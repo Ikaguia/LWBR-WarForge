@@ -41,46 +41,46 @@ for file in files:
 	sys.stdout.flush()
 	with open("module_" + file + ".py",'r') as inputF:
 		with open("module_" + file + '_new.py','w') as outputF:
+			inStr = False
 			ident_level  = 0
 			#lastLine = None
 			for iLine in inputF:
+				wasInStr = inStr
 				iLine = iLine.lstrip().rstrip()
 				oLine = iLine
 
 				#if iLine == "" and lastLine == "": continue
 
-				inStr = False
 				comment = len(iLine)+1
+				open_level = 0
+				close_level = 0
 				for i in xrange(len(iLine)):
 					c = iLine[i]
 					if c == '"': inStr = not inStr
-					if c == '#' and not inStr:
-						comment = i
-						break
+					if not inStr:
+						if c == '#':
+							comment = i
+							break
+						if c in ['[','(','{']: open_level += 1
+						if c in [']',')','}']: close_level += 1
 
-				iLine = iLine[:comment-1]
+				iLine = iLine[:comment]
 
-				if not iLine.startswith("#"):
-					for pattern in ["else_try","try_end","end_try"]:
-						ident_level -= iLine.count(pattern)
+				for pattern in ["else_try","try_end","end_try"]:
+					ident_level -= iLine.count(pattern)
 
-				for _ in xrange(ident_level): oLine = "\t" + oLine
+				if not wasInStr:
+					for _ in xrange(ident_level): oLine = "\t" + oLine
 
-				if not iLine.startswith("#"):
-					for pattern in ["try_begin","try_for_range","try_for_range_backwards","try_for_parties","try_for_agents","try_for_prop_instances","try_for_players","else_try"]:
-						ident_level += iLine.count(pattern)
-					if iLine.startswith("def "):
-						ident_level += 1
-					if iLine.startswith("return "):
-						ident_level -= 1
+				for pattern in ["try_begin","try_for_range","try_for_parties","try_for_agents","try_for_prop_instances","try_for_players","else_try"]:
+					ident_level += iLine.count(pattern)
+				if iLine.startswith("def "):
+					ident_level += 1
+				if iLine.startswith("return "):
+					ident_level -= 1
 
-				if not iLine.startswith("#"):
-					ident_level += iLine.count("[")
-					ident_level += iLine.count("(")
-					ident_level += iLine.count("{")
-					ident_level -= iLine.count("}")
-					ident_level -= iLine.count(")")
-					ident_level -= iLine.count("]")
+				ident_level += open_level
+				ident_level -= close_level
 
 				oLine += "\n"
 

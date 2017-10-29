@@ -67,7 +67,7 @@ meshes = [
 	("pic_vaegir", 0, "pic_vaegir", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("pic_villageriot", 0, "pic_villageriot", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("pic_sarranid_encounter", 0, "pic_sarranid_encounter", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("mp_score_a", 0, "mp_score_a", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_score_b", 0, "mp_score_b", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("portrait_blend_out", 0, "portrait_blend_out", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -80,7 +80,7 @@ meshes = [
 	("flag_infantry", 0, "flag_infantry", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_archers", 0, "flag_archers", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_cavalry", 0, "flag_cavalry", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("inv_slot", 0, "inv_slot", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ingame_menu", 0, "mp_ingame_menu", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_inventory_left", 0, "mp_inventory_left", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -96,7 +96,7 @@ meshes = [
 	("mp_inventory_left_arrow", 0, "mp_inventory_left_arrow", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_inventory_right_arrow", 0, "mp_inventory_right_arrow", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_main", 0, "mp_ui_host_main", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("mp_ui_host_maps_1", 0, "mp_ui_host_maps_a1", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_maps_2", 0, "mp_ui_host_maps_a2", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_maps_3", 0, "mp_ui_host_maps_c", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -116,25 +116,25 @@ meshes = [
 	("mp_ui_command_border_l", 0, "mp_ui_command_border_l", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_command_border_r", 0, "mp_ui_command_border_r", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_welcome_panel", 0, "mp_ui_welcome_panel", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("flag_project_sw", 0, "flag_project_sw", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_vg", 0, "flag_project_vg", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_kh", 0, "flag_project_kh", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_nd", 0, "flag_project_nd", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_rh", 0, "flag_project_rh", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_sr", 0, "flag_project_sr", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("flag_projects_end", 0, "0", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("flag_project_sw_miss", 0, "flag_project_sw_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_vg_miss", 0, "flag_project_vg_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_kh_miss", 0, "flag_project_kh_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_nd_miss", 0, "flag_project_nd_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_rh_miss", 0, "flag_project_rh_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_sr_miss", 0, "flag_project_sr_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("flag_project_misses_end", 0, "0", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("color_picker", 0, "color_picker",  0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("custom_map_banner_01", 0, "custom_map_banner_01",  0, 0, 0, -90, 0, 90, 1, 1, 1),
 	("custom_map_banner_02", 0, "custom_map_banner_02",  0, 0, 0, -90, 0, 90, 1, 1, 1),
@@ -211,12 +211,12 @@ meshes = [
 	("custom_banner_charge_44", 0, "custom_banner_charge_44",  0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("custom_banner_charge_45", 0, "custom_banner_charge_45",  0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("custom_banner_charge_46", 0, "custom_banner_charge_46",  0, 0, 0, 0, 0, 0, 10, 10, 10),
-	
+
 	("tableau_mesh_custom_banner", 0, "tableau_mesh_custom_banner", 0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_custom_banner_square", 0, "tableau_mesh_custom_banner_square", 0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_custom_banner_tall", 0, "tableau_mesh_custom_banner_tall", 0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_custom_banner_short", 0, "tableau_mesh_custom_banner_short", 0, 0, 0, 0, 0, 0, 10, 10, 10),
-	
+
 	("tableau_mesh_shield_round_1",  0, "tableau_mesh_shield_round_1", 0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_shield_round_2",  0, "tableau_mesh_shield_round_2", 0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_shield_round_3",  0, "tableau_mesh_shield_round_3", 0, 0, 0, 0, 0, 0, 10, 10, 10),
@@ -233,14 +233,14 @@ meshes = [
 	("tableau_mesh_shield_heater_2", 0, "tableau_mesh_shield_heater_2",  0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_shield_pavise_1", 0, "tableau_mesh_shield_pavise_1",  0, 0, 0, 0, 0, 0, 10, 10, 10),
 	("tableau_mesh_shield_pavise_2", 0, "tableau_mesh_shield_pavise_2",  0, 0, 0, 0, 0, 0, 10, 10, 10),
-	
+
 	("heraldic_armor_bg", 0, "heraldic_armor_bg",  0, 0, 0, 0, 0, 0, 10, 10, 10),
-	
+
 	("tableau_mesh_heraldic_armor_a", 0, "tableau_mesh_heraldic_armor_a",  0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("tableau_mesh_heraldic_armor_b", 0, "tableau_mesh_heraldic_armor_b",  0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("tableau_mesh_heraldic_armor_c", 0, "tableau_mesh_heraldic_armor_c",  0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("tableau_mesh_heraldic_armor_d", 0, "tableau_mesh_heraldic_armor_d",  0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("outer_terrain_plain_1", 0, "ter_border_a", -90, 0, 0, 0, 0, 0, 1, 1, 1),
 	("banner_a01", 0, "banner_a01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_a02", 0, "banner_a02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -347,7 +347,7 @@ meshes = [
 	("banner_e19", 0, "banner_e19", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_e20", 0, "banner_e20", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_e21", 0, "banner_e21", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("banner_f01", 0, "banner_f01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_f02", 0, "banner_f02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_f03", 0, "banner_f03", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -368,7 +368,7 @@ meshes = [
 	("banner_f18", 0, "banner_f18", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_f19", 0, "banner_f19", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_f20", 0, "banner_f20", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("banner_g01", 0, "banner_f01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_g02", 0, "banner_f02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_g03", 0, "banner_f03", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -379,7 +379,7 @@ meshes = [
 	("banner_g08", 0, "banner_f08", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_g09", 0, "banner_f09", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_g10", 0, "banner_f10", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("banner_kingdom_a", 0, "banner_kingdom_a", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_kingdom_b", 0, "banner_kingdom_b", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_kingdom_c", 0, "banner_kingdom_c", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -387,8 +387,8 @@ meshes = [
 	("banner_kingdom_e", 0, "banner_kingdom_e", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_kingdom_f", 0, "banner_kingdom_f", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banner_f21", 0, "banner_a15", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
-	
+
+
 	("arms_a01", 0, "arms_a01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_a02", 0, "arms_a02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_a03", 0, "arms_a03", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -494,7 +494,7 @@ meshes = [
 	("arms_e19", 0, "banner_e19", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_e20", 0, "banner_e20", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_e21", 0, "banner_e21", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("arms_f01", 0, "banner_f01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_f02", 0, "banner_f02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_f03", 0, "banner_f03", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -515,7 +515,7 @@ meshes = [
 	("arms_f18", 0, "banner_f18", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_f19", 0, "banner_f19", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_f20", 0, "banner_f20", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("arms_g01", 0, "banner_f01", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_g02", 0, "banner_f02", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_g03", 0, "banner_f03", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -526,7 +526,7 @@ meshes = [
 	("arms_g08", 0, "banner_f08", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_g09", 0, "banner_f09", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_g10", 0, "banner_f10", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("arms_kingdom_a", 0, "banner_kingdom_a", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_kingdom_b", 0, "banner_kingdom_b", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_kingdom_c", 0, "banner_kingdom_c", 0, 0, 0, -90, 0, 0, 1, 1, 1),
@@ -534,28 +534,28 @@ meshes = [
 	("arms_kingdom_e", 0, "banner_kingdom_e", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_kingdom_f", 0, "banner_kingdom_f", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("arms_f21", 0, "banner_a15", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("banners_default_a", 0, "banners_default_a", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banners_default_b", 0, "banners_default_b", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banners_default_c", 0, "banners_default_c", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banners_default_d", 0, "banners_default_d", 0, 0, 0, -90, 0, 0, 1, 1, 1),
 	("banners_default_e", 0, "banners_default_e", 0, 0, 0, -90, 0, 0, 1, 1, 1),
-	
+
 	("troop_label_banner",  0, "troop_label_banner", 0, 0, 0, 0, 0, 0, 10, 10, 10),
-	
+
 	("ui_kingdom_shield_1", 0, "ui_kingdom_shield_1", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ui_kingdom_shield_2", 0, "ui_kingdom_shield_2", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ui_kingdom_shield_3", 0, "ui_kingdom_shield_3", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ui_kingdom_shield_4", 0, "ui_kingdom_shield_4", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ui_kingdom_shield_5", 0, "ui_kingdom_shield_5", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ui_kingdom_shield_6", 0, "ui_kingdom_shield_6", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	#("flag_swadian", 0, "banner_a01", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	#("flag_vaegir", 0, "banner_a02", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	#("flag_khergit", 0, "banner_d01", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	#("flag_nord", 0, "banner_a03", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	#("flag_rhodok", 0, "banner_a04", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("mouse_arrow_down", 0, "mouse_arrow_down", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mouse_arrow_right", 0, "mouse_arrow_right", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mouse_arrow_left", 0, "mouse_arrow_left", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -563,11 +563,11 @@ meshes = [
 	("mouse_arrow_plus", 0, "mouse_arrow_plus", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mouse_left_click", 0, "mouse_left_click", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mouse_right_click", 0, "mouse_right_click", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("status_ammo_ready", 0, "status_ammo_ready", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("main_menu_background", 0, "main_menu_nord", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("loading_background", 0, "load_screen_2", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("ui_quick_battle_a", 0, "ui_quick_battle_a", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("white_bg_plane_a", 0, "white_bg_plane_a", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("cb_ui_icon_infantry", 0, "cb_ui_icon_infantry", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -583,12 +583,12 @@ meshes = [
 	("cb_ui_maps_scene_07", 0, "cb_ui_maps_scene_07", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("cb_ui_maps_scene_08", 0, "cb_ui_maps_scene_08", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("cb_ui_maps_scene_09", 0, "cb_ui_maps_scene_09", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("mp_ui_host_maps_14", 0, "mp_ui_host_maps_c4", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_maps_15", 0, "mp_ui_host_maps_c5", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("quit_adv", 0, "quit_adv", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("quit_adv_b", 0, "quit_adv_b", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	("ui_kingdom_shield_7", 0, "ui_kingdom_shield_7", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_rb", 0, "flag_project_rb", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("flag_project_rb_miss", 0, "flag_project_rb_miss", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -598,11 +598,11 @@ meshes = [
 	("mp_ui_host_maps_19", 0, "mp_ui_host_maps_e2", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_maps_20", 0, "mp_ui_host_maps_e1", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("mp_ui_host_maps_21", 0, "mp_ui_host_maps_cold_cost", 0, 0, 0, 0, 0, 0, 1, 1, 1),
-	
+
 	#INVASION MODE START
 	("incoming_enemy", 0, "cb_ui_icon_infantry", 0, 0, 0, 0, 0, 0, 2, 2, 2),
 	("prison_cart_pos", 0, "ccoop_prison_cart", 0, 0, 0, 0, 0, 0, 2, 2, 2),
-	
+
 	("ccoop_drop_chest_top", 0, "ccoop_drop_chest_top", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	("ccoop_drop_chest_bottom", 0, "ccoop_drop_chest_bottom", 0, 0, 200, 0, 0, 0, 1, 1, 1),
 	("ccoop_random_class", 0, "ccoop_random_class", 0, 0, 0, 0, 0, 0, 1, 1, 1),
@@ -612,3 +612,9 @@ meshes = [
 	("ccoop_mounted_class", 0, "ccoop_mounted_class", 0, 0, 0, 0, 0, 0, 1, 1, 1),
 	#INVASION MODE END
 	]
+
+#LWBR WarForge 2.0 --- BEGIN
+if not IS_CLIENT:
+	for g in xrange(len(meshes)):
+		meshes[g] = (meshes[g][0],0,"pic_bandits",0,0,0,0,0,0,0,0,0)
+#LWBR WarForge 2.0 --- END

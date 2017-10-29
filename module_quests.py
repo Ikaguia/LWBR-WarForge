@@ -90,11 +90,11 @@ quests = [
 	("capture_prisoners", "Bring {reg1} {s3} Prisoners", qf_random_quest,
 		"{!}{s9} wanted you to bring him {reg1} {s3} as prisoners."
 		),
-	
+
 	## ("hunt_down_raiders", "Hunt Down Raiders",qf_random_quest,
 	##  "{s1} asked you to hunt down and punish the raiders that attacked a village near {s3} before they reach the safety of their base at {s4}."
 	##  ),
-	
+
 	##################
 	# Enemy Kingdom Lord quests
 	##################
@@ -102,7 +102,7 @@ quests = [
 	("lend_surgeon", "Lend Your Surgeon {s3} to {s1}", qf_random_quest,
 		"{!}Lend your experienced surgeon {s3} to {s1}."
 		),
-	
+
 	##################
 	# Kingdom Army quests
 	##################
@@ -127,8 +127,8 @@ quests = [
 	("scout_waypoints", "Scout {s13}, {s14} and {s15}", qf_random_quest,
 		"{!}None"
 		),
-	
-	
+
+
 	##################
 	# Kingdom Lady quests
 	##################
@@ -140,23 +140,23 @@ quests = [
 	("deliver_message_to_prisoner_lord", "Deliver Message to {s13} at {s14}", qf_random_quest,
 		"{!}None"
 		),
-	
+
 	#Courtship quests
 	("duel_for_lady", "Challenge {s13} to a Trial of Arms", qf_random_quest,
 		"{!}None"
 		),
-	
+
 	("duel_courtship_rival", "Challenge {s13} to a Trial of Arms (optional)", qf_random_quest,
 		"{!}None"
 		),
-	
+
 	#Other duel quests
 	("duel_avenge_insult", "Challenge {s13} to a Trial of Arms", qf_random_quest,
 		"{!}None"
 		),
-	
-	
-	
+
+
+
 	##################
 	# Mayor quests
 	##################
@@ -173,26 +173,26 @@ quests = [
 	("troublesome_bandits", "Hunt Down Troublesome Bandits", qf_random_quest,
 		"{!}{s9} of {s4} asked you to hunt down the troublesome bandits in the vicinity of the town."
 		),
-	
+
 	("kidnapped_girl", "Ransom Girl from Bandits", qf_random_quest,
 		"{!}Guildmaster of {s4} gave you {reg12} denars to pay the ransom of a girl kidnapped by bandits.\
-		You are to meet the bandits near {s3} and pay them the ransom fee.\
-		After that you are to bring the girl back to {s4}."
+You are to meet the bandits near {s3} and pay them the ransom fee.\
+After that you are to bring the girl back to {s4}."
 		),
-	
+
 	("persuade_lords_to_make_peace", "Make Sure Two Lords Do Not Object to Peace", qf_random_quest, #possibly deprecate., or change effects
 		"{!}Guildmaster of {s4} promised you {reg12} denars if you can make sure that\
-		{s12} and {s13} no longer pose a threat to a peace settlement between {s15} and {s14}.\
-		In order to do that, you must either convince them or make sure they fall captive and remain so until a peace agreement is made."
+{s12} and {s13} no longer pose a threat to a peace settlement between {s15} and {s14}.\
+In order to do that, you must either convince them or make sure they fall captive and remain so until a peace agreement is made."
 		),
-	
+
 	("deal_with_looters", "Deal with Looters", qf_random_quest,
 		"{!}The Guildmaster of {s4} has asked you to deal with several bands of looters around {s4}, and bring back any goods you recover."
 		),
 	("deal_with_night_bandits", "Deal with Night Bandits", qf_random_quest,
 		"{!}TODO: The Guildmaster of {s14} has asked you to deal with night bandits at {s14}."
 		),
-	
+
 	############
 	# Village Elder quests
 	############
@@ -210,20 +210,20 @@ quests = [
 	## ("capture_nobleman", "Capture Nobleman",qf_random_quest,
 	##  "{s1} wanted you to capture an enemy nobleman on his way from {s3} to {s4}. He said the nobleman would leave {s3} in {reg1} days."
 	##  ),
-	
+
 	# Bandit quests: Capture rich merchant, capture banker, kill manhunters?..
-	
+
 	# Note : This is defined as the last village elder quest in module_constants.py:
 	("eliminate_bandits_infesting_village", "Save the Village of {s7} from Marauding Bandits", qf_random_quest,
 		"{!}A villager from {s7} begged you to save their village from the bandits that took refuge there."
 		),
-	
-	
+
+
 	# Tutorial quest
 	## ("destroy_dummies", "Destroy Dummies", qf_show_progression,
 	##  "Trainer ordered you to destroy 10 dummies in the training camp."
 	##     ),
-	
+
 	#Courtship and marriage quests begin here
 	("visit_lady", "Visit Lady", qf_random_quest,
 		"{!}None"
@@ -240,176 +240,182 @@ quests = [
 	("wed_betrothed_female", "Wed Your Betrothed", qf_random_quest,
 		"{!}None"
 		),  #in this case, the giver troop is the spouse
-	
-	
+
+
 	# Join Kingdom quest
 	("join_faction", "Give Oath of Homage to {s1}", qf_random_quest,
 		"{!}Find {s1} and give him your oath of homage."
 		),
-	
+
 	# Rebel against Kingdom quest
 	("rebel_against_kingdom", "Help {s13} Claim the Throne of {s14}", qf_random_quest,
 		"{!}None"
 		),
-	
+
 	#Political quests begin here
 	("consult_with_minister", "Consult With Minister", qf_random_quest, "{!}Consult your minister, {s11}, currently at {s12}"),
-	
+
 	("organize_feast",        "Organize Feast", qf_random_quest,        "{!}Bring goods for a feast to your spouse {s11}, currently at {s12}"),
 	("resolve_dispute",       "Resolve Dispute", qf_random_quest,       "{!}Resolve the dispute between {s11} and {s12}"),
 	("offer_gift",            "Procure Gift", qf_random_quest,          "{!}Give {s10} a gift to provide to {reg4?her:his} {s11}, {s12}"),
 	("denounce_lord",         "Denounce Lord", qf_random_quest,         "{!}Denounce {s11} in Public"),
 	("intrigue_against_lord", "Intrigue against Lord", qf_random_quest, "{!}Criticize {s11} in Private"),
-	
-	
+
+
 	#Dynamic quests begin here
 	#These quests are determined dynamically by external conditions -- bandits who have carried out a raid, an impending war, etc...
 	("track_down_bandits", "Track Down Bandits", qf_random_quest,
 		"{!}{s9} of {s4} asked you to track down {s6}, who attacked travellers on the roads near town."
 		), #this is a fairly simple quest for the early game to make the town guildmaster's description of the economy a little more relevant, and also to give the player a reason to talk to other neutral parties on the map
-	
+
 	("track_down_provocateurs", "Track Down Provocateurs", qf_random_quest,
 		"{!}{s9} of {s4} asked you to track down a group of thugs, hired to create a border incident between {s5} and {s6}."
 		),
 	("retaliate_for_border_incident", "Retaliate for a Border Incident", qf_random_quest,
 		"{!}{s9} of {s4} asked you to defeat {s5} of the {s7} in battle, defusing tension in the {s8} to go to war."
 		), #perhaps replaces persuade_lords_to_make_peace
-	
+
 	("raid_caravan_to_start_war", "Attack a Neutral Caravan to Provoke War", qf_random_quest,
 		"{!}placeholder",
 		),
-	
+
 	("cause_provocation", "Give a Kingdom Provocation to Attack Another", qf_random_quest,
 		"{!}placeholder",
 		), #replaces raid_caravan_to_start_war
-	
+
 	("rescue_prisoner", "Rescue or Ransom a Prisoner", qf_random_quest,
 		"{!}placeholder"
 		), #possibly replaces rescue lord
-	
+
 	("destroy_bandit_lair", "Destroy Bandit Lair", qf_random_quest,
 		"{!}{s9} of {s4} asked you to discover a {s6} and destroy it."
 		),
-	
+
 	("blank_quest_2", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_3", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_4", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_5", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_6", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_7", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_8", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_9", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_10", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_11", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_12", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_13", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_14", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_15", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_16", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_17", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_18", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_19", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_20", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_21", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_22", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_23", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_24", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_25", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_26", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("blank_quest_27", "{!}blank_quest", qf_random_quest,
 		"{!}placeholder"
 		),
-	
+
 	("collect_men", "Collect Five Men", 0,
 		"{!}{s9} asked you to collect at least 5 men before you move against the bandits threatening the townsmen. You can recruit soldiers from villages as well as town taverns. You can find {s9} at the tavern in {s4} when you have think you have enough men."
 		),
-	
+
 	("learn_where_merchant_brother_is", "Learn Where the Hostages are Held.", 0,
 		"{!}placeholder."
 		),
-	
+
 	("save_relative_of_merchant", "Attack the Bandit Lair", 0,
 		"{!}placeholder."
 		),
-	
+
 	("save_town_from_bandits", "Save Town from Bandits", 0,
 		"{!}placeholder."
 		),
-	
+
 	("quests_end", "Quests End", 0, "{!}."),
 	]
+
+#LWBR WarForge 2.0 --- BEGIN
+if not IS_CLIENT:
+	for g in xrange(len(quests)):
+		quests[g] = (quests[g][0],"_",0,"_"),
+#LWBR WarForge 2.0 --- END

@@ -247,7 +247,7 @@ troops = [
 	["temp_troop","Temp Troop","Temp Troop",tf_hero,no_scene,reserved,fac.commoners,[],def_attrib,0,knows_common|knows_inventory_management_10,0],
 	##  ["game","Game","Game",tf_hero,no_scene,reserved,fac.commoners,[],def_attrib,0,knows_common,0],
 	##  ["unarmed_troop","Unarmed Troop","Unarmed Troops",tf_hero,no_scene,reserved,fac.commoners,[itm.arrows,itm.short_bow],def_attrib|str_14,0,knows_common|knows_power_draw_2,0],
-	
+
 	####################################################################################################################
 	# Troops before this point are hardwired into the game and their order should not be changed!
 	####################################################################################################################
@@ -263,7 +263,7 @@ troops = [
 	["tutorial_swordsman","Swordsman","Swordsman",tf_guarantee_boots|tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.tutorial_sword,itm.leather_vest,itm.hide_boots],
 		str_6|agi_6|level(5),wp(80),knows_common,mercenary_face_1,mercenary_face_2],
-	
+
 	["novice_fighter","Novice Fighter","Novice Fighters",tf_guarantee_boots|tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.hide_boots],
 		str_6|agi_6|level(5),wp(60),knows_common,mercenary_face_1, mercenary_face_2],
@@ -276,7 +276,7 @@ troops = [
 	["champion_fighter","Champion Fighter","Champion Fighters",tf_guarantee_boots|tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.hide_boots],
 		str_12|agi_11|level(22),wp(140),knows_common|knows_ironflesh_4|knows_power_strike_3|knows_athletics_3|knows_riding_3|knows_shield_4,mercenary_face_1, mercenary_face_2],
-	
+
 	["arena_training_fighter_1","Novice Fighter","Novice Fighters",tf_guarantee_boots|tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.hide_boots],
 		str_6|agi_6|level(5),wp(60),knows_common,mercenary_face_1, mercenary_face_2],
@@ -307,10 +307,10 @@ troops = [
 	["arena_training_fighter_10","Champion Fighter","Champion Fighters",tf_guarantee_boots|tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.hide_boots],
 		str_12|agi_12|level(23),wp(150),knows_common,mercenary_face_1, mercenary_face_2],
-	
+
 	["cattle","Cattle","Cattle",0,no_scene,reserved,fac.neutral, [], def_attrib|level(1),wp(60),0,mercenary_face_1, mercenary_face_2],
-	
-	
+
+
 	#soldiers:
 	#This troop is the troop marked as soldiers_begin
 	["farmer","Farmer","Farmers",tf_guarantee_armor,no_scene,reserved,fac.commoners,
@@ -343,7 +343,7 @@ troops = [
 	["mercenaries_end","mercenaries_end","mercenaries_end",0,no_scene,reserved,fac.commoners,
 		[],
 		def_attrib|level(4),wp(60),knows_common,mercenary_face_1, mercenary_face_2],
-	
+
 	#peasant - retainer - footman - man-at-arms -  knight
 	["swadian_recruit","Swadian Recruit","Swadian Recruits",tf_guarantee_armor,0,0,fac.kingdom_1,
 		[itm.scythe,itm.hatchet,itm.pickaxe,itm.club,itm.stones,itm.tab_shield_heater_a,itm.leather_cap,itm.felt_hat,itm.felt_hat,
@@ -397,7 +397,7 @@ troops = [
 	["swadian_castle_guard","Castle Guard","Castle Guards",tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.kingdom_1,
 		[itm.awlpike,itm.pike,itm.great_sword,itm.morningstar,itm.sword_medieval_b,itm.tab_shield_heater_c,itm.tab_shield_heater_d,itm.coat_of_plates,itm.plate_armor,itm.plate_boots,itm.guard_helmet,itm.helmet_with_neckguard,itm.bascinet,itm.guard_helmet,itm.leather_gloves],
 		def_attrib|level(25),wp(130),knows_common|knows_shield_3|knows_ironflesh_3|knows_power_strike_3,swadian_face_young_1, swadian_face_old_2],
-	
+
 	# Vaegir watchman?
 	["vaegir_recruit","Vaegir Recruit","Vaegir Recruits",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.kingdom_2,
 		[itm.scythe,itm.hatchet,itm.cudgel,itm.axe,itm.stones,itm.tab_shield_kite_a, itm.tab_shield_kite_a,
@@ -449,8 +449,8 @@ troops = [
 	["vaegir_castle_guard","Castle Guard","Castle Guards", tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.kingdom_2,
 		[itm.ashwood_pike,itm.battle_fork,itm.bardiche,itm.battle_axe,itm.fighting_axe,itm.tab_shield_kite_d,itm.studded_leather_coat,itm.lamellar_armor,itm.mail_chausses,itm.iron_greaves,itm.nordic_helmet,itm.nordic_helmet,itm.nordic_helmet,itm.spiked_helmet,itm.leather_gloves],
 		def_attrib|level(24),wp(130),knows_athletics_3|knows_shield_2|knows_ironflesh_3,vaegir_face_middle_1, vaegir_face_older_2],
-	
-	
+
+
 	["khergit_tribesman","Khergit Tribesman","Khergit Tribesmen",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.kingdom_3,
 		[itm.arrows,itm.club,itm.spear,itm.hunting_bow,
 			itm.steppe_cap,itm.nomad_cap_b,itm.leather_vest,itm.steppe_armor,itm.nomad_boots,itm.khergit_leather_boots],
@@ -488,8 +488,8 @@ troops = [
 	["khergit_castle_guard","Castle Guard","Castle Guards", tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.kingdom_3,
 		[itm.sword_khergit_4,itm.tab_shield_small_round_b,itm.tab_shield_small_round_a,itm.lamellar_vest_khergit,itm.lamellar_armor,itm.khergit_leather_boots,itm.iron_greaves,itm.khergit_guard_helmet,itm.khergit_cavalry_helmet,itm.leather_warrior_cap],
 		def_attrib|level(24),wp(130),knows_athletics_5|knows_shield_2|knows_ironflesh_5,khergit_face_middle_1, khergit_face_older_2],
-	
-	
+
+
 	["nord_recruit","Nord Recruit","Nord Recruits",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.kingdom_4,
 		[itm.axe,itm.hatchet,itm.spear,itm.tab_shield_round_a,itm.tab_shield_round_a,
 			itm.blue_tunic,itm.coarse_tunic,itm.hide_boots,itm.nomad_boots],
@@ -535,8 +535,8 @@ troops = [
 	["nord_castle_guard","Castle Guard","Castle Guards", tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.kingdom_4,
 		[itm.ashwood_pike,itm.battle_fork,itm.battle_axe,itm.fighting_axe,itm.tab_shield_round_d,itm.tab_shield_round_e,itm.mail_hauberk,itm.heraldic_mail_with_tabard,itm.mail_chausses,itm.iron_greaves,itm.nordic_helmet,itm.nordic_helmet,itm.nordic_helmet,itm.spiked_helmet,itm.leather_gloves],
 		def_attrib|level(24),wp(130),knows_athletics_3|knows_shield_2|knows_ironflesh_3,nord_face_middle_1, nord_face_older_2],
-	
-	
+
+
 	["rhodok_tribesman","Rhodok Tribesman","Rhodok Tribesmen",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.kingdom_5,
 		[itm.pitch_fork,itm.tab_shield_pavise_a,
 			itm.shirt,itm.coarse_tunic,itm.wrapping_boots,itm.nomad_boots,itm.head_wrappings,itm.straw_hat],
@@ -586,8 +586,8 @@ troops = [
 		[itm.ashwood_pike,itm.battle_fork,itm.battle_axe,itm.fighting_axe,itm.tab_shield_pavise_c,itm.bascinet_2,itm.surcoat_over_mail,itm.mail_chausses,itm.iron_greaves,itm.leather_gloves],
 		def_attrib|level(24),wp(130),knows_athletics_3|knows_shield_2|knows_ironflesh_3,rhodok_face_middle_1, rhodok_face_older_2],
 	#peasant - retainer - footman - man-at-arms -  knight
-	
-	
+
+
 	["sarranid_recruit","Sarranid Recruit","Sarranid Recruits",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.kingdom_6,
 		[itm.scythe,itm.hatchet,itm.pickaxe,itm.club,itm.stones,itm.tab_shield_heater_a,itm.sarranid_felt_hat,itm.turban,itm.sarranid_boots_a,
 			itm.sarranid_cloth_robe, itm.sarranid_cloth_robe_b],
@@ -624,7 +624,7 @@ troops = [
 		[itm.heavy_lance,itm.scimitar_b,itm.sarranid_two_handed_mace_1,itm.sarranid_cavalry_sword,itm.tab_shield_small_round_c,
 			itm.mamluke_mail,itm.sarranid_boots_d,itm.sarranid_boots_c,itm.sarranid_veiled_helmet,itm.arabian_horse_b,itm.warhorse_sarranid,itm.scale_gauntlets,itm.mail_mittens],
 		def_attrib|level(27),wp_one_handed (150) | wp_two_handed (130) | wp_polearm (130) | wp_archery (75) | wp_crossbow (75) | wp_throwing (110),knows_common|knows_riding_6|knows_shield_5|knows_ironflesh_5|knows_power_strike_5,swadian_face_middle_1, swadian_face_older_2],
-	
+
 	["sarranid_messenger","Sarranid Messenger","Sarranid Messengers",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_horse|tf_guarantee_ranged,0,0,fac.kingdom_6,
 		[itm.lance,itm.arabian_sword_b,itm.scimitar_b,itm.mace_4,itm.tab_shield_small_round_b,
 			itm.sarranid_mail_shirt,itm.mail_chausses,itm.sarranid_helmet1,itm.courser,itm.hunter],
@@ -639,8 +639,8 @@ troops = [
 	["sarranid_castle_guard","Castle Guard","Castle Guards",tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.kingdom_6,
 		[itm.arabian_sword_b,itm.scimitar_b,itm.war_spear,itm.mace_4,itm.sarranid_boots_c, itm.sarranid_boots_d,itm.arabian_armor_b,itm.sarranid_mail_coif,itm.sarranid_helmet1,itm.sarranid_horseman_helmet,itm.mail_boots,itm.iron_greaves,itm.mail_mittens,itm.leather_gloves,itm.tab_shield_kite_d],
 		def_attrib|level(25),wp_melee(135)|wp_throwing(100),knows_common|knows_shield_3|knows_ironflesh_3|knows_power_strike_3,swadian_face_middle_1, swadian_face_older_2],
-	
-	
+
+
 	["looter","Looter","Looters",0,0,0,fac.outlaws,
 		[itm.hatchet,itm.club,itm.butchering_knife,itm.falchion,itm.rawhide_coat,itm.stones,itm.nomad_armor,itm.nomad_armor,itm.woolen_cap,itm.woolen_cap,itm.nomad_boots,itm.wrapping_boots],
 		def_attrib|level(4),wp(20),knows_common,bandit_face1, bandit_face2],
@@ -671,18 +671,18 @@ troops = [
 	["desert_bandit","Desert Bandit","Desert Bandits",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_mounted,0,0,fac.outlaws,
 		[itm.arrows,itm.arabian_sword_a,itm.winged_mace,itm.spear, itm.light_lance,itm.jarid,itm.nomad_bow,itm.short_bow,itm.jarid,itm.sarranid_cloth_robe, itm.sarranid_cloth_robe, itm.skirmisher_armor, itm.desert_turban, itm.turban,itm.leather_steppe_cap_b,itm.leather_covered_round_shield,itm.leather_covered_round_shield,itm.saddle_horse,itm.arabian_horse_a],
 		def_attrib|level(12),wp(100),knows_riding_4|knows_horse_archery_3|knows_power_draw_3,khergit_face_young_1, khergit_face_old_2],
-	
+
 	["black_khergit_horseman","Black Khergit Horseman","Black Khergit Horsemen",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse,0,0,fac.black_khergits,
 		[itm.arrows,itm.sword_khergit_2,itm.scimitar,itm.scimitar,itm.winged_mace,itm.spear,itm.lance,itm.khergit_bow,itm.khergit_bow,itm.nomad_bow,itm.nomad_bow,itm.steppe_cap,itm.nomad_cap,itm.khergit_war_helmet,itm.khergit_war_helmet,itm.mail_hauberk,itm.lamellar_armor,itm.hide_boots,itm.plate_covered_round_shield,itm.plate_covered_round_shield,itm.saddle_horse,itm.steppe_horse],
 		def_attrib|level(21),wp(100),knows_riding_3|knows_ironflesh_3|knows_horse_archery_3|knows_power_draw_3,khergit_face_young_1, khergit_face_old_2],
-	
+
 	["manhunter","Manhunter","Manhunters",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,0,0,fac.manhunters,
 		[itm.mace_3,itm.winged_mace,itm.nasal_helmet,itm.padded_cloth,itm.aketon_green,itm.aketon_green,itm.wooden_shield,itm.nomad_boots,itm.wrapping_boots,itm.sumpter_horse],
 		def_attrib|level(10),wp(50),knows_common,bandit_face1, bandit_face2],
 	##  ["deserter","Deserter","Deserters",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.swadian_deserters,
 	##   [itm.arrows,itm.spear,itm.fighting_pick,itm.short_bow,itm.sword,itm.voulge,itm.nordic_shield,itm.round_shield,itm.kettle_hat,itm.leather_cap,itm.padded_cloth,itm.leather_armor,itm.scale_armor,itm.saddle_horse],
 	##   def_attrib|level(12),wp(60),knows_common,bandit_face1, bandit_face2],
-	
+
 	#fac.slavers
 	##  ["slave_keeper","Slave Keeper","Slave Keepers",tf_guarantee_armor ,0,0,fac.slavers,
 	##   [itm.cudgel,itm.club,itm.woolen_cap,itm.rawhide_coat,itm.coarse_tunic,itm.nomad_armor,itm.nordic_shield,itm.nomad_boots,itm.wrapping_boots,itm.sumpter_horse],
@@ -699,14 +699,14 @@ troops = [
 	["slaver_chief","Slaver Chief","Slaver Chiefs",tf_mounted|tf_guarantee_all_wo_ranged,0,0,fac.slavers,
 		[itm.military_hammer,itm.warhammer,itm.brigandine_red,itm.steel_shield,itm.scale_gauntlets,itm.mail_mittens,itm.guard_helmet,itm.plate_boots,itm.mail_boots,itm.warhorse],
 		def_attrib|level(26),wp(130),knows_common|knows_riding_4|knows_power_strike_5,bandit_face1, bandit_face2],
-	
+
 	#Rhodok tribal, Hunter, warrior, veteran, warchief
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	#  ["undead_walker","undead_walker","undead_walkers",tf_undead|tf_allways_fall_dead,0,0,fac.undeads,
 	#   [],
 	#   def_attrib|level(3),wp(60),knows_common,undead_face1, undead_face2],
@@ -722,9 +722,9 @@ troops = [
 	#  ["hell_knight","hell_knight","hell_knights",tf_undead|tf_allways_fall_dead|tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.undeads,
 	#   [],
 	#   def_attrib|level(23),wp(100),knows_common|knows_riding_3,undead_face1, undead_face2],
-	
-	
-	
+
+
+
 	["follower_woman","Camp Follower","Camp Follower",tf_female|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.bolts,itm.light_crossbow,itm.short_bow,itm.crossbow,itm.nordic_shield,itm.hide_covered_round_shield,itm.hatchet,itm.hand_axe,itm.voulge,itm.fighting_pick,itm.club,itm.dress,itm.woolen_dress, itm.skullcap, itm.wrapping_boots],
 		def_attrib|level(5),wp(70),knows_common,refugee_face1,refugee_face2],
@@ -737,26 +737,26 @@ troops = [
 	["sword_sister","Sword Sister","Sword Sisters",tf_female|tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_shield|tf_guarantee_horse,0,0,fac.commoners,
 		[itm.bolts,itm.sword_medieval_b,itm.sword_khergit_3,itm.plate_covered_round_shield,itm.tab_shield_small_round_c, itm.crossbow,itm.plate_armor,itm.coat_of_plates,itm.plate_boots,itm.guard_helmet,itm.helmet_with_neckguard,itm.courser,itm.leather_gloves],
 		def_attrib|level(22),wp(140),knows_common|knows_power_strike_3|knows_riding_5|knows_athletics_3|knows_ironflesh_2|knows_shield_2,refugee_face1,refugee_face2],
-	
+
 	["refugee","Refugee","Refugees",tf_female|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.knife,itm.pitch_fork,itm.sickle,itm.hatchet,itm.club,itm.dress,itm.robe,itm.woolen_dress, itm.headcloth, itm.woolen_hood, itm.wrapping_boots],
 		def_attrib|level(1),wp(45),knows_common,refugee_face1,refugee_face2],
 	["peasant_woman","Peasant Woman","Peasant Women",tf_female|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.knife,itm.pitch_fork,itm.sickle,itm.hatchet,itm.club,itm.dress,itm.woolen_dress, itm.headcloth, itm.woolen_hood, itm.wrapping_boots],
 		def_attrib|level(1),wp(40),knows_common,refugee_face1,refugee_face2],
-	
-	
+
+
 	["caravan_master","Caravan Master","Caravan Masters",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse,0,0,fac.commoners,
 		[itm.sword_medieval_c,itm.fur_coat,itm.hide_boots,itm.saddle_horse,
 			itm.saddle_horse,itm.saddle_horse,itm.saddle_horse,
 			itm.leather_jacket, itm.leather_cap],
 		def_attrib|level(9),wp(100),knows_common|knows_riding_4|knows_ironflesh_3,mercenary_face_1, mercenary_face_2],
-	
+
 	["kidnapped_girl","Kidnapped Girl","Kidnapped Girls",tf_hero|tf_randomize_face|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.commoners,
 		[itm.dress,itm.leather_boots],
 		def_attrib|level(2),wp(50),knows_common|knows_riding_2,woman_face_1, woman_face_2],
-	
-	
+
+
 	#This troop is the troop marked as soldiers_end and town_walkers_begin
 	["town_walker_1","Townsman","Townsmen",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.short_tunic, itm.linen_tunic,itm.fur_coat, itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.arena_tunic_white, itm.leather_apron, itm.shirt, itm.arena_tunic_green, itm.arena_tunic_blue, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.hide_boots, itm.ankle_boots, itm.leather_boots, itm.fur_hat, itm.leather_cap, itm.straw_hat, itm.felt_hat],
@@ -776,7 +776,7 @@ troops = [
 	["sarranid_townswoman","Townswoman","Townswomen",tf_female|tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.sarranid_common_dress, itm.sarranid_common_dress_b,itm.woolen_hose,itm.sarranid_boots_a, itm.sarranid_felt_head_cloth, itm.sarranid_felt_head_cloth_b],
 		def_attrib|level(2),wp(40),knows_common,woman_face_1,woman_face_2],
-	
+
 	#This troop is the troop marked as town_walkers_end and village_walkers_begin
 	["village_walker_1","Villager","Villagers",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.short_tunic, itm.linen_tunic, itm.coarse_tunic, itm.leather_vest, itm.leather_apron, itm.shirt, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.hide_boots, itm.ankle_boots, itm.leather_boots, itm.fur_hat, itm.leather_cap, itm.straw_hat, itm.felt_hat],
@@ -784,7 +784,7 @@ troops = [
 	["village_walker_2","Villager","Villagers",tf_female|tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.blue_dress, itm.dress, itm.woolen_dress, itm.peasant_dress, itm.woolen_hose, itm.blue_hose, itm.wimple_a, itm.wimple_with_veil, itm.female_hood],
 		def_attrib|level(2),wp(40),knows_common,woman_face_1,woman_face_2],
-	
+
 	#This troop is the troop marked as village_walkers_end and spy_walkers_begin
 	["spy_walker_1","Townsman","Townsmen",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_helmet,0,0,fac.commoners,
 		[itm.short_tunic, itm.linen_tunic, itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.robe, itm.leather_apron, itm.shirt, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.hide_boots, itm.ankle_boots, itm.leather_boots, itm.fur_hat, itm.leather_cap, itm.straw_hat, itm.felt_hat],
@@ -793,24 +793,24 @@ troops = [
 		[itm.blue_dress, itm.dress, itm.woolen_dress, itm.peasant_dress, itm.woolen_hose, itm.blue_hose, itm.wimple_a, itm.wimple_with_veil, itm.female_hood],
 		def_attrib|level(2),wp(40),knows_common,woman_face_1,woman_face_2],
 	# Ryan END
-	
+
 	#This troop is the troop marked as spy_walkers_end
 	# Zendar
 	["tournament_master","Tournament Master","Tournament Master",tf_hero, scn.zendar_center|entry(1),reserved,  fac.commoners,[itm.nomad_armor,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common,0x000000000008414401e28f534c8a2d09],
 	["trainer","Trainer","Trainer",tf_hero, scn.zendar_center|entry(2),reserved,  fac.commoners,[itm.leather_jerkin,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x00000000000430c701ea98836781647f],
 	["Constable_Hareck","Constable Hareck","Constable Hareck",tf_hero, scn.zendar_center|entry(5),reserved,  fac.commoners,[itm.leather_jacket,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,0x00000000000c41c001fb15234eb6dd3f],
-	
+
 	# Ryan BEGIN
 	["Ramun_the_slave_trader","Ramun, the slave trader","Ramun, the slave trader",tf_hero, no_scene,reserved, fac.commoners,[itm.leather_jacket,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,0x0000000fd5105592385281c55b8e44eb00000000001d9b220000000000000000],
-	
+
 	["guide","Quick Jimmy","Quick Jimmy",tf_hero, no_scene,0,  fac.commoners,[itm.coarse_tunic,itm.hide_boots],def_attrib|level(2),wp(20),knows_inventory_management_10, 0x00000000000c318301f24e38a36e38e3],
 	# Ryan END
-	
+
 	["Xerina","Xerina","Xerina",tf_hero|tf_female, scn.the_happy_boar|entry(5),reserved,  fac.commoners,[itm.leather_jerkin,itm.hide_boots],def_attrib|str_15|agi_15|level(39),wp(312),knows_power_strike_5|knows_ironflesh_5|knows_riding_6|knows_power_draw_4|knows_athletics_8|knows_shield_3,0x00000001ac0820074920561d0b51e6ed00000000001d40ed0000000000000000],
 	["Dranton","Dranton","Dranton",tf_hero, scn.the_happy_boar|entry(2),reserved,  fac.commoners,[itm.leather_vest,itm.hide_boots],def_attrib|str_15|agi_14|level(42),wp(324),knows_power_strike_5|knows_ironflesh_7|knows_riding_4|knows_power_draw_4|knows_athletics_4|knows_shield_3,0x0000000a460c3002470c50f3502879f800000000001ce0a00000000000000000],
 	["Kradus","Kradus","Kradus",tf_hero, scn.the_happy_boar|entry(3),reserved,  fac.commoners,[itm.padded_leather,itm.hide_boots],def_attrib|str_15|agi_14|level(43),wp(270),knows_power_strike_5|knows_ironflesh_7|knows_riding_4|knows_power_draw_4|knows_athletics_4|knows_shield_3,0x0000000f5b1052c61ce1a9521db1375200000000001ed31b0000000000000000],
-	
-	
+
+
 	#Tutorial
 	["tutorial_trainer","Training Ground Master","Training Ground Master",tf_hero, 0, 0, fac.commoners,[itm.robe,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common,0x000000000008414401e28f534c8a2d09],
 	["tutorial_student_1","{!}tutorial_student_1","{!}tutorial_student_1",tf_guarantee_boots|tf_guarantee_armor, 0, 0, fac.neutral,
@@ -825,25 +825,25 @@ troops = [
 	["tutorial_student_4","{!}tutorial_student_4","{!}tutorial_student_4",tf_guarantee_boots|tf_guarantee_armor, 0, 0, fac.neutral,
 		[itm.practice_staff, itm.leather_jerkin,itm.padded_leather,itm.leather_armor,itm.ankle_boots,itm.padded_coif,itm.footman_helmet],
 		def_attrib|level(2),wp(20),knows_common, swadian_face_young_1, swadian_face_old_2],
-	
+
 	#Sargoth
 	#halkard, hardawk. lord_taucard lord_caupard. lord_paugard
-	
+
 	#Salt mine
 	["Galeas","Galeas","Galeas",tf_hero, 0, reserved, fac.commoners,[itm.leather_jacket,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,0x000000000004718201c073191a9bb10c],
-	
+
 	#Dhorak keep
-	
+
 	["farmer_from_bandit_village","Farmer","Farmers",tf_guarantee_armor,no_scene,reserved,fac.commoners,
 		[itm.linen_tunic,itm.coarse_tunic,itm.shirt,itm.nomad_boots,itm.wrapping_boots],
 		def_attrib|level(4),wp(60),knows_common,man_face_middle_1, man_face_older_2],
-	
+
 	["trainer_1","Trainer","Trainer",tf_hero, scn.training_ground_ranged_melee_1|entry(6),reserved,  fac.commoners,[itm.leather_jerkin,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x0000000d0d1030c74ae8d661b651c6840000000000000e220000000000000000],
 	["trainer_2","Trainer","Trainer",tf_hero, scn.training_ground_ranged_melee_2|entry(6),reserved,  fac.commoners,[itm.nomad_vest,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x0000000e5a04360428ec253846640b5d0000000000000ee80000000000000000],
 	["trainer_3","Trainer","Trainer",tf_hero, scn.training_ground_ranged_melee_3|entry(6),reserved,  fac.commoners,[itm.padded_leather,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x0000000e4a0445822ca1a11ab1e9eaea0000000000000f510000000000000000],
 	["trainer_4","Trainer","Trainer",tf_hero, scn.training_ground_ranged_melee_4|entry(6),reserved,  fac.commoners,[itm.leather_jerkin,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x0000000e600452c32ef8e5bb92cf1c970000000000000fc20000000000000000],
 	["trainer_5","Trainer","Trainer",tf_hero, scn.training_ground_ranged_melee_5|entry(6),reserved,  fac.commoners,[itm.leather_vest,itm.hide_boots],def_attrib|level(2),wp(20),knows_common,0x0000000e77082000150049a34c42ec960000000000000e080000000000000000],
-	
+
 	# Ransom brokers.
 	["ransom_broker_1","Ransom_Broker","Ransom_Broker",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.leather_vest,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["ransom_broker_2","Ransom_Broker","Ransom_Broker",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.tabard,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
@@ -855,7 +855,7 @@ troops = [
 	["ransom_broker_8","Ransom_Broker","Ransom_Broker",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.fur_coat,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["ransom_broker_9","Ransom_Broker","Ransom_Broker",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.leather_vest,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["ransom_broker_10","Ransom_Broker","Ransom_Broker",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.leather_jacket,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
-	
+
 	# Tavern traveler.
 	["tavern_traveler_1","Traveller","Traveller",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.fur_coat,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["tavern_traveler_2","Traveller","Traveller",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.tabard,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
@@ -867,7 +867,7 @@ troops = [
 	["tavern_traveler_8","Traveller","Traveller",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.tabard,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["tavern_traveler_9","Traveller","Traveller",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.fur_coat,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
 	["tavern_traveler_10","Traveller","Traveller",tf_hero|tf_randomize_face, 0, reserved, fac.commoners,[itm.leather_jacket,itm.hide_boots],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],
-	
+
 	# Tavern traveler.
 	["tavern_bookseller_1","Book_Merchant","Book_Merchant",tf_hero|tf_is_merchant|tf_randomize_face, 0, reserved, fac.commoners,[itm.fur_coat,itm.hide_boots,
 			itm.book_tactics, itm.book_persuasion, itm.book_wound_treatment_reference, itm.book_leadership,
@@ -875,18 +875,18 @@ troops = [
 	["tavern_bookseller_2","Book_Merchant","Book_Merchant",tf_hero|tf_is_merchant|tf_randomize_face, 0, reserved, fac.commoners,[itm.fur_coat,itm.hide_boots,
 			itm.book_wound_treatment_reference, itm.book_leadership, itm.book_intelligence, itm.book_trade,
 			itm.book_engineering, itm.book_weapon_mastery],def_attrib|level(5),wp(20),knows_common,merchant_face_1, merchant_face_2],
-	
+
 	# Tavern minstrel.
 	["tavern_minstrel_1","Wandering Minstrel","Minstrel",tf_hero|tf_randomize_face|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_boots, 0, reserved, fac.commoners,[itm.leather_jacket, itm.hide_boots, itm.lute],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2], #lute
 	["tavern_minstrel_2","Wandering Bard","Minstrel",tf_hero|tf_randomize_face|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_boots, 0, reserved, fac.commoners,[itm.tunic_with_green_cape, itm.hide_boots, itm.lyre],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2],  #early harp/lyre
 	["tavern_minstrel_3","Wandering Ashik","Minstrel",tf_hero|tf_randomize_face|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_boots, 0, reserved, fac.commoners,[itm.nomad_robe, itm.hide_boots, itm.lute],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2], #lute/oud or rebab
 	["tavern_minstrel_4","Wandering Skald","Minstrel",tf_hero|tf_randomize_face|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_boots, 0, reserved, fac.commoners,[itm.fur_coat, itm.hide_boots, itm.lyre],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2], #No instrument or lyre
 	["tavern_minstrel_5","Wandering Troubadour","Minstrel",tf_hero|tf_randomize_face|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_boots, 0, reserved, fac.commoners,[itm.short_tunic, itm.hide_boots, itm.lute],def_attrib|level(5),wp(20),knows_common,merchant_face_1,merchant_face_2], #Lute or Byzantine/Occitan lyra
-	
+
 	#NPC system changes begin
 	#Companions
 	["kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  tf_hero, 0,reserved,  fac.kingdom_1,[],          lord_attrib,wp(220),knows_lord_1, 0x000000000010918a01f248377289467d],
-	
+
 	["npc1","Borcha","Borcha",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac.commoners,[itm.khergit_armor,itm.nomad_boots,itm.knife],
 		str_8|agi_7|int_12|cha_7|level(3),wp(60),knows_tracker_npc|
 		knows_ironflesh_1|knows_power_strike_1|knows_pathfinding_3|knows_athletics_2|knows_tracking_1|knows_riding_2, #skills 2/3 player at that level
@@ -952,8 +952,8 @@ troops = [
 		knows_power_throw_3|knows_athletics_2|knows_power_strike_1,
 		0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
 	#NPC system changes end
-	
-	
+
+
 	#governers olgrel rasevas                                                                        Horse          Bodywear                Footwear_in                     Footwear_out                    Armor                       Weapon                  Shield                  Headwaer
 	["kingdom_1_lord",  "King Harlaus",  "Harlaus",  tf_hero, 0,reserved,  fac.kingdom_1,[itm.charger,   itm.rich_outfit,        itm.blue_hose,                  itm.plate_boots,               itm.plate_armor, itm.gauntlets,    itm.bastard_sword_b,      itm.tab_shield_heater_cav_b,       itm.great_helmet],          knight_attrib_5,wp(220),knight_skills_5|knows_trainer_5, 0x0000000f45041105241acd2b5a66a86900000000001e98310000000000000000,swadian_face_older_2],
 	["kingdom_2_lord",  "King Yaroglek",  "Yaroglek",  tf_hero, 0,reserved,  fac.kingdom_2,[itm.hunter,    itm.courtly_outfit,      itm.leather_boots,              itm.plate_boots,              itm.heraldic_mail_with_surcoat, itm.gauntlets,      itm.military_pick,      itm.tab_shield_kite_cav_b,      itm.vaegir_mask],    knight_attrib_5,wp(220),knight_skills_5|knows_trainer_4, 0x0000000ec50001400a2269f919dee11700000000001cc57d0000000000000000, vaegir_face_old_2],
@@ -961,13 +961,13 @@ troops = [
 	["kingdom_4_lord",  "King Ragnar",  "Ragnar",  tf_hero, 0,reserved,  fac.kingdom_4,[itm.hunter,    itm.nobleman_outfit,    itm.leather_boots,              itm.mail_boots,                 itm.cuir_bouilli,  itm.gauntlets,    itm.great_axe,           itm.tab_shield_round_e,    itm.nordic_helmet],            knight_attrib_5,wp(220),knight_skills_5|knows_trainer_4, 0x0000000e2c0c028a068e8c18557b12a500000000001c0fe80000000000000000, nord_face_older_2],
 	["kingdom_5_lord",  "King Graveth",  "Graveth",  tf_hero, 0,reserved,  fac.kingdom_5,[itm.warhorse,  itm.tabard,             itm.leather_boots,              itm.splinted_leather_greaves,   itm.heraldic_mail_with_tabard,  itm.gauntlets,         itm.bastard_sword_b,         itm.tab_shield_heater_cav_b,        itm.spiked_helmet],         knight_attrib_4,wp(220),knight_skills_4|knows_trainer_5, 0x0000000efc04119225848dac5d50d62400000000001d48b80000000000000000, rhodok_face_old_2],
 	["kingdom_6_lord",  "Sultan Hakim",  "Hakim",  tf_hero, 0,reserved,  fac.kingdom_6,[itm.warhorse_sarranid,     itm.mamluke_mail,          itm.sarranid_boots_c,       itm.sarranid_mail_coif,  itm.mail_mittens,      itm.sarranid_cavalry_sword,    itm.tab_shield_small_round_c],         knight_attrib_4,wp(220),knight_skills_5|knows_trainer_5, 0x0000000a4b103354189c71d6d386e8ac00000000001e24eb0000000000000000, rhodok_face_old_2],
-	
-	
+
+
 	#    Imbrea   Belinda Ruby Qaelmas Rose    Willow
 	#  Alin  Ganzo            Zelka Rabugti
 	#  Qlurzach Ruhbus Givea_alsev  Belanz        Bendina
 	# Dunga        Agatha     Dibus Crahask
-	
+
 	#                                                                               Horse                   Bodywear                Armor                               Footwear_in                 Footwear_out                        Headwear                    Weapon               Shield
 	#Swadian civilian clothes: itm.courtly_outfit itm.gambeson itm.blue_gambeson itm.red_gambeson itm.nobleman_outfit itm.rich_outfit itm.short_tunic itm.tabard
 	#Older knights with higher skills moved to top
@@ -979,7 +979,7 @@ troops = [
 	["knight_1_6", "Count Tredian", "Tredian", tf_hero, 0, reserved,  fac.kingdom_1, [itm.hunter,            itm.tabard,      itm.heraldic_mail_with_surcoat,               itm.leather_boots,          itm.mail_boots,                      itm.winged_great_helmet, itm.gauntlets, itm.bastard_sword_b, itm.sword_two_handed_b,  itm.tab_shield_heater_cav_b], knight_attrib_5,wp(240),knight_skills_4|knows_trainer_4, 0x0000000c0a08038736db74c6a396a8e500000000001db8eb0000000000000000, swadian_face_older_2],
 	["knight_1_7", "Count Grainwad", "Grainwad", tf_hero, 0, reserved,  fac.kingdom_1, [itm.hunter,            itm.tabard,      itm.heraldic_mail_with_surcoat,               itm.leather_boots,          itm.mail_boots,                      itm.flat_topped_helmet, itm.gauntlets, itm.bastard_sword_b,   itm.sword_two_handed_b, itm.tab_shield_heater_cav_b], knight_attrib_5,wp(290),knight_skills_4|knows_trainer_4, 0x0000000c1e001500589dae4094aa291c00000000001e37a80000000000000000, swadian_face_young_2],
 	["knight_1_8", "Count Ryis", "Ryis", tf_hero, 0, reserved,  fac.kingdom_1, [itm.warhorse,          itm.nobleman_outfit,     itm.coat_of_plates,                 itm.leather_boots,          itm.splinted_leather_greaves,        itm.winged_great_helmet,  itm.gauntlets,itm.bastard_sword_b,  itm.sword_two_handed_a, itm.tab_shield_heater_d],  knight_attrib_4,wp(250),knight_skills_4, 0x0000000c330855054aa9aa431a48d74600000000001ed5240000000000000000, swadian_face_older_2],
-	
+
 	#Swadian younger knights
 	["knight_1_9", "Count Plais", "Plais", tf_hero, 0, reserved,  fac.kingdom_1, [itm.steppe_horse,      itm.gambeson,     itm.heraldic_mail_with_surcoat,                 itm.blue_hose,              itm.mail_boots,                      itm.nasal_helmet,  itm.scale_gauntlets,     itm.fighting_pick,   itm.tab_shield_heater_c],    knight_attrib_3,wp(160),knight_skills_3, 0x0000000c0f08000458739a9a1476199800000000001fb6f10000000000000000, swadian_face_old_2],
 	["knight_1_10", "Count Mirchaud", "Mirchaud", tf_hero, 0, reserved,  fac.kingdom_1, [itm.courser,           itm.blue_gambeson,        itm.mail_hauberk,                   itm.woolen_hose,            itm.mail_chausses,                   itm.guard_helmet,    itm.gauntlets,    itm.sword_two_handed_b,        itm.tab_shield_heater_cav_b],   knight_attrib_3,wp(190),knight_skills_3, 0x0000000c0610351048e325361d7236cd00000000001d532a0000000000000000, swadian_face_older_2],
@@ -993,17 +993,17 @@ troops = [
 	["knight_1_18", "Count Rochabarth", "Rochabarth", tf_hero, 0, reserved,  fac.kingdom_1, [itm.courser,           itm.blue_gambeson,        itm.mail_hauberk,                   itm.woolen_hose,            itm.mail_chausses,                   itm.winged_great_helmet,   itm.gauntlets,     itm.sword_two_handed_a,        itm.tab_shield_heater_cav_a],   knight_attrib_3,wp(210),knight_skills_1, 0x0000000c150045c6365d8565932a8d6400000000001ec6940000000000000000, swadian_face_young_2],
 	["knight_1_19", "Count Despin", "Despin", tf_hero, 0, reserved,  fac.kingdom_1, [itm.saddle_horse,      itm.rich_outfit,        itm.heraldic_mail_with_surcoat,                    itm.nomad_boots,            itm.mail_boots,                      itm.great_helmet, itm.gauntlets,           itm.fighting_pick,  itm.sword_two_handed_a, itm.tab_shield_heater_cav_a],    knight_attrib_1,wp(120),knight_skills_1, 0x00000008200012033d9b6d4a92ada53500000000001cc1180000000000000000, swadian_face_young_2],
 	["knight_1_20", "Count Montewar", "Montewar", tf_hero, 0, reserved,  fac.kingdom_1, [itm.saddle_horse,      itm.ragged_outfit,      itm.heraldic_mail_with_surcoat,           itm.nomad_boots,            itm.splinted_greaves,                itm.great_helmet, itm.gauntlets,           itm.sword_medieval_c,   itm.sword_two_handed_a,   itm.tab_shield_heater_cav_a],   knight_attrib_2,wp(150),knight_skills_1, 0x0000000c4d0840d24a9b2ab4ac2a332400000000001d34db0000000000000000, swadian_face_young_2],
-	
-	
-	
-	
+
+
+
+
 	#  ["knight_1_21", "Lord Swadian 21", "knight_1_7", tf_hero, 0, reserved,  fac.kingdom_1, [itm.saddle_horse,      itm.ragged_outfit,      itm.heraldic_mail_with_surcoat,           itm.nomad_boots,            itm.splinted_greaves,                itm.great_helmet, itm.gauntlets,           itm.sword_medieval_c,   itm.sword_two_handed_a,   itm.tab_shield_heater_cav_a],   knight_attrib_2,wp(150),knight_skills_2, 0x0000000c4d0840d24a9b2ab4ac2a332400000000001d34db0000000000000000, swadian_face_young_2],
 	# ["knight_1_22", "Lord Swadian 22", "knight_1_8", tf_hero, 0, reserved,  fac.kingdom_1, [itm.saddle_horse,      itm.short_tunic,       itm.heraldic_mail_with_surcoat,           itm.leather_boots,          itm.mail_chausses,                   itm.winged_great_helmet, itm.gauntlets,       itm.bastard_sword_a,  itm.sword_two_handed_a,  itm.tab_shield_heater_d],    knight_attrib_3,wp(180),knight_skills_3|knows_trainer_4, 0x0000000c370c1194546469ca6c4e450e00000000001ebac40000000000000000, swadian_face_older_2],
 	#  ["knight_1_23", "Lord Swadian 23", "knight_1_9", tf_hero, 0, reserved,  fac.kingdom_1, [itm.hunter,            itm.rich_outfit,        itm.mail_hauberk,                   itm.woolen_hose,            itm.mail_chausses,                   itm.guard_helmet, itm.gauntlets,         itm.sword_medieval_c,    itm.tab_shield_heater_d],      knight_attrib_4,wp(200),knight_skills_4|knows_trainer_6, 0x0000000c0c1064864ba34e2ae291992b00000000001da8720000000000000000, swadian_face_older_2],
 	#  ["knight_1_24", "Lord Swadian 24", "knight_1_0", tf_hero, 0, reserved,  fac.kingdom_1, [itm.hunter,            itm.tabard,      itm.heraldic_mail_with_surcoat,               itm.leather_boots,          itm.mail_boots,                      itm.winged_great_helmet, itm.gauntlets, itm.bastard_sword_b, itm.sword_two_handed_b,  itm.tab_shield_heater_cav_b], knight_attrib_5,wp(240),knight_skills_5|knows_trainer_5, 0x0000000c0a08038736db74c6a396a8e500000000001db8eb0000000000000000, swadian_face_older_2],
-	
-	
-	
+
+
+
 	["knight_2_1", "Boyar Vuldrat", "Vuldrat", tf_hero, 0, reserved,  fac.kingdom_2, [itm.saddle_horse,      itm.fur_coat,     itm.vaegir_elite_armor,                   itm.nomad_boots,            itm.splinted_leather_greaves,        itm.vaegir_noble_helmet,    itm.mail_mittens,       itm.sword_viking_3,           itm.tab_shield_kite_c],    knight_attrib_1,wp(130),knight_skills_1|knows_trainer_3, 0x00000005590011c33d9b6d4a92ada53500000000001cc1180000000000000000, vaegir_face_middle_2],
 	["knight_2_2", "Boyar Naldera", "Naldera", tf_hero, 0, reserved,  fac.kingdom_2, [itm.saddle_horse,      itm.rich_outfit,        itm.lamellar_armor,               itm.woolen_hose,            itm.mail_chausses,                   itm.vaegir_noble_helmet,  itm.mail_mittens,      itm.shortened_military_scythe,    itm.tab_shield_kite_cav_a],    knight_attrib_2,wp(160),knight_skills_2, 0x0000000c2a0015d249b68b46a98e176400000000001d95a40000000000000000, vaegir_face_old_2],
 	["knight_2_3", "Boyar Meriga", "Meriga", tf_hero, 0, reserved,  fac.kingdom_2, [itm.warhorse_steppe,            itm.short_tunic,        itm.mail_hauberk,                   itm.woolen_hose,            itm.mail_chausses,                   itm.vaegir_lamellar_helmet, itm.lamellar_gauntlets,           itm.great_bardiche,           itm.tab_shield_kite_cav_b],     knight_attrib_3,wp(190),knight_skills_3, 0x0000000c131031c546a38a2765b4c86000000000001e58d30000000000000000, vaegir_face_older_2],
@@ -1024,7 +1024,7 @@ troops = [
 	["knight_2_18", "Boyar Valishin", "Valishin", tf_hero, 0, reserved,  fac.kingdom_2, [itm.hunter,            itm.nomad_robe,             itm.nomad_vest,                     itm.woolen_hose,            itm.mail_chausses,                   itm.vaegir_lamellar_helmet,  itm.lamellar_gauntlets,      itm.great_bardiche,    itm.tab_shield_kite_cav_a],    knight_attrib_3,wp(180),knight_skills_3, 0x0000000b670012c23d9b6d4a92ada53500000000001cc1180000000000000000, vaegir_face_older_2],
 	["knight_2_19", "Boyar Rudin", "Rudin", tf_hero, 0, reserved,  fac.kingdom_2, [itm.saddle_horse,      itm.rich_outfit,        itm.vaegir_elite_armor,                     itm.leather_boots,          itm.mail_chausses,                   itm.vaegir_noble_helmet, itm.scale_gauntlets,         itm.fighting_pick,  itm.shortened_military_scythe, itm.tab_shield_kite_d],    knight_attrib_4,wp(210),knight_skills_4|knows_trainer_4, 0x0000000e070050853b0a6e4994ae272a00000000001db4e10000000000000000, vaegir_face_older_2],
 	["knight_2_20", "Boyar Kumipa", "Kumipa", tf_hero, 0, reserved,  fac.kingdom_2, [itm.warhorse_steppe,          itm.fur_coat,        itm.lamellar_armor,               itm.woolen_hose,            itm.mail_boots,                      itm.vaegir_lamellar_helmet,  itm.lamellar_gauntlets,      itm.great_bardiche,   itm.tab_shield_kite_cav_b],      knight_attrib_5,wp(240),knight_skills_5|knows_trainer_5, 0x0000000f800021c63b0a6e4994ae272a00000000001db4e10000000000000000, vaegir_face_older_2],
-	
+
 	#khergit civilian clothes: itm.leather_vest, itm.nomad_vest, itm.nomad_robe, itm.lamellar_vest,itm.tribal_warrior_outfit
 	["knight_3_1", "Alagur Noyan", "Alagur", tf_hero, 0, reserved,  fac.kingdom_3, [itm.courser, itm.leather_vest,  itm.studded_leather_coat,itm.nomad_boots,  itm.mail_boots, itm.khergit_guard_helmet, itm.lamellar_gauntlets, itm.leather_gloves,  itm.sword_khergit_3, itm.tab_shield_small_round_c, itm.khergit_bow, itm.arrows],  knight_attrib_1,wp(130),knight_skills_1|knows_trainer_3|knows_power_draw_4, 0x000000043000318b54b246b7094dc39c00000000001d31270000000000000000, khergit_face_middle_2],
 	["knight_3_2", "Tonju Noyan",  "Tonju", tf_hero, 0, reserved,  fac.kingdom_3, [itm.courser, itm.nomad_vest,   itm.lamellar_armor, itm.hide_boots,  itm.mail_boots, itm.khergit_cavalry_helmet, itm.lamellar_gauntlets, itm.leather_gloves, itm.khergit_sword_two_handed_b,  itm.tab_shield_small_round_b, itm.khergit_bow, itm.arrows], knight_attrib_2,wp(160),knight_skills_2|knows_power_draw_4, 0x0000000c280461004929b334ad632aa200000000001e05120000000000000000, khergit_face_old_2],
@@ -1046,7 +1046,7 @@ troops = [
 	["knight_3_18", "Karaban Noyan", "Karaban", tf_hero, 0, reserved,  fac.kingdom_3, [itm.courser,   itm.nomad_vest, itm.khergit_elite_armor, itm.hide_boots, itm.splinted_greaves,  itm.khergit_guard_helmet, itm.scale_gauntlets,   itm.war_axe, itm.tab_shield_small_round_c, itm.lance,  itm.khergit_bow, itm.arrows],   knight_attrib_3,wp(180),knight_skills_3|knows_trainer_4|knows_power_draw_4, 0x0000000c0810500347ae7acd0d3ad74a00000000001e289a0000000000000000, khergit_face_older_2],
 	["knight_3_19", "Akadan Noyan","Akadan", tf_hero, 0, reserved,  fac.kingdom_3, [itm.hunter,   itm.nomad_robe, itm.lamellar_vest_khergit, itm.leather_boots, itm.splinted_leather_greaves,  itm.khergit_cavalry_helmet, itm.lamellar_gauntlets, itm.sword_khergit_4, itm.shortened_military_scythe, itm.tab_shield_small_round_c],  knight_attrib_4,wp(210),knight_skills_4|knows_trainer_5|knows_power_draw_4, 0x0000000c1500510528f50d52d20b152300000000001d66db0000000000000000, khergit_face_older_2],
 	["knight_3_20", "Dundush Noyan","Dundush", tf_hero, 0, reserved,  fac.kingdom_3, [itm.warhorse_steppe, itm.lamellar_vest, itm.khergit_elite_armor, itm.hide_boots, itm.mail_chausses, itm.khergit_guard_helmet, itm.scale_gauntlets, itm.khergit_sword_two_handed_a, itm.tab_shield_small_round_c, itm.lance, itm.khergit_bow, itm.arrows],  knight_attrib_5,wp(240),knight_skills_5|knows_power_draw_4, 0x0000000f7800620d66b76edd5cd5eb6e00000000001f691e0000000000000000, khergit_face_older_2],
-	
+
 	["knight_4_1", "Jarl Aedin", "Aedin", tf_hero, 0, reserved,  fac.kingdom_4, [itm.rich_outfit,  itm.banded_armor,   itm.woolen_hose,  itm.mail_boots,  itm.nordic_huscarl_helmet, itm.mail_mittens, itm.great_axe, itm.tab_shield_round_d, itm.throwing_axes], knight_attrib_1,wp(130),knight_skills_1, 0x0000000c13002254340eb1d91159392d00000000001eb75a0000000000000000, nord_face_middle_2],
 	["knight_4_2", "Jarl Irya", "Irya", tf_hero, 0, reserved,  fac.kingdom_4, [ itm.short_tunic,  itm.banded_armor, itm.blue_hose,  itm.splinted_greaves,  itm.nordic_warlord_helmet, itm.scale_gauntlets, itm.one_handed_battle_axe_c,  itm.tab_shield_round_d, itm.throwing_axes],  knight_attrib_2,wp(160),knight_skills_2|knows_trainer_3, 0x0000000c1610218368e29744e9a5985b00000000001db2a10000000000000000, nord_face_old_2],
 	["knight_4_3", "Jarl Olaf", "Olaf", tf_hero, 0, reserved,  fac.kingdom_4, [itm.warhorse, itm.rich_outfit,  itm.heraldic_mail_with_tabard,   itm.nomad_boots,  itm.mail_chausses, itm.scale_gauntlets,   itm.nordic_warlord_helmet,   itm.great_axe, itm.tab_shield_round_e, itm.throwing_axes],  knight_attrib_3,wp(190),knight_skills_3, 0x0000000c03040289245a314b744b30a400000000001eb2a90000000000000000, nord_face_older_2],
@@ -1067,7 +1067,7 @@ troops = [
 	["knight_4_18", "Jarl Gearth", "Gearth", tf_hero, 0, reserved,  fac.kingdom_4, [ itm.rich_outfit,  itm.mail_and_plate,   itm.woolen_hose,  itm.mail_chausses,   itm.segmented_helmet, itm.scale_gauntlets, itm.sword_viking_3, itm.shortened_military_scythe,  itm.tab_shield_round_d],   knight_attrib_3,wp(180),knight_skills_3, 0x0000000c0d00118866e22e3d9735a72600000000001eacad0000000000000000, nord_face_older_2],
 	["knight_4_19", "Jarl Surdun", "Surdun", tf_hero, 0, reserved,  fac.kingdom_4, [itm.warhorse, itm.nomad_robe,   itm.haubergeon, itm.blue_hose,  itm.mail_boots,  itm.guard_helmet, itm.scale_gauntlets,   itm.one_handed_battle_axe_c,  itm.tab_shield_round_e, itm.throwing_axes],  knight_attrib_4,wp(210),knight_skills_4|knows_trainer_5, 0x0000000c0308225124e26d4a6295965a00000000001d23e40000000000000000, nord_face_older_2],
 	["knight_4_20", "Jarl Gerlad", "Gerlad", tf_hero, 0, reserved,  fac.kingdom_4, [itm.hunter,   itm.courtly_outfit,   itm.coat_of_plates,   itm.nomad_boots,  itm.splinted_greaves, itm.scale_gauntlets,  itm.winged_great_helmet,itm.great_axe, itm.tab_shield_round_e, itm.throwing_axes],  knight_attrib_5,wp(240),knight_skills_5, 0x0000000f630052813b6bb36de5d6eb7400000000001dd72c0000000000000000, nord_face_older_2],
-	
+
 	["knight_5_1", "Count Matheas", "Matheas", tf_hero, 0, reserved,  fac.kingdom_5, [itm.saddle_horse,   itm.tabard,   itm.heraldic_mail_with_surcoat,       itm.leather_boots,    itm.mail_boots,    itm.guard_helmet, itm.leather_gloves,     itm.fighting_pick,   itm.tab_shield_heater_c],     knight_attrib_1,wp(130),knight_skills_1|knows_trainer_3, 0x0000000a1b0c00483adcbaa5ac9a34a200000000001ca2d40000000000000000, rhodok_face_middle_2],
 	["knight_5_2", "Count Gutlans", "Gutlans", tf_hero, 0, reserved,  fac.kingdom_5, [itm.courser,    itm.red_gambeson,       itm.heraldic_mail_with_tabard,    itm.leather_boots,    itm.mail_boots,    itm.nasal_helmet, itm.leather_gloves,      itm.military_pick,  itm.sword_two_handed_a,   itm.tab_shield_heater_c],     knight_attrib_2,wp(160),knight_skills_2|knows_trainer_4, 0x0000000c390c659229136db45a75251300000000001f16930000000000000000, rhodok_face_old_2],
 	["knight_5_3", "Count Laruqen", "Laruqen", tf_hero, 0, reserved,  fac.kingdom_5, [itm.hunter,     itm.short_tunic,  itm.mail_and_plate,     itm.nomad_boots,      itm.splinted_leather_greaves,  itm.kettle_hat, itm.gauntlets, itm.shortened_military_scythe,  itm.tab_shield_heater_d],    knight_attrib_3,wp(190),knight_skills_3, 0x0000000c2f10415108b1aacba27558d300000000001d329c0000000000000000, rhodok_face_older_2],
@@ -1088,7 +1088,7 @@ troops = [
 	["knight_5_18", "Count Fraichin", "Fraichin", tf_hero, 0, reserved,  fac.kingdom_5, [itm.saddle_horse, itm.courtly_outfit,     itm.heraldic_mail_with_tabard,    itm.woolen_hose,      itm.mail_boots,    itm.nasal_helmet, itm.gauntlets,       itm.military_pick,   itm.tab_shield_heater_d],    knight_attrib_3,wp(180),knight_skills_3, 0x0000000a3d0c13c3452aa967276dc95c00000000001dad350000000000000000, rhodok_face_older_2],
 	["knight_5_19", "Count Trimbau", "Trimbau", tf_hero, 0, reserved,  fac.kingdom_5, [itm.warhorse,     itm.leather_jacket,     itm.heraldic_mail_with_tabard,   itm.leather_boots,    itm.splinted_leather_greaves,       itm.kettle_hat, itm.gauntlets,   itm.fighting_pick,  itm.sword_two_handed_a, itm.tab_shield_heater_d],   knight_attrib_4,wp(210),knight_skills_4|knows_trainer_5, 0x0000000038043194092ab4b2d9adb44c00000000001e072c0000000000000000, rhodok_face_older_2],
 	["knight_5_20", "Count Reichsin", "Reichsin", tf_hero, 0, reserved,  fac.kingdom_5, [itm.warhorse,     itm.rich_outfit,  itm.heraldic_mail_with_tabard,     itm.blue_hose,  itm.mail_chausses,       itm.great_helmet, itm.gauntlets,       itm.bastard_sword_b,   itm.tab_shield_heater_d],  knight_attrib_5,wp(240),knight_skills_5|knows_trainer_6, 0x000000003600420515a865b45c64d64c00000000001d544b0000000000000000, rhodok_face_older_2],
-	
+
 	["knight_6_1", "Emir Uqais", "Uqais", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_a,   itm.mamluke_mail,          itm.sarranid_boots_c,    itm.mail_boots,    itm.sarranid_warrior_cap, itm.leather_gloves,    itm.heavy_lance, itm.sarranid_cavalry_sword,   itm.tab_shield_small_round_c],     knight_attrib_1,wp(130),knight_skills_1|knows_trainer_3, 0x00000000600c2084486195383349eae500000000001d16a30000000000000000, rhodok_face_middle_2],
 	["knight_6_2", "Emir Hamezan", "Hamezan", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_b,    itm.sarranid_elite_armor,       itm.sarranid_boots_c,    itm.mail_boots,    itm.sarranid_warrior_cap, itm.leather_gloves,   itm.lance,   itm.military_pick,  itm.sword_two_handed_a,   itm.tab_shield_small_round_c],     knight_attrib_2,wp(160),knight_skills_2|knows_trainer_4, 0x00000001380825d444cb68b92b8d3b1d00000000001dd71e0000000000000000, rhodok_face_old_2],
 	["knight_6_3", "Emir Atis", "Atis", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_a,     itm.mamluke_mail,       itm.nomad_boots,      itm.sarranid_warrior_cap,  itm.shortened_military_scythe, itm.lamellar_gauntlets,  itm.tab_shield_small_round_c],    knight_attrib_3,wp(190),knight_skills_3, 0x000000002208428579723147247ad4e500000000001f14d40000000000000000, rhodok_face_older_2],
@@ -1104,33 +1104,33 @@ troops = [
 	["knight_6_13", "Emir Amdar", "Amdar", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_b,     itm.sarranid_mail_shirt,       itm.sarranid_boots_c,      itm.sarranid_boots_c,  itm.sarranid_helmet1,   itm.lamellar_gauntlets,     itm.sword_two_handed_a,  itm.tab_shield_small_round_c],    knight_attrib_3,wp(190),knight_skills_3, 0x00000000001021435b734d4ad94eba9400000000001eb8eb0000000000000000, rhodok_face_older_2],
 	["knight_6_14", "Emir Hiwan", "Hiwan", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_b,     itm.sarranid_elite_armor,       itm.sarranid_boots_c,      itm.sarranid_boots_c,    itm.sarranid_mail_coif, itm.lance,  itm.sarranid_cavalry_sword,    itm.tab_shield_small_round_c],    knight_attrib_4,wp(220),knight_skills_4, 0x000000000c0c45c63a5b921ac22db8e200000000001cca530000000000000000, rhodok_face_older_2],
 	["knight_6_15", "Emir Muhnir", "Muhnir", tf_hero, 0, reserved,  fac.kingdom_6, [itm.hunter,     itm.sarranid_mail_shirt,       itm.sarranid_boots_c,    itm.mail_boots,    itm.sarranid_helmet1,  itm.sword_two_handed_a,  itm.tab_shield_small_round_c], knight_attrib_5,wp(250),knight_skills_5, 0x000000001b0c4185369a6938cecde95600000000001f25210000000000000000, rhodok_face_older_2],
-	
+
 	["knight_6_16", "Emir Ayyam", "Ayyam", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_a,    itm.mamluke_mail,             itm.sarranid_boots_c,      itm.sarranid_boots_c,    itm.sarranid_mail_coif, itm.leather_gloves,  itm.lance,    itm.fighting_pick,   itm.tab_shield_small_round_c],    knight_attrib_1,wp(120),knight_skills_1, 0x00000007770841c80a01e1c5eb51ffff00000000001f12d80000000000000000, rhodok_face_middle_2],
 	["knight_6_17", "Emir Raddoun", "Raddoun", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_b,     itm.sarranid_mail_shirt,          itm.sarranid_boots_c,    itm.sarranid_boots_c,       itm.sarranid_mail_coif,  itm.leather_gloves,      itm.sarranid_cavalry_sword,    itm.tab_shield_small_round_c],     knight_attrib_2,wp(150),knight_skills_2, 0x000000007f0462c32419f47a1aba8bcf00000000001e7e090000000000000000, rhodok_face_old_2],
 	["knight_6_18", "Emir Tilimsan", "Tilimsan", tf_hero, 0, reserved,  fac.kingdom_6, [itm.arabian_horse_a,  itm.sarranid_elite_armor,     itm.sarranid_boots_c,      itm.mail_boots,    itm.sarranid_helmet1,  itm.lance,       itm.military_pick,   itm.tab_shield_small_round_c],    knight_attrib_3,wp(180),knight_skills_3, 0x000000003410410070d975caac91aca500000000001c27530000000000000000, rhodok_face_older_2],
 	["knight_6_19", "Emir Dhashwal", "Dhashwal", tf_hero, 0, reserved,  fac.kingdom_6, [itm.warhorse_sarranid,     itm.sarranid_mail_shirt,        itm.sarranid_boots_c,    itm.sarranid_boots_c,       itm.sarranid_mail_coif, itm.lamellar_gauntlets,   itm.fighting_pick,  itm.sword_two_handed_a, itm.tab_shield_small_round_c],   knight_attrib_4,wp(210),knight_skills_4|knows_trainer_5, 0x000000018a08618016ac36bc8b6e4a9900000000001dd45d0000000000000000, rhodok_face_older_2],
 	["knight_6_20", "Emir Biliya", "Biliya", tf_hero, 0, reserved,  fac.kingdom_6, [itm.warhorse_sarranid,     itm.sarranid_cavalry_robe,       itm.sarranid_boots_c,  itm.sarranid_boots_c,       itm.sarranid_veiled_helmet,   itm.lance,      itm.sarranid_cavalry_sword,   itm.tab_shield_small_round_c],  knight_attrib_5,wp(240),knight_skills_5|knows_trainer_6, 0x00000001bd0040c0281a899ac956b94b00000000001ec8910000000000000000, rhodok_face_older_2],
-	
-	
-	
-	
+
+
+
+
 	["kingdom_1_pretender",  "Lady Isolla of Suno",       "Isolla",  tf_hero|tf_female|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_1,[itm.charger,   itm.rich_outfit,  itm.blue_hose,      itm.iron_greaves,         itm.mail_shirt,      itm.sword_medieval_c_small,      itm.tab_shield_small_round_c,       itm.bascinet],          lord_attrib,wp(220),knight_skills_5, 0x00000000ef00000237dc71b90c31631200000000001e371b0000000000000000],
 	#claims pre-salic descent
-	
+
 	["kingdom_2_pretender",  "Prince Valdym the Bastard", "Valdym",  tf_hero|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_2,[itm.hunter,    itm.courtly_outfit,      itm.leather_boots,              itm.mail_chausses,              itm.lamellar_armor,       itm.military_pick,      itm.tab_shield_heater_b,      itm.flat_topped_helmet],    lord_attrib,wp(220),knight_skills_5, 0x00000000200412142452ed631b30365c00000000001c94e80000000000000000, vaegir_face_middle_2],
 	#had his patrimony falsified
-	
+
 	["kingdom_3_pretender",  "Dustum Khan",               "Dustum",  tf_hero|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_3,[itm.courser,   itm.nomad_robe,             itm.leather_boots,              itm.splinted_greaves,           itm.khergit_guard_armor,         itm.sword_khergit_2,              itm.tab_shield_small_round_c,       itm.segmented_helmet],      lord_attrib,wp(220),knight_skills_5, 0x000000065504310b30d556b51238f66100000000001c256d0000000000000000, khergit_face_middle_2],
 	#of the family
-	
+
 	["kingdom_4_pretender",  "Lethwin Far-Seeker",   "Lethwin",  tf_hero|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_4,[itm.hunter,    itm.tabard,    itm.leather_boots,              itm.mail_boots,                 itm.brigandine_red,           itm.sword_medieval_c,           itm.tab_shield_heater_cav_a,    itm.kettle_hat],            lord_attrib,wp(220),knight_skills_5, 0x00000004340c01841d89949529a6776a00000000001c910a0000000000000000, nord_face_young_2],
 	#dispossessed and wronged
-	
+
 	["kingdom_5_pretender",  "Lord Kastor of Veluca",  "Kastor",  tf_hero|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_5,[itm.warhorse,  itm.nobleman_outfit,             itm.leather_boots,              itm.splinted_leather_greaves,   itm.mail_hauberk,           itm.sword_medieval_c,         itm.tab_shield_heater_d,        itm.spiked_helmet],         lord_attrib,wp(220),knight_skills_5, 0x0000000bed1031051da9abc49ecce25e00000000001e98680000000000000000, rhodok_face_old_2],
 	#republican
-	
+
 	["kingdom_6_pretender",  "Arwa the Pearled One",       "Arwa",  tf_hero|tf_female|tf_unmoveable_in_party_window, 0,reserved,  fac.kingdom_6,[itm.arabian_horse_b, itm.sarranid_mail_shirt, itm.sarranid_boots_c, itm.sarranid_cavalry_sword,      itm.tab_shield_small_round_c],          lord_attrib,wp(220),knight_skills_5, 0x000000050b003004072d51c293a9a70b00000000001dd6a90000000000000000],
-	
+
 	##  ["kingdom_1_lord_a", "Kingdom 1 Lord A", "Kingdom 1 Lord A", tf_hero, 0,reserved,  fac.kingdom_1,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
 	##  ["kingdom_1_lord_b", "Kingdom 1 Lord B", "Kingdom 1 Lord B", tf_hero, 0,reserved,  fac.kingdom_2,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
 	##  ["kingdom_1_lord_c", "Kingdom 1 Lord C", "Kingdom 1 Lord C", tf_hero, 0,reserved,  fac.kingdom_3,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
@@ -1145,9 +1145,9 @@ troops = [
 	##  ["kingdom_1_lord_l", "Kingdom 1 Lord L", "Kingdom 1 Lord L", tf_hero, 0,reserved,  fac.kingdom_3,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
 	##  ["kingdom_1_lord_m", "Kingdom 1 Lord M", "Kingdom 1 Lord M", tf_hero, 0,reserved,  fac.kingdom_3,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
 	##  ["kingdom_1_lord_n", "Kingdom 1 Lord N", "Kingdom 1 Lord N", tf_hero, 0,reserved,  fac.kingdom_3,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x00000000000c710201fa51b7286db721],
-	
-	
-	
+
+
+
 	#  ["town_1_ruler_a", "King Harlaus",  "King Harlaus",  tf_hero, scn.town_1_castle|entry(9),reserved,  fac.swadians,[itm.saddle_horse,itm.courtly_outfit,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000010908101e36db44b75b6dd],
 	#  ["town_2_ruler_a", "Duke Taugard",  "Duke Taugard",  tf_hero, scn.town_2_castle|entry(9),reserved,  fac.swadians,[itm.saddle_horse,itm.courtly_outfit,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000000310401e06db86375f6da],
 	#  ["town_3_ruler_a", "Count Grimar",  "Count Grimar",  tf_hero, scn.town_3_castle|entry(9),reserved, fac.swadians,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000004430301e46136eb75bc0a],
@@ -1155,7 +1155,7 @@ troops = [
 	#  ["town_5_ruler_a", "Count Belicha", "Count Belicha", tf_hero, scn.town_5_castle|entry(9),reserved, fac.swadians,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x00000000000421c801e7713729c5b8ce],
 	#  ["town_6_ruler_a", "Count Nourbis", "Count Nourbis", tf_hero, scn.town_6_castle|entry(9),reserved,  fac.swadians,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x00000000000c640501e371b72bcdb724],
 	#  ["town_7_ruler_a", "Count Rhudolg", "Count Rhudolg", tf_hero, scn.town_7_castle|entry(9),reserved,  fac.swadians,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x00000000000c710201fa51b7286db721],
-	
+
 	#  ["town_8_ruler_b", "King Yaroglek", "King_yaroglek", tf_hero, scn.town_8_castle|entry(9),reserved,  fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000000128801f294ca6d66d555],
 	#  ["town_9_ruler_b", "Count Aolbrug", "Count_Aolbrug", tf_hero, scn.town_9_castle|entry(9),reserved,  fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000004234401f26a271c8d38ea],
 	#  ["town_10_ruler_b","Count Rasevas", "Count_Rasevas", tf_hero, scn.town_10_castle|entry(9),reserved, fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x00000000001032c201f38e269372471c],
@@ -1163,7 +1163,7 @@ troops = [
 	#  ["town_12_ruler_b","Count Haelbrad","Count_Haelbrad",tf_hero, scn.town_12_castle|entry(9),reserved,  fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x00000000000410c701f38598ac8aaaab],
 	#  ["town_13_ruler_b","Count Mira",    "Count_Mira",    tf_hero, scn.town_13_castle|entry(9),reserved, fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000004204401f390c515555594],
 	#  ["town_14_ruler_b","Count Camechaw","Count_Camechaw",tf_hero, scn.town_14_castle|entry(9),reserved,  fac.vaegirs,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000008318101f390c515555594],
-	
+
 	##  ["kingdom_2_lord_a", "Kingdom 2 Lord A", "Kingdom 2 Lord A", tf_hero, 0,reserved,  fac.kingdom_10,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
 	##  ["kingdom_2_lord_b", "Kingdom 2 Lord B", "Kingdom 2 Lord B", tf_hero, 0,reserved,  fac.kingdom_11,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
 	##  ["kingdom_2_lord_c", "Kingdom 2 Lord C", "Kingdom 2 Lord C", tf_hero, 0,reserved,  fac.kingdom_12,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
@@ -1178,13 +1178,13 @@ troops = [
 	##  ["kingdom_2_lord_l", "Kingdom 2 Lord L", "Kingdom 2 Lord L", tf_hero, 0,reserved,  fac.kingdom_12,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
 	##  ["kingdom_2_lord_m", "Kingdom 2 Lord M", "Kingdom 2 Lord M", tf_hero, 0,reserved,  fac.kingdom_12,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
 	##  ["kingdom_2_lord_n", "Kingdom 2 Lord N", "Kingdom 2 Lord N", tf_hero, 0,reserved,  fac.kingdom_12,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots,itm.coat_of_plates],lord_attrib|level(38),wp(220),knows_common, 0x000000000008318101f390c515555594],
-	
-	
-	
+
+
+
 	#Royal family members
-	
+
 	["knight_1_1_wife","Error - knight_1_1_wife should not appear in game","knight_1_1_wife",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.commoners, [itm.lady_dress_ruby ,   itm.turret_hat_ruby,    itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000055910200107632d675a92b92d00000000001e45620000000000000000],
-	
+
 	#Swadian ladies - eight mothers, eight daughters, four sisters
 	["kingdom_1_lady_1","Lady Anna","Anna",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_1, [          itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000055910200107632d675a92b92d00000000001e45620000000000000000],
 	["kingdom_1_lady_2","Lady Nelda","Nelda",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_1, [       itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000054f08100232636aa90d6e194b00000000001e43130000000000000000],
@@ -1206,7 +1206,7 @@ troops = [
 	["kingdom_1_lady_18","Lady Bernatys","Bernatys",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_1, [      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x0000000000083006465800000901161200000000001e38cc0000000000000000],
 	["kingdom_1_lady_19","Lady Enricata","Enricata",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_1, [      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, swadian_woman_face_1],
 	["kingdom_1_lady_20","Lady Gaeta","Gaeta",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_1, [itm.lady_dress_green,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, swadian_woman_face_2],
-	
+
 	#Vaegir ladies
 	["kingdom_2_lady_1","Lady Junitha","Junitha",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_2, [      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000007c0101002588caf17142ab93d00000000001ddfa40000000000000000],
 	["kingdom_2_lady_2","Lady Katia","Katia",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_2, [    itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000008c00c20032aa5ae36b4259b9300000000001da6a50000000000000000],
@@ -1228,8 +1228,8 @@ troops = [
 	["kingdom_2_lady_18","Lady Erenchina","Erenchina",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_2, [  itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000008c00c20032aa5ae36b4259b9300000000001da6a50000000000000000],
 	["kingdom_2_lady_19","Lady Tamar","Tamar",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_2,  [  itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x0000000007080004782a6cc4ecae4d1e00000000001eb6e30000000000000000],
 	["kingdom_2_lady_20","Lady Valka","Valka",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_2,  [itm.green_dress,   itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000054008200638db99d89eccbd3500000000001ec91d0000000000000000],
-	
-	
+
+
 	["kingdom_3_lady_1","Lady Borge","Borge",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3, [      itm.brown_dress,       itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, khergit_woman_face_1],
 	["kingdom_3_lady_2","Lady Tuan","Tuan",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3, [      itm.green_dress,       itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000008ec0820062ce4d246b38e632e00000000001d52910000000000000000],
 	["kingdom_3_lady_3","Lady Mahraz","Mahraz",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3, [itm.red_dress ,     itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, khergit_woman_face_2],
@@ -1250,9 +1250,9 @@ troops = [
 	["kingdom_3_lady_18","Lady Qutala","Qutala",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3, [      itm.brown_dress,       itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000008ec0820062ce4d246b38e632e00000000001d52910000000000000000],
 	["kingdom_3_lady_19","Lady Hindal","Hindal",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3,  [    itm.brown_dress ,     itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000000320c30023ce23a145a8f27a300000000001ea6dc0000000000000000],
 	["kingdom_3_lady_20","Lady Mechet","Mechet",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_3,  [    itm.brown_dress ,     itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000002a0c200348a28f2a54aa391c00000000001e46d10000000000000000],
-	
-	
-	
+
+
+
 	["kingdom_4_lady_1","Lady Jadeth","Jadeth",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4, [      itm.court_dress ,   itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000054b100003274d65d2d239eb1300000000001d49080000000000000000],
 	["kingdom_4_lady_2","Lady Miar","Miar",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4, [      itm.court_dress ,   itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000058610000664d3693664f0c54b00000000001d332d0000000000000000],
 	["kingdom_4_lady_3","Lady Dria","Dria",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4,  [    itm.peasant_dress, itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000000000c000469a4d5cda4b1349c00000000001cd6600000000000000000],
@@ -1273,8 +1273,8 @@ troops = [
 	["knight_4_2c_wife_2","Lady Aesa","Aesa",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4, [      itm.court_dress ,   itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000058610000664d3693664f0c54b00000000001d332d0000000000000000],
 	["knight_4_1c_daughter","Lady Alfrun","Alfrun",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4,  [    itm.peasant_dress,  itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000000000c000469a4d5cda4b1349c00000000001cd6600000000000000000],
 	["kingdom_4_lady_20","Lady Afrid","Afrid",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_4,  [    itm.peasant_dress,  itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000000000000021564d196e2aa279400000000001dc4ed0000000000000000],
-	
-	
+
+
 	["kingdom_5_lady_1","Lady Brina","Brina",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5, [      itm.lady_dress_green,     itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000007e900200416ed96e88b8d595a00000000001cb8ac0000000000000000],
 	["kingdom_5_lady_2","Lady Aliena","Aliena",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5, [      itm.lady_dress_green,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000057008200222d432cf6d4a2ae300000000001d37a10000000000000000],
 	["kingdom_5_lady_3","Lady Aneth","Aneth",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5,  [ itm.lady_dress_ruby ,     itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000001b9002002364dd8aa5475d76400000000001db8d30000000000000000],
@@ -1295,7 +1295,7 @@ troops = [
 	["kingdom_5_2c_wife_2","Lady Ysueth","Ysueth",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5, [      itm.lady_dress_green,   itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000057008200222d432cf6d4a2ae300000000001d37a10000000000000000],
 	["kingdom_5_1c_daughter_4","Lady Ellian","Ellian",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5,  [ itm.lady_dress_ruby ,  itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x00000001b9002002364dd8aa5475d76400000000001db8d30000000000000000],
 	["kingdom_5_lady_20","Lady Timethi","Timethi",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_5,  [ itm.lady_dress_ruby ,  itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000057a0000014123dae69e8e48e200000000001e08db0000000000000000],
-	
+
 	#Sarranid ladies
 	["kingdom_6_lady_1","Lady Rayma","Rayma",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_6, [itm.sarranid_lady_dress,  itm.sarranid_head_cloth,        itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000055910200107632d675a92b92d00000000001e45620000000000000000],
 	["kingdom_6_lady_2","Lady Thanaikha","Thanaikha",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_6, [itm.sarranid_lady_dress_b,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000054f08100232636aa90d6e194b00000000001e43130000000000000000],
@@ -1317,10 +1317,10 @@ troops = [
 	["kingdom_6_lady_18","Lady Khalisa","Khalisa",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_6, [itm.sarranid_lady_dress,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x0000000000083006465800000901161200000000001e38cc0000000000000000],
 	["kingdom_6_lady_19","Lady Janab","Janab",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_6, [itm.sarranid_lady_dress_b,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, swadian_woman_face_1],
 	["kingdom_6_lady_20","Lady Sur","Sur",tf_hero|tf_female|tf_unmoveable_in_party_window,0,reserved,fac.kingdom_6, [itm.sarranid_lady_dress,      itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, swadian_woman_face_2],
-	
-	
-	
-	
+
+
+
+
 	#  ["kingdom_11_lord_daughter","kingdom_11_lord_daughter","kingdom_11_lord_daughter",tf_hero|tf_female,0,reserved,fac.kingdom_10,  [ itm.lady_dress_blue ,   itm.turret_hat_blue,    itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000008300701c08d34a450ce43],
 	#  ["kingdom_13_lord_daughter","kingdom_13_lord_daughter","kingdom_13_lord_daughter",tf_hero|tf_female,0,reserved,fac.kingdom_10,  [ itm.lady_dress_green,   itm.turret_hat_green,   itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000008000401db10a45b41d6d8],
 	##  ["kingdom_1_lady_a","kingdom_1_lady_a","kingdom_1_lady_a",tf_hero|tf_female,0,reserved,fac.kingdom_1, [   itm.lady_dress_blue ,   itm.turret_hat_blue,    itm.leather_boots],     def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000008500201d8ad93708e4694],
@@ -1332,7 +1332,7 @@ troops = [
 	##  ["kingdom_3_lady_b","Kingdom 3 Lady b","Kingdom 3 Lady b",tf_hero|tf_female,0,reserved,fac.kingdom_3,  [                         itm.lady_dress_ruby ,   itm.turret_hat_ruby,    itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000000100601d8b08d76d14a24],
 	##  ["kingdom_4_lady_a","Kingdom 4 Lady a","Kingdom 4 Lady a",tf_hero|tf_female,0,reserved,fac.kingdom_4,  [                         itm.lady_dress_green,   itm.turret_hat_green,   itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000010500601d8ad93708e4694],
 	##  ["kingdom_4_lady_b","Kingdom 4 Lady b","Kingdom 4 Lady b",tf_hero|tf_female,0,reserved,fac.kingdom_4,  [                         itm.lady_dress_blue ,   itm.turret_hat_blue,    itm.leather_boots], def_attrib|level(2),wp(50),knows_common|knows_riding_2, 0x000000000008500201d8ad93708e4694],
-	
+
 	["heroes_end", "{!}heroes end", "{!}heroes end", tf_hero, 0,reserved,  fac.neutral,[itm.saddle_horse,itm.leather_jacket,itm.nomad_boots],def_attrib|level(2),wp(20),knows_common, 0x000000000008318101f390c515555594],
 	#Merchants                                                                              AT                      SILAH                   ZIRH                        BOT                         Head_wear
 	##  ["merchant_1", "merchant_1_F", "merchant_1_F",tf_hero|tf_female,  0,0, fac.kingdom_1,[itm.courser,            itm.fighting_axe,       itm.leather_jerkin,         itm.leather_boots,          itm.straw_hat],              def_attrib|level(15),wp(100),knows_inventory_management_10, 0x000000000008200201e54c137a940c91],
@@ -1355,8 +1355,8 @@ troops = [
 	##  ["merchant_18","merchant_18","merchant_18",tf_hero,               0,0, fac.merchants,[itm.saddle_horse,       itm.nordic_sword,       itm.padded_leather,         itm.leather_boots,                          ],              def_attrib|level(15),wp(100),knows_inventory_management_10, 0x000000000008020c01fc2db3b4c97685],
 	##  ["merchant_19","merchant_19","merchant_19",tf_hero,               0,0, fac.merchants,[itm.saddle_horse,       itm.falchion,           itm.leather_jerkin,         itm.woolen_hose,                            ],              def_attrib|level(15),wp(100),knows_inventory_management_10, 0x000000000008118301f02af91892725b],
 	##  ["merchant_20","merchant_20_F","merchant_20_F",tf_hero|tf_female, 0,0, fac.merchants,[itm.courser,            itm.arming_sword,       itm.padded_leather,         itm.leather_boots,                          ],              def_attrib|level(15),wp(100),knows_inventory_management_10, 0x000000000010500401f6837d27688212],
-	
-	
+
+
 	#Seneschals
 	["town_1_seneschal", "{!}Town 1 Seneschal", "{!}Town 1 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[     itm.coarse_tunic,       itm.leather_boots], def_attrib|level(2),wp(20),knows_common, 0x00000000000c218501ef4f5d2ccb0026],
 	["town_2_seneschal", "{!}Town 2 Seneschal", "{!}Town 2 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[     itm.padded_leather,     itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x00000000000c03cc01cc34a9a467fdfd],
@@ -1380,7 +1380,7 @@ troops = [
 	["town_20_seneschal", "{!}Town 20 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.blue_gambeson,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x000000000004728b01c293c694944b05],
 	["town_21_seneschal", "{!}Town 21 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.blue_gambeson,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x000000000004728b01c293c694944b05],
 	["town_22_seneschal", "{!}Town 22 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.blue_gambeson,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x000000000004728b01c293c694944b05],
-	
+
 	["castle_1_seneschal", "{!}Castle 1 Seneschal", "{!}Castle 1 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.coarse_tunic,          itm.hide_boots],    def_attrib|level(2),wp(20),knows_common, 0x000000000010360b01cef8b57553d34e],
 	["castle_2_seneschal", "{!}Castle 2 Seneschal", "{!}Castle 2 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.nomad_armor,           itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x000000000008061301fb89acfb95332f],
 	["castle_3_seneschal", "{!}Castle 3 Seneschal", "{!}Castle 3 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.padded_leather,        itm.leather_boots], def_attrib|level(2),wp(20),knows_common, 0x000000000008548e01d952a9b25d6d5a],
@@ -1429,7 +1429,7 @@ troops = [
 	["castle_46_seneschal", "{!}Castle 20 Seneschal", "{!}Castle 20 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.padded_leather,    itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x00000000000440c601e1cd45cfb38550],
 	["castle_47_seneschal", "{!}Castle 20 Seneschal", "{!}Castle 20 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.padded_leather,    itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x00000000000440c601e1cd45cfb38550],
 	["castle_48_seneschal", "{!}Castle 20 Seneschal", "{!}Castle 20 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[itm.padded_leather,    itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x00000000000440c601e1cd45cfb38550],
-	
+
 	#Arena Masters
 	["town_1_arena_master", "Tournament Master","{!}Tournament Master",tf_hero|tf_randomize_face, scn.town_1_arena|entry(52),reserved,   fac.commoners,[itm.coarse_tunic,      itm.hide_boots],    def_attrib|level(2),wp(20),knows_common,man_face_middle_1, man_face_older_2],
 	["town_2_arena_master", "Tournament Master","{!}Tournament Master",tf_hero|tf_randomize_face, scn.town_2_arena|entry(52),reserved,   fac.commoners,[itm.linen_tunic,       itm.nomad_boots],   def_attrib|level(2),wp(20),knows_common,man_face_middle_1, man_face_older_2],
@@ -1453,11 +1453,11 @@ troops = [
 	["town_20_arena_master","Tournament Master","{!}Tournament Master",tf_hero|tf_randomize_face, scn.town_20_arena|entry(52),reserved,  fac.commoners,[itm.fur_coat,    itm.hide_boots],    def_attrib|level(2),wp(20),knows_common,man_face_middle_1, man_face_older_2],
 	["town_21_arena_master","Tournament Master","{!}Tournament Master",tf_hero|tf_randomize_face, scn.town_21_arena|entry(52),reserved,  fac.commoners,[itm.padded_leather,    itm.hide_boots],    def_attrib|level(2),wp(20),knows_common,man_face_middle_1, man_face_older_2],
 	["town_22_arena_master","Tournament Master","{!}Tournament Master",tf_hero|tf_randomize_face, scn.town_22_arena|entry(52),reserved,  fac.commoners,[itm.padded_leather,    itm.hide_boots],    def_attrib|level(2),wp(20),knows_common,man_face_middle_1, man_face_older_2],
-	
-	
-	
+
+
+
 	# Underground
-	
+
 	##  ["town_1_crook","Town 1 Crook","Town 1 Crook",tf_hero,                0,0, fac.neutral,[itm.linen_tunic,        itm.leather_boots       ],def_attrib|level(2),wp(20),knows_inventory_management_10, 0x000000000004428401f46e44a27144e3],
 	##  ["town_2_crook","Town 2 Crook","Town 2 Crook",tf_hero|tf_female,      0,0, fac.neutral,[itm.lady_dress_ruby,    itm.turret_hat_ruby     ],def_attrib|level(2),wp(20),knows_inventory_management_10, 0x000000000004300101c36db6db6db6db],
 	##  ["town_3_crook","Town 3 Crook","Town 3 Crook",tf_hero,                0,0, fac.neutral,[itm.leather_apron,      itm.hide_boots          ],def_attrib|level(2),wp(20),knows_inventory_management_10, 0x00000000000c530701f17944a25164e1],
@@ -1473,10 +1473,10 @@ troops = [
 	##  ["town_12_crook","Town 12 Crook","Town 12 Crook",tf_hero,             0,0, fac.neutral,[itm.coarse_tunic,      itm.hide_boots          ],def_attrib|level(5),wp(20),knows_inventory_management_10, 0x00000000000870c501f386c4f34dbaa1],
 	##  ["town_13_crook","Town 13 Crook","Town 13 Crook",tf_hero,             0,0, fac.neutral,[itm.blue_gambeson,     itm.nomad_boots         ],def_attrib|level(5),wp(20),knows_inventory_management_10, 0x00000000000c114901f245caf34dbaa1],
 	##  ["town_14_crook","Town 14 Crook","Town 14 Crook",tf_hero|tf_female,   0,0, fac.neutral,[itm.woolen_dress,      itm.turret_hat_ruby     ],def_attrib|level(5),wp(20),knows_inventory_management_10, 0x00000000001021c001f545a49b6eb2bc],
-	
+
 	# Armor Merchants
 	#arena_masters_end = zendar_armorer
-	
+
 	["town_1_armorer","Armorer",  "{!}Armorer",  tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.linen_tunic,           itm.leather_boots   ],def_attrib|level(2),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_2_armorer","Armorer",  "{!}Armorer",  tf_hero|tf_randomize_face|tf_female|tf_is_merchant, 0, 0, fac.commoners,[itm.woolen_dress,          itm.straw_hat       ],def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
 	["town_3_armorer","Armorer",  "{!}Armorer",  tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.arena_tunic_red,        itm.hide_boots      ],def_attrib|level(2),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
@@ -1499,9 +1499,9 @@ troops = [
 	["town_20_armorer","Armorer", "{!}Armorer",  tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.fur_coat,         itm.nomad_boots     ],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_21_armorer","Armorer", "{!}Armorer",  tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.fur_coat,       itm.hide_boots      ],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_22_armorer","Armorer", "{!}Armorer",  tf_hero|tf_randomize_face|tf_female|tf_is_merchant, 0, 0, fac.commoners,[itm.sarranid_common_dress,         itm.sarranid_head_cloth       ],def_attrib|level(5),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
-	
+
 	# Weapon merchants
-	
+
 	["town_1_weaponsmith", "Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|tf_female|tf_is_merchant, 0, 0, fac.commoners,[itm.linen_tunic,      itm.hide_boots,itm.straw_hat],def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
 	["town_2_weaponsmith", "Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.shirt,     itm.nomad_boots],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_3_weaponsmith", "Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.fur_coat,   itm.hide_boots],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
@@ -1524,9 +1524,9 @@ troops = [
 	["town_20_weaponsmith","Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.shirt,           itm.sarranid_boots_a],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_21_weaponsmith","Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.arena_tunic_green,     itm.sarranid_boots_a],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
 	["town_22_weaponsmith","Weaponsmith","{!}Weaponsmith",tf_hero|tf_randomize_face|          tf_is_merchant, 0, 0, fac.commoners,[itm.linen_tunic,     itm.sarranid_boots_a],def_attrib|level(5),wp(20),knows_inventory_management_10, mercenary_face_1, mercenary_face_2],
-	
+
 	#Tavern keepers
-	
+
 	["town_1_tavernkeeper", "Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face,           scn.town_1_tavern|entry(9),0,   fac.commoners,[itm.leather_apron,       itm.wrapping_boots],def_attrib|level(2),wp(20),knows_common, mercenary_face_1, mercenary_face_2],
 	["town_2_tavernkeeper", "Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face,           scn.town_2_tavern|entry(9),0,   fac.commoners,[itm.leather_apron,       itm.leather_boots],def_attrib|level(2),wp(20),knows_common, mercenary_face_1, mercenary_face_2],
 	["town_3_tavernkeeper", "Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face|tf_female, scn.town_3_tavern|entry(9),0,   fac.commoners,[itm.woolen_dress,        itm.hide_boots],def_attrib|level(2),wp(20),knows_common, woman_face_1, woman_face_2],
@@ -1549,9 +1549,9 @@ troops = [
 	["town_20_tavernkeeper","Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face,           scn.town_20_tavern|entry(9),0,  fac.commoners,[itm.sarranid_cloth_robe,       itm.sarranid_boots_a],def_attrib|level(2),wp(20),knows_common, mercenary_face_1, mercenary_face_2],
 	["town_21_tavernkeeper","Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face|tf_female, scn.town_21_tavern|entry(9),0,  fac.commoners,[itm.sarranid_common_dress,        itm.sarranid_boots_a,     itm.headcloth],def_attrib|level(2),wp(20),knows_common, woman_face_1, woman_face_2],
 	["town_22_tavernkeeper","Tavern_Keeper","{!}Tavern_Keeper",tf_hero|tf_randomize_face,           scn.town_22_tavern|entry(9),0,  fac.commoners,[itm.sarranid_cloth_robe_b,               itm.sarranid_boots_a],def_attrib|level(2),wp(20),knows_common, mercenary_face_1, mercenary_face_2],
-	
+
 	#Goods Merchants
-	
+
 	["town_1_merchant", "Merchant","{!}Merchant",          tf_hero|tf_randomize_face|tf_is_merchant, scn.town_1_store|entry(9),0, fac.commoners,     [itm.coarse_tunic,  itm.leather_boots                   ],def_attrib|level(2),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
 	["town_2_merchant", "Merchant","{!}Merchant",          tf_hero|tf_randomize_face|tf_is_merchant, scn.town_2_store|entry(9),0, fac.commoners,     [itm.leather_apron, itm.leather_boots                   ],def_attrib|level(2),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
 	["town_3_merchant", "Merchant","{!}Merchant",tf_female|tf_hero|tf_randomize_face|tf_is_merchant, scn.town_3_store|entry(9),0, fac.commoners,     [itm.dress,         itm.leather_boots,  itm.straw_hat   ],def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
@@ -1574,11 +1574,11 @@ troops = [
 	["town_20_merchant","Merchant","{!}Merchant",tf_female|tf_hero|tf_randomize_face|tf_is_merchant, scn.town_20_store|entry(9),0, fac.commoners,    [itm.sarranid_common_dress_b,  itm.sarranid_boots_a, itm.sarranid_felt_head_cloth_b  ],def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
 	["town_21_merchant","Merchant","{!}Merchant",tf_female|tf_hero|tf_randomize_face|tf_is_merchant, scn.town_21_store|entry(9),0, fac.commoners,    [itm.sarranid_dress_a,         itm.sarranid_boots_a,  itm.sarranid_felt_head_cloth  ],def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
 	["town_22_merchant","Merchant","{!}Merchant",          tf_hero|tf_randomize_face|tf_is_merchant, scn.town_22_store|entry(9),0, fac.commoners,    [itm.leather_apron, itm.leather_boots                   ],def_attrib|level(2),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
-	
+
 	["salt_mine_merchant","Barezan","Barezan",                tf_hero|tf_is_merchant, scn.salt_mine|entry(1),0, fac.commoners,        [itm.leather_apron, itm.leather_boots],def_attrib|level(2),wp(20),knows_inventory_management_10, 0x00000000000c528601ea69b6e46dbdb6],
-	
+
 	# Horse Merchants
-	
+
 	["town_1_horse_merchant","Horse Merchant","{!}Town 1 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant|tf_female,    0, 0, fac.commoners,[itm.blue_dress,           itm.blue_hose,      itm.female_hood],   def_attrib|level(2),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
 	["town_2_horse_merchant","Horse Merchant","{!}Town 2 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant,              0, 0, fac.commoners,[itm.linen_tunic,          itm.nomad_boots,],                      def_attrib|level(5),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
 	["town_3_horse_merchant","Horse Merchant","{!}Town 3 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant,              0, 0, fac.commoners,[itm.nomad_armor,          itm.hide_boots],                        def_attrib|level(5),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
@@ -1601,8 +1601,8 @@ troops = [
 	["town_20_horse_merchant","Horse Merchant","{!}Town 16 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant,            0, 0, fac.commoners,[itm.sarranid_cloth_robe,      itm.sarranid_boots_a],                        def_attrib|level(5),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
 	["town_21_horse_merchant","Horse Merchant","{!}Town 17 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant,            0, 0, fac.commoners,[itm.sarranid_cloth_robe_b,        itm.sarranid_boots_a],                       def_attrib|level(5),wp(20),knows_inventory_management_10, man_face_young_1, man_face_older_2],
 	["town_22_horse_merchant","Horse Merchant","{!}Town 18 Horse Merchant",tf_hero|tf_randomize_face|tf_is_merchant|tf_female,  0, 0, fac.commoners,[itm.sarranid_common_dress_b,       itm.blue_hose,      itm.sarranid_felt_head_cloth_b],     def_attrib|level(5),wp(20),knows_inventory_management_10, woman_face_1, woman_face_2],
-	
-	
+
+
 	#Town Mayors    #itm.courtly_outfit itm.gambeson itm.blue_gambeson itm.red_gambeson itm.nobleman_outfit itm.rich_outfit
 	["town_1_mayor", "Guild_Master", "{!}Guild_Master", tf_hero|tf_randomize_face, 0,reserved,  fac.neutral,[     itm.courtly_outfit, itm.leather_boots], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
 	["town_2_mayor", "Guild_Master", "{!}Guild_Master", tf_hero|tf_randomize_face, 0,reserved,  fac.neutral,[     itm.gambeson,     itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common,  man_face_middle_1, mercenary_face_2],
@@ -1626,8 +1626,8 @@ troops = [
 	["town_20_mayor", "Guild_Master", "{!}Guild_Master", tf_hero|tf_randomize_face, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe,       itm.sarranid_boots_a], def_attrib|level(2),wp(20),knows_common,  man_face_middle_1, mercenary_face_2],
 	["town_21_mayor", "Guild_Master", "{!}Guild_Master", tf_hero|tf_randomize_face, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe,    itm.sarranid_boots_a],   def_attrib|level(2),wp(20),knows_common,  man_face_middle_1, mercenary_face_2],
 	["town_22_mayor", "Guild_Master", "{!}Guild_Master", tf_hero|tf_randomize_face, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe,      itm.sarranid_boots_a],     def_attrib|level(2),wp(20),knows_common,  man_face_middle_1, mercenary_face_2],
-	
-	
+
+
 	#Village stores
 	["village_1_elder", "Village_Elder", "{!}village_1_elder",tf_hero|tf_randomize_face|tf_is_merchant, 0,0, fac.commoners,[itm.coarse_tunic, itm.hide_boots, itm.felt_hat],def_attrib|level(2),wp(20),knows_inventory_management_10,            man_face_old_1, man_face_older_2],
 	["village_2_elder", "Village_Elder", "{!}village_1_elder",tf_hero|tf_randomize_face|tf_is_merchant, 0,0, fac.commoners,[itm.robe, itm.wrapping_boots],def_attrib|level(2),wp(20),knows_inventory_management_10,                              man_face_old_1, man_face_older_2],
@@ -1741,7 +1741,7 @@ troops = [
 	["village_110_elder","Village_Elder", "{!}village_1_elder",tf_hero|tf_randomize_face|tf_is_merchant, 0,0, fac.commoners,[itm.robe, itm.wrapping_boots],def_attrib|level(2),wp(20),knows_inventory_management_10,                              man_face_old_1, man_face_older_2],
 	# Place extra merchants before this point
 	["merchants_end","merchants_end","merchants_end",tf_hero, 0,0, fac.commoners,[],def_attrib|level(2),wp(20),knows_inventory_management_10,0],
-	
+
 	#Used for player enterprises
 	["town_1_master_craftsman", "{!}Town 1 Craftsman", "{!}Town 1 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[     itm.leather_apron,       itm.leather_boots], def_attrib|level(2),wp(20),knows_common, 0x000000003a0c629346edb2335a82b6e300000000000d634a0000000000000000],
 	["town_2_master_craftsman", "{!}Town 2 Craftsman", "{!}Town 2 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[     itm.padded_leather,     itm.woolen_hose],   def_attrib|level(2),wp(20),knows_common, 0x0000000f010811c92d3295e46a96c72300000000001f5a980000000000000000],
@@ -1765,9 +1765,9 @@ troops = [
 	["town_20_master_craftsman", "{!}Town 20 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe_b,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x000000001104449136e44cbd1c9352bc000000000005e8d10000000000000000],
 	["town_21_master_craftsman", "{!}Town 21 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x00000000131032d3351c6e43226ec96c000000000005b5240000000000000000],
 	["town_22_master_craftsman", "{!}Town 22 Seneschal", "{!}Town 14 Seneschal", tf_hero|tf_is_merchant, 0,reserved,  fac.neutral,[ itm.sarranid_cloth_robe_b,      itm.blue_hose],     def_attrib|level(2),wp(20),knows_common, 0x00000000200c658a5723b1a3148dc455000000000015ab920000000000000000],
-	
-	
-	
+
+
+
 	# Chests
 	["zendar_chest","{!}Zendar Chest","{!}Zendar Chest",tf_hero|tf_inactive, 0,reserved,  fac.neutral,
 		[],def_attrib|level(18),wp(60),knows_common, 0],
@@ -1776,32 +1776,32 @@ troops = [
 	["bonus_chest_1","{!}Bonus Chest","{!}Bonus Chest",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[itm.strange_armor,itm.strange_short_sword],def_attrib|level(18),wp(60),knows_common, 0],
 	["bonus_chest_2","{!}Bonus Chest","{!}Bonus Chest",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[itm.strange_boots,itm.strange_sword],def_attrib|level(18),wp(60),knows_common, 0],
 	["bonus_chest_3","{!}Bonus Chest","{!}Bonus Chest",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[itm.strange_helmet,itm.strange_great_sword],def_attrib|level(18),wp(60),knows_common, 0],
-	
+
 	["household_possessions","{!}household_possessions","{!}household_possessions",tf_hero|tf_inactive|tf_is_merchant, 0,reserved,  fac.neutral,[],def_attrib|level(18),wp(60),knows_inventory_management_10, 0],
-	
+
 	# These are used as arrays in the scripts.
 	["temp_array_a","{!}temp_array_a","{!}temp_array_a",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[],def_attrib|level(18),wp(60),knows_common, 0],
 	["temp_array_b","{!}temp_array_b","{!}temp_array_b",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[],def_attrib|level(18),wp(60),knows_common, 0],
 	["temp_array_c","{!}temp_array_c","{!}temp_array_c",tf_hero|tf_inactive, 0,reserved,  fac.neutral,[],def_attrib|level(18),wp(60),knows_common, 0],
-	
+
 	["stack_selection_amounts","{!}stack_selection_amounts","{!}stack_selection_amounts",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
 	["stack_selection_ids","{!}stack_selection_ids","{!}stack_selection_ids",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
-	
+
 	["notification_menu_types","{!}notification_menu_types","{!}notification_menu_types",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
 	["notification_menu_var1","{!}notification_menu_var1","{!}notification_menu_var1",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
 	["notification_menu_var2","{!}notification_menu_var2","{!}notification_menu_var2",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
-	
+
 	["banner_background_color_array","{!}banner_background_color_array","{!}banner_background_color_array",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
-	
+
 	["multiplayer_data","{!}multiplayer_data","{!}multiplayer_data",tf_hero|tf_inactive,0,reserved,fac.neutral,[],def_attrib,0,knows_common,0],
-	
+
 	##  ["black_khergit_guard","Black Khergit Guard","Black Khergit Guard",tf_mounted|tf_guarantee_ranged|tf_guarantee_shield|tf_guarantee_boots|tf_guarantee_helmet|tf_guarantee_armor|tf_guarantee_horse,0,0,fac.black_khergits,
 	##   [itm.arrows,itm.nomad_sabre,itm.scimitar,itm.winged_mace,itm.lance,itm.khergit_bow,itm.khergit_guard_helmet,itm.khergit_cavalry_helmet,itm.khergit_guard_boots,itm.khergit_guard_armor,itm.nomad_shield,itm.steppe_horse,itm.warhorse],
 	##   def_attrib|level(28),wp(140),knows_riding_6|knows_ironflesh_4|knows_horse_archery_6|knows_power_draw_6,khergit_face1, khergit_face2],
-	
-	
+
+
 	# Add Extra Quest NPCs below this point
-	
+
 	["local_merchant","Local Merchant","Local Merchants",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
 	["tax_rebel","Peasant Rebel","Peasant Rebels",tf_guarantee_armor,0,reserved,fac.commoners,
 		[itm.cleaver,itm.knife,itm.pitch_fork,itm.sickle,itm.club,itm.stones,itm.leather_cap,itm.felt_hat,itm.felt_hat,itm.linen_tunic,itm.coarse_tunic,itm.nomad_boots,itm.wrapping_boots],
@@ -1812,37 +1812,37 @@ troops = [
 	["fugitive","Nervous Man","Nervous Men",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.short_tunic,itm.linen_tunic,itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.wrapping_boots, itm.fur_hat, itm.leather_cap, itm.sword_medieval_b, itm.throwing_daggers],
 		def_attrib|str_24|agi_25|level(26),wp(180),knows_common|knows_power_throw_6|knows_power_strike_6|knows_ironflesh_9,man_face_middle_1, man_face_old_2],
-	
+
 	["belligerent_drunk","Belligerent Drunk","Belligerent Drunks",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.short_tunic,itm.linen_tunic,itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.wrapping_boots, itm.fur_hat, itm.leather_cap, itm.sword_viking_1],
 		def_attrib|str_20|agi_8|level(15),wp(120),knows_common|knows_power_strike_2|knows_ironflesh_9,    bandit_face1, bandit_face2],
-	
+
 	["hired_assassin","Hired Assassin","Hired Assassin",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners, #they look like belligerent drunks
 		[itm.short_tunic,itm.linen_tunic,itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.wrapping_boots, itm.fur_hat, itm.leather_cap, itm.sword_viking_1],
 		def_attrib|str_20|agi_16|level(20),wp(180),knows_common|knows_power_strike_5|knows_ironflesh_3,    bandit_face1, bandit_face2],
-	
+
 	["fight_promoter","Rough-Looking Character","Rough-Looking Character",tf_guarantee_boots|tf_guarantee_armor,0,0,fac.commoners,
 		[itm.short_tunic,itm.linen_tunic,itm.coarse_tunic, itm.tabard, itm.leather_vest, itm.woolen_hose, itm.nomad_boots, itm.blue_hose, itm.wrapping_boots, itm.fur_hat, itm.leather_cap, itm.sword_viking_1],
 		def_attrib|str_20|agi_16|level(20),wp(180),knows_common|knows_power_strike_5|knows_ironflesh_3,    bandit_face1, bandit_face2],
-	
-	
-	
+
+
+
 	["spy","Ordinary Townsman","Ordinary Townsmen", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_horse,0,0,fac.neutral,
 		[itm.sword_viking_1,itm.leather_jerkin,itm.leather_boots,itm.courser,itm.leather_gloves],
 		def_attrib|agi_11|level(20),wp(130),knows_common,man_face_middle_1, man_face_older_2],
-	
+
 	["spy_partner","Unremarkable Townsman","Unremarkable Townsmen", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_horse,0,0,fac.neutral,
 		[itm.sword_medieval_b,itm.leather_jerkin,itm.leather_boots,itm.courser,itm.leather_gloves],
 		def_attrib|agi_11|level(10),wp(130),knows_common,vaegir_face1, vaegir_face2],
-	
+
 	["nurse_for_lady","Nurse","Nurse",tf_female|tf_guarantee_armor,0,reserved,fac.commoners,
 		[itm.robe, itm.black_hood, itm.wrapping_boots],
 		def_attrib|level(4),wp(60),knows_common,woman_face_1, woman_face_2],
 	["temporary_minister","Minister","Minister",tf_guarantee_armor|tf_guarantee_boots,0,reserved,fac.commoners,
 		[itm.rich_outfit, itm.wrapping_boots],
 		def_attrib|level(4),wp(60),knows_common,man_face_middle_1, man_face_older_2],
-	
-	
+
+
 	##  ["conspirator","Conspirator","Conspirators", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_horse,0,0,fac.neutral,
 	##   [itm.sword,itm.leather_jerkin,itm.leather_boots,itm.hunter,itm.leather_gloves],
 	##   def_attrib|agi_11|level(10),wp(130),knows_common,vaegir_face1, vaegir_face2],
@@ -1858,10 +1858,10 @@ troops = [
 	##  ["noble_refugee_woman","Noble Refugee Woman","Noble Refugee Women",tf_female|tf_guarantee_armor|tf_guarantee_boots,0,0,fac.noble_refugees,
 	##   [itm.knife,itm.dagger,itm.hunting_crossbow,itm.dress,itm.robe,itm.woolen_dress, itm.headcloth, itm.woolen_hood, itm.wrapping_boots],
 	##   def_attrib|level(3),wp(45),knows_common,refugee_face1,refugee_face2],
-	
-	
+
+
 	["quick_battle_6_player", "{!}quick_battle_6_player", "{!}quick_battle_6_player", tf_hero, 0, reserved,  fac.player_faction, [itm.padded_cloth,itm.nomad_boots, itm.splinted_leather_greaves, itm.skullcap, itm.sword_medieval_b,  itm.crossbow, itm.bolts, itm.plate_covered_round_shield],    knight_attrib_1,wp(130),knight_skills_1, 0x000000000008010b01f041a9249f65fd],
-	
+
 	#Multiplayer ai troops
 	["swadian_crossbowman_multiplayer_ai","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.bolts,itm.crossbow,itm.sword_medieval_a,itm.tab_shield_heater_b,
@@ -1933,9 +1933,9 @@ troops = [
 		[itm.lance,itm.arabian_sword_b,itm.scimitar_b,itm.mace_4,itm.tab_shield_small_round_b,
 			itm.sarranid_mail_shirt,itm.sarranid_boots_b,itm.sarranid_boots_c,itm.sarranid_horseman_helmet,itm.courser,itm.hunter],
 		def_attrib|level(20),wp_melee(100),knows_common|knows_riding_4|knows_ironflesh_2|knows_shield_2|knows_power_strike_3,swadian_face_young_1, swadian_face_old_2],
-	
-	
-	
+
+
+
 	#Multiplayer troops (they must have the base items only, nothing else)
 	["swadian_crossbowman_multiplayer","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.bolts,itm.crossbow,itm.sword_medieval_b_small,itm.tab_shield_heater_a,itm.red_shirt,itm.ankle_boots],
@@ -2011,10 +2011,10 @@ troops = [
 		[itm.arabian_sword_a,itm.lance,itm.tab_shield_small_round_a,
 			itm.sarranid_cloth_robe, itm.sarranid_boots_b,itm.saddle_horse],
 		str_15 | agi_14 |def_attrib_multiplayer|level(19),wpe(110,90,60,110),knows_common_multiplayer|knows_riding_5|knows_ironflesh_3|knows_power_strike_2|knows_shield_3|knows_power_throw_2|knows_weapon_master_1,vaegir_face_young_1, vaegir_face_older_2],
-	
-	
+
+
 	["multiplayer_end","{!}multiplayer_end","{!}multiplayer_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
-	
+
 	#Player history array
 	["log_array_entry_type",            "{!}Local Merchant","{!}Local Merchant",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
 	["log_array_entry_time",            "{!}Local Merchant","{!}Local Merchant",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
@@ -2025,7 +2025,7 @@ troops = [
 	["log_array_troop_object",          "{!}Local Merchant","{!}Local Merchant",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
 	["log_array_troop_object_faction",  "{!}Local Merchant","{!}Local Merchant",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
 	["log_array_faction_object",        "{!}Local Merchant","{!}Local Merchant",tf_guarantee_boots|tf_guarantee_armor, 0,0, fac.commoners,[itm.leather_apron,itm.leather_boots,itm.butchering_knife],def_attrib|level(5),wp(40),knows_power_strike_1, merchant_face_1, merchant_face_2],
-	
+
 	["quick_battle_troop_1","Rodrigo de Braganca","Rodrigo de Braganca", tf_hero,0,0,fac.kingdom_1,
 		[itm.long_hafted_knobbed_mace, itm.wooden_shield, itm.iron_staff, itm.throwing_daggers,
 			itm.felt_hat, itm.fur_coat, itm.light_leather_boots, itm.leather_gloves],
@@ -2071,7 +2071,7 @@ troops = [
 			itm.leather_gloves, itm.fur_hat, itm.leather_boots, itm.leather_jacket],
 		str_15|agi_12|int_14|cha_20|level(28),wpex(101,35,136,15,17,19),knows_riding_4|knows_athletics_2|knows_shield_4|knows_weapon_master_4|knows_power_strike_5|knows_ironflesh_5,0x0000000e800015125adb702de3459a9c00000000001ea6d00000000000000000, swadian_face_old_2],
 	["quick_battle_troops_end","{!}quick_battle_troops_end","{!}quick_battle_troops_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
-	
+
 	["tutorial_fighter_1","Novice Fighter","Fighters",tf_hero,0,0,fac.kingdom_2,
 		[itm.linen_tunic,itm.nomad_boots],
 		def_attrib|level(1),wp_melee(10),knows_athletics_1|knows_ironflesh_2|knows_shield_2,0x000000088c1073144252b1929a85569300000000000496a50000000000000000, vaegir_face_older_2],
@@ -2099,7 +2099,7 @@ troops = [
 	["tutorial_master_horseman","Riding Trainer","Riding Trainer",tf_hero,0,0,fac.kingdom_2,
 		[itm.leather_vest,itm.nomad_boots],
 		def_attrib|str_12|level(19),wp_melee(70)|wp_archery(110),knows_ironflesh_1|knows_power_draw_2|knows_athletics_2|knows_power_throw_1,0x0000000ea0084140478a692894ba185500000000001d4af30000000000000000, vaegir_face_older_2],
-	
+
 	["swadian_merchant", "Merchant of Praven", "{!}Prominent", tf_hero|tf_randomize_face, 0, reserved, fac.kingdom_4, [itm.sword_two_handed_a, itm.courtly_outfit, itm.leather_boots], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
 	["vaegir_merchant", "Merchant of Reyvadin", "{!}Prominent", tf_hero|tf_randomize_face, 0, reserved, fac.kingdom_5, [itm.sword_two_handed_a, itm.nobleman_outfit, itm.woolen_hose], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
 	["khergit_merchant", "Merchant of Tulga", "{!}Prominent", tf_hero|tf_randomize_face, 0, reserved, fac.kingdom_1, [itm.sword_two_handed_a, itm.red_gambeson, itm.nomad_boots], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
@@ -2107,24 +2107,24 @@ troops = [
 	["rhodok_merchant", "Merchant of Jelkala", "{!}Prominent", tf_hero|tf_randomize_face, 0, reserved, fac.kingdom_3, [itm.sword_two_handed_a, itm.leather_jerkin, itm.blue_hose], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
 	["sarranid_merchant", "Merchant of Shariz", "{!}Prominent", tf_hero|tf_randomize_face, 0, reserved, fac.kingdom_6, [itm.sword_two_handed_a, itm.sarranid_cloth_robe, itm.sarranid_boots_a], def_attrib|level(2),wp(20),knows_common, man_face_middle_1, mercenary_face_2],
 	["startup_merchants_end","startup_merchants_end","startup_merchants_end",tf_hero, 0,0, fac.commoners,[],def_attrib|level(2),wp(20),knows_inventory_management_10,0],
-	
+
 	["sea_raider_leader","Sea Raider Captain","Sea Raider Captains",tf_hero|tf_guarantee_all_wo_ranged,0,0,fac.outlaws,
 		[itm.arrows,itm.sword_viking_1,itm.sword_viking_2,itm.fighting_axe,itm.battle_axe,itm.spear,itm.nordic_shield,itm.nordic_shield,itm.nordic_shield,itm.wooden_shield,itm.long_bow,itm.javelin,itm.throwing_axes,
 			itm.nordic_helmet,itm.nordic_helmet,itm.nasal_helmet,itm.mail_shirt,itm.byrnie,itm.mail_hauberk,itm.leather_boots, itm.nomad_boots],
 		def_attrib|level(24),wp(110),knows_ironflesh_2|knows_power_strike_2|knows_power_draw_3|knows_power_throw_2|knows_riding_1|knows_athletics_2,nord_face_young_1, nord_face_old_2],
-	
+
 	["looter_leader","Robber","Looters",tf_hero,0,0,fac.outlaws,
 		[itm.hatchet,itm.club,itm.butchering_knife,itm.falchion,itm.rawhide_coat,itm.stones,itm.nomad_armor,itm.nomad_armor,itm.woolen_cap,itm.woolen_cap,itm.nomad_boots,itm.wrapping_boots],
 		def_attrib|level(4),wp(20),knows_common,0x00000001b80032473ac49738206626b200000000001da7660000000000000000, bandit_face2],
-	
+
 	["bandit_leaders_end","bandit_leaders_end","bandit_leaders_end",tf_hero, 0,0, fac.commoners,[],def_attrib|level(2),wp(20),knows_inventory_management_10,0],
-	
+
 	["relative_of_merchant", "Merchant's Brother", "{!}Prominent",tf_hero,0,0,fac.kingdom_2,
 		[itm.linen_tunic,itm.nomad_boots],
 		def_attrib|level(1),wp_melee(10),knows_athletics_1|knows_ironflesh_2|knows_shield_2, 0x00000000320410022d2595495491afa400000000001d9ae30000000000000000, mercenary_face_2],
-	
+
 	["relative_of_merchants_end","relative_of_merchants_end","relative_of_merchants_end",tf_hero, 0,0, fac.commoners,[],def_attrib|level(2),wp(20),knows_inventory_management_10,0],
-	
+
 	["swadian_crossbowman_multiplayer_coop_tier_1","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.hunting_crossbow,itm.bolts,itm.fighting_pick,itm.tab_shield_heater_a,itm.arming_cap,itm.padded_cloth,itm.ankle_boots],
 		level(4)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
@@ -2179,7 +2179,7 @@ troops = [
 	["sarranid_mamluke_multiplayer_coop_tier_1","Sarranid Mamluke","Sarranid Mamluke",tf_mounted|tf_guarantee_all,0,0,fac.kingdom_6,
 		[itm.lance,itm.tab_shield_small_round_a,itm.sarranid_cloth_robe, itm.sarranid_boots_b,itm.arabian_horse_a],
 		level(4)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
-	
+
 	["swadian_crossbowman_multiplayer_coop_tier_2","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.spiked_club,itm.crossbow,itm.bolts,itm.tab_shield_heater_b,itm.arming_cap,itm.red_gambeson,itm.ankle_boots],
 		level(5)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
@@ -2234,7 +2234,7 @@ troops = [
 	["sarranid_mamluke_multiplayer_coop_tier_2","Sarranid Mamluke","Sarranid Mamluke",tf_mounted|tf_guarantee_all,0,0,fac.kingdom_6,
 		[itm.heavy_lance,itm.tab_shield_small_round_b,itm.javelin,itm.archers_vest, itm.sarranid_warrior_cap,itm.leather_gloves,itm.sarranid_boots_b,itm.arabian_horse_a],
 		level(5)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
-	
+
 	["swadian_crossbowman_multiplayer_coop_tier_3","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.sword_medieval_b,itm.heavy_crossbow,itm.steel_bolts,itm.tab_shield_heater_c,itm.segmented_helmet,itm.leather_jerkin,itm.leather_boots],
 		level(6)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
@@ -2289,7 +2289,7 @@ troops = [
 	["sarranid_mamluke_multiplayer_coop_tier_3","Sarranid Mamluke","Sarranid Mamluke",tf_mounted|tf_guarantee_all,0,0,fac.kingdom_6,
 		[itm.heavy_lance,itm.tab_shield_small_round_b,itm.jarid,itm.sarranid_cavalry_robe,itm.sarranid_horseman_helmet,itm.mail_mittens,itm.sarranid_boots_c,itm.arabian_horse_a],
 		level(6)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
-	
+
 	["swadian_crossbowman_multiplayer_coop_tier_4","Swadian Crossbowman","Swadian Crossbowmen",tf_guarantee_all,0,0,fac.kingdom_1,
 		[itm.sword_medieval_b,itm.sniper_crossbow,itm.steel_bolts,itm.tab_shield_heater_c,itm.helmet_with_neckguard,itm.leather_gloves,itm.haubergeon,itm.mail_chausses],
 		level(7)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
@@ -2344,7 +2344,7 @@ troops = [
 	["sarranid_mamluke_multiplayer_coop_tier_4","Sarranid Mamluke","Sarranid Mamluke",tf_mounted|tf_guarantee_all,0,0,fac.kingdom_6,
 		[itm.arabian_sword_a,itm.lance,itm.tab_shield_small_round_c,itm.mamluke_mail,itm.sarranid_veiled_helmet,itm.scale_gauntlets, itm.sarranid_boots_d,itm.arabian_horse_a],
 		level(7)|str_20, wp(300), knows_power_draw_10|knows_power_throw_10|knows_riding_10, 0, 0],
-	
+
 	["coop_faction_troop_templates_end","{!}multiplayer_end","{!}multiplayer_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
 	#tier 1
 	["npc1_1","Borcha","Borcha",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac.commoners,[itm.khergit_armor,itm.nomad_boots,itm.knife, itm.courser],
@@ -2411,7 +2411,7 @@ troops = [
 		str_14|agi_17|int_6|cha_30|level(25),wpex(260,10,100,160,30,300),knows_tracking_10|knows_engineer_10|knows_first_aid_10|knows_surgery_10|knows_wound_treatment_10|knows_tactics_10|knows_trainer_10|knows_looting_10|
 		knows_power_throw_10|knows_athletics_10|knows_power_strike_8|knows_riding_4|knows_power_draw_5,
 		0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
-	
+
 	#tier 2
 	["npc1_2","Borcha","Borcha",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac.commoners,[itm.leather_steppe_cap_c,itm.leather_gloves,itm.nomad_robe,itm.hide_boots,itm.sword_medieval_b_small, itm.courser],
 		str_16|agi_17|int_12|cha_7|level(14),wp(60),knows_tracker_npc|
@@ -2477,7 +2477,7 @@ troops = [
 		str_14|agi_17|int_8|cha_7|level(17),wp(80),knows_tracker_npc|
 		knows_power_throw_3|knows_athletics_2|knows_power_strike_1,
 		0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
-	
+
 	#tier 3
 	["npc1_3","Borcha","Borcha",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac.commoners,[itm.khergit_war_helmet,itm.lamellar_gauntlets,itm.lamellar_vest_khergit,itm.khergit_leather_boots,itm.sword_medieval_c_small, itm.courser],
 		str_16|agi_17|int_12|cha_7|level(14),wp(60),knows_tracker_npc|
@@ -2543,7 +2543,7 @@ troops = [
 		str_14|agi_17|int_8|cha_7|level(17),wp(80),knows_tracker_npc|
 		knows_power_throw_3|knows_athletics_2|knows_power_strike_1,
 		0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
-	
+
 	#tier 4
 	["npc1_4","Borcha","Borcha",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac.commoners,[itm.khergit_guard_helmet,itm.lamellar_gauntlets,itm.khergit_guard_armor,itm.khergit_guard_boots,itm.sword_viking_3_small, itm.courser],
 		str_16|agi_17|int_12|cha_7|level(14),wp(60),knows_tracker_npc|
@@ -2609,14 +2609,14 @@ troops = [
 		str_14|agi_17|int_8|cha_7|level(17),wp(80),knows_tracker_npc|
 		knows_power_throw_3|knows_athletics_2|knows_power_strike_1,
 		0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
-	
+
 	["coop_companion_equipment_ui_0","{!}multiplayer_end","{!}multiplayer_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
 	["coop_companion_equipment_ui_0_f","{!}multiplayer_end","{!}multiplayer_end", tf_female, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
 	["coop_companion_equipment_ui_1","{!}multiplayer_end","{!}multiplayer_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
 	["coop_companion_equipment_ui_1_f","{!}multiplayer_end","{!}multiplayer_end", tf_female, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
 	["coop_companion_equipment_sets_end","{!}multiplayer_end","{!}multiplayer_end", 0, 0, 0, fac.kingdom_5, [], 0, 0, 0, 0, 0],
-	
-	
+
+
 	]
 
 
