@@ -44,29 +44,29 @@ map_icons = [
 	("village_snow_a",mcn_no_shadow,"map_village_snow_a", 0.45, 0),
 	("village_snow_burnt_a",mcn_no_shadow,"map_village_snow_burnt_a", 0.45, 0),
 	("village_snow_deserted_a",mcn_no_shadow,"map_village_snow_deserted_a", 0.45, 0),
-
-
+	
+	
 	("camp",mcn_no_shadow,"camp_tent", 0.13, 0),
 	("ship",mcn_no_shadow,"boat_sail_on", 0.23, snd.footstep_grass, 0.0, 0.05, 0),
 	("ship_on_land",mcn_no_shadow,"boat_sail_off", 0.23, 0),
-
+	
 	("castle_a",mcn_no_shadow,"map_castle_a", 0.35,0),
 	("castle_b",mcn_no_shadow,"map_castle_b", 0.35,0),
 	("castle_c",mcn_no_shadow,"map_castle_c", 0.35,0),
 	("castle_d",mcn_no_shadow,"map_castle_d", 0.35,0),
 	("town_snow",mcn_no_shadow,"map_town_snow_a", 0.35,0),
-
-
+	
+	
 	("castle_snow_a",mcn_no_shadow,"map_castle_snow_a", 0.35,0),
 	("castle_snow_b",mcn_no_shadow,"map_castle_snow_b", 0.35,0),
 	("mule",0,"icon_mule", 0.2,snd.footstep_grass, 0.15, 0.173, 0),
 	("cattle",0,"icon_cow", 0.2,snd.footstep_grass, 0.15, 0.173, 0),
 	("training_ground",mcn_no_shadow,"training", 0.35,0),
-
+	
 	("bridge_a",mcn_no_shadow,"map_river_bridge_a", 1.27,0),
 	("bridge_b",mcn_no_shadow,"map_river_bridge_b", 0.7,0),
 	("bridge_snow_a",mcn_no_shadow,"map_river_bridge_snow_a", 1.27,0),
-
+	
 	("custom_banner_01",0,"custom_map_banner_01", banner_scale, 0,
 		[
 			(ti_on_init_map_icon,
@@ -103,7 +103,7 @@ map_icons = [
 					(try_end),
 					]),
 			]),
-
+	
 	# Banners
 	("banner_01",0,"map_flag_01", banner_scale,0),
 	("banner_02",0,"map_flag_02", banner_scale,0),
@@ -210,7 +210,7 @@ map_icons = [
 	("banner_103",0,"map_flag_e19", banner_scale,0),
 	("banner_104",0,"map_flag_e20", banner_scale,0),
 	("banner_105",0,"map_flag_e21", banner_scale,0),
-
+	
 	("banner_106",0,"map_flag_f01", banner_scale,0),
 	("banner_107",0,"map_flag_f02", banner_scale,0),
 	("banner_108",0,"map_flag_f03", banner_scale,0),
@@ -231,7 +231,7 @@ map_icons = [
 	("banner_123",0,"map_flag_f18", banner_scale,0),
 	("banner_124",0,"map_flag_f19", banner_scale,0),
 	("banner_125",0,"map_flag_f20", banner_scale,0),
-
+	
 	("banner_126",0,"map_flag_f01", banner_scale,0),
 	("banner_127",0,"map_flag_f02", banner_scale,0),
 	("banner_128",0,"map_flag_f03", banner_scale,0),
@@ -242,7 +242,7 @@ map_icons = [
 	("banner_133",0,"map_flag_f08", banner_scale,0),
 	("banner_134",0,"map_flag_f09", banner_scale,0),
 	("banner_135",0,"map_flag_f10", banner_scale,0),
-
+	
 	("map_flag_kingdom_a",0,"map_flag_kingdom_a", banner_scale,0),
 	("map_flag_kingdom_b",0,"map_flag_kingdom_b", banner_scale,0),
 	("map_flag_kingdom_c",0,"map_flag_kingdom_c", banner_scale,0),

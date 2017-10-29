@@ -31,30 +31,30 @@ man_face_keys = [
 	(250,0,0.8,-1.0, "Mouth-Nose Distance"),
 	(200,0,-0.3,1.0, "Mouth Width"),
 	(50,0,-1.5,1.0, "Cheeks"),
-
+	
 	(60,0,-0.4,1.35, "Nose Height"),
 	(70,0,-0.6,0.7, "Nose Width"),
 	(80,0,1.0,-0.1, "Nose Size"),
 	(270,0,-0.5,1.0, "Nose Shape"),
 	(90,0,-0.2,1.4, "Nose Bridge"),
-
+	
 	(100,0,-0.3,1.5, "Cheek Bones"),
 	(150,0,-0.2,3.0, "Eye Width"),
 	(110,0,1.5,-0.9, "Eye to Eye Dist"),
 	(120,0,1.9,-1.0, "Eye Shape"),
 	(130,0,-0.5, 1.1, "Eye Depth"),
 	(140,0,1.0,-1.2, "Eyelids"),
-
+	
 	(160,0,1.3,-0.2, "Eyebrow Position"),
 	(170,0,-0.1,1.9, "Eyebrow Height"),
 	(220,0,-0.1,0.9, "Eyebrow Depth"),
 	(180,0,-1.1,1.6, "Eyebrow Shape"),
 	(230,0,1.2,-0.7, "Temple Width"),
-
+	
 	(30,0,-0.6,0.9, "Face Depth"),
 	(40,0,0.9,-0.6, "Face Ratio"),
 	(190,0,0.0,0.95, "Face Width"),
-
+	
 	(280,0,0.0,1.0, "Post-Edit"),
 	]
 # Face width-Jaw width Temple width
@@ -67,31 +67,31 @@ woman_face_keys = [
 	(270,0,0.9,-0.9, "Mouth-Nose Distance"),
 	(30,0,-0.5,1.0, "Mouth Width"),
 	(50,0, -0.5,1.0, "Cheeks"),
-
+	
 	(60,0,-0.5,1.0, "Nose Height"),
 	(70,0,-0.5,1.1, "Nose Width"),
 	(80,0,1.5,-0.3, "Nose Size"),
 	(240,0,-1.0,0.8, "Nose Shape"),
 	(90,0, 0.0,1.1, "Nose Bridge"),
-
+	
 	(100,0,-0.5,1.5, "Cheek Bones"),
 	(150,0,-0.4,1.0, "Eye Width"),
 	(110,0,1.0,0.0, "Eye to Eye Dist"),
 	(120,0,-0.2,1.0, "Eye Shape"),
 	(130,0,-0.1,1.6, "Eye Depth"),
 	(140,0,-0.2,1.0, "Eyelids"),
-
-
+	
+	
 	(160,0,-0.2,1.2, "Eyebrow Position"),
 	(170,0,-0.2,0.7, "Eyebrow Height"),
 	(250,0,-0.4,0.9, "Eyebrow Depth"),
 	(180,0,-1.5,1.2, "Eyebrow Shape"),
 	(260,0,1.0,-0.7, "Temple Width"),
-
+	
 	(200,0,-0.5,1.0, "Face Depth"),
 	(210,0,-0.5,0.9, "Face Ratio"),
 	(190,0,-0.4,0.8, "Face Width"),
-
+	
 	(280,0,0.0,1.0, "Post-Edit"),
 	]
 undead_face_keys = []
@@ -162,7 +162,7 @@ skins = [
 			[2.7, comp_greater_than, (1.0,chin_size), (1.0,mouth_nose_distance), (1.0,nose_height), (-1.0,face_width)],
 			]
 		),
-
+	
 	(
 		"woman", skf_use_morph_key_10,
 		"woman_body",  "woman_calf_l", "f_handL",
@@ -183,7 +183,7 @@ skins = [
 		"skel_human", 1.0,
 		psys.game_blood,psys.game_blood_2,
 		),
-
+	
 	##  (
 	##    "undead", 0,
 	##    "undead_body", "undead_calf_l", "undead_handL",

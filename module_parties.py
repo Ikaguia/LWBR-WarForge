@@ -40,7 +40,7 @@ parties = [
 	("temp_party","{!}temp_party",pf_disabled, no_menu, pt.none, fac.commoners,0,ai_bhvr_hold,0,(0,0),[]),
 	("camp_bandits","{!}camp_bandits",pf_disabled, no_menu, pt.none, fac.outlaws,0,ai_bhvr_hold,0,(1,1),[(trp.temp_troop,3,0)]),
 	#parties before this point are hardwired. Their order should not be changed.
-
+	
 	("temp_party_2","{!}temp_party_2",pf_disabled, no_menu, pt.none, fac.commoners,0,ai_bhvr_hold,0,(0,0),[]),
 	#Used for calculating casulties.
 	("temp_casualties","{!}casualties",pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
@@ -55,20 +55,20 @@ parties = [
 	("player_casualties","{!}_",  pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
 	("enemy_casualties","{!}_",  pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
 	("ally_casualties","{!}_",  pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
-
+	
 	("collective_enemy","{!}collective_enemy",pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
 	#TODO: remove this and move all to collective ally
 	("collective_ally","{!}collective_ally",pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
 	("collective_friends","{!}collective_ally",pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
-
+	
 	("total_enemy_casualties","{!}_",  pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]), #ganimet hesaplari icin #new:
 	("routed_enemies","{!}routed_enemies",pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]), #new:
-
+	
 	#  ("village_reinforcements","village_reinforcements",pf_is_static|pf_disabled, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(1,1),[]),
-
+	
 	###############################################################
 	("zendar","Zendar",pf_disabled|icon.town|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(18,60),[]),
-
+	
 	("town_1","Sargoth",  icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-17.6, 79.7),[], 170),
 	("town_2","Tihr",     icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-53.5, 78.4),[], 120),
 	("town_3","Veluca",   icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-57.4, -44.5),[], 80),
@@ -76,7 +76,7 @@ parties = [
 	("town_5","Jelkala",  icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-74.6, -79.7),[], 90),
 	("town_6","Praven",   icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-96, 26.4),[], 155),
 	("town_7","Uxkhal",   icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-50, -8.5),[], 240),
-
+	
 	("town_8","Reyvadin", icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(48.44, 39.3),[], 175),
 	("town_9","Khudan",   icon.town_snow|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(94, 65.2),[], 90),
 	("town_10","Tulga",   icon.town_steppe|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(135.5, -22),[], 310),
@@ -84,17 +84,17 @@ parties = [
 	("town_12","Wercheg", icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-1.2, 108.9),[], 25),
 	("town_13","Rivacheg",icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(64.8, 113.7),[], 60),
 	("town_14","Halmar",  icon.town_steppe|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(55.5, -45),[], 135),
-
+	
 	("town_15","Yalen",  icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-132.8, -47.3),[], 45),
 	("town_16","Dhirim",  icon.town|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(14, -2),[], 0),
 	("town_17","Ichamur",  icon.town_steppe|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(121.8, 8.6),[], 90),
 	("town_18","Narra",  icon.town_steppe|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(88, -26.5),[], 135),
-
+	
 	("town_19","Shariz", icon.town_desert|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(15, -107),[], 45),
 	("town_20","Durquba", icon.town_desert|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(90, -95.1),[], 270),
 	("town_21","Ahmerrad", icon.town_desert|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(130.5, -78.5),[], 330),
 	("town_22","Bariyye", icon.town_desert|pf_town, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(165, -106.7),[], 225),
-
+	
 	#   Aztaq_Castle
 	#  Malabadi_Castle
 	("castle_1","Culmarr_Castle",icon.castle_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-101.3, -21),[],50),
@@ -125,7 +125,7 @@ parties = [
 	("castle_26","Senuzgda_Castle",icon.castle_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-2.5, -9.5),[],260),
 	("castle_27","Rindyar_Castle",icon.castle_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(63.3, -2),[],260),
 	("castle_28","Grunwalder_Castle",icon.castle_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-36.4, -39.3),[],260),
-
+	
 	("castle_29","Nelag_Castle",icon.castle_snow_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(147.7, 50.4),[],280),
 	("castle_30","Asugan_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(176, -47),[],260),
 	("castle_31","Vyincourd_Castle",icon.castle_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-65.7, -12.5),[],260),
@@ -138,7 +138,7 @@ parties = [
 	("castle_38","Tulbuk_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(141.7, 33.3),[],260),
 	("castle_39","Slezkh_Castle",icon.castle_snow_a|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(56.8, 74.5),[],280),
 	("castle_40","Uhhun_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(62.9, -26),[],260),
-
+	
 	("castle_41","Jameyyed_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(71.3, -71.1),[],260),
 	("castle_42","Teramma_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(70, -96),[],80),
 	("castle_43","Sharwa_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(172, -65),[],260),
@@ -147,12 +147,12 @@ parties = [
 	("castle_46","Weyyah_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(13.3, -84.4),[],260),
 	("castle_47","Samarra_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(116, -74),[],260),
 	("castle_48","Bardaq_Castle",icon.castle_d|pf_castle, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(157, -80),[],260),
-
-
+	
+	
 	#     Rinimad
 	#              Rietal Derchios Gerdus
 	# Tuavus   Pamir   vezona
-
+	
 	("village_1", "Yaragar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-60, -9.5),[], 100),
 	("village_2", "Burglen",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-13.5, 3.5),[], 110),
 	("village_3", "Azgad",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-97.4, 36),[], 120),
@@ -163,7 +163,7 @@ parties = [
 	("village_8", "Haen",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-49.7, 74),[], 120),
 	("village_9", "Buvran",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-85, -75.35),[], 130),
 	("village_10","Mechin",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(8.8, 34.75),[], 170),
-
+	
 	("village_11","Dusturil",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(137.2, -36.5),[], 100),
 	("village_12","Emer",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-45.8, -58.5),[], 110),
 	("village_13","Nemeja",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-119, 3),[], 120),
@@ -174,7 +174,7 @@ parties = [
 	("village_18","Ulburban",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(73.7, 30.1),[], 170),
 	("village_19","Hanun",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(152.3, 53.5),[], 170),
 	("village_20","Uslum",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(116, 80.3),[], 170),
-
+	
 	("village_21","Bazeck",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(60.4, 85),[], 100),
 	("village_22","Shulus",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(125.4, 64),[], 110),
 	("village_23","Ilvia",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-133.3, -37.6),[], 120),
@@ -184,7 +184,7 @@ parties = [
 	("village_27","Glunmar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-146.3, -16.6),[], 170),
 	("village_28","Tash_Kulun",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(95, -11.4),[], 170),
 	("village_29","Buillin",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-90.6, 110.9),[], 170),
-
+	
 	("village_30","Ruvar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(29.2, 114.3),[], 170),
 	("village_31","Ambean",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-24, 53),[], 100),
 	("village_32","Tosdhar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(8.3 , 14.5 ),[], 110),
@@ -196,7 +196,7 @@ parties = [
 	("village_38","Ibiran",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-42.8, 11.25),[], 170),
 	("village_39","Reveran",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-124.3, -29.5),[], 170),
 	("village_40","Saren",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-12, -53),[], 170),
-
+	
 	("village_41","Dugan",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(175, -39.5),[], 100),
 	("village_42","Dirigh_Aban",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(115.4, 21.6),[], 110),
 	("village_43","Zagush",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(99.4, -21.3),[], 120),
@@ -207,7 +207,7 @@ parties = [
 	("village_48","Veidar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-103, 15.3),[], 170),
 	("village_49","Tismirr",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(90.8, 60.5),[], 10),
 	("village_50","Karindi",  icon.village_snow_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(64.1, 55.9),[], 170),
-
+	
 	("village_51","Jelbegi",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-40, 62),[], 100),
 	("village_52","Amashke",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(38.2, -67.7),[], 110),
 	("village_53","Balanli",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-130.3, 42),[], 120),
@@ -218,7 +218,7 @@ parties = [
 	("village_58","Vezin",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(78.50, 118.3),[], 170),
 	("village_59","Dumar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-101, -45),[], 170),
 	("village_60","Tahlberl",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-26.6, 30),[], 170),
-
+	
 	("village_61","Aldelen",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-99.8, 85.65),[], 100),
 	("village_62","Rebache",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(36.7, 59.5),[], 100),
 	("village_63","Rduna",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(70.75, 1.6),[], 100),
@@ -229,7 +229,7 @@ parties = [
 	("village_68","Ibdeles",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-72.6, -97.5),[], 100),
 	("village_69","Kwynn",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-26.5, 77.6),[], 100),
 	("village_70","Dirigsene",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-94, -27),[], 100),
-
+	
 	("village_71","Tshibtin",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-9, -20),[], 20),
 	("village_72","Elberl",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-144, 16.15),[], 60),
 	("village_73","Chaeza",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-63.2, -51.4),[], 55),
@@ -240,7 +240,7 @@ parties = [
 	("village_78","Sarimish",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-30.2, -53.3),[], 180),
 	("village_79","Istiniar",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-134.1, -5.5),[], 0),
 	("village_80","Vayejeg",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-1.5, 56),[], 40),
-
+	
 	("village_81","Odasan",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-17.2, 123.6),[], 20),
 	("village_82","Yalibe",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(12, -26),[], 60),
 	("village_83","Gisim",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-79.9, 55.2),[], 55),
@@ -251,7 +251,7 @@ parties = [
 	("village_88","Tulbuk",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(135.8, 24.7),[], 180),
 	("village_89","Uhhun",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(70.1, -27.9),[], 0),
 	("village_90","Jamiche",  icon.village_a|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-12.7, -85.5),[], 40),
-
+	
 	("village_91","Ayn Assuadi",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(21.6, -95.3),[], 20),
 	("village_92","Dhibbain",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(42.5, -111.6),[], 60),
 	("village_93","Qalyut",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(50, -94.8),[], 55),
@@ -262,7 +262,7 @@ parties = [
 	("village_98","Mawiti",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(117.7, -62.2),[], 180),
 	("village_99","Fishara",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(158.35, -98),[], 0),
 	("village_100","Iqbayl",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(150, -106.5),[], 40),
-
+	
 	("village_101","Uzgha",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(154, -69.5),[], 20),
 	("village_102","Shibal Zumr",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(77.2, -91),[], 60),
 	("village_103","Mijayet",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(121, -95.6),[], 55),
@@ -273,23 +273,23 @@ parties = [
 	("village_108","Mit Nun",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(28.8, -107.3),[], 180),
 	("village_109","Tilimsal",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(53, -114.5),[], 0),
 	("village_110","Rushdigh",  icon.village_c|pf_village, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(38, -104),[], 40),
-
+	
 	("salt_mine","Salt_Mine",icon.village_a|pf_disabled|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(14.2, -31),[]),
 	("four_ways_inn","Four_Ways_Inn",icon.village_a|pf_disabled|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(4.8, -39.6),[]),
 	("test_scene","test_scene",icon.village_a|pf_disabled|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(10.8, -19.6),[]),
 	#("test_scene","test_scene",icon.village_a|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(10.8, -19.6),[]),
 	("battlefields","battlefields",pf_disabled|icon.village_a|pf_is_static|pf_always_visible|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(10.8, -16.6),[]),
 	("dhorak_keep","Dhorak_Keep",icon.town|pf_disabled|pf_is_static|pf_always_visible|pf_no_label|pf_hide_defenders, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-50,-58),[]),
-
+	
 	("training_ground","Training Ground",  pf_disabled|icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(3, -7),[]),
-
+	
 	("training_ground_1", "Training Field",  icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible|pf_label_medium, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(37.4, 102.8),[], 100),
 	("training_ground_2", "Training Field",  icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible|pf_label_medium, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-12.8, 33),[], 100),
 	("training_ground_3", "Training Field",  icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible|pf_label_medium, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(70.5, 72.0),[], 100),
 	("training_ground_4", "Training Field",  icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible|pf_label_medium, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(11.5, -75.2),[], 100),
 	("training_ground_5", "Training Field",  icon.training_ground|pf_hide_defenders|pf_is_static|pf_always_visible|pf_label_medium, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-125.8, 12.5),[], 100),
-
-
+	
+	
 	#  bridge_a
 	("Bridge_1","{!}1",icon.bridge_snow_a|pf_is_static|pf_always_visible|pf_no_label, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(39.37, 65.10),[], -44.8),
 	("Bridge_2","{!}2",icon.bridge_snow_a|pf_is_static|pf_always_visible|pf_no_label, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(56.44, 77.88),[], 4.28),
@@ -305,7 +305,7 @@ parties = [
 	("Bridge_12","{!}12",icon.bridge_a|pf_is_static|pf_always_visible|pf_no_label, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-114.33, -1.94),[], -35.5),
 	("Bridge_13","{!}13",icon.bridge_a|pf_is_static|pf_always_visible|pf_no_label, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-84.02, -7),[], -17.7),
 	("Bridge_14","{!}14",icon.bridge_a|pf_is_static|pf_always_visible|pf_no_label, no_menu, pt.none, fac.neutral,0,ai_bhvr_hold,0,(-23.36, 75.8),[], 66.6),
-
+	
 	("looter_spawn_point"   ,"{!}looter_sp",pf_disabled|pf_is_static, no_menu, pt.none, fac.outlaws,0,ai_bhvr_hold,0,(26, 77),[(trp.looter,15,0)]),
 	("steppe_bandit_spawn_point"  ,"the steppes",pf_disabled|pf_is_static, no_menu, pt.none, fac.outlaws,0,ai_bhvr_hold,0,(125, 9),[(trp.looter,15,0)]),
 	("taiga_bandit_spawn_point"   ,"the tundra",pf_disabled|pf_is_static, no_menu, pt.none, fac.outlaws,0,ai_bhvr_hold,0,(78, 84),[(trp.looter,15,0)]),
