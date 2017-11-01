@@ -11712,7 +11712,6 @@ scripts = [
 			(assign, reg0, ":num_maps"),
 			]),
 
-
 	# script_multiplayer_count_players_bots
 	# Input: none
 	# Output: none
@@ -50692,12 +50691,7 @@ scripts = [
 		#
 		]),
 	#script.lwbr_give_items_to_troops
-	("lwbr_give_items_to_troops",[
-		(store_script_param_1, ":value"),
-		(try_for_range, ":troop", "trp_swadian_crossbowman_multiplayer", "trp_multiplayer_end"),
-			(call_script, "script_lwbr_give_items_to_troop", ":value", ":troop"),
-		(try_end),
-		]),
+	foo___lwbr_give_items_to_troops(),
 	#script.lwbr_give_items_to_troop
 	("lwbr_give_items_to_troop",[
 		(store_script_param_1, ":value"),
@@ -52801,4 +52795,4 @@ scripts = [
 		(call_script, "script_game_get_mission_template_name", ":mt"),
 		]),
 	#LWBR WarForge 2.0 --- END
-	]
+]
