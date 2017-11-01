@@ -14509,5 +14509,5 @@ This will surely be your best opportunity to attack him.",
 #LWBR WarForge 2.0 --- BEGIN
 if not IS_CLIENT:
 	for g in xrange(len(game_menus)):
-		game_menus[g] = (game_menus[g][0],0,"_","none",[(change_screen_exit)],[("none",[],"None",[])])
+		game_menus[g] = (game_menus[g][0],0,"_","none",[(change_screen_quit)],[("none",[],"None",[])])
 #LWBR WarForge 2.0 --- END

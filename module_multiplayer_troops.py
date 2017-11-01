@@ -2,6 +2,11 @@ from compiler import *
 
 infantry,archer,crossbowman,cavalry,ranged_cavalry = 0,1,1,2,3
 
+packages = {}
+for pack in ('Native','WarForge','Arena','Peasant'):
+	packages[pack] = 1 << len(packages)
+
+
 multi_troops = [
 	[fac.kingdom_1,[#swadia
 		[trp.swadian_infantry_multiplayer,infantry,[
@@ -310,7 +315,7 @@ multi_troops = [
 			["WarForge",[],
 				[#paid items
 					itm.falchion,itm.winged_mace,itm.hammer,itm.sword_medieval_d_long,itm.military_hammer,itm.sword_medieval_c_small,
-					itm.sword_medieval_b_small,itm.mace_4,itm.maul,itm.shortened_voulge,itm.Sledgehammer,itm.bec_de_corbin_a,itm.blue_gambeson,
+					itm.sword_medieval_b_small,itm.mace_4,itm.maul,itm.shortened_voulge,itm.sledgehammer,itm.bec_de_corbin_a,itm.blue_gambeson,
 					itm.heraldic_mail_with_surcoat,itm.leather_apron,itm.mail_and_plate,itm.plate_armor,itm.scale_armor,itm.bascinet,
 					itm.bascinet_2,itm.felt_hat,itm.felt_hat_b,itm.full_helm,itm.mail_coif,itm.skullcap,itm.segmented_helmet,itm.padded_leather,
 					itm.blue_hose,
@@ -381,7 +386,7 @@ multi_troops = [
 def foo___lwbr_give_items_to_troops():
 	foo = [ (store_script_param_1, l.value), ]
 	for faction in multi_troops:
-		for troop in faction:
+		for troop in faction[1]:
 			foo += [ (call_script, script.lwbr_give_items_to_troop, l.value, troop[0]), ]
 	return ("lwbr_give_items_to_troops",foo)
 
@@ -413,18 +418,17 @@ def foo___lwbr_give_items_to_troop():
 					(eq,l.troop,troop[0]),
 					(troop_clear_inventory,troop[0]),
 			]
-			for pack in xrange(len(troop[2])):
+			for pack in troop[2]:
 				foo += [
 					(try_begin),
-						(store_and,l.pack,l.value,1 << pack),
-						(eq,l.pack,1 << pack),
+						(store_and,l.pack,l.value,packages[pack[0]]),
+						(eq,l.pack,packages[pack[0]]),
 				]
 				free_horses,paid_horses = [],[]
-				for item in troop[2][pack][1]:
-					print "item.flags",item.flags
+				for item in pack[1]:
 					if (item.flags & itp_type_horse) == itp_type_horse: free_horses += [item]
 					else: foo += [ (troop_add_item, troop[0], item), ]
-				for item in troop[2][pack][2]:
+				for item in pack[2]:
 					if (item.flags & itp_type_horse) == itp_type_horse: paid_horses += [item]
 					else: foo += [ (call_script, script.multiplayer_set_item_available_for_troop,item,troop[0]), ]
 				foo += [
@@ -439,8 +443,5 @@ def foo___lwbr_give_items_to_troop():
 				]
 
 	foo += [ (try_end), ]
-	for i in foo:
-		print i
 	return ("lwbr_give_items_to_troop",foo)
 
-foo___lwbr_give_items_to_troop()

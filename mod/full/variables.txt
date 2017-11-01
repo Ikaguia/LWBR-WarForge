@@ -1,3 +1,6 @@
+lwbr_server_is_native
+lwbr_horses_enabled
+lwbr_vars_initialized
 training_ground_position_changed
 auto_besiege_town
 g_player_besiege_town
