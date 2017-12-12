@@ -1,5 +1,5 @@
 scenesfile version 1
- 553
+ 554
 scn_random_scene random_scene 1792 none none 0.000000 0.000000 240.000000 240.000000 -0.500000 0x300028000003e8fa0000034e00004b34000059be 
   0 
   0 
@@ -2044,6 +2044,10 @@ scn_multi_scene_20 multi_scene_20 256 none none 0.000000 0.000000 100.000000 100
   0 
   0 
  outer_terrain_plain 
+scn_multi_scene_21 multi_scene_21 256 none none 0.000000 0.000000 100.000000 100.000000 -100.000000 0x0000000040000c910003e8fa0000538900003e9e00005301 
+  0 
+  0 
+ outer_terrain_beach_snowy 
 scn_random_multi_plain_medium random_multi_plain_medium 1792 none none 0.000000 0.000000 240.000000 240.000000 -0.500000 0x00000001394018dd000649920004406900002920000056d7 
   0 
   0 

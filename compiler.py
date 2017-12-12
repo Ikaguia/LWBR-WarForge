@@ -24,7 +24,10 @@ except:
 
 
 #LWBR WarForge 2.0 --- BEGIN
-from cur_compilation import *
+try:
+	from cur_compilation import *
+except:
+	print ""
 #LWBR WarForge 2.0 --- END
 
 
@@ -1889,6 +1892,8 @@ DEFAULT_ITEM_MODIFIERS = [
 ]
 
 
+
+import lwbr
 
 if __name__ == '__main__':
 	value = '0x00000003b9a94de8000903220000424380000c5000002e08'

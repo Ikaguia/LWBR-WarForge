@@ -583,7 +583,7 @@ animations = [
 	["ride_turn_left", acf_enforce_lowerbody | acf_synch_with_horse, amf_client_prediction,
 		[1.0, "anim_human_02", 450, 483, arf_cyclic],
 		],
-	
+
 	["mount_horse", acf_enforce_all, amf_priority_mount|amf_play|amf_client_prediction,
 		[1.3, "anim_human", horse_move+1003, horse_move+1045,  arf_blend_in_1, 0, (0.0,0,0.0)],
 		],
@@ -777,8 +777,8 @@ animations = [
 	["reload_musket", 0, amf_priority_reload|amf_use_weapon_speed|amf_play,
 		[2.0, "anim_human", combat+2650, combat+2860, arf_blend_in_8],
 		],
-	
-	
+
+
 	["ready_swingright_fist", 0, amf_priority_attack|amf_use_weapon_speed|amf_keep|amf_client_owner_prediction|amf_rider_rot_swing_right,
 		[ready_durn, "right_swing", 0, 15, blend_in_ready],
 		],
@@ -794,7 +794,7 @@ animations = [
 	["parried_swingright_fist", 0, amf_priority_parried|amf_use_weapon_speed|amf_play|amf_rider_rot_swing_right,
 		[attack_parried_duration, "anim_human", combat+4013, combat+4008, blend_in_parry],
 		],
-	
+
 	["ready_swingleft_fist", 0, amf_priority_attack|amf_use_weapon_speed|amf_keep|amf_client_owner_prediction|amf_rider_rot_swing_left,
 		[ready_durn, "anim_human", combat+4300, combat+4300, blend_in_ready],
 		],
@@ -810,8 +810,8 @@ animations = [
 	["parried_swingleft_fist", 0, amf_priority_parried|amf_use_weapon_speed|amf_play|amf_rider_rot_swing_left,
 		[attack_parried_duration, "anim_human", combat+4313, combat+4308, blend_in_parry],
 		],
-	
-	
+
+
 	["ready_direct_fist", 0, amf_priority_attack|amf_use_weapon_speed|amf_keep|amf_client_owner_prediction|amf_rider_rot_thrust,
 		[ready_durn, "direct_fist", 0, 16, blend_in_ready],
 		],
@@ -842,7 +842,7 @@ animations = [
 	["parried_uppercut_fist", 0, amf_priority_parried|amf_use_weapon_speed|amf_play|amf_rider_rot_thrust,
 		[attack_parried_duration, "anim_human", combat+4913, combat+4908, blend_in_parry],
 		],
-	
+
 	["ready_slashright_twohanded", acf_right_cut|acf_rot_vertical_bow|acf_anim_length(100), amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction,
 		##   [ready_durn, "anim_human", combat+5700, combat+5710, blend_in_ready],
 		##   [ready_durn, "slashright_twohanded", 5, 20, blend_in_ready],
@@ -947,7 +947,7 @@ animations = [
 	["parried_thrust_onehanded_horseback", acf_enforce_rightside, amf_priority_parried|amf_use_weapon_speed|amf_play|amf_rider_rot_thrust,
 		[attack_parried_duration_thrust, "anim_human", combat+8515, combat+8513, blend_in_parry],
 		],
-	
+
 	["ready_thrust_onehanded_lance",   acf_thrust|acf_rot_vertical_sword|acf_anim_length(100)|acf_enforce_rightside, amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction|amf_rider_rot_thrust,
 		##   [ready_durn, "anim_human", combat+9500, combat+9508, blend_in_ready],
 		[ready_durn, "thrust_onehanded_lance_hb", 5, 8, blend_in_ready],
@@ -1000,7 +1000,7 @@ animations = [
 	## ["parry_slashright_onehanded", 0, amf_priority_parried|acf_rot_vertical|amf_use_weapon_speed|amf_play,
 	##   [attack_parried_duration, "attacks_single", 230, 225, blend_in_parry],
 	## ],
-	
+
 	["ready_slashleft_onehanded", acf_left_cut|acf_rot_vertical_sword|acf_anim_length(100), amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction,
 		##   [ready_durn, "anim_human", combat+9100, combat+9110, blend_in_ready],
 		##   [ready_durn, "attacks_single_lefttoright", 9, 19, blend_in_ready],
@@ -1089,7 +1089,7 @@ animations = [
 		#   [attack_parried_duration, "anim_human", combat+10420, combat+10415, blend_in_parry],
 		[attack_parried_duration, "parry_single_lefttoright", 0, 75, blend_in_parry],
 		],
-	
+
 	["ready_slash_horseback_polearm_right", acf_right_cut|acf_rot_vertical_sword|acf_anim_length(100), amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction|amf_rider_rot_swing_right,
 		[ready_durn, "attacks_staff_righttoleft", 6, 16, blend_in_ready],
 		],
@@ -1120,7 +1120,7 @@ animations = [
 	["parried_slash_horseback_polearm_left",acf_rot_vertical_sword|acf_anim_length(100), amf_priority_parried|amf_use_weapon_speed|amf_play|amf_rider_rot_swing_left,
 		[attack_blocked_duration, "anim_human", combat+7615, combat+7613, arf_blend_in_2],
 		],
-	
+
 	["ready_overswing_staff", acf_overswing, amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction,
 		[ready_durn, "attacks_staff_uptodown", 9, 26, blend_in_ready],
 		],
@@ -1184,7 +1184,7 @@ animations = [
 	## ["parried_thrust_staff_overhead", acf_rot_vertical_bow|acf_anim_length(100), amf_priority_parried|amf_use_weapon_speed|amf_play,
 	##   [attack_parried_duration_thrust, "anim_human", combat+7316, combat+7313, arf_blend_in_2],
 	## ],
-	
+
 	["ready_slashleft_staff",acf_rot_vertical_bow|acf_anim_length(100), amf_priority_attack|amf_use_weapon_speed|amf_use_inertia|amf_keep|amf_client_owner_prediction,
 		##   [ready_durn, "anim_human", combat+7600, combat+7610, blend_in_ready],
 		##   [ready_durn, "attacks_staff_lefttoright", 6, 20, blend_in_ready],
@@ -1223,10 +1223,10 @@ animations = [
 	["parried_slashright_staff",acf_rot_vertical_bow|acf_anim_length(100), amf_priority_parried|amf_use_weapon_speed|amf_play,
 		[attack_parried_duration, "anim_human", combat+7915, combat+7913, arf_blend_in_2],
 		],
-	
-	
-	
-	
+
+
+
+
 	["defend_fist", 0, amf_play|amf_restart|amf_priority_defend|amf_use_defend_speed|amf_keep|amf_rider_rot_defend|amf_client_owner_prediction,
 		[defend_duration, "anim_human", combat+4950, combat+4960, blend_in_defense],
 		],
@@ -1254,7 +1254,7 @@ animations = [
 	["defend_shield_left", 0, amf_play|amf_restart|amf_priority_defend|amf_use_defend_speed|amf_use_inertia|amf_rider_rot_shield|amf_client_owner_prediction,
 		[defend_duration, "defend_shield_left", 5, 26, blend_in_defense],
 		],
-	
+
 	["defend_shield", 0, amf_play|amf_restart|amf_priority_defend|amf_use_defend_speed|amf_use_inertia|amf_rider_rot_shield|amf_client_owner_prediction,
 		#  [defend_duration, "anim_human", defend+105, defend+120, blend_in_defense],
 		#   [defend_duration, "defend_shield_parry_all", 5, 26, blend_in_defense],
@@ -1490,8 +1490,8 @@ animations = [
 	["defend_left_staff_parry_3", 0, amf_priority_defend_parry|amf_play|amf_restart|amf_rider_rot_defend,
 		[defend_parry_duration_3, "anim_human", defend+2321, defend+2330, arf_blend_in_1],
 		],
-	
-	
+
+
 	["strike_head_left", 0, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[0.5, "strikes", 55, 71, arf_blend_in_3],
 		],
@@ -1540,7 +1540,7 @@ animations = [
 	["strike_legs_back", 0, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[0.5, "strikes_back", 1120, 1137, arf_blend_in_3],
 		],
-	
+
 	["strike2_head_left", acf_enforce_all, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[0.5, "strikes", 55, 71, arf_blend_in_3],
 		],
@@ -1594,7 +1594,7 @@ animations = [
 	["strike2_legs_back", acf_enforce_all, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[0.5, "strikes_back", 1120, 1137, arf_blend_in_3],
 		],
-	
+
 	["strike3_head_left", acf_enforce_all, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[0.9 * 1.1, "strikes3_head", 107, 146, arf_blend_in_3],
 		],
@@ -1643,7 +1643,7 @@ animations = [
 	## ["strike3_legs_back", acf_enforce_all, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 	##   [0.8, "strikes_back", 1120, 1144, arf_blend_in_3],
 	## ],
-	
+
 	## ["strike_head_front_left", 0, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 	##   [0.55, "anim_human", blow+0, blow+10, arf_blend_in_3],
 	## ],
@@ -1702,7 +1702,7 @@ animations = [
 	["strike_fall_back_rise_upper", acf_align_with_ground, amf_priority_striked|amf_play|amf_accurate_body|amf_restart,
 		[1.44, "anim_human", blow+5400, blow+5445, arf_blend_in_2],
 		],
-	
+
 	["cheer", 0, amf_play|amf_priority_mount,
 		##   [2.5, "anim_human", 70000, 70045, arf_blend_in_5],
 		##   [3.0, "anim_human", 70100, 70150, arf_blend_in_5],
@@ -1711,11 +1711,11 @@ animations = [
 		[4.5, "man_cheer", 300, 437, arf_blend_in_5],
 		[5.5, "man_cheer", 450, 617, arf_blend_in_5],
 		],
-	
+
 	["cheer_stand", arf_cyclic, amf_play|amf_priority_mount,
 		[31.5, "man_cheer", 650, 1597, arf_blend_in_5],
 		],
-	
+
 	["stand_townguard", 0, 0,
 		[79.0, "stand_guardsman", 0, 2397, arf_use_stand_progress|arf_cyclic, 0, (0, 0, 0), 0.25],
 		],
@@ -1725,7 +1725,7 @@ animations = [
 	["stand_lord", 0, 0,
 		[10.0, "lord_stand", 0, 111, arf_use_stand_progress|arf_cyclic, 0, (0, 0, 0), 0.25],
 		],
-	
+
 	["dance", 0, 0,
 		[20.0, "anim_human", 0, 387, arf_blend_in_5],
 		#   [10.0, "anim_human_temp", 0, 10, arf_blend_in_5],
@@ -1745,44 +1745,44 @@ animations = [
 	["pose_5", 0, 0,
 		[3.0, "poses", 8, 8, arf_cyclic],
 		],
-	
-	
-	
+
+
+
 	### Unused human animations start from here.
-	
+
 	["wedding_guest", 0, amf_play|amf_priority_die,
 		[30.0, "wedding_guest", 0, 906, arf_cyclic]],
-	
+
 	["wedding_guest_notr", 0, amf_play|amf_priority_die,
 		[32.0, "wedding_guest_notr", 0, 962, arf_cyclic]],
-	
+
 	["wedding_guest_woman", 0, amf_play|amf_priority_die,
 		[27.5, "wedding_guest_woman", 0, 825, arf_cyclic]],
-	
+
 	["wedding_dad_stairs", 0, amf_play|amf_priority_die|amf_start_instantly,
 		[10.0, "wedding_dad_stairs", 0, 300, arf_blend_in_0]],
-	
+
 	["wedding_dad_walk", 0, amf_play|amf_priority_die|amf_start_instantly,
 		[4.5, "wedding_dad_walk", 0, 134, arf_blend_in_0]],
-	
+
 	["wedding_bride_stairs", 0, amf_play|amf_priority_die|amf_start_instantly,
 		[10.0, "wedding_bride_stairs", 0, 300, arf_blend_in_0]],
-	
+
 	["wedding_bride_walk", 0, amf_play|amf_priority_die|amf_start_instantly,
 		[4.5, "wedding_bride_walk", 0, 134, arf_blend_in_0]],
-	
+
 	["wedding_groom_wait", 0, amf_play|amf_priority_die|amf_start_instantly|amf_keep,
 		[10.0, "wedding_groom_last", 0, 2, arf_blend_in_0]],
-	
+
 	["wedding_groom_last", 0, amf_play|amf_priority_die|amf_start_instantly|amf_keep,
 		[10.0, "wedding_groom_last", 0, 300, arf_blend_in_0]],
-	
+
 	["wedding_dad_last", 0, amf_play|amf_priority_die|amf_start_instantly|amf_keep,
 		[10.0, "wedding_dad_last", 0, 300, arf_blend_in_0]],
-	
+
 	["wedding_bride_last", 0, amf_play|amf_priority_die|amf_start_instantly|amf_keep,
 		[10.0, "wedding_bride_last", 0, 300, arf_blend_in_0]],
-	
+
 	["equip_bayonet", 0, amf_priority_equip|amf_play|amf_restart|amf_client_prediction,
 		[0.3, "equip_musket", 5, 13, arf_blend_in_0],
 		],
@@ -1936,7 +1936,7 @@ animations = [
 	["unused_human_anim_98", 0, 0, [1.0, "anim_human", 0, 1, 0]],
 	["unused_human_anim_99", 0, 0, [1.0, "anim_human", 0, 1, 0]],
 	["unused_human_anim_100", 0, 0, [1.0, "anim_human", 0, 1, 0]],
-	
+
 	["horse_stand", 0, amf_client_prediction,
 		##   [5.0, "anim_horse", 1000, 1044, arf_cyclic],
 		##   [3.0, "anim_horse", 600, 644, arf_cyclic],
@@ -1979,7 +1979,7 @@ animations = [
 	["horse_jump_end", acf_enforce_lowerbody, amf_priority_jump_end|amf_play|amf_client_prediction,
 		[0.1, "anim_horse", 222,  224,  arf_blend_in_8],
 		],
-	
+
 	["horse_turn_right", 0, amf_client_prediction,
 		[1.0, "anim_horse", 500, 533, arf_blend_in_4|arf_cyclic],
 		],

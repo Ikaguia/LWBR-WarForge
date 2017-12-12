@@ -154,5 +154,5 @@ party_templates = [
 #LWBR WarForge 2.0 --- BEGIN
 if not IS_CLIENT:
 	for g in xrange(len(party_templates)):
-		party_templates[g] = (party_templates[g][0],"_",0,0,0,0,[]),
+		party_templates[g] = (party_templates[g][0],"_",0,0,0,0,[])
 #LWBR WarForge 2.0 --- END

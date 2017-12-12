@@ -27,7 +27,7 @@ write_id_files = None          # will suppress generation of ID_*.py files
 # Set to True to display compiler performance information at the end of compilation. Set to False to suppress.
 # Default value: False
 
-show_performance_data = True
+show_performance_data = False
 
 
 
@@ -36,4 +36,6 @@ show_performance_data = True
 ##########################
 
 import plugin_ms_extension
-#import plugin_presentations
+import plugin_multiplayer_troops
+import plugin_make_presentations
+import plugin_lwbr_main

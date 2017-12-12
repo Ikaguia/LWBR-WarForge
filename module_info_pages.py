@@ -18,5 +18,5 @@ info_pages = [
 from compiler import *
 if not IS_CLIENT:
 	for g in xrange(len(info_pages)):
-		info_pages[g] = (info_pages[g][0],"_")
+		info_pages[g] = (info_pages[g][0],"_","_")
 #LWBR WarForge 2.0 --- END

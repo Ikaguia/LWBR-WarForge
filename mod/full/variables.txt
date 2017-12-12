@@ -1,6 +1,8 @@
 lwbr_server_is_native
+lwbr_little_pos_helper
 lwbr_horses_enabled
 lwbr_vars_initialized
+lwbr_open_menu_overlay
 training_ground_position_changed
 auto_besiege_town
 g_player_besiege_town

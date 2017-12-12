@@ -417,5 +417,5 @@ In order to do that, you must either convince them or make sure they fall captiv
 #LWBR WarForge 2.0 --- BEGIN
 if not IS_CLIENT:
 	for g in xrange(len(quests)):
-		quests[g] = (quests[g][0],"_",0,"_"),
+		quests[g] = (quests[g][0],"_",0,"_")
 #LWBR WarForge 2.0 --- END

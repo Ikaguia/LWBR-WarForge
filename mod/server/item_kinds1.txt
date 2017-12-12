@@ -1,5 +1,5 @@
 itemsfile version 3
-603
+620
  itm_no_item INVALID_ITEM INVALID_ITEM 1  invalid_item 0  12582914 9223388529554358287 3 0 1.500000 100 0 0 0 0 0 103 0 90 0 522 528
  0
 0
@@ -2446,6 +2446,75 @@ itemsfile version 3
 0
 
  itm_items_end Items_End Items_End 1  shield_round_a 0  0 0 1 0 0.000000 100 0 0 0 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_javelin_bow Javelin_Bow Javelin_Bow 2  war_bow 0  war_bow_carry 3458764513820540928  6291464 5905584128 0 0 1.500000 100 0 0 0 0 0 84 59 0 0 281 0
+ 0
+1
+-51.000000  1 600 1 1152921504606847017 
+
+ itm_knockdown_mace Knockdown_Mace Knockdown_Mace 1  flanged_mace 0  274882363394 9223388532775583758 0 262164 3.500000 100 0 0 0 0 0 103 0 70 0 256 536
+ 0
+0
+
+ itm_blood_drain_throwing_knives Blood_Drain_Throwing_Knives Blood_Drain_Throwing_Knives 1  throwing_knife 0  4194314 131072 0 4398046781448 2.500000 100 0 0 0 0 0 121 25 0 5 281 0
+ 0
+0
+
+ itm_doom_javelins Doom_Javelins Doom_Javelins 2  jarid_new_b 0  jarid_new_b_bag 3458764513820540928  4194314 36507484160 0 4398046781448 3.000000 100 0 0 0 0 0 87 22 65 2 300 0
+ 0
+0
+
+ itm_disarming_throwing_axe Disarming_Throwing_Axe Disarming_Throwing_Axe 1  throwing_axe_a 0  4194314 196608 0 4398046519304 1.000000 100 0 0 0 0 0 98 18 53 1 10 0
+ 0
+0
+
+ itm_instakill_knife Instakill_Knife Instakill_Knife 1  peasant_knife_new 0  14696450 9223372037685248015 0 24596 0.500000 100 0 0 0 0 0 101 0 40 0 269 21
+ 0
+0
+
+ itm_backstabber Backstabber Backstabber 2  sword_viking_a_small 0  sword_viking_a_small_scabbard 3458764513820540928  4194306 9223388564182532111 0 155668 1.250000 100 0 0 0 0 0 103 0 86 0 269 20
+ 0
+0
+
+ itm_weak_beserker_dart Weak_Beserker_Dart Weak_Beserker_Dart 2  dart_b 0  dart_b_bag 3458764513820540928  4194314 36239048704 0 4398046781448 4.000000 100 0 0 0 0 0 95 28 32 1 261 0
+ 0
+0
+
+ itm_team_change_dart Team_Change_Dart Team_Change_Dart 2  dart_a 0  dart_a_bag 3458764513820540928  4194314 36507484160 0 4398046781448 5.000000 100 0 0 0 0 0 93 27 45 1 261 0
+ 0
+0
+
+ itm_awesome_spear Awesome_Spear Awesome_Spear 1  spear 0  138674180 4222131026005760 0 8202 1.500000 100 0 0 0 0 0 110 0 157 0 289 41
+ 0
+0
+
+ itm_running_boots Running_Boots Running_Boots 1  samurai_boots 0  3854 0 0 123731968 1.000000 100 0 0 21 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_power_gloves Power_Gloves Power_Gloves 1  scale_gauntlets_a_L 0  15 0 0 704643236 0.900000 100 0 6 0 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_invulnerable_helmet Invulnerable_Helmet Invulnerable_Helmet 1  maciejowski_helmet_new 0  2147483660 0 1240 704643238 2.750000 100 63 0 0 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_kicking_boots Kicking_Boots Kicking_Boots 1  sarranid_camel_boots 0  536874766 0 0 704643238 3.000000 100 0 0 20 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_restore_health_armour Restore_Health_Armour Restore_Health_Armour 1  samurai_armor 0  16777229 0 0 704643236 12.000000 100 0 27 11 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_javelin_bow_ammo Shooting_Javelins Shooting_Javelins 2  javelin_bow_ammo 0  javelins_quiver_new 3458764513820540928  32773 2147483648 0 0 4.000000 100 0 0 0 0 0 0 0 75 15 290 0
+ 0
+0
+
+ itm_ccoop_new_items_end Items_End Items_End 1  shield_round_a 0  0 0 1 0 0.000000 100 0 0 0 0 0 0 0 0 0 0 0
  0
 0
 

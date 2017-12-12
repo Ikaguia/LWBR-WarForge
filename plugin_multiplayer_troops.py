@@ -1,11 +1,7 @@
 from compiler import *
+register_plugin(__name__)
 
 infantry,archer,crossbowman,cavalry,ranged_cavalry = 0,1,1,2,3
-
-packages = {}
-for pack in ('Native','WarForge','Arena','Peasant'):
-	packages[pack] = 1 << len(packages)
-
 
 multi_troops = [
 	[fac.kingdom_1,[#swadia
@@ -28,7 +24,18 @@ multi_troops = [
 					itm.heraldic_mail_with_tunic_b,itm.heraldic_mail_with_tabard,itm.light_mail_and_plate,itm.mail_with_surcoat,
 					itm.tabard,itm.bascinet,itm.mail_coif,itm.winged_great_helmet,itm.plate_armor,itm.throwing_daggers,
 					itm.throwing_knives,itm.woolen_hose,
-				]]
+				]],
+			["Event",[itm.woolen_hose],
+				[#paid items
+					itm.tutorial_shield,itm.red_tourney_armor,itm.gold_tourney_armor,itm.gold_tourney_helmet,itm.woolen_hose,itm.padded_cloth,
+					itm.head_wrappings,itm.common_hood,itm.mail_coif,itm.military_hammer,itm.bec_de_corbin_a,itm.norman_shield_1,
+					itm.norman_shield_6,itm.byzantion_helmet_a,itm.light_mail_and_plate,itm.stones,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.plate_armor,itm.plate_boots,
+					itm.heraldic_mail_with_surcoat,itm.heraldic_mail_with_tabard,#cheaper cost
+				]],
 			]],
 		[trp.swadian_crossbowman_multiplayer,crossbowman,[
 			["Native",
@@ -45,7 +52,17 @@ multi_troops = [
 				[#paid items
 					itm.dagger,itm.fighting_pick,itm.hammer,itm.pickaxe,itm.mace_4,itm.bastard_sword_a,itm.heraldic_mail_with_tunic,itm.tabard,
 					itm.bascinet,itm.mail_coif,itm.hunting_crossbow,itm.light_crossbow,itm.woolen_hose,
-				]]
+				]],
+			["Event",[itm.woolen_hose],
+				[#paid items
+					itm.gold_tourney_armor,itm.woolen_hose,itm.head_wrappings,itm.common_hood,itm.mail_coif,itm.segmented_helmet,
+					itm.byzantion_helmet_a,itm.stones,itm.green_tourney_armor,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.plate_armor,itm.plate_boots,
+					itm.heraldic_mail_with_surcoat,itm.heraldic_mail_with_tabard,#cheaper cost
+				]],
 			]],
 		[trp.swadian_man_at_arms_multiplayer,cavalry,[
 			["Native",
@@ -66,7 +83,17 @@ multi_troops = [
 					itm.sword_two_handed_b,itm.morningstar,itm.battle_fork,itm.double_sided_lance,itm.jousting_lance,itm.light_lance,
 					itm.military_fork,itm.pitch_fork,itm.brigandine_red,itm.haubergeon,itm.heraldic_mail_with_surcoat,itm.light_mail_and_plate,
 					itm.tabard,itm.bascinet,itm.mail_coif,itm.winged_great_helmet,itm.plate_armor,itm.woolen_hose,
-				]]
+				]],
+			["Event",[],
+				[#paid items
+					itm.tutorial_shield,itm.red_tourney_armor,itm.tourney_helm_red,itm.mail_with_surcoat,itm.mail_coif,itm.sword_of_war,
+					itm.light_mail_and_plate,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.plate_armor,itm.plate_boots,itm.winged_great_helmet,
+					itm.heraldic_mail_with_surcoat,itm.heraldic_mail_with_tabard,#cheaper cost
+				]],
 			]],
 		#[trp.swadian_mounted_crossbowman_multiplayer,ranged_cavalry,[
 			#["Native",
@@ -102,7 +129,18 @@ multi_troops = [
 					itm.coat_of_plates,itm.fur_coat,itm.gambeson,itm.heraldic_mail_with_tunic_b,itm.heraldic_mail_with_tabard,itm.lamellar_vest_khergit,
 					itm.leather_jacket,itm.nomad_vest,itm.studded_leather_coat,itm.tribal_warrior_outfit,itm.lamellar_gauntlets,itm.khergit_elite_armor,
 					itm.fur_hat,itm.nasal_helmet,itm.nomad_cap,itm.spiked_helmet,itm.vaegir_mask,itm.khergit_leather_boots,
-				]]
+				]],
+			["Event",[],
+				[#paid items
+					itm.hunter_boots,itm.fur_coat,itm.studded_leather_coat,itm.mail_shirt,itm.head_wrappings,itm.fur_hat,itm.nomad_cap,
+					itm.leather_warrior_cap,itm.fighting_axe,itm.battle_axe,itm.war_axe,itm.mace_3,itm.mace_4,itm.rus_helmet_a,itm.stones,
+					itm.throwing_spears,itm.nomad_armor,itm.byrnie,itm.tribal_warrior_outfit,itm.norman_shield_7,itm.magyar_helmet_a,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.cuir_bouilli,
+					itm.heraldic_mail_with_tunic,itm.heraldic_mail_with_tunic_b,#cheaper cost
+				]],
 			]],
 		[trp.vaegir_archer_multiplayer,archer,[
 			["Native",
@@ -118,7 +156,16 @@ multi_troops = [
 					itm.falchion,itm.sword_khergit_2,itm.mace_3,itm.hunting_bow,itm.short_bow,itm.khergit_arrows,itm.fur_coat,itm.gambeson,
 					itm.heraldic_mail_with_tunic,itm.lamellar_vest_khergit,itm.leather_jacket,itm.nomad_vest,itm.tribal_warrior_outfit,
 					itm.fur_hat,itm.nasal_helmet,itm.nomad_cap,itm.spiked_helmet,itm.khergit_leather_boots,
-				]]
+				]],
+			["Event",[],
+				[#paid items
+					itm.hunter_boots,itm.head_wrappings,itm.fur_hat,itm.nomad_cap,itm.leather_warrior_cap,itm.stones,itm.throwing_spears,
+					itm.nomad_armor,itm.byrnie,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.heraldic_mail_with_tunic,itm.heraldic_mail_with_tunic_b,#cheaper cost
+				]],
 			]],
 		[trp.vaegir_horseman_multiplayer,cavalry,[
 			["Native",
@@ -140,7 +187,16 @@ multi_troops = [
 					itm.banded_armor,itm.coat_of_plates,itm.fur_coat,itm.gambeson,itm.heraldic_mail_with_surcoat,itm.lamellar_vest_khergit,
 					itm.leather_jacket,itm.nomad_vest,itm.tribal_warrior_outfit,itm.lamellar_gauntlets,itm.khergit_elite_armor,itm.fur_hat,
 					itm.nasal_helmet,itm.nomad_cap,itm.spiked_helmet,itm.khergit_leather_boots,
-				]]
+				]],
+			["Event",[],
+				[#paid items
+					itm.fur_coat,itm.sword_of_war,itm.rus_helmet_a,itm.banded_armor,itm.norman_shield_7,itm.magyar_helmet_a,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.cuir_bouilli,
+					itm.heraldic_mail_with_tunic,itm.heraldic_mail_with_tunic_b,#cheaper cost
+				]],
 			]],
 		]],
 	[fac.kingdom_3,[#khergit khanate
@@ -411,8 +467,8 @@ def foo___lwbr_give_items_to_troop():
 		# 	(eq, l.value, lwbr_new_items__native_plus_warforge),
 	]
 
-	for fact in multi_troops[-1:]:
-		for troop in fact[1][-1:]:
+	for fact in multi_troops:
+		for troop in fact[1]:
 			foo += [
 				(else_try),
 					(eq,l.troop,troop[0]),
@@ -421,16 +477,16 @@ def foo___lwbr_give_items_to_troop():
 			for pack in troop[2]:
 				foo += [
 					(try_begin),
-						(store_and,l.pack,l.value,packages[pack[0]]),
-						(eq,l.pack,packages[pack[0]]),
+						(store_and,l.pack,l.value,lwbr.packages[pack[0]]),
+						(eq,l.pack,lwbr.packages[pack[0]]),
 				]
 				free_horses,paid_horses = [],[]
-				for item in pack[1]:
-					if (item.flags & itp_type_horse) == itp_type_horse: free_horses += [item]
-					else: foo += [ (troop_add_item, troop[0], item), ]
-				for item in pack[2]:
-					if (item.flags & itp_type_horse) == itp_type_horse: paid_horses += [item]
-					else: foo += [ (call_script, script.multiplayer_set_item_available_for_troop,item,troop[0]), ]
+				for free_item in pack[1]:
+					if (free_item.flags & itp_type_horse) == itp_type_horse: free_horses += [free_item]
+					else: foo += [ (troop_add_item, troop[0], free_item), ]
+				for paid_item in pack[2]:
+					if (paid_item.flags & itp_type_horse) == itp_type_horse: paid_horses += [paid_item]
+					else: foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,troop[0]), ]
 				foo += [
 						(try_begin),
 							(eq,g.lwbr_horses_enabled,1),
@@ -445,3 +501,7 @@ def foo___lwbr_give_items_to_troop():
 	foo += [ (try_end), ]
 	return ("lwbr_give_items_to_troop",foo)
 
+scripts = [
+	foo___lwbr_give_items_to_troops(),
+	foo___lwbr_give_items_to_troop(),
+]

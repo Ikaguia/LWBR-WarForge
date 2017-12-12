@@ -366,7 +366,7 @@ soundsfile version 3
  your_flag_returned.ogg 2721
  you_scored_a_point.ogg 2721
  enemy_scored_a_point.ogg 2721
-178
+200
 snd_click 769 1 0 0 
 snd_tutorial_1 1793 1 1 0 
 snd_tutorial_2 1793 1 2 0 
@@ -545,3 +545,25 @@ snd_enemy_flag_taken 2721 1 362 0
 snd_flag_returned 2721 1 363 0 
 snd_team_scored_a_point 2721 1 364 0 
 snd_enemy_scored_a_point 2721 1 365 0 
+snd_ccoop_spawn_companion_0 2049 1 282 0 
+snd_ccoop_spawn_companion_1 2049 1 283 0 
+snd_ccoop_spawn_companion_2 2049 1 284 0 
+snd_ccoop_spawn_companion_3 2049 1 285 0 
+snd_ccoop_nobleman_taunt 2049 1 295 0 
+snd_ccoop_looter_taunt_0 2049 1 270 0 
+snd_ccoop_looter_taunt_1 2049 1 271 0 
+snd_ccoop_looter_taunt_2 2049 1 272 0 
+snd_ccoop_looter_taunt_3 2049 1 273 0 
+snd_ccoop_looter_taunt_4 2049 1 274 0 
+snd_ccoop_bandit_taunt_0 2049 1 275 0 
+snd_ccoop_bandit_taunt_1 2049 1 276 0 
+snd_ccoop_bandit_taunt_2 2049 1 277 0 
+snd_ccoop_bandit_taunt_3 2049 1 278 0 
+snd_ccoop_bandit_taunt_4 2049 1 279 0 
+snd_ccoop_bandit_taunt_5 2049 1 280 0 
+snd_ccoop_bandit_taunt_6 2049 1 281 0 
+snd_ccoop_sea_raider_taunt_0 2049 1 286 0 
+snd_ccoop_sea_raider_taunt_1 2049 1 287 0 
+snd_ccoop_sea_raider_taunt_2 2049 1 288 0 
+snd_ccoop_sea_raider_taunt_3 2049 1 289 0 
+snd_sounds_end 2721 1 365 0 

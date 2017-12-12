@@ -401,6 +401,12 @@ def position_set_coordinates(position, x, y, z, *argl):
 		(position_set_z, position, z),
 	]
 
+def position_set_xy(position, x, y, *argl):
+	return [
+		(position_set_x, position, x),
+		(position_set_y, position, y),
+	]
+
 def position_aim_at_position(position, target, *argl):
 	return [
 		(call_script, script.position_aim_at_position, position, target),
@@ -532,6 +538,24 @@ def item_modifier_get_rarity_multiplier(destination, modifier, *argl):
 	    (val_mul, destination, l._cached_),
 	    (val_div, destination, 1000000), # convert to current fixed point
 	]
+def overlay_set_pos(overlay, x, y, *argl):
+	return [
+		(position_set_x, pos0, x),
+		(position_set_y, pos0, y),
+		(overlay_set_position, overlay, pos0),
+	]
+def overlay_set_sz(overlay, x, y, *argl):
+	return [
+		(position_set_x, pos0, x),
+		(position_set_y, pos0, y),
+		(overlay_set_size, overlay, pos0),
+	]
+def overlay_set_area_sz(overlay, w, h, *argl):
+	return [
+		(position_set_x, pos0, w),
+		(position_set_y, pos0, h),
+		(overlay_set_area_size, overlay, pos0),
+	]
 
 
 extend_syntax(str_store_attribute_name)        # (str_store_attribute_name, <string_reg_no>, <attribute_id>),
@@ -567,6 +591,8 @@ extend_syntax(get_fixed_point_multiplier) # (get_fixed_point_multiplier, <destin
                                           # Retrieves current fixed point multiplier value.
 extend_syntax(position_set_coordinates)   # (position_set_coordinates, <pos>, <x_fixed_point>, <y_fixed_point>, <z_fixed_point>),
                                           # Sets all 3 position coordinates with a single line.
+extend_syntax(position_set_xy)            # (position_set_xy, <pos>, <x_fixed_point>, <y_fixed_point>),
+                                          # Sets both x and y position coordinates with a single line.
 extend_syntax(position_aim_at_position)   # (position_point_towards, <position_reg>, <aim_position_reg>),
                                           # Rotates the position so it's Y axis points at specified aim position.
 extend_syntax(troop_set_attribute)        # (troop_set_attribute, <troop_id>, <attribute_id>, <value>),
@@ -575,6 +601,12 @@ extend_syntax(troop_set_skill)            # (troop_set_skill, <troop_id>, <skill
                                           # Sets troop skill to specified value.
 extend_syntax(item_get_real_difficulty)   # (item_get_real_difficulty, <destination>, <item_id>, [<imod_value>]),
                                           # Retrieves item difficulty value, taking modifier into account. If modifier is omitted, standard item difficulty is returned.
+extend_syntax(overlay_set_pos)            # (overlay_set_pos, <overlay>, <x_fixed_point>, <y_fixed_point>),
+                                          # Sets overlay position in a single line
+extend_syntax(overlay_set_sz)             # (overlay_set_sz, <overlay>, <w_fixed_point>, <h_fixed_point>),
+                                          # Sets overlay size in a single line
+extend_syntax(overlay_set_area_sz)        # (overlay_set_area_sz, <overlay>, <w_fixed_point>, <h_fixed_point>),
+                                          # Sets overlay area size in a single line
 
 extend_syntax(item_modifier_get_damage)            # (item_modifier_get_damage, <destination>, <imod_value>),
 extend_syntax(item_modifier_get_armor)             # (item_modifier_get_armor, <destination>, <imod_value>),

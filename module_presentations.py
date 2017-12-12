@@ -8,6 +8,8 @@ from compiler import *
 #  4) Triggers: Simple triggers that are associated with the presentation
 ####################################################################################################################
 
+from module_scenes import scenes
+
 presentations = [
 	("game_credits",prsntf_read_only,mesh.load_window,[
 			(ti_on_presentation_load,
@@ -1735,7 +1737,11 @@ presentations = [
 
 	("game_multiplayer_admin_panel", prsntf_manual_end_only, 0, [
 			(ti_on_presentation_load,
-				[(set_fixed_point_multiplier, 1000),
+				[
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt admin panel, entering load"),
+					#LWBR WarForge 2.0 --- END
+					(set_fixed_point_multiplier, 1000),
 					#INVASION MODE START
 					#This code is necessary for presentation objects that are present in some modes but not others
 					(assign, "$g_presentation_obj_admin_panel_1", -1),
@@ -2745,10 +2751,17 @@ presentations = [
 						(presentation_set_duration, 0),
 						(start_presentation, "prsnt_game_multiplayer_admin_panel"),
 					(try_end),
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt admin panel, leaving load"),
+					#LWBR WarForge 2.0 --- END
 					]),
 
 			(ti_on_presentation_event_state_change,
-				[(store_trigger_param_1, ":object"),
+				[
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt admin panel, entering change"),
+					#LWBR WarForge 2.0 --- END
+					(store_trigger_param_1, ":object"),
 					(store_trigger_param_2, ":value"),
 					(try_begin),
 						(eq, ":object", "$g_presentation_obj_admin_panel_1"),
@@ -2948,6 +2961,9 @@ presentations = [
 						#(display_message, "@sending difficulty to server"),
 						#INVASION MODE END
 					(try_end),
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt admin panel, leaving change"),
+					#LWBR WarForge 2.0 --- END
 					]),
 			(ti_on_presentation_run,
 				[
@@ -7613,7 +7629,11 @@ presentations = [
 
 	("multiplayer_escape_menu", prsntf_manual_end_only, 0, [
 			(ti_on_presentation_load,
-				[(set_fixed_point_multiplier, 1000),
+				[
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt escape menu, entering load"),
+					#LWBR WarForge 2.0 --- END
+					(set_fixed_point_multiplier, 1000),
 
 					(create_mesh_overlay, reg0, mesh.mp_ingame_menu),
 					(position_set_x, pos1, 250),
@@ -7787,10 +7807,20 @@ presentations = [
 					(val_sub, ":cur_y", escape_menu_item_height),
 					(position_set_y, pos1, ":cur_y"),
 					(overlay_set_position, "$g_presentation_obj_escape_menu_10", pos1),
+
+					inject('lwbr_inject_escape_presentation_load'),#LWBR WarForge 2.0
+
 					(presentation_set_duration, 999999),
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt escape menu, leaving load"),
+					#LWBR WarForge 2.0 --- END
 					]),
 			(ti_on_presentation_event_state_change,
-				[(store_trigger_param_1, ":object"),
+				[
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt escape menu, entering change"),
+					#LWBR WarForge 2.0 --- END
+					(store_trigger_param_1, ":object"),
 					(try_begin),
 						(eq, ":object", "$g_presentation_obj_escape_menu_1"),
 						(presentation_set_duration, 0),
@@ -7820,7 +7850,13 @@ presentations = [
 					(else_try),
 						(eq, ":object", "$g_presentation_obj_escape_menu_7"),
 						(presentation_set_duration, 0),
-						(multiplayer_send_message_to_server, multiplayer_event_open_admin_panel),
+						#LWBR WarForge 2.0 --- BEGIN
+						(display_message, "@prsnt escape menu, open adm panel 1"),
+						#LWBR WarForge 2.0 --- END
+						# (multiplayer_send_message_to_server, multiplayer_event_open_admin_panel),
+						#LWBR WarForge 2.0 --- BEGIN
+						(display_message, "@prsnt escape menu, open adm panel 2"),
+						#LWBR WarForge 2.0 --- END
 					(else_try),
 						(eq, ":object", "$g_presentation_obj_escape_menu_8"),
 						(presentation_set_duration, 0),
@@ -7849,7 +7885,11 @@ presentations = [
 						(eq, ":object", "$g_presentation_obj_escape_menu_13"),
 						(presentation_set_duration, 0),
 						(multiplayer_send_message_to_server, multiplayer_event_open_game_rules),
+						inject('lwbr_inject_escape_presentation_state_change'),#LWBR WarForge 2.0
 					(try_end),
+					#LWBR WarForge 2.0 --- BEGIN
+					(display_message, "@prsnt escape menu, leaving change"),
+					#LWBR WarForge 2.0 --- END
 					]),
 			(ti_on_presentation_run,
 				[(store_trigger_param_1, ":cur_time"),
@@ -7859,6 +7899,7 @@ presentations = [
 						(gt, ":cur_time", 200),
 						(presentation_set_duration, 0),
 					(try_end),
+					inject('lwbr_inject_escape_presentation_run'),#LWBR WarForge 2.0
 					]),
 			]),
 
@@ -13610,4 +13651,681 @@ presentations = [
 			]),
 	#INVASION MODE END
 
-	]
+
+	#LWBR WarForge 2.0 --- BEGIN
+	# ("lwbr_menu", prsntf_manual_end_only, 0, [
+	# 	(ti_on_presentation_load, [
+	# 		(set_fixed_point_multiplier, 1000),
+	# 		(assign, g.lwbr_overlay1, 0),
+	# 		(assign, g.lwbr_overlay2, 0),
+	# 		(assign, g.lwbr_overlay3, 0),
+	# 		(assign, g.lwbr_overlay4, 0),
+	# 		(assign, g.lwbr_overlay5, 0),
+	# 		#Little Pos Helper by Kuba begin
+	# 		(create_text_overlay, g.lwbr_little_pos_helper, "@00,00"),
+	# 			(overlay_set_color, g.lwbr_little_pos_helper, 0xFFFFFFFF),
+	# 			(position_set_x, pos1, 10),
+	# 			(position_set_y, pos1, 700),
+	# 			(overlay_set_position, g.lwbr_little_pos_helper, pos1),
+	# 		#Little Pos Helper by Kuba end
+	# 		(create_mesh_overlay, reg0, mesh.mp_ingame_menu),
+	# 		(overlay_set_pos, reg0, pos1, 225, 20),
+	# 		(overlay_set_sz, reg0, 1100, 1000),
+	# 		(str_clear, s0),
+	# 		(create_text_overlay,	 g.lwbr_admin_panel_container, s0, tf_scrollable),
+	# 			(overlay_set_pos,	 g.lwbr_admin_panel_container, 59, 50),
+	# 			(overlay_set_area_sz,g.lwbr_admin_panel_container, 640, 520),
+	# 			(overlay_set_sz,	 g.lwbr_admin_panel_container, 640, 1000),
+	# 		(set_container_overlay,  g.lwbr_admin_panel_container),
+	# 			(assign, l.cur_y, 1450),
+	# 			(assign, l.x1, 200),
+	# 			(assign, l.x2, 220),
+	# 			(assign, l.x3, 270),
+	# 			(assign, l.x4, 325),
+	# 			(create_text_overlay, g.lwbr_overlay1, "@LWBR WarForge menu."),
+	# 				(overlay_set_pos, g.lwbr_overlay1, l.x1, l.cur_y),
+	# 				(overlay_set_color, g.lwbr_overlay1, 0xf0371e),
+	# 			(val_sub, l.cur_y, escape_menu_item_height*2),
+	# 			(try_begin),#Native server Options
+	# 				(eq,g.lwbr_server_is_native,1),
+	# 				#
+	# 				(create_text_overlay, g.lwbr_overlay2,"@Server is not runing LWBR WarForge."),
+	# 					(overlay_set_pos, g.lwbr_overlay2, l.x1, l.cur_y),
+	# 					(overlay_set_color, g.lwbr_overlay2, 0xf0371e),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(create_text_overlay, reg1, "@Dmg report:"),
+	# 					(overlay_set_pos,reg1, l.x2, l.cur_y),
+	# 					(overlay_set_color,reg1, 0xFFFFFF),
+	# 					(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_pos, reg1, l.x1, l.cur_y),
+	# 					(overlay_set_val, reg1, g.lwbr_dmg_report),
+	# 				#set weather client side
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(create_text_overlay, reg1, "@Keep selected items:"),
+	# 					(overlay_set_pos,  reg1, l.x2, l.cur_y),
+	# 					(overlay_set_color,reg1, 0xFFFFFF),
+	# 					(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_pos, reg1, l.x1, l.cur_y),
+	# 					(overlay_set_val, reg1, g.lwbr_keep_selected_items),
+	# 				#
+	# 			(else_try),#LWBR servers options
+	# 				#
+	# 				(create_text_overlay, g.lwbr_overlay3,"@Server is runing LWBR WarForge."),
+	# 					(overlay_set_pos, g.lwbr_overlay3, l.x1, l.cur_y),
+	# 					(overlay_set_color,g.lwbr_overlay3, 0xf0371e),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(create_game_button_overlay, reg1, "@Set Hotkeys"),
+	# 					(overlay_set_pos, reg1, l.x3, l.cur_y),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(create_text_overlay,  reg1, "@Dmg report:"),
+	# 					(overlay_set_pos,  reg1, l.x2, l.cur_y),
+	# 					(overlay_set_color,reg1, 0xFFFFFF),
+	# 					(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_pos,  reg1, l.x1, l.cur_y),
+	# 					(overlay_set_val,  reg1, g.lwbr_dmg_report),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(create_text_overlay,  reg1, "@Keep selected items:"),
+	# 					(overlay_set_pos,  reg1, l.x2, l.cur_y),
+	# 					(overlay_set_color,reg1, 0xFFFFFF),
+	# 					(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_pos,  reg1, l.x1, l.cur_y),
+	# 					(overlay_set_val,  reg1, g.lwbr_keep_selected_items),
+	# 				#
+	# 			(try_end),
+	# 			(try_begin),#Admin Options
+	# 				(eq,"$g_server_is_native",0),
+	# 				(multiplayer_get_my_player, ":player"),
+	# 				(player_is_admin, ":player"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_text_overlay, "$lwbr_overlay4", "@Admin options."),
+	# 					(overlay_set_position, "$lwbr_overlay4", pos1),
+	# 					(overlay_set_color, "$lwbr_overlay4", 0xf0371e),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_game_button_overlay, reg1, "@Admin Message."),
+	# 					(overlay_set_position, reg1, pos3),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_game_button_overlay, reg1, "@Admin Cheats."),
+	# 					(overlay_set_position, reg1, pos3),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_game_button_overlay, reg1, "@Customize Maplist."),
+	# 					(overlay_set_position, reg1, pos3),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Firearms Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_firearms_enabled"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Horses Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_horse_enabled"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Peasants Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_peasants_enabled"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Persistent Stats."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_persistant_stats"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Jumping from horse Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_jump_from_horse"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Taunting Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_taunt"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Cheering Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_cheer"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos2, l.cur_y),
+	# 				(create_text_overlay, reg1, "@'Only one FREE weapon' Enabled."),
+	# 					(overlay_set_position,	reg1, pos2),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_check_box_overlay, reg1, mesh.checkbox_off, mesh.checkbox_on),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_1_free_wpn"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(store_sub, ":cur_y2", l.cur_y, escape_menu_item_height / 4),
+	# 				(position_set_y, pos3, ":cur_y2"),
+	# 				(create_text_overlay, reg1, "@Min Mod Version required^(-1 for native)."),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, -1, lwbr_mod_version),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_min_version_required"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Time between server Messages(min)"),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, 0, 61),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_sv_messaage_cd_min"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Team 1 Dmg receieved(%)"),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, 0, 1001),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_team_1_dmg_received"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Team 1 Dmg dealt(%)"),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, 0, 1001),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_team_1_dmg_dealt"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Team 2 Dmg receieved(%)"),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, 0, 1001),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_team_2_dmg_received"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos3, l.cur_y),
+	# 				(create_text_overlay, reg1, "@Team 2 Dmg dealt(%)"),
+	# 					(overlay_set_position,	reg1, pos3),
+	# 					(overlay_set_color,		reg1, 0xFFFFFF),
+	# 				(position_set_y, pos1, l.cur_y),
+	# 				(create_number_box_overlay, reg1, 0, 1001),
+	# 					(overlay_set_position, reg1, pos1),
+	# 					(overlay_set_val, reg1, "$g_lwbr_team_2_dmg_dealt"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos4, l.cur_y),
+	# 				(create_combo_button_overlay, reg1),
+	# 					(overlay_add_item,reg1,"@Only Native items"),
+	# 					(overlay_add_item,reg1,"@Native + Warforge"),
+	# 					(overlay_add_item,reg1,"@Only Peasant items"),
+	# 					(overlay_add_item,reg1,"@Only arena items"),
+	# 					(overlay_add_item,reg1,"@No items"),
+	# 					(overlay_set_position, reg1, pos4),
+	# 					(overlay_set_val, reg1, "$g_lwbr_new_items"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos4, l.cur_y),
+	# 				(create_combo_button_overlay, reg1),
+	# 					(overlay_add_item,reg1,"@'Based on Map' Weather"),
+	# 					(overlay_add_item,reg1,"@Clear Sky"),
+	# 					(overlay_add_item,reg1,"@Rainy"),
+	# 					(overlay_add_item,reg1,"@Snowy"),
+	# 					(overlay_set_position, reg1, pos4),
+	# 					(overlay_set_val, reg1, "$g_menu_rain_type"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos4, l.cur_y),
+	# 				(create_combo_button_overlay, reg1),
+	# 					(overlay_add_item,reg1,"@Random Time"),
+	# 					(overlay_add_item,reg1,"@Random Time no Night"),
+	# 					(overlay_add_item,reg1,"@Dawn"),
+	# 					(overlay_add_item,reg1,"@Noon"),
+	# 					(overlay_add_item,reg1,"@Dusk"),
+	# 					(overlay_add_item,reg1,"@Midnight"),
+	# 					(overlay_set_position, reg1, pos4),
+	# 					(overlay_set_val, reg1, "$g_menu_round_day_time"),
+	# 				#
+	# 				(val_sub, l.cur_y, escape_menu_item_height),
+	# 				(position_set_y, pos4, l.cur_y),
+	# 				(create_combo_button_overlay, reg1),
+	# 					(overlay_add_item, reg1, "@'Based on Map' Fog"),
+	# 					(overlay_add_item, reg1, "@No Fog"),
+	# 					(overlay_add_item, reg1, "@Sparse Fog"),
+	# 					(overlay_add_item, reg1, "@Thick Fog"),
+	# 					(overlay_set_position, reg1, pos4),
+	# 					(overlay_set_val, reg1, "$g_menu_fog_distance"),
+	# 			(try_end),
+	# 			(val_sub, l.cur_y, escape_menu_item_height),
+	# 			(position_set_y, pos3, ":cur_y"),
+	# 			(create_game_button_overlay, "$lwbr_overlay5", "@Done."),
+	# 				(overlay_set_position, "$lwbr_overlay5", pos3),
+	# 		(presentation_set_duration, 999999),
+	# 		]),
+	# 	(ti_on_presentation_event_state_change, [
+	# 		(store_trigger_param_1, ":overlay"),
+	# 		(store_trigger_param_2, ":value"),
+	# 		(try_begin),
+	# 			(is_between, ":overlay", "$lwbr_overlay2", "$lwbr_overlay5"),
+	# 			(try_begin),#Options for Native server
+	# 				(assign,":check", "$lwbr_overlay2"),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 1"),#text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 4"),#"Dmg report Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_dmg_report", ":value"),#"Dmg report Enabled" checkbox
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 8"),#"'Keep selected items' Enabled." text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_keep_selected_items", ":value"),#"'Keep selected items' Enabled." checkbox
+	# 			(else_try),#Options for LWBR WarForge server
+	# 				(assign,":check", "$lwbr_overlay3"),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 2"),#text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(presentation_set_duration, 0),
+	# 				(start_presentation,"prsnt_lwbr_set_hotkeys"),#Set hotkeys button
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 4"),#"Dmg report Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_dmg_report", ":value"),#"Dmg report Enabled" checkbox
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 8"),#"'Keep selected items' Enabled." text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_keep_selected_items", ":value"),#"'Keep selected items' Enabled." checkbox
+	# 			(else_try),#Admin options for LWBR WarForge server
+	# 				(assign,":check", "$lwbr_overlay4"),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 3"),#"Admin options" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(presentation_set_duration, 0),
+	# 				(start_presentation,"prsnt_lwbr_admin_chat"),#"@Admin Message." button
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(presentation_set_duration, 0),
+	# 				(start_presentation,"prsnt_lwbr_admin_cheats"),#"@Admin Cheats." button
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(presentation_set_duration, 0),
+	# 				(start_presentation,"prsnt_lwbr_maps_customize"),#"@Customize Maplist." button
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 4"),#"Firearms Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_firearms_enabled", ":value"),#"Firearms Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_firearms_enabled, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 4"),#"Horses Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_horse_enabled", ":value"),#"Horses Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_horses_enabled, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 4"),#"Peasants Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_peasants_enabled", ":value"),#"Peasants Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_peasants_enabled, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 5"),#"Persistent Stats" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$lwbr_g_firearms_enabled", ":value"),#"Persistent Stats" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_persistant_stats, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 6"),#"Jumping from horse Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_jump_from_horse", ":value"),#"Jumping from horse Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_jump_from_horse, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 7"),#"Taunting Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_taunt", ":value"),#"Taunting Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_taunt, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 8"),#"Cheering Enabled" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_cheer", ":value"),#"Cheering Enabled" checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_cheer, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 8"),#"'Only one FREE weapon' Enabled." text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_1_free_wpn", ":value"),#"'Only one FREE weapon' Enabled." checkbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_1_free_wpn, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Min Version Required" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_min_version_required", ":value"),#"Min Version Required" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_min_version_required, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Time between server Messages(min)" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_sv_messaage_cd_min", ":value"),#"Time between server Messages(min)" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_sv_message_cd_min, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Team 1 Dmg receieved(%)" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_team_1_dmg_received", ":value"),#"Team 1 Dmg receieved(%)" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_team_1_dmg_received, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Team 1 Dmg dealt(%)" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_team_1_dmg_dealt", ":value"),#"Team 1 Dmg dealt(%)" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_team_1_dmg_dealt, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Team 2 Dmg receieved(%)" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_team_2_dmg_received", ":value"),#"Team 2 Dmg receieved(%)" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_team_2_dmg_received, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(display_message,"@This should not be displayed 9"),#"Team 2 Dmg dealt(%)" text
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),
+	# 				(assign, "$g_lwbr_team_2_dmg_dealt", ":value"),#"Team 2 Dmg dealt(%)" numbox
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_team_2_dmg_dealt, ":value"),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),#Items available
+	# 				(assign,"$g_lwbr_new_items", ":value"),
+	# 				(try_begin),
+	# 					(eq,":value", 0),
+	# 					(str_store_string,s1,"@DEBUG: Only Native items selected"),
+	# 				(else_try),
+	# 					(eq,":value", 1),
+	# 					(str_store_string,s1,"@DEBUG: Native + Warforge selected"),
+	# 				(else_try),
+	# 					(eq,":value", 2),
+	# 					(str_store_string,s1,"@DEBUG: Only Peasant items selected"),
+	# 				(else_try),
+	# 					(eq,":value", 3),
+	# 					(str_store_string,s1,"@DEBUG: Only arena items selected"),
+	# 				(else_try),
+	# 					(eq,":value", 4),
+	# 					(str_store_string,s1,"@DEBUG: No items selected"),
+	# 				(try_end),
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_new_items, "$g_lwbr_new_items"),
+	# 				(try_begin),
+	# 					(eq, lwbr_debug_mode, 1),
+	# 					(display_message,"@DEBUG: Selecting Allowed Items"),
+	# 					(display_message,s1),
+	# 				(try_end),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),#Weather
+	# 				(try_begin),
+	# 					(eq,":value", 0),
+	# 					(str_store_string,s1,"@DEBUG: 'Based on Map' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 1),
+	# 					(str_store_string,s1,"@DEBUG: 'Clear Sky' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 2),
+	# 					(str_store_string,s1,"@DEBUG: 'Rainy' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 3),
+	# 					(str_store_string,s1,"@DEBUG: 'Snowy' selected"),
+	# 				(try_end),
+	# 				(assign, "$g_menu_rain_type", ":value"),
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_menu_rain_type, ":value"),
+	# 				(try_begin),
+	# 					(eq, lwbr_debug_mode, 1),
+	# 					(display_message,"@DEBUG: Selecting Weather"),
+	# 					(display_message,s1),
+	# 				(try_end),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),#Time
+	# 				(try_begin),
+	# 					(eq,":value", 0),
+	# 					(str_store_string,s1,"@DEBUG: 'Random Time' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 1),
+	# 					(str_store_string,s1,"@DEBUG: 'Random Time no Night' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 2),
+	# 					(str_store_string,s1,"@DEBUG: 'Dawn' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 3),
+	# 					(str_store_string,s1,"@DEBUG: 'Noon' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 4),
+	# 					(str_store_string,s1,"@DEBUG: 'Dusk' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 5),
+	# 					(str_store_string,s1,"@DEBUG: 'Midnight' selected"),
+	# 				(try_end),
+	# 				(assign, "$g_menu_round_day_time", ":value"),
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_menu_day_time, ":value"),
+	# 				(try_begin),
+	# 					(eq, lwbr_debug_mode, 1),
+	# 					(display_message,"@DEBUG: Selecting Time"),
+	# 					(display_message,s1),
+	# 				(try_end),
+	# 			(else_try),
+	# 				(val_add,":check", 1),
+	# 				(eq, ":overlay", ":check"),#Fog
+	# 				(try_begin),
+	# 					(eq,":value", 0),
+	# 					(str_store_string,s1,"@DEBUG: 'Based on Map' Fog selected"),
+	# 				(else_try),
+	# 					(eq,":value", 1),
+	# 					(str_store_string,s1,"@DEBUG: 'No Fog' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 2),
+	# 					(str_store_string,s1,"@DEBUG: 'Sparse Fog' selected"),
+	# 				(else_try),
+	# 					(eq,":value", 3),
+	# 					(str_store_string,s1,"@DEBUG: 'Thick Fog' selected"),
+	# 				(try_end),
+	# 				(assign, "$g_menu_fog_distance", ":value"),
+	# 				(multiplayer_send_3_int_to_server, multiplayer_event_lwbr_server, lwbr_server_set_var, lwbr_var_menu_fog_dist, ":value"),
+	# 				(try_begin),
+	# 					(eq, lwbr_debug_mode, 1),
+	# 					(display_message,"@DEBUG: Selecting Fog"),
+	# 					(display_message,s1),
+	# 				(try_end),
+	# 			(try_end),
+	# 		(else_try),
+	# 			(eq, ":overlay", "$lwbr_overlay5"),
+	# 			(presentation_set_duration, 0),
+	# 			(assign, "$g_lwbr_is_in_a_menu", 0),
+	# 		(try_end),
+	# 		]),
+	# 	(ti_on_presentation_run,[
+	# 		(assign, "$g_lwbr_is_in_a_menu", "prsnt_lwbr_menu"),
+	# 		(set_fixed_point_multiplier, 1000),
+	# 		(store_trigger_param_1, ":cur_time"),
+	# 		(try_begin),
+	# 			(this_or_next|key_clicked, key_escape),
+	# 			(key_clicked, key_xbox_start),
+	# 			(gt, ":cur_time", 200),
+	# 			(presentation_set_duration, 0),
+	# 			(assign, "$g_lwbr_is_in_a_menu", 0),
+	# 		(try_end),
+	# 		#Little Pos Helper by Kuba begin
+	# 		(mouse_get_position, pos1),
+	# 		(position_get_x, reg1, pos1),
+	# 		(position_get_y, reg2, pos1),
+	# 		(overlay_set_text, g.lwbr_little_pos_helper, "@{reg1},{reg2}"),
+	# 		#Little Pos Helper by Kuba end
+	# 		]),
+	# 	]),
+]
+
+
+if not IS_CLIENT:
+	for i in xrange(len(presentations)):
+		if i != 2:
+			presentations[i] = (presentations[i][0],0,0,[])
+	presentations[2] = (presentations[2][0],presentations[2][1],presentations[2][2],[
+		(ti_on_presentation_load,[
+			(set_fixed_point_multiplier, 1000),
+
+			(create_combo_label_overlay, "$g_presentation_obj_custom_battle_designer_18"),
+			(position_set_x, pos1, 800),
+			(position_set_y, pos1, 800),
+			(overlay_set_size, "$g_presentation_obj_custom_battle_designer_18", pos1),
+			(position_set_x, pos1, 175),
+			(position_set_y, pos1, 635),
+			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_18", pos1),
+
+			# (assign, g.lwbr_cur_scene, 0),
+			] + [(overlay_add_item, "$g_presentation_obj_custom_battle_designer_18", "@" + scene[0]) for scene in scenes] + [
+			(overlay_set_val, "$g_presentation_obj_custom_battle_designer_18", g.lwbr_cur_scene),
+
+			(create_game_button_overlay, "$g_presentation_obj_custom_battle_designer_19", "str_start", 0),
+			(position_set_x, pos1, 415),
+			(position_set_y, pos1, 10),
+			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_19", pos1),
+
+			(create_game_button_overlay, "$g_presentation_obj_custom_battle_designer_20", "str_back", 0),
+			(position_set_x, pos1, 585),
+			(position_set_y, pos1, 10),
+			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_20", pos1),
+
+			(presentation_set_duration, 999999),
+			]),
+		(ti_on_presentation_event_state_change,[
+			(store_trigger_param_1, l.obj),
+			(try_begin),
+				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_18"),
+				(store_trigger_param_2, l.val),
+				(assign, g.lwbr_cur_scene, l.val),
+			(else_try),
+				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_19"),
+				(set_jump_mission,mt.conversation_encounter),
+				(jump_to_scene, g.lwbr_cur_scene),
+				(change_screen_mission),
+				(presentation_set_duration, 0),
+			(else_try),
+				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_20"),
+				(presentation_set_duration, 0),
+			(try_end),
+			]),
+		])
+	#LWBR WarForge 2.0 --- END
