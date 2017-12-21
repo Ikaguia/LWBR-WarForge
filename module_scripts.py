@@ -12406,7 +12406,6 @@ scripts = [
 			(player_set_slot, ":player_no", slot_player_last_rounds_used_item_earnings, 0),
 			(val_add, ":player_gold", ":added_gold"),
 			(assign, ":armor_bought", 0),
-
 			#LWBR WarForge 2.0 --- BEGIN
 			(try_begin),
 			inject('lwbr_inject_buy_equipment'),
