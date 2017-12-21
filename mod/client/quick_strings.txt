@@ -1,4 +1,4 @@
-886
+881
 qstr_Breaking_camp... Breaking_camp...
 qstr_{!}{s3}_commander_of {!}{s3}_commander_of_party_#{reg4}_which_is_not_his_troop_leaded_party_{reg5}
 qstr_{!}DEBUG____Doing_po {!}DEBUG_--_Doing_political_calculations_for_{s9}
@@ -443,6 +443,7 @@ qstr_{!}destroy_prison_ca {!}destroy_prison_cart
 qstr_{!}spawning_prison_c {!}spawning_prison_cart_at_point_{reg0}
 qstr_{!}prison_cart_spawn {!}prison_cart_spawn_at_point_{reg0}
 qstr_{!}multiplayer_upgra {!}multiplayer_upgrade_player_equipment:_{reg0}
+qstr_potato potato
 qstr_Disabled Disabled
 qstr_1 1
 qstr_2 2
@@ -664,6 +665,8 @@ qstr_Native_Items: Native_Items:
 qstr_WarForge_Items: WarForge_Items:
 qstr_Arena_Items: Arena_Items:
 qstr_Peasant_Items: Peasant_Items:
+qstr_Event_Items: Event_Items:
+qstr_Event2_Items: Event2_Items:
 qstr_Weather: Weather:
 qstr_Based_on_Map Based_on_Map
 qstr_Clear_Sky Clear_Sky
@@ -688,16 +691,8 @@ qstr_This_should_never_appear This_should_never_appear:_4
 qstr_This_should_never_appear: This_should_never_appear:_8
 qstr_This_should_never_appear:_ This_should_never_appear:_9
 qstr_This_should_never_appear:_1 This_should_never_appear:_10
-qstr_pack_Native_{reg0}_ pack_Native,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Native_{reg0}__ pack_Native,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_WarForge_{reg0 pack_WarForge,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_WarForge_{reg0} pack_WarForge,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_Arena_{reg0}_& pack_Arena,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Arena_{reg0}_ pack_Arena,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_Peasant_{reg0} pack_Peasant,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Peasant_{reg0}_ pack_Peasant,_{reg0}_|_{reg1}_=_{reg2}
-qstr_This_should_never_appear:_3 This_should_never_appear:_35
-qstr_This_should_never_appear:_36 This_should_never_appear:_36
+qstr_This_should_never_appear:_3 This_should_never_appear:_37
+qstr_This_should_never_appear:_38 This_should_never_appear:_38
 qstr_{reg1}{reg2} {reg1},{reg2}
 qstr_{!}{s4}:_M{reg3}_2M {!}{s4}:_M{reg3},_2M{reg4},_PC{reg5},_2PC{reg6},_PM{reg7}
 qstr_You_came_into_the_wo You_came_into_the_world_a_{reg3?daughter:son}_of_declining_nobility,owning_only_the_house_in_which_they_lived._However,_despite_your_family's_hardships,they_afforded_you_a_good_education_and_trained_you_from_childhood_for_the_rigors_of_aristocracy_and_life_at_court.

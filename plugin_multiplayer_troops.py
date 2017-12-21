@@ -4,6 +4,39 @@ register_plugin(__name__)
 infantry,archer,crossbowman,cavalry,ranged_cavalry = 0,1,1,2,3
 
 multi_troops = [
+	[fac.no_faction,[#all
+		[trp.player,infantry,[#all troops
+			["Peasant",[
+				#2h/pole
+				itm.pitch_fork,itm.long_spiked_club,itm.scythe,itm.military_fork,itm.battle_fork,itm.boar_spear,itm.staff,
+				itm.quarter_staff,itm.shortened_spear,
+				#1h
+				itm.wooden_stick,itm.cudgel,itm.hammer,itm.club,itm.pickaxe,itm.spiked_club,itm.sickle,itm.butchering_knife,
+				itm.cleaver,itm.knife,itm.dagger,itm.falchion,itm.hatchet,itm.mace_1,itm.torch,
+				#thrown
+				itm.stones,
+				#bow
+				itm.hunting_bow,itm.short_bow,
+				itm.arrows,
+				#head
+				itm.straw_hat,itm.pilgrim_hood,itm.head_wrappings,itm.common_hood,itm.hood_b,itm.hood_c,itm.hood_d,
+				itm.felt_hat,itm.felt_hat_b,itm.woolen_cap,itm.vaegir_fur_cap,itm.black_hood,
+				#body
+				itm.pilgrim_disguise,itm.fur_coat,itm.shirt,itm.linen_tunic,itm.short_tunic,itm.red_shirt,itm.red_tunic,
+				itm.green_tunic,itm.blue_tunic,itm.coarse_tunic,itm.leather_apron,itm.tabard,itm.leather_vest,itm.gambeson,
+				itm.blue_gambeson,itm.red_gambeson,itm.padded_cloth,itm.aketon_green,itm.leather_jerkin,itm.nomad_vest,
+				itm.padded_leather,itm.nomad_robe,itm.sarranid_cloth_robe,itm.sarranid_cloth_robe_b,itm.robe,itm.burlap_tunic,
+				itm.robe,itm.tunic_with_green_cape,
+				#boots
+				itm.wrapping_boots,itm.woolen_hose,itm.blue_hose,itm.hunter_boots,itm.hide_boots,itm.ankle_boots,
+				itm.nomad_boots,itm.sarranid_boots_a,itm.sarranid_boots_b,itm.sarranid_boots_c,itm.leather_boots,
+				#hands
+				itm.leather_gloves,
+				#horses
+				itm.sumpter_horse,
+			],[]]
+		]]
+	]],
 	[fac.kingdom_1,[#swadia
 		[trp.swadian_infantry_multiplayer,infantry,[
 			["Native",
@@ -439,66 +472,172 @@ multi_troops = [
 		]],
 ]
 
+def foo__debug_func(func_name="script_name", args=[]):
+	if lwbr.debug_mode <= 0: return []
+	block = [(str_store_string, s0, "@running script %s" % func_name),]
+	if len(args) > 0:
+		block += [(str_store_string, s0, "@{s0} with args"),]
+		for argi in xrange(len(args)):
+			block += [
+				(assign, reg0, args[argi]),
+				(str_store_string, s0, "@{s0} {reg0}"),
+			]
+	block += [(display_message, s0),]
+	return block
+
+
 def foo___lwbr_give_items_to_troops():
-	foo = [ (store_script_param_1, l.value), ]
-	for faction in multi_troops:
-		for troop in faction[1]:
-			foo += [ (call_script, script.lwbr_give_items_to_troop, l.value, troop[0]), ]
+	foo = [ (store_script_param_1, l.value), ] + foo__debug_func("lwbr_give_items_to_troops")
+	for fact_id,fact_troops in multi_troops:
+		if fact_id == fac.no_faction: continue
+		for troop_id,troop_type,troop_packs in fact_troops:
+			if troop_id == trp.player: continue
+			foo += [ (call_script, script.lwbr_give_items_to_troop, l.value, troop_id), ]
 	return ("lwbr_give_items_to_troops",foo)
 
 def foo___lwbr_give_items_to_troop():
 	foo = [
 		(store_script_param_1, l.value),
 		(store_script_param_2, l.troop),
+		] + foo__debug_func("lwbr_give_items_to_troop", [l.value, l.troop]) + [
+		# (troop_clear_inventory,l.troop),
+		(troop_get_inventory_capacity, l.slots, l.troop),
+		(try_for_range, l.slot, 0, l.slots),
+			(troop_set_inventory_slot, l.troop, l.slot, -1),
+		(try_end),
+		(store_troop_faction, l.troop_fac, l.troop),
+		(eq, l.troop_fac, l.troop_fac),
 		(try_for_range, l.cur_item, all_items_begin, all_items_end),
 			(store_sub, l.item_troop_slot, l.troop, multiplayer_troops_begin),
 			(val_add, l.item_troop_slot, slot_item_multiplayer_availability_linked_list_begin),
 			(item_set_slot, l.cur_item, l.item_troop_slot, -1),
 		(try_end),
 		(try_begin),
-			(eq,1,0),
-		# 	(this_or_next|eq,l.value, lwbr_new_items__peasant_items),
-		# 	(this_or_next|eq,l.value, lwbr_new_items__no_items),
-		# 	(eq,l.value, lwbr_new_items__arena_items),
-		# 	(call_script, script.lwbr_add_arena_equip_to_troop, l.troop, l.value),
-		# (else_try),
-		# 	(eq,l.troop, trp.swadian_crossbowman_multiplayer),
-		# 	(call_script, script.multiplayer_set_item_available_for_troop, "itm.bolts", "trp_swadian_crossbowman_multiplayer", 0),
-		# 	(eq, l.value, lwbr_new_items__native_plus_warforge),
 	]
 
-	for fact in multi_troops:
-		for troop in fact[1]:
-			foo += [
-				(else_try),
-					(eq,l.troop,troop[0]),
-					(troop_clear_inventory,troop[0]),
-			]
-			for pack in troop[2]:
+	for fact_id,fact_troops in multi_troops:
+		for troop_id,troop_type,troop_packs in fact_troops:
+			if troop_id == trp.player:
+				if fact_id != fac.no_faction:
+					foo += [(eq,l.troop_fac,fact_id),]
+			else:
+				foo += [(eq,l.troop,troop_id),]
+			for pack_name,pack_free_items,pack_paid_items in troop_packs:
 				foo += [
 					(try_begin),
-						(store_and,l.pack,l.value,lwbr.packages[pack[0]]),
-						(eq,l.pack,lwbr.packages[pack[0]]),
+						(store_and,l.pack,l.value,lwbr.packages[pack_name]),
 				]
-				free_horses,paid_horses = [],[]
-				for free_item in pack[1]:
-					if (free_item.flags & itp_type_horse) == itp_type_horse: free_horses += [free_item]
-					else: foo += [ (troop_add_item, troop[0], free_item), ]
-				for paid_item in pack[2]:
-					if (paid_item.flags & itp_type_horse) == itp_type_horse: paid_horses += [paid_item]
-					else: foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,troop[0]), ]
-				foo += [
+				if lwbr.debug_mode > 0:
+					foo += [
 						(try_begin),
-							(eq,g.lwbr_horses_enabled,1),
-				]
-				for horse in free_horses: foo += [ (troop_add_item, troop[0], horse), ]
-				for horse in paid_horses: foo += [ (call_script, script.multiplayer_set_item_available_for_troop,horse,troop[0]), ]
-				foo += [
+							(eq, l.troop, multi_troops[1][1][0][0]),
+							(assign, reg0, l.value),
+							(eq, l.troop, multi_troops[1][1][0][0]),
+							(assign, reg1, lwbr.packages[pack_name]),
+							(assign, reg2, l.pack),
+							(display_message, "@{reg0} & {reg1} = {reg2} -> %s" % pack_name),
 						(try_end),
-					(try_end),
-				]
+					]
+				foo += [ (neq,l.pack,0),]
+				if lwbr.debug_mode > 0:
+					foo += [
+						(try_begin),
+							(eq, l.troop, multi_troops[1][1][0][0]),
+							(display_message, "@passed"),
+						(try_end),
+						]
+				for free_item in pack_free_items:
+					foo += [
+						(try_begin),
+							(troop_has_item, l.troop, free_item),
+					]
+					if lwbr.debug_mode > 0:
+						foo += [
+							(try_begin),
+								(eq, l.troop, multi_troops[1][1][0][0]),
+								(str_store_troop_name, s0, l.troop),
+								(str_store_item_name, s1, free_item),
+								(display_message, "@Troop {s0} already had free item {s1}"),
+							(try_end),
+						]
+					foo += [
+						(else_try),
+							(eq, g.lwbr_horses_enabled ,0),
+							#seems bugged,the above returns true for a lot of other types, probably because
+							#itp_type_horse is 0x01 -> 0001
+							#and shields are   0x07 -> 0111, which also contains itp_type_horse, thus it returns true
+							#and boots are     0x0e -> 1110, which doesnt cointain itp_type_horse, thus it returns false
+							(item_has_property, free_item, itp_type_horse),
+							(neg|item_has_property, free_item, itp_type_one_handed_wpn),
+							(neg|item_has_property, free_item, itp_type_two_handed_wpn),
+							(neg|item_has_property, free_item, itp_type_polearm),
+							(neg|item_has_property, free_item, itp_type_arrows),
+							(neg|item_has_property, free_item, itp_type_bolts),
+							(neg|item_has_property, free_item, itp_type_shield),
+							(neg|item_has_property, free_item, itp_type_bow),
+							(neg|item_has_property, free_item, itp_type_crossbow),
+							(neg|item_has_property, free_item, itp_type_thrown),
+							(neg|item_has_property, free_item, itp_type_goods),
+							(neg|item_has_property, free_item, itp_type_head_armor),
+							(neg|item_has_property, free_item, itp_type_body_armor),
+							(neg|item_has_property, free_item, itp_type_foot_armor),
+							(neg|item_has_property, free_item, itp_type_hand_armor),
+							(neg|item_has_property, free_item, itp_type_pistol),
+							(neg|item_has_property, free_item, itp_type_musket),
+							(neg|item_has_property, free_item, itp_type_bullets),
+							(neg|item_has_property, free_item, itp_type_animal),
+							(neg|item_has_property, free_item, itp_type_book),
+					]
+					if lwbr.debug_mode > 0:
+						foo += [
+							(try_begin),
+								(eq, l.troop, multi_troops[1][1][0][0]),
+								(str_store_troop_name, s0, l.troop),
+								(str_store_item_name, s1, free_item),
+								(display_message, "@Troop {s0} would get horse {s1} but horses are disabled"),
+							(try_end),
+						]
+					foo += [
+						(else_try),
+							(troop_add_item, l.troop, free_item),
+							(call_script, script.multiplayer_set_item_available_for_troop,free_item, l.troop),
+					]
+					if lwbr.debug_mode > 0:
+						foo += [
+							(try_begin),
+								(eq, l.troop, multi_troops[1][1][0][0]),
+								(str_store_troop_name, s0, l.troop),
+								(str_store_item_name, s1, free_item),
+								(display_message, "@Troop {s0} has free item {s1}"),
+							(try_end),
+						]
+					foo += [
+						(try_end),
+					]
+				for paid_item in pack_paid_items:
+					foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,troop_id), ]
+				foo += [ (try_end), ]
+			if troop_id == trp.player: foo += [(eq,1,0),]
+			foo += [(else_try),]
+	foo += [
+			(str_store_troop_name, s0, l.troop),
+			(display_message, "@Error: invalid or unrecognized troop '{s0}' for script.lwbr_give_items_to_troop"),
+		(try_end),
+	]
 
-	foo += [ (try_end), ]
+	if lwbr.debug_mode > 0:
+		foo += [
+			(try_begin),
+				(eq, l.troop, multi_troops[1][1][0][0]),
+				(str_store_troop_name, s0, l.troop),
+				(display_message, "@trp.{s0} has itms:"),
+				(try_for_troop_items, l.itm, l.troop),
+					(str_store_item_name, s1, l.itm),
+					(display_message, "@	itm.{s1}"),
+				(try_end),
+			(try_end),
+		]
+
 	return ("lwbr_give_items_to_troop",foo)
 
 scripts = [

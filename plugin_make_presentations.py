@@ -43,6 +43,9 @@ def make_presentation(name,flags,args,opts):
 
 		if opt[0] in (typ.blank,typ.code,typ.open_container,typ.close_container):
 			if opt[0] == typ.open_container:
+				if in_container:
+					print "\n\nError: opening container inside another container at plugin_make_presentations, option #%d, presentation %s\n" % (opti,name)
+					exit(1)
 
 				tot = 0
 				for optj in xrange(opti,len(opts)):
@@ -62,6 +65,9 @@ def make_presentation(name,flags,args,opts):
 				]
 				in_container = True
 			elif opt[0] == typ.close_container:
+				if not in_container:
+					print "\n\nError: closing container outside of any container at plugin_make_presentations, option #%d, presentation %s\n" % (opti,name)
+					exit(1)
 				load += [
 					(set_container_overlay, -1),
 					(assign,l.cur_y,l.out_y),

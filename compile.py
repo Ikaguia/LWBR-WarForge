@@ -52,11 +52,11 @@ else:
 from compiler import *
 
 
+#write_id_files = "ID_%s.py" # Where the compiler will write new iteration ID-files.
+
 #LWBR WarForge 2.0 --- BEGIN
 
-#write_id_files = "ID_%s.py" # Where the compiler will write new iteration ID-files.
 #export_filename = '%s.txt' # How to name export files (only used for some debugging purposes).
-write_id_files = "ID_%s.py"
 export_filename = pathPrefix+'%s.txt'
 
 #LWBR WarForge 2.0 --- END
@@ -524,3 +524,5 @@ if show_performance_data and WRECK.time_loaded:
 	print '    >>> %.03f sec total time spent. <<<' % (gettime() - WRECK.time_started)
 	print
 if 'wait' in sys.argv: raw_input('Press Enter to finish>')
+
+if not WRECK.successful: exit(1)

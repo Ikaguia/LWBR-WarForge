@@ -622,9 +622,7 @@ multiplayer_server_check_end_map = (
 multiplayer_once_at_the_first_frame = (
 	0, 0, ti_once, [], [
 		(start_presentation, "prsnt_multiplayer_welcome_message"),
-		#LWBR WarForge 2.0 --- BEGIN
-		inject("inject_lwbr_once_at_first_frame"),
-		#LWBR WarForge 2.0 --- END
+		inject("inject_lwbr_once_at_first_frame"),#LWBR WarForge 2.0
 		])
 
 multiplayer_battle_window_opened = (

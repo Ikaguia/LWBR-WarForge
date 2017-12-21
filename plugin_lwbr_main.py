@@ -8,14 +8,22 @@ from module_scenes import scenes as _scenes
 
 def foo__lwbr_menu():
 	def foo_sv_var(slot,load = [],change = []):
-		lo = [(troop_get_slot, l.val, trp.lwbr_sv_vars, slot),] + load
-		if change != []: ch = [(troop_get_slot, l.var, trp.lwbr_sv_vars, slot),] + change + [(troop_set_slot, trp.lwbr_sv_vars, slot, l.val)]
-		else: ch = change + [(troop_set_slot, trp.lwbr_sv_vars, slot, l.val)]
-		return (lo,ch)
+		load = [(troop_get_slot, l.val, trp.lwbr_sv_vars, slot),] + load
+		if change != []:
+			change = [(troop_get_slot, l.var, trp.lwbr_sv_vars, slot),] + change
+		change += [
+			(troop_get_slot, l.var, trp.lwbr_sv_vars, slot),
+			(neq, l.var, l.val),
+			(troop_set_slot, trp.lwbr_sv_vars, slot, l.val),
+			(call_script, script.lwbr_send_event_to_server, lwbr.multiplayer_event_server,
+				lwbr.sv_event.set_sv_var, slot, l.val, 0),
+		]
+		return (load,change)
 	def foo_cl_var(slot,load = [],change = []):
 		load = [(troop_get_slot, l.val, trp.lwbr_vars, slot),] + load
-		if change != []: change = [(troop_get_slot, l.var, trp.lwbr_vars, slot),] + change
-		change += [(troop_set_slot, trp.lwbr_vars, slot, l.val)]
+		if change != []:
+			change = [(troop_get_slot, l.var, trp.lwbr_vars, slot),] + change
+		change += [(troop_set_slot, trp.lwbr_vars, slot, l.val),]
 		return (load,change)
 	is_wf = [(eq,g.lwbr_server_is_native,0),]
 	is_nat = [(eq,g.lwbr_server_is_native,1),]
@@ -24,14 +32,14 @@ def foo__lwbr_menu():
 	lwbr_menu_list = [
 		(typ.text,"LWBR WarForge menu v%d.%d"%(lwbr.mod_version/1000,lwbr.mod_version%1000),[]),
 		(typ.blank,),
-		(typ.open_container,400,400),
-		(typ.text,"Server in not running LWBR WarForge",is_nat),
-		(typ.text,"Server in running LWBR WarForge v{reg0}.{reg1}",
+		(typ.text,"Server is not running LWBR WarForge",is_nat),
+		(typ.text,"Server is running LWBR WarForge v{reg0}.{reg1}",
 			is_wf + [
 				(troop_get_slot,l.version,trp.lwbr_sv_vars,lwbr.sv_var.version),
 				(store_div,reg0,l.version,1000),
 				(store_mod,reg1,l.version,1000),
 			]),
+		(typ.open_container,400,350),
 		(typ.checkbox,"Dmg report:") + foo_cl_var(lwbr.var.dmg_report),
 		(typ.checkbox,"Keep selected items:") + foo_cl_var(lwbr.var.keep_items),
 		(typ.button,"Set Hotkeys",is_wf,
@@ -133,8 +141,11 @@ def foo__lwbr_menu():
 def foo__lwbr_init_vars():
 	return [(troop_set_slot, trp.lwbr_vars, var, lwbr.var.default[var]) for var in lwbr.var.default]
 
-def foo__lwbr_init_sv_vars():
-	return [(troop_set_slot, trp.lwbr_sv_vars, var, lwbr.sv_var.default[var]) for var in lwbr.sv_var.default]
+def foo__lwbr_init_sv_vars(is_server = False):
+	if is_server:
+		return [(troop_set_slot, trp.lwbr_sv_vars, var, lwbr.sv_var.default_sv[var]) for var in lwbr.sv_var.default]
+	else:
+		return [(troop_set_slot, trp.lwbr_sv_vars, var, lwbr.sv_var.default[var]) for var in lwbr.sv_var.default]
 
 def foo__lwbr_init_player():
 	return [(player_set_slot, l.player_no, slot, lwbr.slot_player.default[slot]) for slot in lwbr.slot_player.default]
@@ -145,7 +156,7 @@ def foo__lwbr_init_troop():
 def foo__lwbr_init_scene():
 	return [(scene_set_slot, l.scene, slot, lwbr.slot_scene.default[slot]) for slot in lwbr.slot_scene.default]
 
-def foo_lwbr_init_scenes():
+def foo__lwbr_init_scenes():
 	body = [(try_for_range, l.scene, 0, len(_scenes)),] + foo__lwbr_init_scene() + [(try_end),]
 	for opt in lwbr.scenes_opt:
 		for scene in opt[0]:
@@ -154,22 +165,69 @@ def foo_lwbr_init_scenes():
 	return ("lwbr_init_scenes",body)
 
 def foo__server_ask_player_info():
-	return [(multiplayer_send_2_int_to_player, l.player_no, lwbr.multiplayer_event_client, lwbr.cl_event.ask_var, lwbr.var.version)]
+	return [
+		(call_script, script.lwbr_send_event_to_player, l.player_no,
+			lwbr.multiplayer_event_client, lwbr.cl_event.ask_var, lwbr.var.version, 0, 0),
+	]
 
 def foo__server_send_player_info():
 	body = []
-	for var in lwbr.var.default:
-		body += [
-			(troop_get_slot, l.val, trp.lwbr_vars, var),
-			(multiplayer_send_3_int_to_player, l.player_no, lwbr.multiplayer_event_both, lwbr.bo_event.set_var, var, l.val),
-		]
 	for var in lwbr.sv_var.default:
 		body += [
 			(troop_get_slot, l.val, trp.lwbr_sv_vars, var),
-			(multiplayer_send_3_int_to_player, l.player_no, lwbr.multiplayer_event_both, lwbr.bo_event.set_sv_var, var, l.val),
+			(call_script, script.lwbr_send_event_to_player, l.player_no, lwbr.multiplayer_event_client,
+				lwbr.cl_event.return_sv_var, var, l.val, 0),
 		]
 	return body
 
+def foo__debug_vars():
+	ret = []
+	if lwbr.debug_mode > 0:
+		v = sorted([(vars(lwbr.var)[f],f) for f in vars(lwbr.var) if not f.startswith("__") and not f in ("default","count")])
+		for var in v:
+			ret += [
+				(troop_get_slot, reg0, trp.lwbr_vars, var[0]),
+				(display_message, "@var %s = {reg0}" % var[1]),
+			]
+		v = sorted([(vars(lwbr.sv_var)[f],f) for f in vars(lwbr.sv_var) if not f.startswith("__") and not f in ("default","default_sv","count")])
+		for var in v:
+			ret += [
+				(troop_get_slot, reg0, trp.lwbr_sv_vars, var[0]),
+				(display_message, "@sv var %s = {reg0}" % var[1]),
+			]
+	return ret
+
+def foo__debug_func(func_name="script_name", args=[]):
+	if lwbr.debug_mode <= 0: return []
+	block = [(str_store_string, s0, "@running script %s" % func_name),]
+	if len(args) > 0:
+		block += [(str_store_string, s0, "@{s0} with args"),]
+		for argi in xrange(len(args)):
+			block += [
+				(assign, reg0, args[argi]),
+				(str_store_string, s0, "@{s0} {reg0}"),
+			]
+	block += [(display_message, s0),]
+	return block
+
+def foo__add_rnd_itp(troop, itp_type, cnt, ek, player):
+	return [
+		(try_begin),
+			(gt, cnt, 0),
+			(store_random_in_range, l.rnd, 0, cnt),
+			(try_for_troop_items, l.itm, troop),
+				(item_get_type, l.type, l.itm),
+				(eq, l.type, itp_type),
+				(try_begin),
+					(eq, cnt, 0),
+					(player_add_spawn_item, player, ek, l.itm),
+					(try_for_troop_items_break),
+				(else_try),
+					(val_sub, cnt, 1),
+				(try_end),
+			(try_end),
+		(try_end),
+	]
 
 presentations = [
 	make_presentation("lwbr_menu", prsntf_manual_end_only, 0, foo__lwbr_menu()),
@@ -182,12 +240,12 @@ presentations = [
 scripts = [
 	#script.lwbr_init_item_slots
 	("lwbr_init_item_slots", [
+		] + foo__debug_func("lwbr_init_item_slots") + [
 		(try_for_range, l.item, all_items_begin, all_items_end),
 			(item_set_slot, l.item, slot_item_multiplayer_item_class, 0),
 			(item_get_type,l.type,l.item),
 			(try_begin),
 				(eq,l.type,itp_type_one_handed_wpn),
-				(item_set_slot, l.item, slot_item_multiplayer_item_class, multi_item_class_type_sword),
 				#can also be:
 				#multi_item_class_type_war_picks
 				(try_begin),
@@ -283,101 +341,31 @@ scripts = [
 				(item_set_slot, l.item, slot_item_multiplayer_item_class, multi_item_class_type_horse),
 			(try_end),
 		(try_end),
-		# #1h Axes
-		# (item_set_slot, itm.axe, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.one_handed_war_axe_a, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.one_handed_war_axe_b, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.one_handed_battle_axe_a, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.one_handed_battle_axe_b, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.one_handed_battle_axe_c, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.fighting_axe, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# (item_set_slot, itm.practice_axe, slot_item_multiplayer_item_class, multi_item_class_type_axe),
-		# #2h Axes
-		# (item_set_slot, itm.two_handed_axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.two_handed_battle_axe_2, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.shortened_voulge, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.bardiche, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.great_axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.great_bardiche, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.long_axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.long_axe_b, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.long_axe_c, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.voulge, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.long_bardiche, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.great_long_bardiche, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.war_axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.battle_axe, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.sarranid_two_handed_axe_a, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.sarranid_two_handed_axe_b, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.sarranid_two_handed_mace_1, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.sarranid_axe_a, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# (item_set_slot, itm.sarranid_axe_b, slot_item_multiplayer_item_class, multi_item_class_type_two_handed_axe),
-		# #Blunt Weapons
-		# (item_set_slot, itm.club, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.spiked_club, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.mace_1, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.mace_2, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.mace_3, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.mace_4, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.winged_mace, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.long_spiked_club, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.long_hafted_spiked_mace, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.maul, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.sledgehammer, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.warhammer, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.morningstar, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# (item_set_slot, itm.sarranid_mace_1, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		# #Picks
-		# (item_set_slot, itm.hammer, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# (item_set_slot, itm.military_hammer, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# (item_set_slot, itm.military_sickle_a, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# (item_set_slot, itm.fighting_pick, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# (item_set_slot, itm.military_pick, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# (item_set_slot, itm.club_with_spike_head, slot_item_multiplayer_item_class, multi_item_class_type_war_picks),
-		# #Cleavers
-		# (item_set_slot, itm.military_cleaver_b, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),
-		# (item_set_slot, itm.military_cleaver_c, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),
-		# #(item_set_slot, itm.two_handed_cleaver, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),##it is a cleaver but it's better to set it as a 2h sword
-		# (item_set_slot, itm.hafted_blade_a, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),
-		# (item_set_slot, itm.hafted_blade_b, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),
-		# (item_set_slot, itm.shortened_military_scythe, slot_item_multiplayer_item_class, multi_item_class_type_cleavers),
-		# #Lances  ##commented out cause it was not necessary and was just cluttering up the equip screen
-		# #(item_set_slot, itm.light_lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #(item_set_slot, itm.lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #(item_set_slot, itm.heavy_lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #(item_set_slot, itm.great_lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #(item_set_slot, itm.double_sided_lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #(item_set_slot, itm.jousting_lance, slot_item_multiplayer_item_class, multi_item_class_type_lance),
-		# #Throwing Axes  ##commented out cause it was not necessary and was just cluttering up the equip screen
-		# #(item_set_slot, itm.throwing_axes, slot_item_multiplayer_item_class, multi_item_class_type_throwing_axe),
-		# #(item_set_slot, itm.light_throwing_axes, slot_item_multiplayer_item_class, multi_item_class_type_throwing_axe),
-		# #(item_set_slot, itm.heavy_throwing_axes, slot_item_multiplayer_item_class, multi_item_class_type_throwing_axe),
-
 		#INVASION MODE START
 		#DEBUG FOR SPECIAL ITEMS
-		#(item_set_slot, itm.javelin_bow, slot_item_multiplayer_item_class, multi_item_class_type_bow),
-		#(item_set_slot, itm.knockdown_mace, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
-		#(item_set_slot, itm.blood_drain_throwing_knives, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.doom_javelins, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.disarming_throwing_axe, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.instakill_knife, slot_item_multiplayer_item_class, multi_item_class_type_sword),
-		#(item_set_slot, itm.running_boots, slot_item_multiplayer_item_class, multi_item_class_type_light_foot),
-		#(item_set_slot, itm.power_gloves, slot_item_multiplayer_item_class, multi_item_class_type_glove),
-		#(item_set_slot, itm.wielding_gloves, slot_item_multiplayer_item_class, multi_item_class_type_glove),
-		#(item_set_slot, itm.invulnerable_helmet, slot_item_multiplayer_item_class, multi_item_class_type_light_helm),
-		#(item_set_slot, itm.kicking_boots, slot_item_multiplayer_item_class, multi_item_class_type_light_foot),
-		#(item_set_slot, itm.javelin_bow_ammo, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.weak_beserker_dart, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.team_change_dart, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
-		#(item_set_slot, itm.awesome_spear, slot_item_multiplayer_item_class, multi_item_class_type_spear),
-		#(item_set_slot, itm.restore_health_armour, slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
-		#(item_set_slot, itm.extra_life_helmet, slot_item_multiplayer_item_class, multi_item_class_type_light_helm),
+			#(item_set_slot, itm.javelin_bow, slot_item_multiplayer_item_class, multi_item_class_type_bow),
+			#(item_set_slot, itm.knockdown_mace, slot_item_multiplayer_item_class, multi_item_class_type_blunt),
+			#(item_set_slot, itm.blood_drain_throwing_knives, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.doom_javelins, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.disarming_throwing_axe, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.instakill_knife, slot_item_multiplayer_item_class, multi_item_class_type_sword),
+			#(item_set_slot, itm.running_boots, slot_item_multiplayer_item_class, multi_item_class_type_light_foot),
+			#(item_set_slot, itm.power_gloves, slot_item_multiplayer_item_class, multi_item_class_type_glove),
+			#(item_set_slot, itm.wielding_gloves, slot_item_multiplayer_item_class, multi_item_class_type_glove),
+			#(item_set_slot, itm.invulnerable_helmet, slot_item_multiplayer_item_class, multi_item_class_type_light_helm),
+			#(item_set_slot, itm.kicking_boots, slot_item_multiplayer_item_class, multi_item_class_type_light_foot),
+			#(item_set_slot, itm.javelin_bow_ammo, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.weak_beserker_dart, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.team_change_dart, slot_item_multiplayer_item_class, multi_item_class_type_throwing),
+			#(item_set_slot, itm.awesome_spear, slot_item_multiplayer_item_class, multi_item_class_type_spear),
+			#(item_set_slot, itm.restore_health_armour, slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
+			#(item_set_slot, itm.extra_life_helmet, slot_item_multiplayer_item_class, multi_item_class_type_light_helm),
 		#INVASION MODE END
 		inject('lwbr_inject_init_item_slots'),
 		]),
 	#script.lwbr_init_vars
 	("lwbr_init_vars",[
+		] + foo__debug_func("lwbr_init_vars") + [
 		inject("lwbr_inject_init_vars"),
 		(call_script, script.lwbr_init_scenes),
 		(try_begin),
@@ -389,6 +377,8 @@ scripts = [
 			(multiplayer_is_server),
 			(assign,g.lwbr_server_is_native,	0),
 			inject("lwbr_inject_init_vars_server"),
+		(else_try),
+			inject("lwbr_inject_init_vars_client"),
 		(try_end),
 		]),
 	#script.lwbr_show_msg_players
@@ -396,6 +386,7 @@ scripts = [
 		(try_begin),
 			(multiplayer_is_server),
 			(store_script_param,l.str,1),
+			] + foo__debug_func("lwbr_show_msg_players", [l.str]) + [
 			(call_script, script.lwbr_send_str_to_players, multiplayer_event_show_server_message, l.str),
 		(try_end),
 		]),
@@ -405,6 +396,7 @@ scripts = [
 			(multiplayer_is_server),
 			(store_script_param,l.event_type,1),
 			(store_script_param,l.str,2),
+			] + foo__debug_func("lwbr_send_str_to_players", [l.event_type, l.str]) + [
 			(try_for_players, l.player),
 				(player_is_active, l.player),
 				(multiplayer_send_string_to_player, l.player, l.event_type, l.str),
@@ -415,6 +407,7 @@ scripts = [
 	("lwbr_send_str_to_server",[
 		(store_script_param,l.event_type,1),
 		(store_script_param,l.str,2),
+		] + foo__debug_func("lwbr_send_str_to_server", [l.event_type, l.str]) + [
 		(try_begin),
 			(neg|multiplayer_is_server),
 			(multiplayer_send_string_to_server, l.event_type, s1),
@@ -433,7 +426,29 @@ scripts = [
 		(store_script_param,l.par4,5),
 		(try_begin),
 			(multiplayer_is_server),
+			] + foo__debug_func("lwbr_send_event_to_players", [l.event_type, l.par1, l.par2, l.par3, l.par4]) + [
 			(try_for_players, l.player),
+				(player_is_active, l.player),
+				(call_script, script.lwbr_send_event_to_player, l.player, l.event_type, l.par1, l.par2, l.par3, l.par4),
+			(try_end),
+		(try_end),
+		]),
+	#script.lwbr_send_event_to_player
+	("lwbr_send_event_to_player",[
+		(store_script_param,l.player,1),
+		(store_script_param,l.event_type,2),
+		(store_script_param,l.par1,3),
+		(store_script_param,l.par2,4),
+		(store_script_param,l.par3,5),
+		(store_script_param,l.par4,6),
+		(try_begin),
+			(multiplayer_is_server),
+			] + foo__debug_func("lwbr_send_event_to_player", [l.player, l.event_type, l.par1, l.par2, l.par3, l.par4]) + [
+			(try_begin),
+				(multiplayer_get_my_player, l.me),
+				(eq,l.player,l.me),
+				(call_script, script.game_receive_network_message, l.me, l.event_type, l.par1, l.par2, l.par3, l.par4),
+			(else_try),
 				(player_is_active, l.player),
 				(multiplayer_send_4_int_to_player, l.player, l.event_type, l.par1, l.par2, l.par3, l.par4),
 			(try_end),
@@ -446,6 +461,7 @@ scripts = [
 		(store_script_param,l.par2,3),
 		(store_script_param,l.par3,4),
 		(store_script_param,l.par4,5),
+		] + foo__debug_func("lwbr_send_event_to_server", [l.event_type, l.par1, l.par2, l.par3, l.par4]) + [
 		(try_begin),
 			(neg|multiplayer_is_server),
 			(multiplayer_send_4_int_to_server, l.event_type, l.par1, l.par2, l.par3, l.par4),
@@ -1275,7 +1291,7 @@ scripts = [
 		# (try_end),
 		# ]),
 	#script.lwbr_init_scenes
-	foo_lwbr_init_scenes(),
+	foo__lwbr_init_scenes(),
 	#script.lwbr_set_troop_skill_level
 	# ("lwbr_set_troop_skill_level",[
 		# (store_script_param, l.troop, 1),
@@ -1432,103 +1448,170 @@ injection = {
 		(player_set_slot, l.player_no, lwbr.slot_player.version, 0),
 		],
 	'lwbr_inject_escape_presentation_load' : [
-		(create_button_overlay, g.lwbr_open_menu_overlay, "@Open LWBR WarForge menu"),
+		(create_button_overlay, g.lwbr_open_menu_overlay, "@LWBR WarForge menu"),
 		(overlay_set_color, g.lwbr_open_menu_overlay, 0xFFFFFF),
-		(val_sub, l.cur_y, escape_menu_item_height),
-		(position_set_y, pos1, l.cur_y),
-		(overlay_set_position, g.lwbr_open_menu_overlay, pos1),
-		],
+		(overlay_set_pos, g.lwbr_open_menu_overlay, 10, 10),
+		] + foo__debug_vars(),
 	'lwbr_inject_escape_presentation_state_change' : [
 		(else_try),
 			(eq, l.object, g.lwbr_open_menu_overlay),
 			(presentation_set_duration, 0),
 			(start_presentation, prsnt.lwbr_menu),
 		],
-	'lwbr_inject_server_only_events' : [
+	'lwbr_inject_events' : [
 		(else_try),
-			(eq, l.event_type, lwbr.multiplayer_event_server),
-			(store_script_param, l.type, 3),
+			] + foo__debug_func("game_receive_network_message", [l.player_no, l.event_type]) + [
+			(assign, l.done, 0),
 			(try_begin),
-				(eq, l.type, lwbr.sv_event.ask_sv_var),
-				(store_script_param, l.slot, 4),
-				(troop_get_slot, l.val, trp.lwbr_sv_vars, l.slot),
-				(multiplayer_send_3_int_to_player, l.player_no, lwbr.multiplayer_event_both, lwbr.bo_event.set_sv_var, l.slot, l.val),
-			(else_try),
-				(eq, l.type, lwbr.sv_event.send_var),
-				(store_script_param, l.slot, 4),
-				(store_script_param, l.val, 5),
+				# (eq, l.event_type, __),
+				# (do_something),
+				# (assign, l.done, 1),
+			(try_end),
+			(neq, l.done, 0),
+		],
+	'lwbr_inject_server_only_events' : [
+		(else_try),#set_sv_var
+			(eq, l.type, lwbr.sv_event.set_sv_var),
+			(store_script_param, l.slot, 4),
+			(store_script_param, l.val, 5),
+			] + foo__debug_func("sv_event.set_sv_var", [l.slot, l.val]) + [
+			(try_begin),
 				(try_begin),
-					(eq, l.slot, lwbr.var.version),
-					(player_set_slot, l.player_no, lwbr.slot_player.version, l.val),
+					(neg|player_is_admin, l.player_no),
+					(str_store_player_username, s0, l.player_no),
+					(assign, reg0, l.slot),
+					(assign, reg1, l.val),
+					(display_message, "@Error: non-admin player {s0} at sv_event.set_sv_var #{reg0} -> {reg1}"),
+				(else_try),
+					(neg|is_between, l.slot, 0, lwbr.sv_var.count),
+					(assign, reg0, l.slot),
+					(display_message, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.set_sv_var"),
+				(else_try),
+					(troop_set_slot, trp.lwbr_sv_vars, l.slot, l.val),
+					(call_script, script.lwbr_send_event_to_players, lwbr.multiplayer_event_client,
+						lwbr.cl_event.return_sv_var, l.slot, l.val, 0),
+					(try_begin),
+						(eq, l.slot, lwbr.sv_var.items),
+						(try_begin),
+							(multiplayer_is_dedicated_server),
+							(call_script, script.lwbr_give_items_to_troops, l.val),
+						(try_end),
+						(call_script, script.lwbr_send_event_to_players, lwbr.multiplayer_event_client,
+							lwbr.cl_event.clear_items, 0, 0, 0),
+						(call_script, script.lwbr_send_event_to_players, multiplayer_event_force_start_team_selection,
+							0, 0, 0, 0),#use this to force players to reselect items
+					(try_end),
 				(try_end),
+			(try_end),
+		(else_try),#ask_sv_var
+			(eq, l.type, lwbr.sv_event.ask_sv_var),
+			(store_script_param, l.slot, 4),
+			] + foo__debug_func("sv_event.ask_sv_var", [l.slot]) + [
+			(try_begin),
+				(neg|is_between, l.slot, 0, lwbr.sv_var.count),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.ask_sv_var"),
+			(else_try),
+				(troop_get_slot, l.val, trp.lwbr_sv_vars, l.slot),
+				(call_script, script.lwbr_send_event_to_player, l.player_no, lwbr.multiplayer_event_client,
+					lwbr.cl_event.return_sv_var, l.slot, l.val, 0),
+			(try_end),
+		(else_try),#return_var
+			(eq, l.type, lwbr.sv_event.return_var),
+			(store_script_param, l.slot, 4),
+			(store_script_param, l.val, 5),
+			] + foo__debug_func("sv_event.return_var", [l.slot, l.val]) + [
+			(try_begin),
+				(eq, l.slot, lwbr.var.version),
+				(player_set_slot, l.player_no, lwbr.slot_player.version, l.val),
+			(else_try),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid or unrecognized returned var #{reg0} at sv_event.return_var"),
+			(try_end),
+		(else_try),#action
+			(eq, l.type, lwbr.sv_event.action),
+			(store_script_param, l.action, 4),
+			(try_begin),
+			# 	(eq, l.action, lwbr.action.taunt.id),
+			# 	...
+			# (else_try),
+				(assign, reg0, l.action),
+				(display_message, "@Error: invalid or unrecognized action #{reg0} at sv_event.action"),
 			(try_end),
 		],
 	'lwbr_inject_client_only_events' : [
-		(else_try),
-			(this_or_next|eq, l.event_type, lwbr.multiplayer_event_both),
-			(eq, l.event_type, lwbr.multiplayer_event_client),
-			(store_script_param, l.type, 3),
+		(else_try),#set_var
+			(eq, l.type, lwbr.cl_event.set_var),
+			(store_script_param, l.slot, 4),
+			(store_script_param, l.val, 5),
+			] + foo__debug_func("cl_event.set_var", [l.slot, l.val]) + [
 			(try_begin),
-				(eq, l.type, lwbr.cl_event.clear_items),
-				(call_script, script.lwbr_force_change_weapons),
+				(neg|is_between, l.slot, 0, lwbr.var.count),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid or unrecognized var #{reg0} at cl_event.set_var"),
 			(else_try),
-				(eq, l.type, lwbr.cl_event.ask_var),
-				(store_script_param, l.slot, 4),
+				(troop_set_slot, trp.lwbr_vars, l.slot, l.val),
+				# (try_begin),
+				# 	(eq, l.slot, lwbr.var.---),
+				# 	---
+				# (try_end),
+			(try_end),
+		(else_try),#ask_var
+			(eq, l.type, lwbr.cl_event.ask_var),
+			(store_script_param, l.slot, 4),
+			] + foo__debug_func("cl_event.ask_var", [l.slot]) + [
+			(try_begin),
+				(neg|is_between, l.slot, 0, lwbr.var.count),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid or unrecognized var #{reg0} at cl_event.ask_var"),
+			(else_try),
 				(troop_get_slot, l.val, trp.lwbr_vars, l.slot),
-				(multiplayer_send_3_int_to_server, lwbr.multiplayer_event_server, lwbr.sv_event.send_var, l.slot, l.val),
+				(call_script, script.lwbr_send_event_to_server, lwbr.multiplayer_event_server,
+					lwbr.sv_event.return_var, l.slot, l.val, 0),
 			(try_end),
-		],
-	'lwbr_inject_both_events' : [
-		(else_try),
-			(this_or_next|eq, l.event_type, lwbr.multiplayer_event_server),
-			(this_or_next|eq, l.event_type, lwbr.multiplayer_event_client),
-			(eq, l.event_type, lwbr.multiplayer_event_both),
-			(store_script_param, l.type, 3),
+		(else_try),#return_sv_var
+			(eq, l.type, lwbr.cl_event.return_sv_var),
+			(store_script_param, l.slot, 4),
+			(store_script_param, l.val, 5),
+			] + foo__debug_func("cl_event.return_sv_var", [l.slot,l.val]) + [
 			(try_begin),
-				(eq, l.type, lwbr.bo_event.set_var),
-				(store_script_param, l.slot, 4),
-				(store_script_param, l.val, 5),
-				(try_begin),
-					(this_or_next|player_is_admin, l.player_no),
-					(neg|multiplayer_is_server),
-					#
-					(troop_set_slot, trp.lwbr_vars, l.slot, l.val),
-					(call_script, script.lwbr_send_event_to_players, lwbr.multiplayer_event_client, lwbr.bo_event.set_var, l.slot, l.val, 0),
-					# (try_begin),
-					# 	(eq, l.slot, lwbr.var.---),
-					# 	---
-					# (try_end),
-				(try_end),
+				(neg|is_between, l.slot, 0, lwbr.sv_var.count),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid or unrecognized sv_var #{reg0} at cl_event.return_sv_var"),
 			(else_try),
-				(eq, l.type, lwbr.bo_event.set_sv_var),
-				(store_script_param, l.slot, 4),
-				(store_script_param, l.val, 5),
+				(troop_set_slot, trp.lwbr_sv_vars, l.slot, l.val),
 				(try_begin),
-					(this_or_next|player_is_admin, l.player_no),
-					(neg|multiplayer_is_server),
-					#
-					(troop_set_slot, trp.lwbr_sv_vars, l.slot, l.val),
-					(call_script, script.lwbr_send_event_to_players, lwbr.multiplayer_event_client, lwbr.bo_event.set_sv_var, l.slot, l.val, 0),
-					# (try_begin),
-					# 	(eq, l.slot, lwbr.sv_var.items),
-					# 	(try_begin),
-					# 		(multiplayer_is_server),
-					# 		(call_script, script.lwbr_send_event_to_players, lwbr.multiplayer_event_client, lwbr.cl_event.clear_items, 0, 0, 0),
-					# 		(call_script, script.lwbr_send_event_to_players, multiplayer_event_force_start_team_selection, 0, 0, 0, 0),#use this to force players to reselct items
-					# 	(try_end),
-					# (try_end),
+					(eq, l.slot, lwbr.sv_var.items),
+					(call_script, script.lwbr_give_items_to_troops, l.val),
 				(try_end),
 			(try_end),
+		(else_try),#set_faction_slot
+			(eq, l.type, lwbr.cl_event.set_faction_slot),
+			(store_script_param, l.faction, 4),
+			(store_script_param, l.slot, 5),
+			(store_script_param, l.val, 6),
+			] + foo__debug_func("cl_event.set_faction_slot", [l.faction, l.slot, l.slot]) + [
+			(try_begin),
+				# (is_between, l.faction, 0, fac.end),
+				(faction_set_slot, l.faction, l.slot, l.val),
+			(else_try),
+				(assign, reg0, l.slot),
+				(display_message, "@Error: invalid faction #{reg0} at cl_event.set_faction_slot"),
+			(try_end),
+		(else_try),#clear_items
+			(eq, l.type, lwbr.cl_event.clear_items),
+			] + foo__debug_func("cl_event.clear_items") + [
+			(call_script, script.lwbr_force_change_weapons),
 		],
-	'lwbr_inject_init_vars' : foo__lwbr_init_vars() + foo__lwbr_init_sv_vars() + [
+	'lwbr_inject_init_vars' : foo__lwbr_init_vars() + [
 		(call_script, script.lwbr_give_items_to_troops, lwbr.sv_var.default[lwbr.sv_var.items]),
-		(display_message, "@potato"),
 		],
 	'lwbr_inject_init_vars_once' : [
 		#set hotkeys to default
 		],
-	'lwbr_inject_init_vars_server' : [
-		(troop_set_slot, trp.lwbr_sv_vars, lwbr.sv_var.version, lwbr.mod_version),
+	'lwbr_inject_init_vars_client' : foo__lwbr_init_sv_vars(is_server = False) + [
+		],
+	'lwbr_inject_init_vars_server' : foo__lwbr_init_sv_vars(is_server = True) + [
 		],
 	'lwbr_inject_server_before_mission_start' : [
 		(call_script, script.lwbr_init_weather),
@@ -1537,12 +1620,25 @@ injection = {
 	'lwbr_inject_on_player_spawn' : [],
 	'lwbr_inject_player_join' : [
 		(try_begin),
+			# (player_is_active, l.player_no),
+			(str_store_player_username, s0, l.player_no),
+			(assign, reg0, l.player_no),
+			(player_get_unique_id, reg1, l.player_no),
+			(display_message, "@player '{s0}' id #{reg0} uid #{reg1} joined"),
+		(try_end),
+		(try_begin),
+			(multiplayer_get_my_player, l.me),
+			(this_or_next|eq, l.player_no, l.me),
+			(neq, g.lwbr_vars_initialized, 1),
+			(call_script,script.lwbr_init_vars),
+		(try_end),
+		(try_begin),
 			(neg|multiplayer_is_server),
 		(else_try),
-			(neg|multiplayer_is_dedicated_server),
-			(multiplayer_get_my_player, l.me),
-			(eq, l.me, l.player_no),
-		(else_try),
+		# 	(neg|multiplayer_is_dedicated_server),
+		# 	(multiplayer_get_my_player, l.me),
+		# 	(eq, l.me, l.player_no),
+		# (else_try),
 		] + foo__server_ask_player_info() + foo__server_send_player_info() + [
 		(try_end),
 		],
@@ -1557,9 +1653,78 @@ injection = {
 	'lwbr_inject_mt_fight_and_destroy' : [],
 	'lwbr_inject_mt_coop' : [],
 	'lwbr_inject_mt_duel' : [],
+	'lwbr_inject_buy_equipment' : [
+			(troop_get_slot, l.packs, trp.lwbr_sv_vars, lwbr.sv_var.items),
+			] + foo__debug_func("lwbr_inject_buy_equipment", [l.player_no, l.packs]) + [
+			(store_and, l.check, l.packs, lwbr.packages["Peasant"]),
+			(neq, l.check, 0),
+			(try_begin),
+				(player_get_troop_id, l.trp, l.player_no),
+				(gt, l.trp, 0),
+				(troop_get_type_counts,l.cnt_horses,
+									   l.cnt_1h,l.cnt_2h,l.cnt_pole,
+									   l.cnt_arrow,l.cnt_bolt,
+									   l.cnt_shield,
+									   l.cnt_bow,l.cnt_xbow,l.cnt_th,
+									   l.rest,
+									   l.cnt_helm,l.cnt_armor,l.cnt_boots,l.cnt_gloves,
+									   l.rest,l.rest,l.rest,l.rest,l.rest,
+									   l.trp),
+				(try_chance,80),#80%
+					] + foo__debug_func("bought_head_armor", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_head_armor,	l.cnt_helm,  ek_head,   l.player_no) + [
+				(try_end),
+				(try_chance,90),#90%
+					] + foo__debug_func("bought_body_armor", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_body_armor,	l.cnt_armor, ek_body,   l.player_no) + [
+				(try_end),
+				(try_chance,88),#88%
+					] + foo__debug_func("bought_foot_armor", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_foot_armor,	l.cnt_boots, ek_foot,   l.player_no) + [
+				(try_end),
+				(try_chance,25),#25%
+					] + foo__debug_func("bought_hand_armor", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_hand_armor,	l.cnt_gloves,ek_gloves, l.player_no) + [
+				(try_end),
+				(try_chance,15),#15%
+					] + foo__debug_func("bought_horse", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_horse,			l.cnt_horses,ek_horse,  l.player_no) + [
+				(try_end),
+				(try_chance,1,3),#1/3
+					] + foo__debug_func("bought_1h", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_one_handed_wpn,l.cnt_1h,    ek_item_0, l.player_no) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_shield,		l.cnt_shield,ek_item_1, l.player_no) + [
+				(else_try_chance),#1/3
+					] + foo__debug_func("bought_2h", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_two_handed_wpn,l.cnt_2h,    ek_item_0, l.player_no) + [
+				(else_try),#1/3
+					] + foo__debug_func("bought_pole", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_polearm,		l.cnt_pole,  ek_item_0, l.player_no) + [
+				(try_end),
+				(try_chance,90),#90%
+					] + foo__debug_func("bought_thrown", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_thrown,		l.cnt_th,    ek_item_2, l.player_no) + [
+				(else_try_chance),#5%
+					] + foo__debug_func("bought_bow", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_bow,			l.cnt_bow,   ek_item_2, l.player_no) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_arrows,		l.cnt_arrow, ek_item_3, l.player_no) + [
+				(else_try),#5%
+					] + foo__debug_func("bought_xbow", [l.player_no]) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_crossbow,		l.cnt_xbow,  ek_item_2, l.player_no) + [
+					] + foo__add_rnd_itp(l.trp, itp_type_bolts,			l.cnt_bolt,  ek_item_3, l.player_no) + [
+				(try_end),
+			(try_end),
+		(else_try),
+		# 	#TODO
+		# 	(store_and, l.check, l.packs, lwbr.packs["Arena"]),
+		# 	(neq, l.check, 0),
+		# 	(assign, l.done, 1),
+		# (else_try),
+	],
 }
 
 
 
 #LWBR WarForge 2.0 --- BEGIN
 #LWBR WarForge 2.0 --- END
+

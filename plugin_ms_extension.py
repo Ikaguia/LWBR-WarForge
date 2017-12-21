@@ -133,6 +133,19 @@ scripts = [
 			(troop_set_slot, trp.static_data_array, 36 * 10 + _imod_offset_difficulty, 2),
 		(try_end),
 	]),
+	("cf_troop_has_item",[
+		(store_script_param, l.troop, 1),
+		(store_script_param, l.item, 2),
+		(troop_get_inventory_capacity, l.cap, l.troop),
+		(try_for_range, l.slot, 0, l.cap),
+			(troop_get_inventory_slot, l.it, l.troop, l.slot),
+			(eq, l.it, l.item),
+			(assign, l.cap, -100),
+		(try_end),
+		(eq, l.cap, -100),
+		# (store_item_kind_count, l.cnt, l.item, l.troop),
+		# (gt, l.cnt, 0),
+		]),
 ]
 
 
@@ -558,6 +571,133 @@ def overlay_set_area_sz(overlay, w, h, *argl):
 	]
 
 
+def troop_has_item(troop, item, *argl):
+	return [ (call_script, script.cf_troop_has_item, troop, item), ]
+def try_for_troop_items(item, troop, *argl):
+	return [
+		(troop_get_inventory_capacity, l.inv_cap, troop),
+		(try_for_range, l.item_slot, 0, l.inv_cap),
+			(troop_get_inventory_slot, item, troop, l.item_slot),
+			(lt, item, 0),
+		(else_try),
+	]
+def try_for_troop_items_break(*argl):
+	return [ (assign, l.inv_cap, 0), ]
+
+def troop_get_type_counts(cnt_horses,
+						  cnt_1h,cnt_2h,cnt_pole,
+						  cnt_arrow,cnt_bolt,
+						  cnt_shield,
+						  cnt_bow,cnt_xbow,cnt_th,
+						  cnt_goods,
+						  cnt_helm,cnt_armor,cnt_boots,cnt_gloves,
+						  cnt_pistol,cnt_musket,cnt_bullets,
+						  cnt_animal,cnt_book,
+						  troop):
+	return [
+
+		(assign, cnt_horses, 0),
+		(assign, cnt_1h, 0),
+		(assign, cnt_2h, 0),
+		(assign, cnt_pole, 0),
+		(assign, cnt_arrow, 0),
+		(assign, cnt_bolt, 0),
+		(assign, cnt_shield, 0),
+		(assign, cnt_bow, 0),
+		(assign, cnt_xbow, 0),
+		(assign, cnt_th, 0),
+		(assign, cnt_goods, 0),
+		(assign, cnt_helm, 0),
+		(assign, cnt_armor, 0),
+		(assign, cnt_boots, 0),
+		(assign, cnt_gloves, 0),
+		(assign, cnt_pistol, 0),
+		(assign, cnt_musket, 0),
+		(assign, cnt_bullets, 0),
+		(assign, cnt_animal, 0),
+		(assign, cnt_book, 0),
+		# (try_for_troop_items, l.itm, troop),
+		(troop_get_inventory_capacity, l.inv_cap, troop),
+		(try_for_range, l.item_slot, 0, l.inv_cap),
+			(troop_get_inventory_slot, l.itm, troop, l.item_slot),
+			(lt, l.itm, 0),
+		(else_try),
+			(item_get_type, l.type, l.itm),
+			(eq, l.type, itp_type_horse),
+			(val_add, cnt_horses, 1),
+		(else_try),
+			(eq, l.type, itp_type_one_handed_wpn),
+			(val_add, cnt_1h, 1),
+		(else_try),
+			(eq, l.type, itp_type_two_handed_wpn),
+			(val_add, cnt_2h, 1),
+		(else_try),
+			(eq, l.type, itp_type_polearm),
+			(val_add, cnt_pole, 1),
+		(else_try),
+			(eq, l.type, itp_type_arrows),
+			(val_add, cnt_arrow, 1),
+		(else_try),
+			(eq, l.type, itp_type_bolts),
+			(val_add, cnt_bolt, 1),
+		(else_try),
+			(eq, l.type, itp_type_shield),
+			(val_add, cnt_shield, 1),
+		(else_try),
+			(eq, l.type, itp_type_bow),
+			(val_add, cnt_bow, 1),
+		(else_try),
+			(eq, l.type, itp_type_crossbow),
+			(val_add, cnt_xbow, 1),
+		(else_try),
+			(eq, l.type, itp_type_thrown),
+			(val_add, cnt_th, 1),
+		(else_try),
+			(eq, l.type, itp_type_goods),
+			(val_add, cnt_goods, 1),
+		(else_try),
+			(eq, l.type, itp_type_head_armor),
+			(val_add, cnt_helm, 1),
+		(else_try),
+			(eq, l.type, itp_type_body_armor),
+			(val_add, cnt_armor, 1),
+		(else_try),
+			(eq, l.type, itp_type_foot_armor),
+			(val_add, cnt_boots, 1),
+		(else_try),
+			(eq, l.type, itp_type_hand_armor),
+			(val_add, cnt_gloves, 1),
+		(else_try),
+			(eq, l.type, itp_type_pistol),
+			(val_add, cnt_pistol, 1),
+		(else_try),
+			(eq, l.type, itp_type_musket),
+			(val_add, cnt_musket, 1),
+		(else_try),
+			(eq, l.type, itp_type_bullets),
+			(val_add, cnt_bullets, 1),
+		(else_try),
+			(eq, l.type, itp_type_animal),
+			(val_add, cnt_animal, 1),
+		(else_try),
+			(eq, l.type, itp_type_book),
+			(val_add, cnt_book, 1),
+		(try_end),
+	]
+def try_chance(chance = 50,chance2 = 100):
+	return [
+		(try_begin),
+			(store_random_in_range, l.rnd, 0, chance2),
+			(lt, l.rnd, chance),
+	]
+def else_try_chance(chance = 50,chance2 = 100):
+	return [
+		(else_try),
+			(store_random_in_range, l.rnd, 0, chance2),
+			(lt, l.rnd, chance),
+	]
+
+
 extend_syntax(str_store_attribute_name)        # (str_store_attribute_name, <string_reg_no>, <attribute_id>),
                                                # Stores specified attribute name (3 capitalized letters by default) to string register, as specified in module_ui_strings.
 extend_syntax(str_store_attribute_name_full)   # (str_store_attribute_name_full, <string_reg_no>, <attribute_id>),
@@ -607,6 +747,28 @@ extend_syntax(overlay_set_sz)             # (overlay_set_sz, <overlay>, <w_fixed
                                           # Sets overlay size in a single line
 extend_syntax(overlay_set_area_sz)        # (overlay_set_area_sz, <overlay>, <w_fixed_point>, <h_fixed_point>),
                                           # Sets overlay area size in a single line
+
+extend_syntax(troop_has_item)			  # (troop_has_skill, <troop_id>, <item_id>),
+										  # Checks if <troop_id> has <item_id> in its inventory
+extend_syntax(try_for_troop_items)		  # (try_for_troop_items, <destination>, <troop_id>),
+										  # Loops trought all items of <troop_id>
+extend_syntax(try_for_troop_items_break)  # (try_for_troop_items_break),
+										  # Breaks out of a try_for_troop_items loop
+extend_syntax(troop_get_type_counts)	  # (troop_get_type_counts,
+										  # 	<cnt_horses>,
+										  # 	<cnt_1h>,<cnt_2h>,<cnt_pole>,
+										  # 	<cnt_arrow>,<cnt_bolt>,
+										  # 	<cnt_shield>,
+										  # 	<cnt_bow>,<cnt_xbow>,<cnt_th>,
+										  # 	<cnt_goods>,
+										  # 	<cnt_helm>,<cnt_armor>,<cnt_boots>,<cnt_gloves>,
+										  # 	<cnt_pistol>,<cnt_musket>,<cnt_bullets>,
+										  # 	<cnt_animal>,<cnt_book>,
+										  # 	<troop_no>),
+extend_syntax(try_chance)				  # (try_chance, <chance>, [<divider>]),
+										  # default divider is 100
+extend_syntax(else_try_chance)			  # (else_try_chance, <chance>, [<divider>]),
+										  # default divider is 100
 
 extend_syntax(item_modifier_get_damage)            # (item_modifier_get_damage, <destination>, <imod_value>),
 extend_syntax(item_modifier_get_armor)             # (item_modifier_get_armor, <destination>, <imod_value>),

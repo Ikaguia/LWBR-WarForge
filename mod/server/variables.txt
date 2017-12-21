@@ -1,7 +1,11 @@
+g_presentation_page_no
+g_presentation_banner_start
 lwbr_vars_initialized
 lwbr_cur_scene
 lwbr_open_menu_overlay
 lwbr_little_pos_helper
+g_presentation_obj_profile_banner_selection_1
+g_presentation_obj_profile_banner_selection_2
 lwbr_server_is_native
 lwbr_horses_enabled
 g_round_ended

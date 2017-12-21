@@ -1,11 +1,8 @@
 from compiler import *
 
 mod_version	= 2000 #2.000
-debug_mode	= 0
+debug_mode	= 1
 
-multiplayer_event_server			= 100
-multiplayer_event_client			= 101
-multiplayer_event_both				= 102
 
 packages = {'full': 0}
 packs = ('Native','WarForge','Arena','Peasant','Event','Event2')
@@ -15,32 +12,65 @@ for pack in packs:
 for pack in packs: packages['-'+pack] = packages['full'] ^ packages[pack]
 
 
-class bo_event:#both event
-	#
-	set_var,set_sv_var,count = xrange(3)
-class sv_event:#server event
-	start = 1000
-	ask_sv_var,send_var,count = xrange(start,start + 3)
-class cl_event:#client event
-	start = 2000
-	set_faction_slot,set_item_slot,set_party_slot,set_pt_slot,set_quest_slot,set_sp_slot,set_scene_slot,\
-	set_team_slot,set_agent_slot,set_troop_slot,set_player_slot,\
-	ask_var,clear_items,count = xrange(start,start + 14)
-class var:
+multiplayer_event_server			= 200
+multiplayer_event_client			= 201
+
+
+class sv_event:#events that run on the server
+	start,end = 2000,2005
+
+	set_sv_var,ask_sv_var,return_var,\
+	action,\
+	count = xrange(start,end)
+class cl_event:#events that run on the client
+	start,end = 3000,3016
+
+	set_var,ask_var,return_sv_var,\
+	set_faction_slot,set_item_slot,set_party_slot,set_pt_slot,set_quest_slot,set_sp_slot,\
+	set_scene_slot,set_team_slot,set_agent_slot,set_troop_slot,set_player_slot,\
+	clear_items,\
+	count = xrange(start,end)
+class var:#personal settings
 	version,dmg_report,keep_items,count = xrange(4)
 	default = {
 		version : mod_version,
 		dmg_report : 0,
 		keep_items : 1,
 	}
-class sv_var:
+class sv_var:#settings of the server
 	items,version,firearms_en,horses_en,peasants_en,persistant_stats,\
 	horse_jump,taunt,cheer,free_wpn,min_version,msg_cd,\
 	t1_dmg_r,t1_dmg_d,t2_dmg_r,t2_dmg_d,weather_config,time_config,fog_config,\
 	cur_wt_typ,cur_wt_str,cur_wt_fog,cur_wt_tim,count = xrange(24)
 	default = {
-		items: 1,#bit 1 = native, bit 2 = WarForge,bit 4 = Arena,bit 8 = Peasant
-		version: 0,#fixed point 1000
+		#assume the server is Native at start
+		items: packages["Native"],
+		version: 0,
+		firearms_en: 0,
+		horses_en: 1,
+		peasants_en: 0,
+		persistant_stats: 0,
+		horse_jump: 0,
+		taunt: 0,
+		cheer: 0,
+		free_wpn: 0,
+		min_version: -1,
+		msg_cd: -1,
+		t1_dmg_d: 100,
+		t1_dmg_r: 100,
+		t2_dmg_d: 100,
+		t2_dmg_r: 100,
+		weather_config: 0,
+		time_config: 0,
+		fog_config: 0,
+		cur_wt_typ: -1,
+		cur_wt_str: -1,
+		cur_wt_fog: -1,
+		cur_wt_tim: -1,
+	}
+	default_sv = {
+		items: packages["Native"] | packages["WarForge"],
+		version: mod_version,
 		firearms_en: 0,
 		horses_en: 1,
 		peasants_en: 0,
@@ -63,6 +93,7 @@ class sv_var:
 		cur_wt_fog: -1,#unitialized
 		cur_wt_tim: -1,#unitialized
 	}
+
 class slot_player:
 	start = 80
 	version,count = xrange(start,start+2)

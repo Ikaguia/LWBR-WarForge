@@ -39,3 +39,5 @@ import plugin_ms_extension
 import plugin_multiplayer_troops
 import plugin_make_presentations
 import plugin_lwbr_main
+
+import plugin_end

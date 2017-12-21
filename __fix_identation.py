@@ -14,7 +14,7 @@ files = [
 	# "items",
 	# "map_icons",
 	# "meshes",
-	"mission_templates",
+	# "mission_templates",
 	# "music",
 	# "particle_systems",
 	# "parties",
@@ -34,6 +34,7 @@ files = [
 	# "triggers",
 	# "troops",
 	# "ui_strings",
+	"aaa",
 ]
 
 for file in files:

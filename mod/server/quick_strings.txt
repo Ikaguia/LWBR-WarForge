@@ -1,4 +1,4 @@
-832
+827
 qstr_{!}sending_prisoner_ {!}sending_prisoner_cart_6_feet_underground!
 qstr_{!}spawn_prison_cart {!}spawn_prison_cart_5_secs_initiated!
 qstr_{!}spawn_prison_cart! {!}spawn_prison_cart!
@@ -79,6 +79,7 @@ qstr_{!}destroy_prison_ca {!}destroy_prison_cart
 qstr_{!}spawning_prison_c {!}spawning_prison_cart_at_point_{reg0}
 qstr_{!}prison_cart_spawn {!}prison_cart_spawn_at_point_{reg0}
 qstr_{!}multiplayer_upgra {!}multiplayer_upgrade_player_equipment:_{reg0}
+qstr_potato potato
 qstr_Disabled Disabled
 qstr_1 1
 qstr_2 2
@@ -795,6 +796,8 @@ qstr_Native_Items: Native_Items:
 qstr_WarForge_Items: WarForge_Items:
 qstr_Arena_Items: Arena_Items:
 qstr_Peasant_Items: Peasant_Items:
+qstr_Event_Items: Event_Items:
+qstr_Event2_Items: Event2_Items:
 qstr_Weather: Weather:
 qstr_Based_on_Map Based_on_Map
 qstr_Clear_Sky Clear_Sky
@@ -820,14 +823,6 @@ qstr_This_should_never_appear This_should_never_appear:_4
 qstr_This_should_never_appear: This_should_never_appear:_8
 qstr_This_should_never_appear:_ This_should_never_appear:_9
 qstr_This_should_never_appear:_1 This_should_never_appear:_10
-qstr_pack_Native_{reg0}_ pack_Native,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Native_{reg0}__ pack_Native,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_WarForge_{reg0 pack_WarForge,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_WarForge_{reg0} pack_WarForge,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_Arena_{reg0}_& pack_Arena,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Arena_{reg0}_ pack_Arena,_{reg0}_|_{reg1}_=_{reg2}
-qstr_pack_Peasant_{reg0} pack_Peasant,_{reg0}_&_{reg1}_=_{reg2}
-qstr_pack_Peasant_{reg0}_ pack_Peasant,_{reg0}_|_{reg1}_=_{reg2}
-qstr_This_should_never_appear:_3 This_should_never_appear:_35
-qstr_This_should_never_appear:_36 This_should_never_appear:_36
+qstr_This_should_never_appear:_3 This_should_never_appear:_37
+qstr_This_should_never_appear:_38 This_should_never_appear:_38
 qstr_{reg1}{reg2} {reg1},{reg2}
