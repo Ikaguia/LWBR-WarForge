@@ -1,5 +1,5 @@
 partytemplatesfile version 1
-63
+64
 pt_none _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
 pt_rescued_prisoners _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
 pt_enemy _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
@@ -63,3 +63,4 @@ pt_sea_raider_lair _ 0 0 0 0 -1 -1 -1 -1 -1 -1
 pt_looter_lair _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
 pt_bandit_lair_templates_end _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
 pt_leaded_looters _ 0 0 0 0 -1 -1 -1 -1 -1 -1 
+pt_end none 0 0 0 0 -1 -1 -1 -1 -1 -1 

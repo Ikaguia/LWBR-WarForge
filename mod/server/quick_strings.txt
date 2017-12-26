@@ -1,4 +1,4 @@
-827
+843
 qstr_{!}sending_prisoner_ {!}sending_prisoner_cart_6_feet_underground!
 qstr_{!}spawn_prison_cart {!}spawn_prison_cart_5_secs_initiated!
 qstr_{!}spawn_prison_cart! {!}spawn_prison_cart!
@@ -40,6 +40,22 @@ qstr_{!}DEBUG_:_{s21}.^CH {!}DEBUG_:_{s21}.^CHEAT_MODE_ASSESSMENT:_{s14}^
 qstr_{s5}_has_been_defeat {s5}_has_been_defeated!
 qstr_{s7}_opened_the_gate {s7}_opened_the_gate
 qstr_{s7}_closed_the_gate {s7}_closed_the_gate
+qstr_player__{s0}__id_#{r player_'{s0}'_id_#{reg0}_uid_#{reg1}_joined
+qstr_Error:_Received_lwbr Error:_Received_lwbr.sv_event_#{reg0}_on_client
+qstr_Error:_Invalid_type_ Error:_Invalid_type_received_for_lwbr.sv_event_#{reg0}
+qstr_Error:_Unrecognized_ Error:_Unrecognized_type_received_for_lwbr.sv_event_#{reg0}
+qstr_Error:_non_admin_pla Error:_non-admin_player_{s0}_at_sv_event.set_sv_var_#{reg0}_->_{reg1}
+qstr_Error:_invalid_or_un Error:_invalid_or_unrecognized_sv_var_#{reg0}_at_sv_event.set_sv_var
+qstr_Error:_invalid_or_unr Error:_invalid_or_unrecognized_sv_var_#{reg0}_at_sv_event.ask_sv_var
+qstr_Error:_invalid_or_unre Error:_invalid_or_unrecognized_returned_var_#{reg0}_at_sv_event.return_var
+qstr_Error:_invalid_or_unrec Error:_invalid_or_unrecognized_action_#{reg0}_at_sv_event.action
+qstr_Error:_Received_lwbr. Error:_Received_lwbr.cl_event_#{reg0}_on_server
+qstr_Error:_Invalid_type_r Error:_Invalid_type_received_for_lwbr.cl_event_#{reg0}
+qstr_Error:_Unrecognized_t Error:_Unrecognized_type_received_for_lwbr.cl_event_#{reg0}
+qstr_Error:_invalid_or_unreco Error:_invalid_or_unrecognized_var_#{reg0}_at_cl_event.set_var
+qstr_Error:_invalid_or_unrecog Error:_invalid_or_unrecognized_var_#{reg0}_at_cl_event.ask_var
+qstr_Error:_invalid_or_unrecogn Error:_invalid_or_unrecognized_sv_var_#{reg0}_at_cl_event.return_sv_var
+qstr_Error:_invalid_facti Error:_invalid_faction_#{reg0}_at_cl_event.set_faction_slot
 qstr_+{reg1}_to_party_mor +{reg1}_to_party_morale
 qstr_Requires_{reg1}_inte Requires_{reg1}_intelligence_to_read
 qstr_Reading_Progress:_{r Reading_Progress:_{reg1}%
@@ -79,7 +95,7 @@ qstr_{!}destroy_prison_ca {!}destroy_prison_cart
 qstr_{!}spawning_prison_c {!}spawning_prison_cart_at_point_{reg0}
 qstr_{!}prison_cart_spawn {!}prison_cart_spawn_at_point_{reg0}
 qstr_{!}multiplayer_upgra {!}multiplayer_upgrade_player_equipment:_{reg0}
-qstr_potato potato
+qstr_Error:_invalid_or_unrecogni Error:_invalid_or_unrecognized_troop_'{s0}'_for_script.lwbr_give_items_to_troop
 qstr_Disabled Disabled
 qstr_1 1
 qstr_2 2
@@ -769,8 +785,8 @@ qstr_enterprise_brewery enterprise_brewery
 qstr_enterprise_oil_press enterprise_oil_press
 qstr_0000 00,00
 qstr_LWBR_WarForge_menu_v LWBR_WarForge_menu_v2.0
-qstr_Server_in_not_runnin Server_in_not_running_LWBR_WarForge
-qstr_Server_in_running_LW Server_in_running_LWBR_WarForge_v{reg0}.{reg1}
+qstr_Server_is_not_runnin Server_is_not_running_LWBR_WarForge
+qstr_Server_is_running_LW Server_is_running_LWBR_WarForge_v{reg0}.{reg1}
 qstr_Dmg_report: Dmg_report:
 qstr_Keep_selected_items: Keep_selected_items:
 qstr_Set_Hotkeys Set_Hotkeys

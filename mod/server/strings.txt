@@ -1,5 +1,5 @@
 stringsfile version 1
-3505
+3506
 str_no_string NO_STRING!
 str_empty_string _
 str_yes Yes.
@@ -3505,3 +3505,4 @@ str_damage_type_2 blunt
 str_damage_type_0_adj cutting
 str_damage_type_1_adj piercing
 str_damage_type_2_adj blunt
+str_end {!}end
