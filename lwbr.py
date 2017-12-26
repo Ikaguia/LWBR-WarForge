@@ -1,7 +1,7 @@
 from compiler import *
 
 mod_version	= 2000 #2.000
-debug_mode	= 1
+debug_mode	= 0
 
 
 packages = {'full': 0}
@@ -69,7 +69,8 @@ class sv_var:#settings of the server
 		cur_wt_tim: -1,
 	}
 	default_sv = {
-		items: packages["Native"] | packages["WarForge"],
+		items: packages["Peasant"],
+		# items: packages["Native"] | packages["WarForge"],
 		version: mod_version,
 		firearms_en: 0,
 		horses_en: 1,

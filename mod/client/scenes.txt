@@ -1,5 +1,5 @@
 scenesfile version 1
- 554
+ 555
 scn_random_scene random_scene 1792 none none 0.000000 0.000000 240.000000 240.000000 -0.500000 0x300028000003e8fa0000034e00004b34000059be 
   0 
   0 
@@ -2213,6 +2213,10 @@ scn_enterprise_brewery enterprise_brewery 1 brewery_interior bo_brewery_interior
   0 
  0 
 scn_enterprise_oil_press enterprise_oil_press 1 oil_press_interior bo_oil_press_interior -40.000000 -40.000000 40.000000 40.000000 -100.000000 0 
+  0 
+  0 
+ 0 
+scn_end end 0 none none 0.000000 0.000000 0.000000 0.000000 0.000000 0 
   0 
   0 
  0 

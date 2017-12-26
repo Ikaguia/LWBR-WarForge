@@ -211,7 +211,7 @@ def foo__debug_func(func_name="script_name", args=[]):
 	return block
 
 def foo__add_rnd_itp(troop, itp_type, cnt, ek, player):
-	return [
+	foo = [
 		(try_begin),
 			(gt, cnt, 0),
 			(store_random_in_range, l.rnd, 0, cnt),
@@ -219,15 +219,23 @@ def foo__add_rnd_itp(troop, itp_type, cnt, ek, player):
 				(item_get_type, l.type, l.itm),
 				(eq, l.type, itp_type),
 				(try_begin),
-					(eq, cnt, 0),
+					(eq, l.rnd, 0),
+	]
+	if lwbr.debug_mode > 0:
+		foo += [
+					(str_store_item_name, s0, l.itm),
+					(str_store_player_username, s1, player),
+					(display_message,"@Adding itm.{s0} to player {s1}"),
+		]
+	foo += [
 					(player_add_spawn_item, player, ek, l.itm),
 					(try_for_troop_items_break),
-				(else_try),
-					(val_sub, cnt, 1),
 				(try_end),
+				(val_sub, l.rnd, 1),
 			(try_end),
 		(try_end),
 	]
+	return foo
 
 presentations = [
 	make_presentation("lwbr_menu", prsntf_manual_end_only, 0, foo__lwbr_menu()),
@@ -1671,45 +1679,45 @@ injection = {
 									   l.rest,l.rest,l.rest,l.rest,l.rest,
 									   l.trp),
 				(try_chance,80),#80%
-					] + foo__debug_func("bought_head_armor", [l.player_no]) + [
+					] + foo__debug_func("bought_head_armor", [l.player_no, l.cnt_helm]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_head_armor,	l.cnt_helm,  ek_head,   l.player_no) + [
 				(try_end),
 				(try_chance,90),#90%
-					] + foo__debug_func("bought_body_armor", [l.player_no]) + [
+					] + foo__debug_func("bought_body_armor", [l.player_no, l.cnt_armor]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_body_armor,	l.cnt_armor, ek_body,   l.player_no) + [
 				(try_end),
 				(try_chance,88),#88%
-					] + foo__debug_func("bought_foot_armor", [l.player_no]) + [
+					] + foo__debug_func("bought_foot_armor", [l.player_no, l.cnt_boots]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_foot_armor,	l.cnt_boots, ek_foot,   l.player_no) + [
 				(try_end),
 				(try_chance,25),#25%
-					] + foo__debug_func("bought_hand_armor", [l.player_no]) + [
+					] + foo__debug_func("bought_hand_armor", [l.player_no, l.cnt_gloves]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_hand_armor,	l.cnt_gloves,ek_gloves, l.player_no) + [
 				(try_end),
 				(try_chance,15),#15%
-					] + foo__debug_func("bought_horse", [l.player_no]) + [
+					] + foo__debug_func("bought_horse", [l.player_no, l.cnt_horses]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_horse,			l.cnt_horses,ek_horse,  l.player_no) + [
 				(try_end),
 				(try_chance,1,3),#1/3
-					] + foo__debug_func("bought_1h", [l.player_no]) + [
+					] + foo__debug_func("bought_1h", [l.player_no, l.cnt_1h]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_one_handed_wpn,l.cnt_1h,    ek_item_0, l.player_no) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_shield,		l.cnt_shield,ek_item_1, l.player_no) + [
-				(else_try_chance),#1/3
-					] + foo__debug_func("bought_2h", [l.player_no]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_two_handed_wpn,l.cnt_2h,    ek_item_0, l.player_no) + [
-				(else_try),#1/3
-					] + foo__debug_func("bought_pole", [l.player_no]) + [
+				# (else_try_chance),
+				# 	] + foo__debug_func("bought_2h", [l.player_no, l.cnt_2h]) + [
+				# 	] + foo__add_rnd_itp(l.trp, itp_type_two_handed_wpn,l.cnt_2h,    ek_item_0, l.player_no) + [
+				(else_try),#2/3
+					] + foo__debug_func("bought_pole", [l.player_no, l.cnt_pole]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_polearm,		l.cnt_pole,  ek_item_0, l.player_no) + [
 				(try_end),
 				(try_chance,90),#90%
-					] + foo__debug_func("bought_thrown", [l.player_no]) + [
+					] + foo__debug_func("bought_thrown", [l.player_no, l.cnt_th]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_thrown,		l.cnt_th,    ek_item_2, l.player_no) + [
 				(else_try_chance),#5%
-					] + foo__debug_func("bought_bow", [l.player_no]) + [
+					] + foo__debug_func("bought_bow", [l.player_no, l.cnt_bow]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_bow,			l.cnt_bow,   ek_item_2, l.player_no) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_arrows,		l.cnt_arrow, ek_item_3, l.player_no) + [
 				(else_try),#5%
-					] + foo__debug_func("bought_xbow", [l.player_no]) + [
+					] + foo__debug_func("bought_xbow", [l.player_no, l.cnt_xbow]) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_crossbow,		l.cnt_xbow,  ek_item_2, l.player_no) + [
 					] + foo__add_rnd_itp(l.trp, itp_type_bolts,			l.cnt_bolt,  ek_item_3, l.player_no) + [
 				(try_end),

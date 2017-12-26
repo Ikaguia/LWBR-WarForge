@@ -501,6 +501,7 @@ def foo___lwbr_give_items_to_troop():
 		(store_script_param_2, l.troop),
 		] + foo__debug_func("lwbr_give_items_to_troop", [l.value, l.troop]) + [
 		# (troop_clear_inventory,l.troop),
+		(troop_raise_skill, l.troop, skl.inventory_management, 10),
 		(troop_get_inventory_capacity, l.slots, l.troop),
 		(try_for_range, l.slot, 0, l.slots),
 			(troop_set_inventory_slot, l.troop, l.slot, -1),
@@ -563,30 +564,8 @@ def foo___lwbr_give_items_to_troop():
 					foo += [
 						(else_try),
 							(eq, g.lwbr_horses_enabled ,0),
-							#seems bugged,the above returns true for a lot of other types, probably because
-							#itp_type_horse is 0x01 -> 0001
-							#and shields are   0x07 -> 0111, which also contains itp_type_horse, thus it returns true
-							#and boots are     0x0e -> 1110, which doesnt cointain itp_type_horse, thus it returns false
-							(item_has_property, free_item, itp_type_horse),
-							(neg|item_has_property, free_item, itp_type_one_handed_wpn),
-							(neg|item_has_property, free_item, itp_type_two_handed_wpn),
-							(neg|item_has_property, free_item, itp_type_polearm),
-							(neg|item_has_property, free_item, itp_type_arrows),
-							(neg|item_has_property, free_item, itp_type_bolts),
-							(neg|item_has_property, free_item, itp_type_shield),
-							(neg|item_has_property, free_item, itp_type_bow),
-							(neg|item_has_property, free_item, itp_type_crossbow),
-							(neg|item_has_property, free_item, itp_type_thrown),
-							(neg|item_has_property, free_item, itp_type_goods),
-							(neg|item_has_property, free_item, itp_type_head_armor),
-							(neg|item_has_property, free_item, itp_type_body_armor),
-							(neg|item_has_property, free_item, itp_type_foot_armor),
-							(neg|item_has_property, free_item, itp_type_hand_armor),
-							(neg|item_has_property, free_item, itp_type_pistol),
-							(neg|item_has_property, free_item, itp_type_musket),
-							(neg|item_has_property, free_item, itp_type_bullets),
-							(neg|item_has_property, free_item, itp_type_animal),
-							(neg|item_has_property, free_item, itp_type_book),
+							(item_get_type, l.type, free_item),
+							(eq, l.type, itp_type_horse),
 					]
 					if lwbr.debug_mode > 0:
 						foo += [

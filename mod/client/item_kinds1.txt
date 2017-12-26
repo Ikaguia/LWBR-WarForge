@@ -1,5 +1,5 @@
 itemsfile version 3
-620
+621
  itm_no_item INVALID_ITEM INVALID_ITEM 1  invalid_item 0  12582914 9223388529554358287 3 0 1.500000 100 0 0 0 0 0 103 0 90 0 522 528
  0
 0
@@ -2515,6 +2515,10 @@ itemsfile version 3
 0
 
  itm_ccoop_new_items_end Items_End Items_End 1  shield_round_a 0  0 0 1 0 0.000000 100 0 0 0 0 0 0 0 0 0 0 0
+ 0
+0
+
+ itm_end {!}end {!}end 0    0 0 0 0 0.000000 100 0 0 0 0 0 0 0 0 0 0 0
  0
 0
 
