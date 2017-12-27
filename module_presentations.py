@@ -14250,54 +14250,66 @@ presentations = [
 ]
 
 
+if lwbr.edit_scenes == 1:
+	for i in xrange(len(presentations)):
+		if presentations[i][0] == "game_custom_battle_designer":
+			presentations[i] = (presentations[i][0],presentations[i][1],presentations[i][2],[
+				(ti_on_presentation_load,[
+					(set_fixed_point_multiplier, 1000),
+
+					(create_number_box_overlay, g.scn_chooser_0, 0, len(scenes)),
+					(overlay_set_pos, g.scn_chooser_0, 325, 635),
+
+					(create_combo_label_overlay, g.scn_chooser_1),
+					(overlay_set_sz,  g.scn_chooser_1, 800, 800),
+					(overlay_set_pos, g.scn_chooser_1, 175, 635),
+
+					(assign, g.lwbr_cur_scene, 0),
+					] + [(overlay_add_item, g.scn_chooser_1, "@" + scene[0]) for scene in scenes] + [
+					(overlay_set_val, g.scn_chooser_1, g.lwbr_cur_scene),
+
+					(create_game_button_overlay, g.scn_chooser_2, "str_start", 0),
+					(overlay_set_pos, g.scn_chooser_2, 415, 10),
+
+					(create_game_button_overlay, g.scn_chooser_3, "str_back", 0),
+					(overlay_set_pos, g.scn_chooser_3, 585, 10),
+
+					(create_game_button_overlay, g.scn_chooser_4, "@multi_scenes_begin", 0),
+					(overlay_set_pos, g.scn_chooser_4, 150, 585),
+
+					(create_game_button_overlay, g.scn_chooser_5, "@multi_scenes_end", 0),
+					(overlay_set_pos, g.scn_chooser_5, 150, 535),
+
+					(presentation_set_duration, 999999),
+					]),
+				(ti_on_presentation_event_state_change,[
+					(store_trigger_param_1, l.obj),
+					(try_begin),
+						(this_or_next|eq, l.obj, g.scn_chooser_0),
+						(eq, l.obj, g.scn_chooser_1),
+						(store_trigger_param_2, g.lwbr_cur_scene),
+					(else_try),
+						(eq, l.obj, g.scn_chooser_2),
+						(set_jump_mission, mt.town_default),
+						(jump_to_menu, mnu.end_game),
+						(jump_to_scene, g.lwbr_cur_scene),
+						(change_screen_mission),
+						(presentation_set_duration, 0),
+					(else_try),
+						(eq, l.obj, g.scn_chooser_3),
+						(presentation_set_duration, 0),
+					(else_try),
+						(eq, l.obj, g.scn_chooser_4),
+						(assign, g.lwbr_cur_scene, multiplayer_scenes_begin),
+					(else_try),
+						(eq, l.obj, g.scn_chooser_5),
+						(assign, g.lwbr_cur_scene, multiplayer_scenes_end),
+					(try_end),
+					(overlay_set_val, g.scn_chooser_0, g.lwbr_cur_scene),
+					(overlay_set_val, g.scn_chooser_1, g.lwbr_cur_scene),
+					]),
+				])
 if not IS_CLIENT:
 	for i in xrange(len(presentations)):
-		if i != 2:
-			presentations[i] = (presentations[i][0],0,0,[])
-	presentations[2] = (presentations[2][0],presentations[2][1],presentations[2][2],[
-		(ti_on_presentation_load,[
-			(set_fixed_point_multiplier, 1000),
-
-			(create_combo_label_overlay, "$g_presentation_obj_custom_battle_designer_18"),
-			(position_set_x, pos1, 800),
-			(position_set_y, pos1, 800),
-			(overlay_set_size, "$g_presentation_obj_custom_battle_designer_18", pos1),
-			(position_set_x, pos1, 175),
-			(position_set_y, pos1, 635),
-			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_18", pos1),
-
-			# (assign, g.lwbr_cur_scene, 0),
-			] + [(overlay_add_item, "$g_presentation_obj_custom_battle_designer_18", "@" + scene[0]) for scene in scenes] + [
-			(overlay_set_val, "$g_presentation_obj_custom_battle_designer_18", g.lwbr_cur_scene),
-
-			(create_game_button_overlay, "$g_presentation_obj_custom_battle_designer_19", "str_start", 0),
-			(position_set_x, pos1, 415),
-			(position_set_y, pos1, 10),
-			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_19", pos1),
-
-			(create_game_button_overlay, "$g_presentation_obj_custom_battle_designer_20", "str_back", 0),
-			(position_set_x, pos1, 585),
-			(position_set_y, pos1, 10),
-			(overlay_set_position, "$g_presentation_obj_custom_battle_designer_20", pos1),
-
-			(presentation_set_duration, 999999),
-			]),
-		(ti_on_presentation_event_state_change,[
-			(store_trigger_param_1, l.obj),
-			(try_begin),
-				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_18"),
-				(store_trigger_param_2, l.val),
-				(assign, g.lwbr_cur_scene, l.val),
-			(else_try),
-				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_19"),
-				(set_jump_mission,mt.conversation_encounter),
-				(jump_to_scene, g.lwbr_cur_scene),
-				(change_screen_mission),
-				(presentation_set_duration, 0),
-			(else_try),
-				(eq, l.obj, "$g_presentation_obj_custom_battle_designer_20"),
-				(presentation_set_duration, 0),
-			(try_end),
-			]),
-		])
+		presentations[i] = (presentations[i][0],0,0,[])
 	#LWBR WarForge 2.0 --- END

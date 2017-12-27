@@ -1,7 +1,8 @@
 from compiler import *
 
 mod_version	= 2000 #2.000
-debug_mode	= 1
+debug_mode	= 0
+edit_scenes = 1
 
 
 packages = {'full': 0}

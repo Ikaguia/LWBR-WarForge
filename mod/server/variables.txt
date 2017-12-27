@@ -2,11 +2,17 @@ g_presentation_page_no
 g_presentation_banner_start
 lwbr_vars_initialized
 lwbr_cur_scene
+scn_chooser_4
+scn_chooser_5
+scn_chooser_2
+scn_chooser_3
+scn_chooser_0
 lwbr_open_menu_overlay
 lwbr_little_pos_helper
 g_presentation_obj_profile_banner_selection_1
 g_presentation_obj_profile_banner_selection_2
 lwbr_server_is_native
+scn_chooser_1
 lwbr_horses_enabled
 g_round_ended
 g_number_of_targets_destroyed
@@ -322,6 +328,3 @@ npc_is_quitting
 npc_with_personality_clash_2
 npc_with_political_grievance
 npc_to_rejoin_party
-g_presentation_obj_custom_battle_designer_18
-g_presentation_obj_custom_battle_designer_19
-g_presentation_obj_custom_battle_designer_20
