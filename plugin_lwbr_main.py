@@ -1443,6 +1443,14 @@ scripts = [
 		]),
 	#script.lwbr_init_weather
 	("lwbr_init_weather",[]),
+	#script.lwbr_add_rnd_itm_of_type
+	("lwbr_add_rnd_itm_of_type",[
+		(store_script_param, l.trp, 1),
+		(store_script_param, l.itp, 2),
+		(store_script_param, l.cnt, 3),
+		(store_script_param, l.ek,  4),
+		(store_script_param, l.pl,  5),
+		] + foo__add_rnd_itp(l.trp, l.itp, l.cnt, l.ek, l.pl) ),
 ]
 
 troops = [
@@ -1666,6 +1674,7 @@ injection = {
 			] + foo__debug_func("lwbr_inject_buy_equipment", [l.player_no, l.packs]) + [
 			(store_and, l.check, l.packs, lwbr.packages["Peasant"]),
 			(neq, l.check, 0),
+			] + foo__debug_func("lwbr_buy_peasant_items") + [
 			(try_begin),
 				(player_get_troop_id, l.trp, l.player_no),
 				(gt, l.trp, 0),
@@ -1680,54 +1689,140 @@ injection = {
 									   l.trp),
 				(try_chance,80),#80%
 					] + foo__debug_func("bought_head_armor", [l.player_no, l.cnt_helm]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_head_armor,	l.cnt_helm,  ek_head,   l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_head_armor,	l.cnt_helm,  ek_head,   l.player_no),
 				(try_end),
 				(try_chance,90),#90%
 					] + foo__debug_func("bought_body_armor", [l.player_no, l.cnt_armor]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_body_armor,	l.cnt_armor, ek_body,   l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_body_armor,	l.cnt_armor, ek_body,   l.player_no),
 				(try_end),
 				(try_chance,88),#88%
 					] + foo__debug_func("bought_foot_armor", [l.player_no, l.cnt_boots]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_foot_armor,	l.cnt_boots, ek_foot,   l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_foot_armor,	l.cnt_boots, ek_foot,   l.player_no),
 				(try_end),
 				(try_chance,25),#25%
 					] + foo__debug_func("bought_hand_armor", [l.player_no, l.cnt_gloves]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_hand_armor,	l.cnt_gloves,ek_gloves, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_hand_armor,	l.cnt_gloves,ek_gloves, l.player_no),
 				(try_end),
 				(try_chance,15),#15%
 					] + foo__debug_func("bought_horse", [l.player_no, l.cnt_horses]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_horse,			l.cnt_horses,ek_horse,  l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_horse,			l.cnt_horses,ek_horse,  l.player_no),
 				(try_end),
 				(try_chance,1,3),#1/3
 					] + foo__debug_func("bought_1h", [l.player_no, l.cnt_1h]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_one_handed_wpn,l.cnt_1h,    ek_item_0, l.player_no) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_shield,		l.cnt_shield,ek_item_1, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_one_handed_wpn,l.cnt_1h,    ek_item_0, l.player_no),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_shield,		l.cnt_shield,ek_item_1, l.player_no),
 				# (else_try_chance),
 				# 	] + foo__debug_func("bought_2h", [l.player_no, l.cnt_2h]) + [
-				# 	] + foo__add_rnd_itp(l.trp, itp_type_two_handed_wpn,l.cnt_2h,    ek_item_0, l.player_no) + [
+				# 	(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_two_handed_wpn,l.cnt_2h,    ek_item_0, l.player_no),
 				(else_try),#2/3
 					] + foo__debug_func("bought_pole", [l.player_no, l.cnt_pole]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_polearm,		l.cnt_pole,  ek_item_0, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_polearm,		l.cnt_pole,  ek_item_0, l.player_no),
 				(try_end),
 				(try_chance,90),#90%
 					] + foo__debug_func("bought_thrown", [l.player_no, l.cnt_th]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_thrown,		l.cnt_th,    ek_item_2, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_thrown,		l.cnt_th,    ek_item_2, l.player_no),
 				(else_try_chance),#5%
 					] + foo__debug_func("bought_bow", [l.player_no, l.cnt_bow]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_bow,			l.cnt_bow,   ek_item_2, l.player_no) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_arrows,		l.cnt_arrow, ek_item_3, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_bow,			l.cnt_bow,   ek_item_2, l.player_no),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_arrows,		l.cnt_arrow, ek_item_3, l.player_no),
 				(else_try),#5%
 					] + foo__debug_func("bought_xbow", [l.player_no, l.cnt_xbow]) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_crossbow,		l.cnt_xbow,  ek_item_2, l.player_no) + [
-					] + foo__add_rnd_itp(l.trp, itp_type_bolts,			l.cnt_bolt,  ek_item_3, l.player_no) + [
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_crossbow,		l.cnt_xbow,  ek_item_2, l.player_no),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_bolts,			l.cnt_bolt,  ek_item_3, l.player_no),
 				(try_end),
 			(try_end),
 		(else_try),
-		# 	#TODO
-		# 	(store_and, l.check, l.packs, lwbr.packs["Arena"]),
-		# 	(neq, l.check, 0),
-		# 	(assign, l.done, 1),
-		# (else_try),
+			(troop_get_slot, l.packs, trp.lwbr_sv_vars, lwbr.sv_var.items),
+			] + foo__debug_func("lwbr_inject_buy_equipment", [l.player_no, l.packs]) + [
+			(store_and, l.check, l.packs, lwbr.packages["Arena"]),
+			(neq, l.check, 0),
+			] + foo__debug_func("lwbr_buy_arena_items") + [
+			(try_begin),
+				(player_get_troop_id, l.trp, l.player_no),
+				(gt, l.trp, 0),
+				(troop_get_type_counts,l.cnt_horses,
+									   l.cnt_1h,l.cnt_2h,l.cnt_pole,
+									   l.cnt_arrow,l.cnt_bolt,
+									   l.cnt_shield,
+									   l.cnt_bow,l.cnt_xbow,l.cnt_th,
+									   l.rest,
+									   l.cnt_helm,l.cnt_armor,l.cnt_boots,l.cnt_gloves,
+									   l.rest,l.rest,l.rest,l.rest,l.rest,
+									   l.trp),
+
+				#add armor
+				(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_head_armor, l.cnt_helm,  ek_head,  l.player_no),
+				(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_body_armor, l.cnt_armor, ek_body,  l.player_no),
+				(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_hand_armor, l.cnt_gloves,ek_gloves,l.player_no),
+				(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_foot_armor, l.cnt_boots, ek_foot,  l.player_no),
+
+				(try_begin),#horse
+					(player_get_slot, l.horse, l.player_no, slot_player_selected_item_indices_begin + 8),#horse slot
+					(ge, l.horse, 0),
+					] + foo__debug_func("picked_mounted_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_horse, itm.practice_horse),
+				(try_end),
+
+				(player_get_slot, l.wpn, l.player_no, slot_player_selected_item_indices_begin),#1st wpn slot
+				(assign, l.itm_type, -1),
+				(assign, l.itm_class, -1),
+				(try_begin),
+					(ge, l.wpn, 0),
+					(item_get_type, l.itm_type, l.wpn),
+					(item_get_slot, l.itm_class, l.wpn, slot_item_multiplayer_item_class),
+				(try_end),
+
+				(try_begin),#lance/shield/dagger
+					(eq, l.wpn, itm.practice_lance),
+					] + foo__debug_func("picked_lancer_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_lance),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_shield, l.cnt_shield, ek_item_1, l.player_no),
+					(player_add_spawn_item, l.player_no, ek_item_2, itm.practice_dagger),
+				(else_try),#staff/throwing dagger
+					(this_or_next|eq, l.wpn, itm.practice_staff),
+					(eq, l.wpn, itm.practice_throwing_daggers),
+					] + foo__debug_func("picked_staff_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_staff),
+					(player_add_spawn_item, l.player_no, ek_item_1, itm.practice_throwing_daggers),
+				(else_try),#javelin/shield/dagger
+					(eq, l.wpn, itm.practice_javelin),
+					] + foo__debug_func("picked_javelin_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_javelin),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_shield, l.cnt_shield, ek_item_1, l.player_no),
+					(player_add_spawn_item, l.player_no, ek_item_1, itm.practice_dagger),
+				(else_try),#bow/dagger
+					(this_or_next|eq, l.itm_type, itp_type_bow),
+					(eq, l.itm_type, itp_type_arrows),
+					] + foo__debug_func("picked_bow_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_bow),
+					(player_add_spawn_item, l.player_no, ek_item_1, itm.practice_arrows),
+					(player_add_spawn_item, l.player_no, ek_item_2, itm.practice_dagger),
+				(else_try),#xbow/dagger
+					(this_or_next|eq, l.itm_type, itp_type_crossbow),
+					(eq, l.itm_type, itp_type_bolts),
+					] + foo__debug_func("picked_xbow_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_crossbow),
+					(player_add_spawn_item, l.player_no, ek_item_1, itm.practice_bolts),
+					(player_add_spawn_item, l.player_no, ek_item_2, itm.practice_dagger),
+				(else_try),#2h
+					(eq, l.itm_type, itp_type_two_handed_wpn),
+					] + foo__debug_func("picked_2h_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.heavy_practice_sword),
+				(else_try),#1h axe/shield
+					(eq, l.itm_type, itp_type_one_handed_wpn),
+					(eq, l.itm_class, multi_item_class_type_axe),
+					] + foo__debug_func("picked_axe_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_axe),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_shield, l.cnt_shield, ek_item_1, l.player_no),
+				(else_try),#1h sword/shield -> default
+					# (this_or_next|eq, l.itm_type, itp_type_one_handed_wpn),
+					# (eq, l.type, itp_type_shield),
+					] + foo__debug_func("picked_1h_kit", [l.player_no]) + [
+					(player_add_spawn_item, l.player_no, ek_item_0, itm.practice_sword),
+					(call_script, script.lwbr_add_rnd_itm_of_type, l.trp, itp_type_shield, l.cnt_shield, ek_item_1, l.player_no),
+				(try_end),
+			(try_end),
+		(else_try),
 	],
 }
 

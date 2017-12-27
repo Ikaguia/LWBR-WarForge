@@ -11357,9 +11357,14 @@ scripts = [
 					(is_between, ":item_class", multi_item_class_type_weapons_begin, multi_item_class_type_weapons_end),
 					(this_or_next|eq, "$g_multiplayer_disallow_ranged_weapons", 0),
 					(neg|is_between, ":item_class", multi_item_class_type_ranged_weapons_begin, multi_item_class_type_ranged_weapons_end),
-					(store_add, ":selected_item_slot", slot_player_selected_item_indices_begin, ":cur_weapon_slot"),
-					(player_set_slot, ":my_player_no", ":selected_item_slot", ":item_id"),
-					(val_add, ":cur_weapon_slot", 1),
+					#LWBR WarForge 2.0 --- BEGIN
+					(try_begin),
+						(lt, l.cur_weapon_slot, 4),
+					#LWBR WarForge 2.0 --- END
+						(store_add, ":selected_item_slot", slot_player_selected_item_indices_begin, ":cur_weapon_slot"),
+						(player_set_slot, ":my_player_no", ":selected_item_slot", ":item_id"),
+						(val_add, ":cur_weapon_slot", 1),
+					(try_end),#LWBR WarForge 2.0
 				(else_try),
 					(is_between, ":item_class", multi_item_class_type_heads_begin, multi_item_class_type_heads_end),
 					(store_add, ":selected_item_slot", slot_player_selected_item_indices_begin, 4),

@@ -34,10 +34,71 @@ multi_troops = [
 				itm.leather_gloves,
 				#horses
 				itm.sumpter_horse,
-			],[]]
-		]]
-	]],
+				],[]],
+			["Arena",
+				[
+					itm.practice_sword,
+					itm.practice_boots,
+					itm.leather_gloves,
+				],[
+					itm.heavy_practice_sword,
+					# itm.practice_dagger,
+					itm.practice_axe,
+					itm.practice_staff,
+					itm.practice_lance,
+					itm.practice_bow,
+					itm.practice_crossbow,
+					itm.practice_javelin,
+					itm.practice_throwing_daggers,
+					itm.practice_horse,
+					# itm.practice_arrows,
+					# itm.practice_bolts,
+				]],
+			["WarForge",[],[
+				itm.stones,itm.torch,
+				]],
+			]],
+		]],
 	[fac.kingdom_1,[#swadia
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_red,
+					itm.arena_armor_red,
+					itm.arena_shield_red,
+				],[
+					itm.arena_tunic_red,
+					itm.arena_turban_red,
+					itm.steppe_helmet_red,
+				]],
+			]],
+		[trp.swadian_crossbowman_multiplayer,crossbowman,[
+			["Native",
+				[#free items
+					itm.bolts,itm.crossbow,itm.sword_medieval_b_small,itm.tab_shield_heater_a,itm.red_shirt,itm.ankle_boots
+				],[#paid items
+					itm.bolts,itm.steel_bolts,itm.crossbow,itm.heavy_crossbow,itm.sniper_crossbow,itm.sword_medieval_a,
+					itm.sword_medieval_b,itm.sword_medieval_b_small,itm.tab_shield_heater_a,itm.tab_shield_heater_b,
+					itm.tab_shield_heater_c,itm.red_shirt,itm.padded_cloth,itm.leather_armor,itm.haubergeon,itm.ankle_boots,
+					itm.leather_boots,itm.mail_chausses,itm.leather_gloves,itm.arming_cap,itm.norman_helmet,itm.helmet_with_neckguard,
+					itm.flat_topped_helmet,itm.guard_helmet,
+				]],
+			["WarForge",[],
+				[#paid items
+					itm.dagger,itm.fighting_pick,itm.hammer,itm.pickaxe,itm.mace_4,itm.bastard_sword_a,itm.heraldic_mail_with_tunic,itm.tabard,
+					itm.bascinet,itm.mail_coif,itm.hunting_crossbow,itm.light_crossbow,itm.woolen_hose,
+				]],
+			["Event",[itm.woolen_hose],
+				[#paid items
+					itm.gold_tourney_armor,itm.woolen_hose,itm.head_wrappings,itm.common_hood,itm.mail_coif,itm.segmented_helmet,
+					itm.byzantion_helmet_a,itm.green_tourney_armor,
+				]],
+			["Event2",[],
+				[#paid items
+					itm.plate_armor,itm.plate_boots,
+					itm.heraldic_mail_with_surcoat,itm.heraldic_mail_with_tabard,#cheaper cost
+				]],
+			]],
 		[trp.swadian_infantry_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -62,34 +123,7 @@ multi_troops = [
 				[#paid items
 					itm.tutorial_shield,itm.red_tourney_armor,itm.gold_tourney_armor,itm.gold_tourney_helmet,itm.woolen_hose,itm.padded_cloth,
 					itm.head_wrappings,itm.common_hood,itm.mail_coif,itm.military_hammer,itm.bec_de_corbin_a,itm.norman_shield_1,
-					itm.norman_shield_6,itm.byzantion_helmet_a,itm.light_mail_and_plate,itm.stones,
-				]],
-			["Event2",[],
-				[#paid items
-					itm.plate_armor,itm.plate_boots,
-					itm.heraldic_mail_with_surcoat,itm.heraldic_mail_with_tabard,#cheaper cost
-				]],
-			]],
-		[trp.swadian_crossbowman_multiplayer,crossbowman,[
-			["Native",
-				[#free items
-					itm.bolts,itm.crossbow,itm.sword_medieval_b_small,itm.tab_shield_heater_a,itm.red_shirt,itm.ankle_boots
-				],[#paid items
-					itm.bolts,itm.steel_bolts,itm.crossbow,itm.heavy_crossbow,itm.sniper_crossbow,itm.sword_medieval_a,
-					itm.sword_medieval_b,itm.sword_medieval_b_small,itm.tab_shield_heater_a,itm.tab_shield_heater_b,
-					itm.tab_shield_heater_c,itm.red_shirt,itm.padded_cloth,itm.leather_armor,itm.haubergeon,itm.ankle_boots,
-					itm.leather_boots,itm.mail_chausses,itm.leather_gloves,itm.arming_cap,itm.norman_helmet,itm.helmet_with_neckguard,
-					itm.flat_topped_helmet,itm.guard_helmet,
-				]],
-			["WarForge",[],
-				[#paid items
-					itm.dagger,itm.fighting_pick,itm.hammer,itm.pickaxe,itm.mace_4,itm.bastard_sword_a,itm.heraldic_mail_with_tunic,itm.tabard,
-					itm.bascinet,itm.mail_coif,itm.hunting_crossbow,itm.light_crossbow,itm.woolen_hose,
-				]],
-			["Event",[itm.woolen_hose],
-				[#paid items
-					itm.gold_tourney_armor,itm.woolen_hose,itm.head_wrappings,itm.common_hood,itm.mail_coif,itm.segmented_helmet,
-					itm.byzantion_helmet_a,itm.stones,itm.green_tourney_armor,
+					itm.norman_shield_6,itm.byzantion_helmet_a,itm.light_mail_and_plate,
 				]],
 			["Event2",[],
 				[#paid items
@@ -142,6 +176,18 @@ multi_troops = [
 			#]],
 		]],
 	[fac.kingdom_2,[#vaegir
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_blue,
+					itm.arena_armor_white,
+					itm.arena_shield_blue,
+				],[
+					itm.arena_tunic_white,
+					itm.arena_turban_blue,
+					itm.steppe_helmet_white,
+				]],
+			]],
 		[trp.vaegir_spearman_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -166,7 +212,7 @@ multi_troops = [
 			["Event",[],
 				[#paid items
 					itm.hunter_boots,itm.fur_coat,itm.studded_leather_coat,itm.mail_shirt,itm.head_wrappings,itm.fur_hat,itm.nomad_cap,
-					itm.leather_warrior_cap,itm.fighting_axe,itm.battle_axe,itm.war_axe,itm.mace_3,itm.mace_4,itm.rus_helmet_a,itm.stones,
+					itm.leather_warrior_cap,itm.fighting_axe,itm.battle_axe,itm.war_axe,itm.mace_3,itm.mace_4,itm.rus_helmet_a,
 					itm.throwing_spears,itm.nomad_armor,itm.byrnie,itm.tribal_warrior_outfit,itm.norman_shield_7,itm.magyar_helmet_a,
 				]],
 			["Event2",[],
@@ -192,7 +238,7 @@ multi_troops = [
 				]],
 			["Event",[],
 				[#paid items
-					itm.hunter_boots,itm.head_wrappings,itm.fur_hat,itm.nomad_cap,itm.leather_warrior_cap,itm.stones,itm.throwing_spears,
+					itm.hunter_boots,itm.head_wrappings,itm.fur_hat,itm.nomad_cap,itm.leather_warrior_cap,itm.throwing_spears,
 					itm.nomad_armor,itm.byrnie,
 				]],
 			["Event2",[],
@@ -233,6 +279,18 @@ multi_troops = [
 			]],
 		]],
 	[fac.kingdom_3,[#khergit khanate
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_yellow,
+					itm.arena_armor_yellow,
+					itm.arena_shield_yellow,
+				],[
+					itm.arena_tunic_yellow,
+					itm.arena_turban_yellow,
+					itm.steppe_helmet_yellow,
+				]],
+			]],
 		[trp.khergit_infantry_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -291,6 +349,18 @@ multi_troops = [
 			]],
 		]],
 	[fac.kingdom_4,[#nords
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_blue,
+					itm.arena_armor_blue,
+					itm.arena_shield_blue,
+				],[
+					itm.arena_tunic_blue,
+					itm.arena_turban_blue,
+					itm.steppe_helmet_blue,
+				]],
+			]],
 		[trp.nord_veteran_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -345,11 +415,23 @@ multi_troops = [
 			["WarForge",[],
 				[#paid items
 					itm.cleaver,itm.dagger,itm.fighting_axe,itm.battle_axe,itm.ashwood_pike,itm.boar_spear,itm.heraldic_mail_with_surcoat,
-					itm.light_leather,itm.rawhide_coat,itm.tribal_warrior_outfit,itm.stones,itm.throwing_daggers,itm.voulge,
+					itm.light_leather,itm.rawhide_coat,itm.tribal_warrior_outfit,itm.throwing_daggers,itm.voulge,
 				]]
 			]],
 		]],
 	[fac.kingdom_5,[#rhodoks
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_green,
+					itm.arena_armor_green,
+					itm.arena_shield_green,
+				],[
+					itm.arena_tunic_green,
+					itm.arena_turban_green,
+					itm.steppe_helmet_green,
+				]],
+			]],
 		[trp.rhodok_sergeant_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -412,6 +494,18 @@ multi_troops = [
 			]],
 		]],
 	[fac.kingdom_6,[#sarranid sultanate
+		[trp.player,infantry,[#all troops
+			["Arena",
+				[
+					itm.arena_helmet_yellow,
+					itm.arena_armor_yellow,
+					itm.arena_shield_yellow,
+				],[
+					itm.arena_tunic_yellow,
+					itm.arena_turban_yellow,
+					itm.steppe_helmet_yellow,
+				]],
+			]],
 		[trp.sarranid_footman_multiplayer,infantry,[
 			["Native",
 				[#free items
@@ -531,9 +625,9 @@ def foo___lwbr_give_items_to_troop():
 				if lwbr.debug_mode > 0:
 					foo += [
 						(try_begin),
-							(eq, l.troop, multi_troops[1][1][0][0]),
+							(eq, l.troop, trp.swadian_infantry_multiplayer),
 							(assign, reg0, l.value),
-							(eq, l.troop, multi_troops[1][1][0][0]),
+							(eq, l.troop, trp.swadian_infantry_multiplayer),
 							(assign, reg1, lwbr.packages[pack_name]),
 							(assign, reg2, l.pack),
 							(display_message, "@{reg0} & {reg1} = {reg2} -> %s" % pack_name),
@@ -543,7 +637,7 @@ def foo___lwbr_give_items_to_troop():
 				if lwbr.debug_mode > 0:
 					foo += [
 						(try_begin),
-							(eq, l.troop, multi_troops[1][1][0][0]),
+							(eq, l.troop, trp.swadian_infantry_multiplayer),
 							(display_message, "@passed"),
 						(try_end),
 						]
@@ -555,7 +649,7 @@ def foo___lwbr_give_items_to_troop():
 					if lwbr.debug_mode > 0:
 						foo += [
 							(try_begin),
-								(eq, l.troop, multi_troops[1][1][0][0]),
+								(eq, l.troop, trp.swadian_infantry_multiplayer),
 								(str_store_troop_name, s0, l.troop),
 								(str_store_item_name, s1, free_item),
 								(display_message, "@Troop {s0} already had free item {s1}"),
@@ -570,7 +664,7 @@ def foo___lwbr_give_items_to_troop():
 					if lwbr.debug_mode > 0:
 						foo += [
 							(try_begin),
-								(eq, l.troop, multi_troops[1][1][0][0]),
+								(eq, l.troop, trp.swadian_infantry_multiplayer),
 								(str_store_troop_name, s0, l.troop),
 								(str_store_item_name, s1, free_item),
 								(display_message, "@Troop {s0} would get horse {s1} but horses are disabled"),
@@ -584,7 +678,7 @@ def foo___lwbr_give_items_to_troop():
 					if lwbr.debug_mode > 0:
 						foo += [
 							(try_begin),
-								(eq, l.troop, multi_troops[1][1][0][0]),
+								(eq, l.troop, trp.swadian_infantry_multiplayer),
 								(str_store_troop_name, s0, l.troop),
 								(str_store_item_name, s1, free_item),
 								(display_message, "@Troop {s0} has free item {s1}"),
@@ -594,7 +688,7 @@ def foo___lwbr_give_items_to_troop():
 						(try_end),
 					]
 				for paid_item in pack_paid_items:
-					foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,troop_id), ]
+					foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,l.troop), ]
 				foo += [ (try_end), ]
 			if troop_id == trp.player: foo += [(eq,1,0),]
 			foo += [(else_try),]
@@ -607,7 +701,7 @@ def foo___lwbr_give_items_to_troop():
 	if lwbr.debug_mode > 0:
 		foo += [
 			(try_begin),
-				(eq, l.troop, multi_troops[1][1][0][0]),
+				(eq, l.troop, trp.swadian_infantry_multiplayer),
 				(str_store_troop_name, s0, l.troop),
 				(display_message, "@trp.{s0} has itms:"),
 				(try_for_troop_items, l.itm, l.troop),
