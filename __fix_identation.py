@@ -24,7 +24,7 @@ files = [
 	# "quests",
 	# "scene_props",
 	# "scenes",
-	# "scripts",
+	"scripts",
 	# "simple_triggers",
 	# "skills",
 	# "skins",
@@ -34,7 +34,7 @@ files = [
 	# "triggers",
 	# "troops",
 	# "ui_strings",
-	"aaa",
+	# "aaa",
 ]
 
 for file in files:

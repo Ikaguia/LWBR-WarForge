@@ -9,11 +9,12 @@ scn_chooser_3
 scn_chooser_0
 lwbr_open_menu_overlay
 lwbr_little_pos_helper
+lwbr_started_sv
 g_presentation_obj_profile_banner_selection_1
 g_presentation_obj_profile_banner_selection_2
-lwbr_server_is_native
 scn_chooser_1
 lwbr_horses_enabled
+lwbr_started_cl
 training_ground_position_changed
 auto_besiege_town
 g_player_besiege_town

@@ -1,7 +1,18 @@
 BUILD = __build_mod.py
 COMPILE = compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
-#DEST = /home/cristiano/.local/share/Steam/steamapps/common/MountBlade Warband/Modules
-DEST = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband/Modules
+
+DEST_LINUX = /home/cristiano/.local/share/Steam/steamapps/common/MountBlade Warband
+DEST_WINDOWS = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
+DDEST_LINUX = $(DEST_LINUX)
+DDEST_WINDOWS = ../wb_dedicated
+
+DEST = $(DEST_WINDOWS)
+DDEST = $(DDEST_WINDOWS)
+# DEST = $(DEST_LINUX)/Modules
+# DDEST = $(DDEST_LINUX)/Modules
+
+DESTM = $(DEST)/modules
+DDESTM = $(DDEST)/modules
 
 MOD_PATH = mod
 CLIENT_V_PATH = $(MOD_PATH)/client
@@ -34,24 +45,35 @@ $(MOD_PATH)/full.zip   : $(FULL_V_PATH)/variables.txt
 	@python $(BUILD) full
 
 _backup:
-	@if [ -d "$(DEST)/Native/" ]; then \
-		if [ -d "$(DEST)/Native_backup/" ]; then \
+	@if [ -d "$(DESTM)/Native/" ]; then \
+		if [ -d "$(DESTM)/Native_backup/" ]; then \
 			echo "backup already exists"; \
-			rm -r  "$(DEST)/Native/"; \
+			rm -r  "$(DESTM)/Native/"; \
 		else \
 			echo "native module backup created"; \
-			mv "$(DEST)/Native/" "$(DEST)/Native_backup/"; \
+			mv "$(DESTM)/Native/" "$(DESTM)/Native_backup/"; \
+		fi \
+	fi
+
+_backupD:
+	@if [ -d "$(DDESTM)/Native/" ]; then \
+		if [ -d "$(DDESTM)/Native_backup/" ]; then \
+			echo "backup already exists"; \
+			rm -r  "$(DDESTM)/Native/"; \
+		else \
+			echo "native module backup created"; \
+			mv "$(DDESTM)/Native/" "$(DDESTM)/Native_backup/"; \
 		fi \
 	fi
 
 _move_cl:     $(MOD_PATH)/client.zip _backup
-	@unzip -q $(MOD_PATH)/client.zip -d "$(DEST)/"
+	@unzip -q $(MOD_PATH)/client.zip -d "$(DESTM)/"
 	@echo "finished moving client version"
-_move_sv:     $(MOD_PATH)/server.zip _backup
-	@unzip -q $(MOD_PATH)/server.zip -d "$(DEST)/"
+_move_sv:     $(MOD_PATH)/server.zip _backupD
+	@unzip -q $(MOD_PATH)/server.zip -d "$(DDESTM)/"
 	@echo "finished moving server version"
 _move_full:   $(MOD_PATH)/full.zip   _backup
-	@unzip -q $(MOD_PATH)/full.zip   -d "$(DEST)/"
+	@unzip -q $(MOD_PATH)/full.zip   -d "$(DESTM)/"
 	@echo "finished moving full version"
 
 
@@ -70,6 +92,8 @@ cl:   _clear _move_cl
 sv:   _clear _move_sv
 full: _clear _move_full
 
+run_sv:
+	$(DDEST)/mb_warband_dedicated.exe -r 1_battle.txt -m Native
 
 _clear:
 	@#clear

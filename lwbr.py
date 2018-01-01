@@ -1,7 +1,7 @@
 from compiler import *
 
 mod_version	= 2000 #2.000
-debug_mode	= 0
+debug_mode	= 1
 edit_scenes = 1
 
 
@@ -13,18 +13,18 @@ for pack in packs:
 for pack in packs: packages['-'+pack] = packages['full'] ^ packages[pack]
 
 
-multiplayer_event_server			= 200
-multiplayer_event_client			= 201
+multiplayer_event_server			= 125
+multiplayer_event_client			= 126
 
 
 class sv_event:#events that run on the server
-	start,end = 2000,2005
+	start,end = 0,5
 
 	set_sv_var,ask_sv_var,return_var,\
 	action,\
 	count = xrange(start,end)
 class cl_event:#events that run on the client
-	start,end = 3000,3016
+	start,end = 0,16
 
 	set_var,ask_var,return_sv_var,\
 	set_faction_slot,set_item_slot,set_party_slot,set_pt_slot,set_quest_slot,set_sp_slot,\
@@ -46,7 +46,7 @@ class sv_var:#settings of the server
 	default = {
 		#assume the server is Native at start
 		items: packages["Native"],
-		version: 0,
+		version: 2000,
 		firearms_en: 0,
 		horses_en: 1,
 		peasants_en: 0,
@@ -419,3 +419,22 @@ scenes_opt = [
 			slot_scene.fog_color	: 0x9798AB,
 		}),
 ]
+
+
+def debug(block = []):
+	if debug_mode == 0: return []
+	return block
+
+def debug_func(func_name="script_name", args=[]):
+	if debug_mode == 0: return []
+	block = [(str_store_string, s0, "@running script %s" % func_name),]
+	if len(args) > 0:
+		block += [(str_store_string, s0, "@{s0} with args"),]
+		for argi in xrange(len(args)):
+			block += [
+				(assign, reg0, args[argi]),
+				(str_store_string, s0, "@{s0} {reg0}"),
+			]
+	block += [(display_message, s0),]
+	return block
+

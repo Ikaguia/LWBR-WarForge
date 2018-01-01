@@ -1,0 +1,8 @@
+infopagesfile version 1
+6
+ip_morale _ _
+ip_economy _ _
+ip_courtship _ _
+ip_politics _ _
+ip_character_backgrounds _ _
+ip_military_campaigns _ _

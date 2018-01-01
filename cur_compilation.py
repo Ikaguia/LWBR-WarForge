@@ -1,2 +1,2 @@
-IS_CLIENT = True
+IS_CLIENT = False
 IS_SERVER = True
