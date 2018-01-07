@@ -2395,32 +2395,69 @@ We apologize sincerely if you contributed your suggestions and feedback but were
 	#### Warband added texts
 	
 	#multiplayer scene names
+	#plains
 	("multi_scene_1", "Ruins"),
+	#steppe
 	("multi_scene_2", "Village"),
+	#mountains
 	("multi_scene_3", "Hailes Castle"), #Castle 1
+	#mountains
 	("multi_scene_4", "Ruined Fort"),
+	#plains
 	("multi_scene_5", "Scene 5"), #not ready yet
+	#plains
 	("multi_scene_6", "Scene 6"), #not ready yet
+	#plains
 	("multi_scene_7", "Field by the River"),
+	#desert
 	("multi_scene_8", "Rudkhan Castle"), #Castle 2
+	#taiga
 	("multi_scene_9", "Snowy Village"),
+	#mountains
 	("multi_scene_10", "Turin Castle"), #Castle 3
+	#coast
 	("multi_scene_11", "Nord Town"),
+	#coast
+	#actually multi_scene_12
 	("multi_scene_16", "Port Assault"),
+	#forest
+	#actually multi_scene_13
 	("multi_scene_17", "Brunwud Castle"), #Castle 4
+	#taiga
+	#actually multi_scene_14
 	("multi_scene_18", "Battle on Ice"),
+	#desert
+	#actually multi_scene_15
 	("multi_scene_19", "Mahdaar Castle"), #Castle 5
+	#desert
+	#actually multi_scene_16
 	("multi_scene_20", "Jameyyed Castle"), #Castle 6
+	#desert
+	#actually multi_scene_17
 	("multi_scene_21", "The Arena"),
+	#forest
+	#actually multi_scene_18
 	("multi_scene_22", "Forest Hideout"),
+	#desert
+	#actually multi_scene_19
 	("multi_scene_23", "Canyon"),
+	#desert
+	#actually multi_scene_20
 	("multi_scene_24", "Desert Town"),
 	#INVASION MODE START
+	#taiga
+	#actually multi_scene_21
 	("multi_scene_25", "Cold Coast"),
 	#INVASION MODE END
+	#actually random_multi_plain_medium
 	("multi_scene_12", "Random Plains (Medium)"),
+	#actually random_multi_plain_large
 	("multi_scene_13", "Random Plains (Large)"),
+	#steppe
+	#actually random_multi_steppe_medium
 	("multi_scene_14", "Random Steppe (Medium)"),
+	#steppe
+	#actually random_multi_steppe_large
 	("multi_scene_15", "Random Steppe (Large)"),
 	("multi_scene_end", "multi_scene_end"),
 	

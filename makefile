@@ -19,7 +19,7 @@ CLIENT_V_PATH = $(MOD_PATH)/client
 SERVER_V_PATH = $(MOD_PATH)/server
 FULL_V_PATH = $(MOD_PATH)/full
 
-PY_FILES = $(wildcard *.py)
+PY_FILES = $(filter-out cur_compilation.py, $(wildcard *.py))
 
 CLIENT_FILES = $(wildcard $(CLIENT_V_PATH)/*)
 SERVER_FILES = $(wildcard $(SERVER_V_PATH)/*)

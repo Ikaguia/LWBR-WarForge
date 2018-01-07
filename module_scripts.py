@@ -1376,6 +1376,14 @@ scripts = [
 	("game_get_console_command",[
 			(store_script_param, ":input", 1),
 			(store_script_param, ":val1", 2),
+
+			#LWBR WarForge 2.0 --- BEGIN
+			] + lwbr.debug([
+				(assign, reg0, l.input),
+				(assign, reg1, l.val1),
+				(display_message, "@Received console command '{reg0}' '{reg1}'"),
+			]) + [
+			#LWBR WarForge 2.0 --- END
 			(try_begin),
 				#getting val2 for some commands
 				(eq, ":input", 2),
@@ -8193,6 +8201,10 @@ scripts = [
 						(eq, ":valid_item", 1),
 						#condition checks are done
 						(player_set_slot, ":player_no", ":slot_no", ":value"),
+					(else_try),
+						(neq, l.value, -1),
+						(str_store_item_name, s0, l.value),
+						(display_message, "@invalid item '{s0}'"),
 					(try_end),
 				(else_try),
 					(eq, ":event_type", multiplayer_event_set_bot_selection),
@@ -9805,6 +9817,7 @@ scripts = [
 				#INVASION MODE END
 			(try_end),##LWBR WarForge 2.0
 			]),
+
 	# script_cf_multiplayer_evaluate_poll
 	# Input: none
 	# Output: none (can fail)
@@ -11341,10 +11354,12 @@ scripts = [
 	# Output: none
 	("multiplayer_set_default_item_selections_for_troop",[
 			(store_script_param, ":troop_no", 1),
-			#LWBR WarForge 2.0 --- BEGIN
+		#LWBR WarForge 2.0 --- BEGIN
+		] + lwbr.debug([
 			(str_store_troop_name, s1, l.troop_no),
 			(display_message, "@Reseting selections to default for troop '{s1}'"),
-			#LWBR WarForge 2.0 --- END
+		]) + [
+		#LWBR WarForge 2.0 --- END
 			(multiplayer_get_my_player, ":my_player_no"),
 			(call_script, "script_multiplayer_clear_player_selected_items", ":my_player_no"),
 			(assign, ":cur_weapon_slot", 0),
@@ -11353,11 +11368,13 @@ scripts = [
 				(troop_get_inventory_slot, ":item_id", ":troop_no", ":i_slot"),
 				(ge, ":item_id", 0),
 				(item_get_slot, ":item_class", ":item_id", slot_item_multiplayer_item_class),
-				#LWBR WarForge 2.0 --- BEGIN
+		#LWBR WarForge 2.0 --- BEGIN
+		] + lwbr.debug([
 				(str_store_item_name, s1, l.item_id),
 				(assign, reg1, l.item_class),
 				(display_message, "@Found item '{s1}' with class {reg1}"),
-				#LWBR WarForge 2.0 --- END
+		]) + [
+		#LWBR WarForge 2.0 --- END
 				(try_begin),
 					(is_between, ":item_class", multi_item_class_type_weapons_begin, multi_item_class_type_weapons_end),
 					(this_or_next|eq, "$g_multiplayer_disallow_ranged_weapons", 0),

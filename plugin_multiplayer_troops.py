@@ -584,17 +584,18 @@ def foo___lwbr_give_items_to_troop():
 		(store_script_param_1, l.value),
 		(store_script_param_2, l.troop),
 		# (troop_clear_inventory,l.troop),#doesnt clear equiped items
-		(troop_raise_skill, l.troop, skl.inventory_management, 10),
+		# (troop_raise_skill, l.troop, skl.inventory_management, 10),
 		(troop_get_inventory_capacity, l.slots, l.troop),
 		(try_for_range, l.slot, 0, l.slots),
 			(troop_set_inventory_slot, l.troop, l.slot, -1),
 		(try_end),
 		(store_troop_faction, l.troop_fac, l.troop),
 		(eq, l.troop_fac, l.troop_fac),
-		(try_for_range, l.cur_item, all_items_begin, all_items_end),
-			(store_sub, l.item_troop_slot, l.troop, multiplayer_troops_begin),
-			(val_add, l.item_troop_slot, slot_item_multiplayer_availability_linked_list_begin),
-			(item_set_slot, l.cur_item, l.item_troop_slot, -1),
+		(try_for_range, l.itm, 0, itm.end),
+			(set_mp_item_for_troop, l.itm, l.troop, -1),
+			# (store_sub, l.item_troop_slot, l.troop, multiplayer_troops_begin),
+			# (val_add, l.item_troop_slot, slot_item_multiplayer_availability_linked_list_begin),
+			# (item_set_slot, l.itm, l.item_troop_slot, -1),
 		(try_end),
 		(try_begin),
 	]
@@ -644,11 +645,11 @@ def foo___lwbr_give_items_to_troop():
 					]) + [
 						(else_try),
 							(troop_add_item, l.troop, free_item),
-							(call_script, script.multiplayer_set_item_available_for_troop,free_item, l.troop),
+							(set_mp_item_for_troop, free_item, l.troop, 1),
 						(try_end),
 					]
 				for paid_item in pack_paid_items:
-					foo += [ (call_script, script.multiplayer_set_item_available_for_troop,paid_item,l.troop), ]
+					foo += [ (set_mp_item_for_troop, paid_item, l.troop, 1), ]
 				foo += [ (try_end), ]
 			if troop_id == trp.player: foo += [(eq,1,0),]
 			foo += [(else_try),]

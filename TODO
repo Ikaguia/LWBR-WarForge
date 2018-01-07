@@ -1,16 +1,14 @@
 peasant items - Done
-
 arena items - Done
-
-initial info not being sent!! why?? - Done, event_types need to be < 128
-
-
+initial info not being sent!! why?? - Fixed, event_types need to be < 128
+send weather info - Done
+weather - Done
+items not working - Fixed
 
 peasant and arena skill levels
-
-weather
-
+weather config in game
 keep items
-
 new maps
-
+taunt
+fall and knock down from horse
+server messages

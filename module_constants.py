@@ -1330,8 +1330,8 @@ courtship_poem_allegoric   = 5 #Idealizes woman as a civilizing force -- the Rom
 
 #Troop Commentaries end
 
-tutorial_fighters_begin = "trp_tutorial_fighter_1"
-tutorial_fighters_end   = "trp_tutorial_archer_1"
+tutorial_fighters_begin = trp.tutorial_fighter_1
+tutorial_fighters_end   = trp.tutorial_archer_1
 
 #Walker types:
 walkert_default            = 0
@@ -1370,66 +1370,66 @@ kingdoms_end = "fac_kingdoms_end"
 npc_kingdoms_begin = "fac_kingdom_1"
 npc_kingdoms_end = kingdoms_end
 
-bandits_begin = "trp_bandit"
-bandits_end = "trp_black_khergit_horseman"
+bandits_begin = trp.bandit
+bandits_end = trp.black_khergit_horseman
 
-kingdom_ladies_begin = "trp_knight_1_1_wife"
-kingdom_ladies_end = "trp_heroes_end"
+kingdom_ladies_begin = trp.knight_1_1_wife
+kingdom_ladies_end = trp.heroes_end
 
 #active NPCs in order: companions, kings, lords, pretenders
 
-pretenders_begin = "trp_kingdom_1_pretender"
+pretenders_begin = trp.kingdom_1_pretender
 pretenders_end = kingdom_ladies_begin
 
-lords_begin = "trp_knight_1_1"
+lords_begin = trp.knight_1_1
 lords_end = pretenders_begin
 
-kings_begin = "trp_kingdom_1_lord"
+kings_begin = trp.kingdom_1_lord
 kings_end = lords_begin
 
-companions_begin = "trp_npc1"
+companions_begin = trp.npc1
 companions_end = kings_begin
 
-active_npcs_begin = "trp_npc1"
+active_npcs_begin = trp.npc1
 active_npcs_end = kingdom_ladies_begin
 #"active_npcs_begin replaces kingdom_heroes_begin to allow for companions to become lords. Includes anyone who may at some point lead their own party: the original kingdom heroes, companions who may become kingdom heroes, and pretenders. (slto_kingdom_hero as an occupation means that you lead a party on the map. Pretenders have the occupation "slto_inactive_pretender", even if they are part of a player's party, until they have their own independent party)
 #If you're a modder and you don't want to go through and switch every kingdom_heroes to active_npcs, simply define a constant: kingdom_heroes_begin = active_npcs_begin., and kingdom_heroes_end = active_npcs_end. I haven't tested for that, but I think it should work.
 
-active_npcs_including_player_begin = "trp_kingdom_heroes_including_player_begin"
-original_kingdom_heroes_begin = "trp_kingdom_1_lord"
+active_npcs_including_player_begin = trp.kingdom_heroes_including_player_begin
+original_kingdom_heroes_begin = trp.kingdom_1_lord
 
 heroes_begin = active_npcs_begin
 heroes_end = kingdom_ladies_end
 
-soldiers_begin = "trp_farmer"
-soldiers_end = "trp_town_walker_1"
+soldiers_begin = trp.farmer
+soldiers_end = trp.town_walker_1
 
 #Rebellion changes
 
 ##rebel_factions_begin = "fac_kingdom_1_rebels"
 ##rebel_factions_end =   "fac_kingdoms_end"
 
-pretenders_begin = "trp_kingdom_1_pretender"
+pretenders_begin = trp.kingdom_1_pretender
 pretenders_end = active_npcs_end
 #Rebellion changes
 
-tavern_minstrels_begin = "trp_tavern_minstrel_1"
-tavern_minstrels_end   = "trp_kingdom_heroes_including_player_begin"
+tavern_minstrels_begin = trp.tavern_minstrel_1
+tavern_minstrels_end   = trp.kingdom_heroes_including_player_begin
 
-tavern_booksellers_begin = "trp_tavern_bookseller_1"
+tavern_booksellers_begin = trp.tavern_bookseller_1
 tavern_booksellers_end   = tavern_minstrels_begin
 
-tavern_travelers_begin = "trp_tavern_traveler_1"
+tavern_travelers_begin = trp.tavern_traveler_1
 tavern_travelers_end   = tavern_booksellers_begin
 
-ransom_brokers_begin = "trp_ransom_broker_1"
+ransom_brokers_begin = trp.ransom_broker_1
 ransom_brokers_end   = tavern_travelers_begin
 
-mercenary_troops_begin = "trp_watchman"
-mercenary_troops_end = "trp_mercenaries_end"
+mercenary_troops_begin = trp.watchman
+mercenary_troops_end = trp.mercenaries_end
 
-multiplayer_troops_begin = "trp_swadian_crossbowman_multiplayer"
-multiplayer_troops_end = "trp_multiplayer_end"
+multiplayer_troops_begin = trp.swadian_crossbowman_multiplayer
+multiplayer_troops_end = trp.multiplayer_end
 
 #INVASION MODE start
 ccoop_companion_sounds_start = "snd_ccoop_spawn_companion_0"
@@ -1447,28 +1447,28 @@ ccoop_bandit_sounds_end = "snd_ccoop_sea_raider_taunt_0"
 ccoop_sea_raider_sounds_start = "snd_ccoop_sea_raider_taunt_0"
 ccoop_sea_raider_sounds_end = "snd_sounds_end"
 
-multiplayer_coop_class_templates_begin = "trp_swadian_crossbowman_multiplayer_coop_tier_1"
-multiplayer_coop_class_templates_end = "trp_coop_faction_troop_templates_end"
+multiplayer_coop_class_templates_begin = trp.swadian_crossbowman_multiplayer_coop_tier_1
+multiplayer_coop_class_templates_end = trp.coop_faction_troop_templates_end
 
-multiplayer_coop_companion_equipment_sets_begin = "trp_npc1_1"
-multiplayer_coop_companion_first_equipment_sets_end = "trp_npc1_2"
-multiplayer_coop_companion_equipment_sets_end = "trp_coop_companion_equipment_sets_end"
+multiplayer_coop_companion_equipment_sets_begin = trp.npc1_1
+multiplayer_coop_companion_first_equipment_sets_end = trp.npc1_2
+multiplayer_coop_companion_equipment_sets_end = trp.coop_companion_equipment_sets_end
 
 multiplayer_coop_companion_description_strings_begin = "str_npc1_1"
 #INVASION MODE end
 
-multiplayer_ai_troops_begin = "trp_swadian_crossbowman_multiplayer_ai"
+multiplayer_ai_troops_begin = trp.swadian_crossbowman_multiplayer_ai
 multiplayer_ai_troops_end = multiplayer_troops_begin
 
 #INVASION MODE START
-captain_multiplayer_troops_begin = "trp_farmer"
-captain_multiplayer_troops_end = "trp_swadian_crossbowman"
+captain_multiplayer_troops_begin = trp.farmer
+captain_multiplayer_troops_end = trp.swadian_crossbowman
 
-captain_multiplayer_new_troops_begin = "trp_swadian_crossbowman"
-captain_multiplayer_new_troops_end = "trp_khergit_lancer"
+captain_multiplayer_new_troops_begin = trp.swadian_crossbowman
+captain_multiplayer_new_troops_end = trp.khergit_lancer
 
-captain_multiplayer_coop_new_troops_begin = "trp_khergit_lancer"
-captain_multiplayer_coop_new_troops_end = "trp_slaver_chief"
+captain_multiplayer_coop_new_troops_begin = trp.khergit_lancer
+captain_multiplayer_coop_new_troops_end = trp.slaver_chief
 #INVASION MODE END
 
 multiplayer_scenes_begin = "scn_multi_scene_1"
@@ -1486,8 +1486,8 @@ multiplayer_flag_taken_projections_end = "mesh_flag_project_misses_end"
 multiplayer_game_type_names_begin = "str_multi_game_type_1"
 multiplayer_game_type_names_end = "str_multi_game_types_end"
 
-quick_battle_troops_begin = "trp_quick_battle_troop_1"
-quick_battle_troops_end = "trp_quick_battle_troops_end"
+quick_battle_troops_begin = trp.quick_battle_troop_1
+quick_battle_troops_end = trp.quick_battle_troops_end
 
 quick_battle_troop_texts_begin = "str_quick_battle_troop_1"
 quick_battle_troop_texts_end = "str_quick_battle_troops_end"
@@ -1573,8 +1573,8 @@ scenes_end = "scn_castle_1_exterior"
 spawn_points_begin = "p_zendar"
 spawn_points_end = "p_spawn_points_end"
 
-regular_troops_begin       = "trp_novice_fighter"
-regular_troops_end         = "trp_tournament_master"
+regular_troops_begin       = trp.novice_fighter
+regular_troops_end         = trp.tournament_master
 
 swadian_merc_parties_begin = "p_town_1_mercs"
 swadian_merc_parties_end   = "p_town_8_mercs"
@@ -1582,47 +1582,47 @@ swadian_merc_parties_end   = "p_town_8_mercs"
 vaegir_merc_parties_begin  = "p_town_8_mercs"
 vaegir_merc_parties_end    = "p_zendar"
 
-arena_masters_begin    = "trp_town_1_arena_master"
-arena_masters_end      = "trp_town_1_armorer"
+arena_masters_begin    = trp.town_1_arena_master
+arena_masters_end      = trp.town_1_armorer
 
-training_gound_trainers_begin    = "trp_trainer_1"
-training_gound_trainers_end      = "trp_ransom_broker_1"
+training_gound_trainers_begin    = trp.trainer_1
+training_gound_trainers_end      = trp.ransom_broker_1
 
-town_walkers_begin = "trp_town_walker_1"
-town_walkers_end = "trp_village_walker_1"
+town_walkers_begin = trp.town_walker_1
+town_walkers_end = trp.village_walker_1
 
-village_walkers_begin = "trp_village_walker_1"
-village_walkers_end   = "trp_spy_walker_1"
+village_walkers_begin = trp.village_walker_1
+village_walkers_end   = trp.spy_walker_1
 
-spy_walkers_begin = "trp_spy_walker_1"
-spy_walkers_end = "trp_tournament_master"
+spy_walkers_begin = trp.spy_walker_1
+spy_walkers_end = trp.tournament_master
 
 walkers_begin = town_walkers_begin
 walkers_end   = spy_walkers_end
 
-armor_merchants_begin  = "trp_town_1_armorer"
-armor_merchants_end    = "trp_town_1_weaponsmith"
+armor_merchants_begin  = trp.town_1_armorer
+armor_merchants_end    = trp.town_1_weaponsmith
 
-weapon_merchants_begin = "trp_town_1_weaponsmith"
-weapon_merchants_end   = "trp_town_1_tavernkeeper"
+weapon_merchants_begin = trp.town_1_weaponsmith
+weapon_merchants_end   = trp.town_1_tavernkeeper
 
-tavernkeepers_begin    = "trp_town_1_tavernkeeper"
-tavernkeepers_end      = "trp_town_1_merchant"
+tavernkeepers_begin    = trp.town_1_tavernkeeper
+tavernkeepers_end      = trp.town_1_merchant
 
-goods_merchants_begin  = "trp_town_1_merchant"
-goods_merchants_end    = "trp_town_1_horse_merchant"
+goods_merchants_begin  = trp.town_1_merchant
+goods_merchants_end    = trp.town_1_horse_merchant
 
-horse_merchants_begin  = "trp_town_1_horse_merchant"
-horse_merchants_end    = "trp_town_1_mayor"
+horse_merchants_begin  = trp.town_1_horse_merchant
+horse_merchants_end    = trp.town_1_mayor
 
-mayors_begin           = "trp_town_1_mayor"
-mayors_end             = "trp_village_1_elder"
+mayors_begin           = trp.town_1_mayor
+mayors_end             = trp.village_1_elder
 
-village_elders_begin   = "trp_village_1_elder"
-village_elders_end     = "trp_merchants_end"
+village_elders_begin   = trp.village_1_elder
+village_elders_end     = trp.merchants_end
 
-startup_merchants_begin = "trp_swadian_merchant"
-startup_merchants_end = "trp_startup_merchants_end"
+startup_merchants_begin = trp.swadian_merchant
+startup_merchants_end = trp.startup_merchants_end
 
 num_max_items = 10000 #used for multiplayer mode
 

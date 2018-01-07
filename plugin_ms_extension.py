@@ -780,3 +780,32 @@ extend_syntax(item_modifier_get_horse_speed)       # (item_modifier_get_horse_sp
 extend_syntax(item_modifier_get_horse_maneuver)    # (item_modifier_get_horse_maneuver, <destination>, <imod_value>),
 extend_syntax(item_modifier_get_rarity_multiplier) # (item_modifier_get_rarity_multiplier, <destination_fixed_point>, <imod_value>),
 extend_syntax(item_modifier_get_value_multiplier)  # (item_modifier_get_value_multiplier, <destination_fixed_point>, <imod_value>),
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Operations
+def set_mp_item_for_troop(item,troop,val):
+	return [ (call_script, script.lwbr_set_item_for_troop, item, troop, val), ]
+def get_mp_item_for_troop(dest,item,troop):
+	return [ (call_script, script.lwbr_get_item_for_troop, item, troop), (assign, dest, reg42), ]
+def send_event_to_players(event_type=lwbr.multiplayer_event_client,i1=0,i2=2,i3=0,i4=0,f=0):
+	return [ (call_script, script.lwbr_send_event_to_players, event_type, i1, i2, i3, i4, f), ]
+def send_event_to_player(player,event_type=lwbr.multiplayer_event_client,i1=0,i2=2,i3=0,i4=0):
+	return [ (call_script, script.lwbr_send_event_to_player, player, event_type, i1, i2, i3, i4), ]
+def send_event_to_server(event_type=lwbr.multiplayer_event_server,i1=0,i2=2,i3=0,i4=0):
+	return [ (call_script, script.lwbr_send_event_to_server, event_type, i1, i2, i3, i4), ]
+extend_syntax(set_mp_item_for_troop)#(set_mp_item_for_troop, item, troop, val)
+extend_syntax(get_mp_item_for_troop)#(get_mp_item_for_troop, dest, item, troop)
+extend_syntax(send_event_to_players)#(send_event_to_players, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>, <filter>)
+extend_syntax(send_event_to_player)	#(send_event_to_player, player, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>)
+extend_syntax(send_event_to_server)	#(send_event_to_server, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>)
