@@ -4,6 +4,7 @@ mod_version	= 2000 #2.000
 debug_mode	= 1
 edit_scenes = 1
 
+native = -1
 
 wt_event_limit = 30
 
@@ -18,7 +19,7 @@ for pack in packs:
 	packages['-'+pack] = packages['full'] ^ packages[pack]
 
 #used to select all players that match all restrictions that are set
-#i.e: Admin|WarForge will select all admins that are using this mod)
+#i.e: "Admin|WarForge" will select all admins that are using this mod)
 player_types = {
 	"Any"		: 0,
 	"Admin"		: 1,
@@ -45,48 +46,105 @@ def player_filter(filters):
 
 multiplayer_event_server			= 125
 multiplayer_event_client			= 126
+multiplayer_event_server_str		= 127
+multiplayer_event_client_str		= 49 #128 is invalid
 
+sync_to_cl = 1
+sync_to_sv = 2
 
+verbose = 0
+silent = 1
+
+msg_troops_begin = trp.find_item_cheat
+msg_string_begin = s.sv_msg_1
+msg_cnt_max = 100
+
+class _action:#player action
+	count = 0
+	def __init__(self,cd=0,hk=-1,adm=False):
+		self.id = _action.count
+		self.cd = cd
+		self.hk = hk
+		self.adm = adm
+		_action.count = _action.count + 1
+class act:#actions
+	taunt = _action(cd=1,hk=key_comma)
+	cheer = _action(cd=1,hk=key_period)
+	# kdown = _action(cd=1,hk=key_delete,adm=True)
+	count = _action.count
+
+class _event:
+	count = {}
+	def __init__(self,typ):
+		if not _event.count.has_key(typ):
+			print "Error: count not set for event type",typ
+			exit(1)
+		self.id = _event.count[typ]
+		_event.count[typ] = _event.count[typ] + 1
 class sv_event:#events that run on the server
 	start = 0
-	end = start + 5
+	end = start + 4
 
+	_event.count["sv"] = start
 	set_sv_var,ask_sv_var,return_var,\
-	action,\
-	count = xrange(start,end)
+	action = [_event("sv") for _ in xrange(start,end)]
 class cl_event:#events that run on the client
 	start = 0
-	end = start + 16
+	end = start + 15
 
+	_event.count["cl"] = start
 	set_var,ask_var,return_sv_var,\
 	set_faction_slot,set_item_slot,set_party_slot,set_pt_slot,set_quest_slot,set_sp_slot,\
 	set_scene_slot,set_team_slot,set_agent_slot,set_troop_slot,set_player_slot,\
-	clear_items,\
-	count = xrange(start,end)
-class var:#personal settings
+	clear_items = [_event("cl") for _ in xrange(start,end)]
+class str_event:#options on sending strings
 	start = 0
-	end = start + 5
-	version,dmg_report,keep_items,nxt_scn_info,\
-	count = xrange(start,end)
-	default = {
-		version : mod_version,
-		dmg_report : 0,
-		keep_items : 1,
-		nxt_scn_info : 0,
-	}
-	default_once = {
-	}
+	end = start + 1
+
+	_event.count["str"] = start
+	set_troop_name, = [_event("str") for _ in xrange(start,end)]
+
+class _var:
+	count = {}
+	def __init__(self,typ,deff=None,deff_sv=None):
+		if not _var.count.has_key(typ):
+			print "Error: count not set for event type",typ
+			exit(1)
+		self.id = _var.count[typ]
+		self.deff = deff
+		self.deff_sv = deff_sv
+		_var.count[typ] = _var.count[typ] + 1
+class cl_var:#personal settings
+	_var.count["cl"] = 0
+	version = var("cl",deff=mod_version)
+	dmg_report = var("cl",deff=0)
+	keep_items = var("cl",deff=1)
+	nxt_scn_info = var("cl",deff=0)
+	msg_edit = var("cl",deff=1)
+	str_sending1 = var("cl",deff=-1)
+	str_sending2 = var("cl",deff=-1)
+	str_sending3 = var("cl",deff=-1)
+	str_sending4 = var("cl",deff=-1)
+	str_receiving1 = var("cl",deff=-1)
+	str_receiving2 = var("cl",deff=-1)
+	str_receiving3 = var("cl",deff=-1)
+	str_receiving4 = var("cl",deff=-1)
+	count = _var.count["cl"]
 class sv_var:#settings of the server
-	start = 0
-	end = start + 20
-	items,version,firearms_en,horses_en,peasants_en,persistant_stats,\
-	horse_jump,taunt,cheer,free_wpn,min_version,msg_cd,\
+	_var.count["sv"] = 0
+	items = var("sv",deff=packages["Native"],deff_sv=packages["Native"]|packages["WarForge"])
+	version = var("sv",deff=native,deff_sv=version)
+	firearms_en = var("sv",deff=0,deff_sv=0)
+	horses_en = var("sv",deff=1,deff_sv=1)
+	peasants_en = var("sv",deff=0,deff_sv=0)
+	persistant_stats = var("sv",deff=0,deff_sv=0)
+	count = _var.count["sv"]
+
+	firearms_en,horses_en,peasants_en,persistant_stats,\
+	horse_jump,taunt,cheer,free_wpn,min_version,msg_cd,msg_cnt,msg_cur_tm,msg_cur_id,\
 	t1_dmg_r,t1_dmg_d,t2_dmg_r,t2_dmg_d,weather_config,time_config,fog_config,\
-	count = xrange(start,end)
+	count = xrange(start,end+1)
 	default = {
-		#assume the server is Native at start
-		items: packages["Native"],
-		version: 2000,
 		firearms_en: 0,
 		horses_en: 1,
 		peasants_en: 0,
@@ -95,8 +153,11 @@ class sv_var:#settings of the server
 		taunt: 0,
 		cheer: 0,
 		free_wpn: 0,
-		min_version: -1,
+		min_version: native,
 		msg_cd: -1,
+		msg_cnt: 0,
+		msg_cur_tm: -1,
+		msg_cur_id: -1,
 		t1_dmg_d: 100,
 		t1_dmg_r: 100,
 		t2_dmg_d: 100,
@@ -106,8 +167,6 @@ class sv_var:#settings of the server
 		fog_config: 0,
 	}
 	default_sv = {
-		items: packages["Native"] | packages["WarForge"],
-		# items: packages["Peasant"],
 		version: mod_version,
 		firearms_en: 0,
 		horses_en: 1,
@@ -117,8 +176,12 @@ class sv_var:#settings of the server
 		taunt: 1,
 		cheer: 1,
 		free_wpn: 0,
-		min_version: -1,#-1 for none
+		# min_version: mod_version,
+		min_version: native,
 		msg_cd: 120,#in seconds
+		msg_cnt: 1,#how many different messages
+		msg_cur_tm: 0,
+		msg_cur_id: 0,
 		t1_dmg_d: 100,
 		t1_dmg_r: 100,
 		t2_dmg_d: 100,
@@ -130,17 +193,30 @@ class sv_var:#settings of the server
 
 class slot_player:
 	start = 80
-	end = start + 3
-	version,nxt_scn_info,count = xrange(start,end)
+	end = start + 10
+	version,nxt_scn_info,\
+	str_sending1,str_receiving1,\
+	str_sending2,str_receiving2,\
+	str_sending3,str_receiving3,\
+	str_sending4,str_receiving4,\
+	count = xrange(start,end+1)
 	default = {
-		version: 0,#0 for native
+		version: native,
 		nxt_scn_info: -1,#unknown/native player
+		str_sending1: -1,#none
+		str_sending2: -1,#none
+		str_sending3: -1,#none
+		str_sending4: -1,#none
+		str_receiving1: -1,#none
+		str_receiving2: -1,#none
+		str_receiving3: -1,#none
+		str_receiving4: -1,#none
 	}
 class slot_troop:
 	start = 0
-	end = start + 10
+	end = start + 9
 	sel_head,sel_body,sel_foot,sel_hand,sel_horse,sel_wpn1,sel_wpn2,sel_wpn3,sel_wpn4,\
-	count = xrange(start,end)
+	count = xrange(start,end+1)
 	default = {
 		sel_head: -2,#-2 for unknown, -1 for none
 		sel_body: -2,#-2 for unknown, -1 for none
@@ -154,13 +230,13 @@ class slot_troop:
 	}
 class slot_scene:
 	start = 0
-	end = start + 22
+	end = start + 21
 	available_dm,available_tdm,available_hq,available_cf,available_sg,available_bt,available_fd,available_duel,available_coop,\
 	rain_min,rain_max,\
 	rain_chance,snow_chance,\
 	fog_min,fog_max,fog_color1,fog_color2,\
 	cur_wt_typ,cur_wt_str,cur_wt_fgD,cur_wt_fgC,\
-	count = xrange(start,end)
+	count = xrange(start,end+1)
 	default = {
 		available_dm : 0,
 		available_tdm : 0,
@@ -250,9 +326,9 @@ scenes_opt = [
 		}),
 	(#desert
 		[
-			] + ["scn_town_%d_walls"%x for x in xrange(19,23)] + [
-			] + ["scn_castle_%d_exterior"%x for x in xrange(41,49)] + [
-			] + ["scn_village_%d"%x for x in xrange(91,111)] + [
+			] + [(scn.town_1_walls      + x - 1)for x in xrange(19,23)] + [
+			] + [(scn.castle_1_exterior + x - 1)for x in xrange(41,49)] + [
+			] + [(scn.village_1         + x - 1)for x in xrange(91,111)] + [
 			scn.lair_desert_bandits,
 			scn.quick_battle_scene_2,
 			scn.quick_battle_scene_4,
@@ -274,15 +350,15 @@ scenes_opt = [
 		}),
 	(#desert close
 		[
-			] + ["scn_town_%d_center"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_castle"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_tavern"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_store"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_arena"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_prison"%x for x in xrange(19,23)] + [
-			] + ["scn_town_%d_alley"%x for x in xrange(19,23)] + [
-			] + ["scn_castle_%d_interior"%x for x in xrange(41,49)] + [
-			] + ["scn_castle_%d_prison"%x for x in xrange(41,49)] + [
+			] + [(scn.town_1_center      + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_castle      + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_tavern      + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_store       + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_arena       + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_prison      + x - 1)for x in xrange(23)] + [
+			] + [(scn.town_1_alley       + x - 1)for x in xrange(23)] + [
+			] + [(scn.castle_1_interior  + x - 1)for x in xrange(41,49)] + [
+			] + [(scn.castle_1_prison    + x - 1)for x in xrange(41,49)] + [
 			#
 			scn.multi_scene_17,#The Arena
 			scn.multi_scene_20,#Desert Town
@@ -298,18 +374,18 @@ scenes_opt = [
 		}),
 	(#steppe
 		[
-			] + ["scn_town_%d_center"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_castle"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_tavern"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_store"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_arena"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_prison"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_walls"%x for x in 10,14,16,17,18] + [
-			] + ["scn_town_%d_alley"%x for x in 10,14,16,17,18] + [
-			] + ["scn_castle_%d_exterior"%x for x in 1,9,10,17,38,40] + [
-			] + ["scn_castle_%d_interior"%x for x in 1,9,10,17,38,40] + [
-			] + ["scn_castle_%d_prison"%x for x in 1,9,10,17,38,40] + [
-			] + ["scn_village_%d"%x for x in 11,12,25,28,37,40,41,42,43,44,45,52,76,88,89,90] + [
+			] + [(scn.town_1_center     + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_castle     + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_tavern     + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_store      + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_arena      + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_prison     + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_walls      + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.town_1_alley      + x - 1)for x in 10,14,16,17,18] + [
+			] + [(scn.castle_1_exterior + x - 1)for x in 1,9,10,17,38,40] + [
+			] + [(scn.castle_1_interior + x - 1)for x in 1,9,10,17,38,40] + [
+			] + [(scn.castle_1_prison   + x - 1)for x in 1,9,10,17,38,40] + [
+			] + [(scn.village_1         + x - 1)for x in 11,12,25,28,37,40,41,42,43,44,45,52,76,88,89,90] + [
 			scn.random_scene_steppe,
 			scn.random_scene_steppe_forest,
 			scn.quick_battle_2,
@@ -346,18 +422,18 @@ scenes_opt = [
 		}),
 	(#taiga
 		[
-			] + ["scn_town_%d_center"%x for x in 9,11] + [
-			] + ["scn_town_%d_castle"%x for x in 9,11] + [
-			] + ["scn_town_%d_tavern"%x for x in 9,11] + [
-			] + ["scn_town_%d_store"%x for x in 9,11] + [
-			] + ["scn_town_%d_arena"%x for x in 9,11] + [
-			] + ["scn_town_%d_prison"%x for x in 9,11] + [
-			] + ["scn_town_%d_walls"%x for x in 9,11] + [
-			] + ["scn_town_%d_alley"%x for x in 9,11] + [
-			] + ["scn_castle_%d_exterior"%x for x in 7,18,19,29,39] + [
-			] + ["scn_castle_%d_interior"%x for x in 7,18,19,29,39] + [
-			] + ["scn_castle_%d_prison"%x for x in 7,18,19,29,39] + [
-			] + ["scn_village_%d"%x for x in 16,18,19,20,21,22,49,50,62,75,85,86] + [
+			] + [scn.town_1_center     + x - 1 for x in 9,11] + [
+			] + [scn.town_1_castle     + x - 1 for x in 9,11] + [
+			] + [scn.town_1_tavern     + x - 1 for x in 9,11] + [
+			] + [scn.town_1_store      + x - 1 for x in 9,11] + [
+			] + [scn.town_1_arena      + x - 1 for x in 9,11] + [
+			] + [scn.town_1_prison     + x - 1 for x in 9,11] + [
+			] + [scn.town_1_walls      + x - 1 for x in 9,11] + [
+			] + [scn.town_1_alley      + x - 1 for x in 9,11] + [
+			] + [scn.castle_1_exterior + x - 1 for x in 7,18,19,29,39] + [
+			] + [scn.castle_1_interior + x - 1 for x in 7,18,19,29,39] + [
+			] + [scn.castle_1_prison   + x - 1 for x in 7,18,19,29,39] + [
+			] + [scn.village_1         + x - 1 for x in 16,18,19,20,21,22,49,50,62,75,85,86] + [
 			scn.lair_taiga_bandits,
 			scn.meeting_scene_snow,
 			scn.meeting_scene_snow_forest,
@@ -382,17 +458,17 @@ scenes_opt = [
 		}),
 	(#mountains
 		[
-			# ] + ["scn_town_%d_center"%x for x in ] + [
-			# ] + ["scn_town_%d_castle"%x for x in ] + [
-			# ] + ["scn_town_%d_tavern"%x for x in ] + [
-			# ] + ["scn_town_%d_store"%x for x in ] + [
-			# ] + ["scn_town_%d_arena"%x for x in ] + [
-			# ] + ["scn_town_%d_prison"%x for x in ] + [
-			# ] + ["scn_town_%d_walls"%x for x in ] + [
-			# ] + ["scn_town_%d_alley"%x for x in ] + [
-			# ] + ["scn_castle_%d_exterior"%x for x in ] + [
-			# ] + ["scn_castle_%d_interior"%x for x in ] + [
-			# ] + ["scn_castle_%d_prison"%x for x in ] + [
+			# ] + [scn.town_1_center     + x - 1 for x in ] + [
+			# ] + [scn.town_1_castle     + x - 1 for x in ] + [
+			# ] + [scn.town_1_tavern     + x - 1 for x in ] + [
+			# ] + [scn.town_1_store      + x - 1 for x in ] + [
+			# ] + [scn.town_1_arena      + x - 1 for x in ] + [
+			# ] + [scn.town_1_prison     + x - 1 for x in ] + [
+			# ] + [scn.town_1_walls      + x - 1 for x in ] + [
+			# ] + [scn.town_1_alley      + x - 1 for x in ] + [
+			# ] + [scn.castle_1_exterior + x - 1 for x in ] + [
+			# ] + [scn.castle_1_interior + x - 1 for x in ] + [
+			# ] + [scn.castle_1_prison   + x - 1 for x in ] + [
 			scn.lair_mountain_bandits,
 			#
 			scn.multi_scene_3,#Hailes Castle, Castle 1
@@ -451,22 +527,21 @@ def debug(block = []):
 
 def debug_func(func_name="script_name", args=[]):
 	if debug_mode == 0: return []
-	block = [(str_store_string, s0, "@running script %s" % func_name),]
+	block = [(str_store_string, s42, "@running script %s" % func_name),]
 	if len(args) > 0:
-		block += [(str_store_string, s0, "@{s0} with args"),]
+		block += [(str_store_string, s42, "@{s42} with args"),]
 		for argi in xrange(len(args)):
 			block += [
 				(assign, reg0, args[argi]),
-				(str_store_string, s0, "@{s0} {reg0}"),
+				(str_store_string, s42, "@{s42} {reg0}"),
 			]
-	block += [(display_message, s0),]
-	return block
+	return block + [(display_message, s42),]
 
 def cl_version(block = []):
 	if IS_CLIENT: return block
-	else: return []
+	else: return [(display_message, "@Error: running client side code on dedicated server"),]
 
 def sv_version(block = []):
 	if IS_SERVER: return block
-	else: return []
+	else: return [(display_message, "@Error: running server side code on non-server client"),]
 

@@ -1,0 +1,1 @@
+mb_warband_dedicated.exe -r 1_battle.txt -m Native

@@ -794,18 +794,157 @@ extend_syntax(item_modifier_get_value_multiplier)  # (item_modifier_get_value_mu
 
 
 #Operations
+def set_lwbr_var(var,val,sync=0):
+	return [ (call_script, script.lwbr_set_var, var, val, sync), ]
+def set_lwbr_sv_var(var,val,sync=0):
+	return [ (call_script, script.lwbr_set_sv_var, var, val, sync), ]
+def get_lwbr_var(dest,var):
+	return [ (call_script, script.lwbr_get_var, var), (assign, dest, reg42), ]
+def get_lwbr_sv_var(dest,var):
+	return [ (call_script, script.lwbr_get_sv_var, var), (assign, dest, reg42), ]
 def set_mp_item_for_troop(item,troop,val):
 	return [ (call_script, script.lwbr_set_item_for_troop, item, troop, val), ]
 def get_mp_item_for_troop(dest,item,troop):
 	return [ (call_script, script.lwbr_get_item_for_troop, item, troop), (assign, dest, reg42), ]
-def send_event_to_players(event_type=lwbr.multiplayer_event_client,i1=0,i2=2,i3=0,i4=0,f=0):
-	return [ (call_script, script.lwbr_send_event_to_players, event_type, i1, i2, i3, i4, f), ]
-def send_event_to_player(player,event_type=lwbr.multiplayer_event_client,i1=0,i2=2,i3=0,i4=0):
-	return [ (call_script, script.lwbr_send_event_to_player, player, event_type, i1, i2, i3, i4), ]
-def send_event_to_server(event_type=lwbr.multiplayer_event_server,i1=0,i2=2,i3=0,i4=0):
-	return [ (call_script, script.lwbr_send_event_to_server, event_type, i1, i2, i3, i4), ]
+slot_rel = {
+	type(fac.end):	(faction_set_slot,			faction_get_slot),
+	type(pt.end):	(party_template_set_slot,	party_template_get_slot),
+	type(p.end):	(party_set_slot,			party_get_slot),
+	type(trp.end):	(troop_set_slot,			troop_get_slot),
+	type(qst.end):	(quest_set_slot,			quest_get_slot),
+	type(itm.end):	(item_set_slot,				item_get_slot),
+	type(scn.end):	(scene_set_slot,			scene_get_slot),
+	type(spr.end):	(scene_prop_set_slot,		scene_prop_get_slot),
+}
+def set_slot(obj,slot,val):
+	if not slot_rel.has_key(type(obj)):
+		print "Error: unable to identify obj type '",obj,"'"
+		exit(1)
+	return [ (slot_rel[type(obj)][0], obj, slot, val), ]
+def get_slot(dest,obj,slot):
+	if type(dest) not in (type(l.a),type(g.a),type(reg0)):
+		print "Error: invalid destination type '",dest,"'"
+		exit(1)
+	if not slot_rel.has_key(type(obj)):
+		print "Error: unable to identify obj type '",obj,"'"
+		exit(1)
+	return [ (slot_rel[type(obj)][1], dest, obj, slot), ]
+def get_filter(f):
+	if type(f)==type("All"):
+		return lwbr.player_filter(f)
+	elif type(f) in (type(0),type(l.v),type(g.v),type(reg0)):
+		return f
+	else:
+		print "Error: invalid type for filter:",f,type(f)
+		exit(1)
+def filter_player(player,f=0):
+	f = get_filter(f)
+	return [ (call_script, script.cf_lwbr_filter_player, player, f), ]
+def send_event_to_players(event_type,i1=0,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
+	f = get_filter(f)
+	return [ (call_script, script.lwbr_send_event_to_players, event_type, i1, i2, i3, i4, f, silent), ]
+def send_event_to_player(player,event_type,i1=0,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
+	f = get_filter(f)
+	return [ (call_script, script.lwbr_send_event_to_player, player, event_type, i1, i2, i3, i4, f, silent), ]
+def send_event_to_server(event_type,i1=0,i2=2,i3=0,i4=0,silent=lwbr.verbose):
+	return [ (call_script, script.lwbr_send_event_to_server, event_type, i1, i2, i3, i4, silent), ]
+def send_str_to_players(string,i1,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
+	f = get_filter(f)
+	return [
+		(try_begin),
+			(multiplayer_is_server),
+			] + lwbr.sv_version([
+				(try_for_players, l.player),
+					(call_script, script.cf_lwbr_filter_player, l.player, f),
+					# (player_get_slot, l.r, player, lwbr.slot_player.str_receiving1),
+					# (eq, l.r, -1),
+					(try_begin),
+						(call_script, script.cf_lwbr_filter_player, l.player, get_filter("-Server")),
+						(player_set_slot, l.player, lwbr.slot_player.str_receiving1, i1),
+						(player_set_slot, l.player, lwbr.slot_player.str_receiving2, i2),
+						(player_set_slot, l.player, lwbr.slot_player.str_receiving3, i3),
+						(player_set_slot, l.player, lwbr.slot_player.str_receiving4, i4),
+						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
+							lwbr.cl_event.set_var, lwbr.var.str_receiving1, i1, 0, f, silent) + [
+						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
+							lwbr.cl_event.set_var, lwbr.var.str_receiving2, i2, 0, f, silent) + [
+						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
+							lwbr.cl_event.set_var, lwbr.var.str_receiving3, i3, 0, f, silent) + [
+						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
+							lwbr.cl_event.set_var, lwbr.var.str_receiving4, i4, 0, f, silent) + [
+					(try_end),
+					(multiplayer_send_string_to_player, l.player, lwbr.multiplayer_event_client_str, string),
+				(try_end),
+			]) + [#end lwbr.sv_version
+		(try_end),
+		]
+def send_str_to_player(player,string,i1,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
+	f = get_filter(f)
+	return [
+		(try_begin),
+			(multiplayer_is_server),
+			] + lwbr.sv_version([
+				(call_script, script.cf_lwbr_filter_player, player, f),
+				# (player_get_slot, l.r, player, lwbr.slot_player.str_receiving1),
+				# (eq, l.r, -1),
+				(try_begin),
+					(call_script, script.cf_lwbr_filter_player, player, get_filter("-Server")),
+					(player_set_slot, player, lwbr.slot_player.str_receiving1, i1),
+					(player_set_slot, player, lwbr.slot_player.str_receiving2, i2),
+					(player_set_slot, player, lwbr.slot_player.str_receiving3, i3),
+					(player_set_slot, player, lwbr.slot_player.str_receiving4, i4),
+					(send_event_to_player, player, lwbr.multiplayer_event_client,
+						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving1, i1, 0, f, silent),
+					(send_event_to_player, player, lwbr.multiplayer_event_client,
+						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving2, i2, 0, f, silent),
+					(send_event_to_player, player, lwbr.multiplayer_event_client,
+						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving3, i3, 0, f, silent),
+					(send_event_to_player, player, lwbr.multiplayer_event_client,
+						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving4, i4, 0, f, silent),
+				(try_end),
+				(multiplayer_send_string_to_player, player, lwbr.multiplayer_event_client_str, string),
+			]) + [#end lwbr.sv_version
+		(try_end),
+		]
+def send_str_to_server(string,i1,i2=0,i3=0,i4=0,silent=lwbr.verbose):
+	return [
+		(try_begin),
+			(neg|multiplayer_is_dedicated_server),
+			] + lwbr.cl_version([
+				# (get_lwbr_var, l.sending, lwbr.var.str_sending1),
+				# (eq, l.sending, -1),
+				(try_begin),
+					(neg|multiplayer_is_server),
+					] + set_lwbr_var(lwbr.var.str_sending1, i1) + [
+					] + set_lwbr_var(lwbr.var.str_sending2, i2) + [
+					] + set_lwbr_var(lwbr.var.str_sending3, i3) + [
+					] + set_lwbr_var(lwbr.var.str_sending4, i4) + [
+					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
+						lwbr.var.str_sending1, i1, 0, silent) + [
+					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
+						lwbr.var.str_sending2, i2, 0, silent) + [
+					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
+						lwbr.var.str_sending3, i3, 0, silent) + [
+					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
+						lwbr.var.str_sending4, i4, 0, silent) + [
+				(try_end),
+				(multiplayer_send_string_to_server, lwbr.multiplayer_event_server_str, string),
+			]) + [#end lwbr.cl_version
+		(try_end),
+		]
+
+extend_syntax(set_lwbr_var)			#(set_lwbr_var, var, val, <sync:no/sv->cl/cl->sv>)
+extend_syntax(set_lwbr_sv_var)		#(set_lwbr_sv_var, var, val, <sync:no/sv->cl/cl->sv>)
+extend_syntax(get_lwbr_var)			#(get_lwbr_var, dest, var)
+extend_syntax(get_lwbr_sv_var)		#(get_lwbr_sv_var, dest, var)
 extend_syntax(set_mp_item_for_troop)#(set_mp_item_for_troop, item, troop, val)
 extend_syntax(get_mp_item_for_troop)#(get_mp_item_for_troop, dest, item, troop)
-extend_syntax(send_event_to_players)#(send_event_to_players, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>, <filter>)
-extend_syntax(send_event_to_player)	#(send_event_to_player, player, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>)
-extend_syntax(send_event_to_server)	#(send_event_to_server, <event_type>, <arg1>, <arg2>, <arg3>, <arg4>)
+extend_syntax(set_slot)				#(set_slot, obj, slot, val)
+extend_syntax(get_slot)				#(get_slot, dest, obj, slot)
+extend_syntax(filter_player)		#(filter_player, player, filter)
+extend_syntax(send_event_to_players)#(send_event_to_players, event_type, <arg1>, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
+extend_syntax(send_event_to_player)	#(send_event_to_player, player, event_type, <arg1>, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
+extend_syntax(send_event_to_server)	#(send_event_to_server, event_type, <arg1>, <arg2>, <arg3>, <arg4>, <silent>)
+extend_syntax(send_str_to_players)	#(send_str_to_players, string, arg1, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
+extend_syntax(send_str_to_player)	#(send_str_to_player, player, string, arg1, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
+extend_syntax(send_str_to_server)	#(send_str_to_server, string, arg1, <arg2>, <arg3>, <arg4>, <silent>)

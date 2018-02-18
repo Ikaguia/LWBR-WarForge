@@ -1,0 +1,19 @@
+read_command_file 0_default.txt
+
+set_mission multiplayer_ccoop
+set_invasion_difficulty 1
+set_map multi_scene_1
+add_map multi_scene_4
+add_map multi_scene_7
+add_map multi_scene_9
+add_map multi_scene_11
+add_map multi_scene_12
+add_map multi_scene_14
+add_map multi_scene_17
+add_map multi_scene_18
+add_map multi_scene_19
+add_map multi_scene_20
+add_factions fac_kingdom_1 fac_ccoop_all_stars
+add_factions fac_kingdom_1 fac_outlaws
+
+start

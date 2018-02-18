@@ -1,0 +1,9 @@
+read_command_file 0_default.txt
+
+set_mission multiplayer_sg
+set_map multi_scene_3
+add_map multi_scene_8
+add_map multi_scene_10
+set_team_point_limit 10
+
+start

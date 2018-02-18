@@ -2,14 +2,14 @@ BUILD = __build_mod.py
 COMPILE = compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 DEST_LINUX = /home/cristiano/.local/share/Steam/steamapps/common/MountBlade Warband
-DEST_WINDOWS = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
 DDEST_LINUX = $(DEST_LINUX)
+DEST_WINDOWS = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
 DDEST_WINDOWS = ../wb_dedicated
 
+# DEST = $(DEST_LINUX)
+# DDEST = $(DDEST_LINUX)
 DEST = $(DEST_WINDOWS)
 DDEST = $(DDEST_WINDOWS)
-# DEST = $(DEST_LINUX)/Modules
-# DDEST = $(DDEST_LINUX)/Modules
 
 DESTM = $(DEST)/modules
 DDESTM = $(DDEST)/modules
@@ -26,7 +26,7 @@ SERVER_FILES = $(wildcard $(SERVER_V_PATH)/*)
 FULL_FILES   = $(wildcard $(FULL_V_PATH)/*)
 
 $(CLIENT_V_PATH)/variables.txt: $(PY_FILES)
-	# $(COMPILE) clientVersion
+	#$(COMPILE) clientVersion
 	@python $(COMPILE) clientVersion
 $(SERVER_V_PATH)/variables.txt: $(PY_FILES)
 	#$(COMPILE) serverVersion
@@ -53,6 +53,8 @@ _backup:
 			echo "native module backup created"; \
 			mv "$(DESTM)/Native/" "$(DESTM)/Native_backup/"; \
 		fi \
+	else \
+		echo "no native module detected"; \
 	fi
 
 _backupD:

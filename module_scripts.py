@@ -8130,6 +8130,7 @@ scripts = [
 
 			(try_begin),
 				(eq, l.event_type, lwbr.multiplayer_event_server),
+				] + lwbr.sv_version([
 				(store_script_param, l.type, 3),
 				(try_begin),
 					(neg|multiplayer_is_server),
@@ -8138,13 +8139,15 @@ scripts = [
 					(ge, l.type, lwbr.sv_event.end - 1),
 					(assign, reg0, l.type),
 					(display_message, "@Error: Unrecognized type received for lwbr.sv_event #{reg0}"),
-				inject('lwbr_inject_server_only_events'),
+					inject('lwbr_inject_server_only_events'),
 				(else_try),
 					(assign, reg0, l.type),
 					(display_message, "@Error: Untreated type received for lwbr.sv_event #{reg0}"),
 				(try_end),
+				]) + [#end lwbr.sv_version
 			(else_try),
 				(eq, l.event_type, lwbr.multiplayer_event_client),
+				] + lwbr.cl_version([
 				(store_script_param, l.type, 3),
 				(try_begin),
 					(multiplayer_is_dedicated_server),
@@ -8153,12 +8156,13 @@ scripts = [
 					(ge, l.type, lwbr.cl_event.end - 1),
 					(assign, reg0, l.type),
 					(display_message, "@Error: Unrecognized type received for lwbr.cl_event #{reg0}"),
-				inject('lwbr_inject_client_only_events'),
+					inject('lwbr_inject_client_only_events'),
 				(else_try),
 					(assign, reg0, l.type),
 					(display_message, "@Error: Untreated type received for lwbr.cl_event #{reg0}"),
 				(try_end),
-			inject('lwbr_inject_events'),
+				inject('lwbr_inject_events'),
+				]) + [#end lwbr.cl_version
 			(else_try),
 			#LWBR WarForge 2.0 --- END
 				(try_begin),

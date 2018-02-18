@@ -4,11 +4,29 @@ initial info not being sent!! why?? - Fixed, event_types need to be < 128
 send weather info - Done
 weather - Done
 items not working - Fixed
+added parts of warband ui retexture - https://forums.taleworlds.com/index.php/topic,373299.0.html
+min version -- Done
+server messages -- Done
 
-peasant and arena skill levels
-weather config in game
+
+
+
+dmg report
 keep items
+edit hotkeys
+
+log admin action and teamkills
+
+admin text
+admin cheats
+maplist config in game
 new maps
+enable/disable horses
+peasant troops
+persistant stats
+jump from horses
 taunt
+one free wpn
+modify dmg
+peasant and arena skill levels
 fall and knock down from horse
-server messages

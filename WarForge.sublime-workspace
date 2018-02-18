@@ -4,8 +4,96 @@
 		"selected_items":
 		[
 			[
+				"cai",
+				"container"
+			],
+			[
+				"text",
+				"text"
+			],
+			[
+				"get_lwbr",
+				"get_lwbr_sv_var"
+			],
+			[
+				"showmess",
+				"multiplayer_event_show_server_message"
+			],
+			[
+				"multisendme",
+				"multiplayer_send_message_to_player\t(multiplayer_send_message_to_player, <player_id>, <message_type>),"
+			],
+			[
+				"crid",
+				"cur_id"
+			],
+			[
+				"mgcr",
+				"msg_cur_tm"
+			],
+			[
+				"tet",
+				"textbox"
+			],
+			[
+				"strrece",
+				"str_receiving1"
+			],
+			[
+				"event",
+				"multiplayer_event_server"
+			],
+			[
+				"send_event",
+				"send_event_to_server"
+			],
+			[
+				"str_send",
+				"str_sending1"
+			],
+			[
+				"sendeven",
+				"send_event_to_player"
+			],
+			[
+				"sendin",
+				"str_sending1"
+			],
+			[
+				"server",
+				"server_add_message_to_log"
+			],
+			[
+				"getlwr",
+				"get_lwbr_sv_var"
+			],
+			[
+				"trp",
+				"troops"
+			],
+			[
+				"else",
+				"else_try"
+			],
+			[
 				"player",
-				"player_types"
+				"filter_player"
+			],
+			[
+				"pack",
+				"pack"
+			],
+			[
+				"lwbrsendwea",
+				"lwbr_send_weather_pl_iter"
+			],
+			[
+				"sendstrtopla",
+				"send_str_to_player"
+			],
+			[
+				"filt",
+				"player_filter"
 			],
 			[
 				"nati",
@@ -26,10 +114,6 @@
 			[
 				"scenes",
 				"_scenes"
-			],
-			[
-				"else",
-				"else_try_chance"
 			],
 			[
 				"admin",
@@ -100,10 +184,6 @@
 				"str_store_player_username"
 			],
 			[
-				"send_event",
-				"lwbr_send_event_to_player"
-			],
-			[
 				"troop_get_inv",
 				"troop_get_inventory_slot"
 			],
@@ -114,10 +194,6 @@
 			[
 				"itp_type_bo",
 				"itp_type_bow"
-			],
-			[
-				"pack",
-				"packs"
 			],
 			[
 				"sendeventtopl",
@@ -167,8 +243,25 @@
 			"file": "lwbr.py",
 			"settings":
 			{
-				"buffer_size": 13132,
+				"buffer_size": 15985,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "makefile",
+			"settings":
+			{
+				"buffer_size": 3390,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "headers/header_triggers.py",
+			"settings":
+			{
+				"buffer_size": 13656,
 				"line_ending": "Unix"
 			}
 		},
@@ -176,17 +269,17 @@
 			"file": "plugin_lwbr_main.py",
 			"settings":
 			{
-				"buffer_size": 78093,
+				"buffer_size": 88938,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "module_scripts.py",
+			"file": "plugin_ms_extension.py",
 			"settings":
 			{
-				"buffer_size": 2140342,
-				"line_ending": "Windows"
+				"buffer_size": 40136,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -201,7 +294,7 @@
 			"file": "TODO",
 			"settings":
 			{
-				"buffer_size": 290,
+				"buffer_size": 612,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -224,6 +317,22 @@
 			[
 				"Packages/Makefile/Make.sublime-build",
 				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
 			]
 		],
 		[
@@ -355,7 +464,7 @@
 			],
 			[
 				"Packages/User/make_wb.sublime-build",
-				"server"
+				""
 			]
 		],
 		[
@@ -455,13 +564,77 @@
 			]
 		]
 	],
-	"build_varint": "server",
+	"build_varint": "",
 	"command_palette":
 	{
-		"height": 320.0,
-		"last_filter": "Package Control: ",
+		"height": 392.0,
+		"last_filter": "color ",
 		"selected_items":
 		[
+			[
+				"color ",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"mb",
+				"Set Syntax: MB Warband API"
+			],
+			[
+				"pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"mb war",
+				"Set Syntax: MB Warband API"
+			],
+			[
+				"colorsc",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"colorpick",
+				"Color Picker"
+			],
+			[
+				"color scheme",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"extract su",
+				"Extract Sublime Package: Extract all packages"
+			],
+			[
+				"installpacka",
+				"Package Control: Install Package"
+			],
+			[
+				"colorsche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"pyt\t",
+				"Set Syntax: Python"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
@@ -471,7 +644,7 @@
 				"Build With: make_full"
 			]
 		],
-		"width": 412.0
+		"width": 964.0
 	},
 	"console":
 	{
@@ -518,54 +691,106 @@
 	],
 	"file_history":
 	[
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_constants.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_mission_templates.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/.gitignore",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/mod/__/make_wb.sublime-build",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/User/make_wb.sublime-build",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_triggers.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_make_presentations.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_scripts.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_scenes.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_ms_extension.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/mod/common/SceneObj/scn_village_109.sco",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_strings.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_troops.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_parties.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_common.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/compile.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_scenes.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/compiler.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/Color Scheme - Default/Monokai.tmTheme",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_triggers.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/makefile",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/test.mb",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_operations.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/__fix_identation.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_lwbr_main.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/mb_warband_api.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/Main.sublime-menu",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/!test.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/add_companion_party.sublime-snippet",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/neq.sublime-snippet",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/test.txt",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/new_test.txt",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/agent_set_reload_speed_modifier.sublime-snippet",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/syntax_test_WB.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/__magic__.sublime-snippet",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Completion Rules.tmPreferences",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Miscellaneous.tmPreferences",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Regular Expressions (WB).sublime-syntax",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Symbol Index.tmPreferences",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Symbol List.tmPreferences",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/syntax_test_python_strings.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/WB.sublime-syntax",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Python.sublime-syntax",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Regular Expressions (Python).sublime-syntax",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_end.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Snippets/for.sublime-snippet",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/wb/Python.sublime-build",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/lwbr.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_animations.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_constants.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_dialogs.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_factions.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_game_menus.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_info.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/mb_warband_api.tmLanguage",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_meshes.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_map_icons.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_info_pages.py",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/C++/C.sublime-syntax",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/C++/C++.sublime-syntax",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/python",
+		"/C/Program Files/Sublime Text 3/Packages/Color Scheme - Default.sublime-package",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/ColorPicker.sublime-settings",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/TODO",
+		"/C/Users/Cristiano/AppData/Local/Temp/Rar$DIa9664.34723/mb_warband_api.tmLanguage",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/mb_warband_api.JSON-tmLanguage",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/mb_warband_api.sublime-settings",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/messages.json",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/README.md",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/warband_api_help_en.json",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/mb-warband-api/Main.sublime-menu.template",
+		"/C/Users/Cristiano/AppData/Local/Temp/Rar$DIa12616.30944/mb_warband_api.JSON-tmLanguage",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/package-metadata.json",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/README.md",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/.no-sublime-package",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Installed Packages/MB Warband API.sublime-package",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Installed Packages/0_package_control_loader.sublime-package",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Installed Packages/Package Control.sublime-package",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/Default (Windows).sublime-keymap",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/Main.sublime-menu",
+		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/ColorPicker.sublime-commands",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/mod/common/Textures/Readme.txt",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_multiplayer_troops.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_mission_templates.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_parties.py",
+		"/C/Users/Cristiano/Desktop/LWBR-WarForge/makefile",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_quests.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_scene_props.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_operations.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_particle_systems.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_common.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_troops.py",
 		"/C/Users/Cristiano/Desktop/wb_dedicated/0_default.txt",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_triggers.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_mission_templates.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_multiplayer_troops.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_make_presentations.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_lwbr_main.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/__fix_identation.py",
-		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/User/make_wb.sublime-build",
 		"/C/Users/Cristiano/Desktop/wb_dedicated/readme.txt",
 		"/C/Users/Cristiano/Desktop/wb_dedicated/battle.txt",
 		"/C/Users/Cristiano/Desktop/wb_dedicated/default.txt",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_presentations.py",
 		"/C/Users/Cristiano/Dropbox/Module_System/WB/1.158/WB_1.158_LWBR/Serverside/module_scenes.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_game_menus.py",
 		"/C/Users/Cristiano/Dropbox/Module_System/WB/1.163/LWBR_WarForge/module_scenes.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/TODO",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_items.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/.gitignore",
 		"/C/Users/Cristiano/Documents/Paradox Interactive/Europa Universalis IV/custom nations/Mengkonkia.cst",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_skills.py",
 		"/C/Program Files/Git/etc/profile.d/aliases.sh",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/plugin_ms_extension.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/headers/header_items.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/compile.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_factions.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_skins.py",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_party_templates.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_map_icons.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_dialogs.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_animations.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_info.py",
 		"/C/Users/Cristiano/Dropbox/Module_System/WB/1.158/WB_1.158_LWBR/Serverside/module_scripts.py",
 		"/C/Program Files (x86)/Steam/appcache/stats/UserGameStats_92572678_48700.bin",
 		"/C/Users/Cristiano/Dropbox/Module_System/WB/1.163/LWBR_WarForge/module_scripts.py",
@@ -583,7 +808,6 @@
 		"/C/Program Files/Git/etc/profile.d/bash_profile.sh",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/mod/common/module.ini",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/module_aaa.py",
-		"/C/Users/Cristiano/Desktop/LWBR-WarForge/lwbr.py",
 		"/C/Users/Cristiano/Downloads/Native 1.171/module_scripts.py",
 		"/C/Users/Cristiano/Downloads/mb_warband_module_system_1171.zip",
 		"/C/Users/Cristiano/Desktop/LWBR-WarForge/__build_mod.py",
@@ -594,58 +818,7 @@
 		"/C/Users/Cristiano/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Program Files/Git/etc/profile.d/perlbin.csh",
 		"/C/Program Files/Git/etc/profile.d/perlbin.sh",
-		"/C/Program Files/Git/etc/profile.d/lang.sh",
-		"/C/Program Files/Git/etc/profile.d/git-prompt.sh",
-		"/C/Program Files/Git/etc/profile.d/env.sh",
-		"/C/Program Files/Git/etc/bash.bash_logout",
-		"/C/Program Files/Git/etc/vimrc",
-		"/C/Program Files/Git/etc/bash.bashrc",
-		"/C/Program Files/Sublime Text 3/sublime.py",
-		"/C/Program Files/Sublime Text 3/sublime_plugin.py",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos/jogos.txt",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos_2/10.2. Dê o par de discordância entre os seguintes",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos_2/menu.cpp",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos/batata.c",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos/batata.h",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos/menu.c",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos_2/batata.cpp",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos_2/batata.h",
-		"/C/Users/Cristiano/Dropbox/UNB/Github/potato-batata/jogos/09_snake/main.c",
-		"/C/Users/Cristiano/Dropbox/UNB/logica computacional 1/lc1_20161_trab2.cpp",
-		"/C/Users/Cristiano/Dropbox/UNB/logica computacional 1/lc1_20161_trab1.cpp",
-		"/C/Users/Cristiano/Dropbox/UNB/logica computacional 1/lc1_20161_trab1.c",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_items.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_scenes.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_strings.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_meshes.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_dialogs.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/readme.txt",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_presentations.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_scripts.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_game_menus.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_parties.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_factions.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_mission_templates.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_simple_triggers.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_constants.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_troops.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_party_templates.py",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_strings.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_troops.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_simple_triggers.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_scripts.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_presentations.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_meshes.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_game_menus.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_dialogs.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 diffs/module_constants.py.diff",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/V1_20 files/module_constants.py",
-		"/C/Users/Cristiano/Downloads/Warband/Lav_CompanionsOverseer_V1_20/Lav_CompanionsOverseer_V1_20/operations bugfix/header_operations.py",
-		"/C/Users/Cristiano/Downloads/Warband/Tournament Play Enhancements 1_5 - Modmerger Kit-3523-1-5/TPE 1.5/Source/TPE 1.5a - Just TPE/tournament_scripts.py",
-		"/C/Users/Cristiano/Downloads/Warband/Tournament Play Enhancements 1_5 - Modmerger Kit-3523-1-5/TPE 1.5/Source/Modmerger/util_scripts.py",
-		"/C/Users/Cristiano/Downloads/Warband/nativebatata/module_quests.py",
-		"/C/Users/Cristiano/Downloads/Warband/Tournament Play Enhancements 1_5 - Modmerger Kit-3523-1-5/TPE 1.5/Source/TPE 1.5a - Just TPE/tournament_quests.py",
-		"/C/Users/Cristiano/Downloads/Warband/Tournament Play Enhancements 1_5 - Modmerger Kit-3523-1-5/TPE 1.5/Source/TPE 1.5a - Just TPE/tournament_dialogs.py"
+		"/C/Program Files/Git/etc/profile.d/lang.sh"
 	],
 	"find":
 	{
@@ -665,134 +838,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"init_player",
-			"508",
-			"lwbr_all_slots_to_def",
+			"clear",
+			"cl",
+			"0",
+			"_event",
+			"key",
+			"action",
+			"taunt",
+			"sv_var.msg",
+			"packs",
+			"textbox",
+			"msg_edit",
+			"l.cnt",
+			"cnt",
+			"list",
+			"opt = opts[opti]",
+			"msg_cnt",
 			"lwbr_server_start",
-			"lwbr_calc_weather",
-			"21 ",
-			"21",
-			"calc_weather",
-			"foo__debug_vars",
-			"lwbr_open_menu_overlay",
-			"foo__debug_vars",
-			"foo__add_rnd_itp",
-			"lwbr_init_scene",
+			"_start",
+			"troop_set_name",
+			"textbox",
+			"send_str_to_server",
+			"s0",
+			"multiplayer_event_show_server_message",
+			"event_show_m",
+			"script_show_multiplayer_message",
+			"send_weather",
+			"to player",
+			"send_str_",
+			"1",
+			"this_or_next",
+			"filter_player",
+			"lwbr_set_var",
+			"1",
+			"silent=0",
+			"silent",
+			",",
+			"to_server",
+			"textbox",
+			"\"WarForge\"",
+			"msg_strings_begin",
+			"send_event_to_player",
+			"silent",
+			"send_event_to_player",
+			"msg_",
+			"msg_troops_begin",
+			"msg_troops_begin\n",
+			"msg_troops_begin",
+			"set_sv_var",
+			"str_store_troop_name",
+			"multiplayer_event_show_server_message",
+			"1",
+			"multiplayer_event_show_server_message",
+			"start = ",
+			"start",
+			"multiplayer_event_show_server_message",
+			"111",
+			"combo_button",
+			"multiplayer_event_show_server_message",
+			"textbo",
+			"[:",
+			"lwbr",
+			"failed",
+			"textbox",
+			"sv_event.lwbr_return_var",
+			"sv_event.lwbr",
+			"combo_button",
+			"lwbr.sync_to_sv",
+			"multiplayer_event_client",
+			"set_lwbr_",
+			"1)",
+			"1",
+			"send_event_to_player",
+			"str_sending",
+			"lwbr.var",
+			"eq",
+			", 1)",
+			"(eq",
+			"-1",
+			"set_lwbr_var",
+			"str_receiving1",
+			"player_get_slot",
+			"get_lwbr_var",
+			"sending",
+			"1",
+			"multiplayer_event_return_str",
+			"event",
+			"return_var",
+			"create_text_box_overlay",
+			"text",
+			"overlay",
+			"text",
+			"sv_var",
+			"event_type=",
+			"i1=0",
+			"<arg1>",
+			"f, silent",
+			"lwbr.str_event, string",
+			"event",
+			"0, silent",
+			"0",
 			" player,",
-			" player ",
-			"ask_player_info",
-			"lwbr_send_weather_info",
-			"foo__lwbr_init_player",
-			"script.lwbr_player_start",
-			"lwbr_slots_initialized_once",
-			"lwbr_slots_initialized",
-			"init_vars",
-			"lwbr_init_var",
-			"pl_types",
-			"player_types",
-			"version",
-			"req_adm",
-			"inject",
-			"lwbr_inject_init_item_slots",
-			"default",
-			"troop",
-			"l.player",
-			"l.troop",
+			"player,",
 			"player",
-			"foo__lwbr_init_troop",
-			"server_start",
-			"troop_slot",
-			"foo__lwbr_init_troop",
-			"foo__lwbr_init_player",
-			"player_joined",
-			"foo__lwbr_init_player",
-			"foo__lwbr_init_scene(",
-			"foo__lwbr_init_scene",
-			"foo__server_ask_player_info",
-			"foo__server_send_player_info",
-			"scenes",
-			"lwbr_send_weather_info",
-			"nxt_scn",
-			"\t\t],{",
-			"enterprise",
-			"init_scen",
-			"val_mul",
-			"#coast",
-			"#forest",
-			"#mountain",
-			"#taiga",
-			"#steppe",
-			"steppe",
-			"\t#desert\n",
-			"plains",
-			"lwbr_calc_weather",
-			"lwbr_init_scenes",
-			"script.lwbr_calc_weather",
-			"l.g",
-			"l.r",
-			"sv_var",
-			"nxt_scn_info",
-			"set_scene_slot",
-			"lwbr_set_weather",
-			"scene_slot",
-			"nxt_scn_info",
-			"last_scn_weather_sent",
-			"weather_",
-			"nxt_scn",
-			"version",
-			"\"$g_time_of_day\"",
-			"time_of_day",
-			"first_frame",
-			"mission_cam_set_target_agent",
-			"cast_ray",
-			"\"count\"",
-			"sv_var",
-			"common",
-			"multiplayer",
-			"common",
-			"display_m",
-			"\"$g_lwbr",
-			"\"$lwbr",
-			"g.lwbr_",
-			"lwbr_inject_init_vars",
-			"lwbr_init_vars",
-			"script.lwbr_init_vars",
-			"lwbr_init_vars",
-			"init_item_slots",
-			"wt_tim",
-			"time_config",
-			"l.tim,",
-			"l.tim",
-			"tim",
-			"scene",
-			"weather_config",
-			"wt_config",
-			"info ",
-			"invalid type",
-			"sp.",
-			"party",
-			"team",
-			"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t ",
-			"team",
-			"party",
-			"quest",
-			"pt",
-			".pt",
-			"_pt_",
-			"pt_",
-			"pt",
-			"party",
-			"item",
-			"faction",
-			"set_faction_slot",
-			"cl_event.",
-			"cl_event",
-			"particle",
-			"\n\t\t",
-			"server_start",
-			"lwbr_send_weather_info",
-			"scn.end",
-			"len(_scenes)"
+			"1",
+			"receiving",
+			"str_receiving",
+			"str_sending",
+			",str_receiving",
+			"str_sending",
+			"str_sending1",
+			"lwbr",
+			"send_event_to_server",
+			"send_event_to_player",
+			"set_lwbr_sv_var",
+			"send_str_to_player",
+			"set_lwbr_var",
+			"lwbr.cl_event, lwbr_set_var",
+			"1",
+			"l.",
+			"send_str_to_player",
+			"1",
+			"str_send",
+			"g1",
+			"str_send",
+			"start",
+			"1",
+			"send_event_to_player",
+			"lwbr_send_weather_info"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -833,53 +1006,52 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13132,
+						"buffer_size": 15985,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1792,
-								1792
+								3677,
+								3677
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
+							"syntax": "Packages/wb/WB.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 450.0,
+						"translation.y": 1924.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "plugin_lwbr_main.py",
+					"file": "makefile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 78093,
+						"buffer_size": 3390,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								56364,
-								56364
+								1645,
+								1645
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 25984.0,
+						"translation.y": 576.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -887,35 +1059,94 @@
 				},
 				{
 					"buffer": 2,
-					"file": "module_scripts.py",
+					"file": "headers/header_triggers.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2140342,
+						"buffer_size": 13656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								388355,
-								388355
+								10488,
+								10498
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/wb/WB.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 146314.0,
+						"translation.y": 4312.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "plugin_lwbr_main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 88938,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								66598,
+								66598
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/wb/WB.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 32032.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "plugin_ms_extension.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21195,
+								21195
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/wb/WB.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9784.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "headers/header_operations.py",
 					"semi_transient": false,
 					"settings":
@@ -927,37 +1158,37 @@
 						"selection":
 						[
 							[
-								262392,
-								262395
+								10515,
+								10518
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
+							"syntax": "Packages/wb/WB.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 49636.0,
+						"translation.y": 3106.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "TODO",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 290,
+						"buffer_size": 612,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								113,
-								113
+								360,
+								360
 							]
 						],
 						"settings":
@@ -965,7 +1196,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 18.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -1007,7 +1238,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 253.0
+		"height": 308.0
 	},
 	"output.find_results":
 	{
@@ -1027,6 +1258,166 @@
 		"selected_items":
 		[
 			[
+				"makef",
+				"makefile"
+			],
+			[
+				"hetrigg",
+				"headers\\header_triggers.py"
+			],
+			[
+				"headerrti",
+				"headers\\header_triggers.py"
+			],
+			[
+				"mxe",
+				"plugin_ms_extension.py"
+			],
+			[
+				"modulescrip",
+				"module_scripts.py"
+			],
+			[
+				"msex",
+				"plugin_ms_extension.py"
+			],
+			[
+				"msx",
+				"plugin_ms_extension.py"
+			],
+			[
+				"109",
+				"mod\\common\\SceneObj\\scn_village_109.sco"
+			],
+			[
+				"string",
+				"module_strings.py"
+			],
+			[
+				"troop",
+				"module_troops.py"
+			],
+			[
+				"hecomm",
+				"headers\\header_common.py"
+			],
+			[
+				"heacoo",
+				"headers\\header_common.py"
+			],
+			[
+				"compi",
+				"compile.py"
+			],
+			[
+				"compiler",
+				"compiler.py"
+			],
+			[
+				"makepre",
+				"plugin_make_presentations.py"
+			],
+			[
+				"headercomm",
+				"headers\\header_common.py"
+			],
+			[
+				"scripts",
+				"module_scripts.py"
+			],
+			[
+				"heatrg",
+				"headers\\header_triggers.py"
+			],
+			[
+				"trigger",
+				"module_triggers.py"
+			],
+			[
+				"opera",
+				"headers\\header_operations.py"
+			],
+			[
+				"moduletroop",
+				"module_troops.py"
+			],
+			[
+				"scenes",
+				"module_scenes.py"
+			],
+			[
+				"heoper",
+				"headers\\header_operations.py"
+			],
+			[
+				"tdo",
+				"TODO"
+			],
+			[
+				"lwbrmain",
+				"plugin_lwbr_main.py"
+			],
+			[
+				"pu",
+				"plugin_end.py"
+			],
+			[
+				"lwmi",
+				"plugin_lwbr_main.py"
+			],
+			[
+				"strings",
+				"module_strings.py"
+			],
+			[
+				"modulscrip",
+				"module_scripts.py"
+			],
+			[
+				"const",
+				"module_constants.py"
+			],
+			[
+				"htrige",
+				"headers\\header_triggers.py"
+			],
+			[
+				"oper",
+				"headers\\header_operations.py"
+			],
+			[
+				"mxex",
+				"mod\\common\\Textures\\Readme.txt"
+			],
+			[
+				"ex",
+				"plugin_ms_extension.py"
+			],
+			[
+				"makeprese",
+				"plugin_make_presentations.py"
+			],
+			[
+				"present",
+				"plugin_make_presentations.py"
+			],
+			[
+				"consta",
+				"module_constants.py"
+			],
+			[
+				"modinfo",
+				"module_info.py"
+			],
+			[
+				"multitrop",
+				"plugin_multiplayer_troops.py"
+			],
+			[
+				"pluginmse",
+				"plugin_ms_extension.py"
+			],
+			[
 				"scr",
 				"module_scripts.py"
 			],
@@ -1035,24 +1426,8 @@
 				"module_mission_templates.py"
 			],
 			[
-				"scripts",
-				"module_scripts.py"
-			],
-			[
-				"const",
-				"module_constants.py"
-			],
-			[
-				"strings",
-				"module_strings.py"
-			],
-			[
 				"scene",
 				"module_scenes.py"
-			],
-			[
-				"string",
-				"module_strings.py"
 			],
 			[
 				"script",
@@ -1069,14 +1444,6 @@
 			[
 				"parti",
 				"module_parties.py"
-			],
-			[
-				"troop",
-				"module_troops.py"
-			],
-			[
-				"compiler",
-				"compiler.py"
 			],
 			[
 				"modultri",
@@ -1111,10 +1478,6 @@
 				"headers\\header_operations.py"
 			],
 			[
-				"opera",
-				"headers\\header_operations.py"
-			],
-			[
 				"heroper",
 				"headers\\header_operations.py"
 			],
@@ -1127,10 +1490,6 @@
 				"module_particle_systems.py"
 			],
 			[
-				"scenes",
-				"module_scenes.py"
-			],
-			[
 				"module_scene",
 				"module_scenes.py"
 			],
@@ -1141,14 +1500,6 @@
 			[
 				"headeopera",
 				"headers\\header_operations.py"
-			],
-			[
-				"consta",
-				"module_constants.py"
-			],
-			[
-				"headercomm",
-				"headers\\header_common.py"
 			],
 			[
 				"heatroop",
@@ -1179,20 +1530,12 @@
 				"headers\\header_triggers.py"
 			],
 			[
-				"heoper",
-				"headers\\header_operations.py"
-			],
-			[
 				"pluginmutroop",
 				"plugin_multiplayer_troops.py"
 			],
 			[
 				"multitroop",
 				"plugin_multiplayer_troops.py"
-			],
-			[
-				"makepre",
-				"plugin_make_presentations.py"
 			],
 			[
 				"mi",
@@ -1211,14 +1554,6 @@
 				"headers\\header_common.py"
 			],
 			[
-				"modulescrip",
-				"module_scripts.py"
-			],
-			[
-				"lwbrmain",
-				"plugin_lwbr_main.py"
-			],
-			[
 				"missionte",
 				"module_mission_templates.py"
 			],
@@ -1233,10 +1568,6 @@
 			[
 				"headecomm",
 				"headers\\header_common.py"
-			],
-			[
-				"makef",
-				"makefile"
 			],
 			[
 				"makefil",
@@ -1327,10 +1658,6 @@
 				"module_items.py"
 			],
 			[
-				"compi",
-				"compile.py"
-			],
-			[
 				"heditem",
 				"headers\\header_items.py"
 			],
@@ -1345,10 +1672,6 @@
 			[
 				"com",
 				"compiler.py"
-			],
-			[
-				"makeprese",
-				"plugin_make_presentations.py"
 			],
 			[
 				"multitroo",
@@ -1369,10 +1692,6 @@
 			[
 				"ope",
 				"headers\\header_operations.py"
-			],
-			[
-				"multitrop",
-				"plugin_multiplayer_troops.py"
 			],
 			[
 				"msexte",
@@ -1419,10 +1738,6 @@
 				"plugin_multiplayer_troops.py"
 			],
 			[
-				"oper",
-				"headers\\header_operations.py"
-			],
-			[
 				"plgun",
 				"plugin_ms_extension.py"
 			],
@@ -1453,30 +1768,6 @@
 			[
 				"module.ini",
 				"mod\\common\\module.ini"
-			],
-			[
-				"present",
-				"module_presentations.py"
-			],
-			[
-				"common",
-				"headers\\header_common.py"
-			],
-			[
-				"moduleaaa",
-				"module_aaa.py"
-			],
-			[
-				"fixide",
-				"__fix_identation.py"
-			],
-			[
-				"build",
-				"__build_mod.py"
-			],
-			[
-				"pres",
-				"module_presentations.py"
 			]
 		],
 		"width": 0.0

@@ -1,0 +1,34 @@
+{
+	// "cmd": ["echo", "${file_path/\\\\/\\//g}"],
+	"cmd": ["bash", "-l", "-c", "make full"],
+	"variants": [
+		{
+			"name": "client",
+			"cmd": ["bash", "-l", "-c", "make cl"],
+		},
+		{
+			"name": "server",
+			"cmd": ["bash", "-l", "-c", "make sv"],
+		},
+		{
+			"name": "run",
+			"cmd": ["steam", "-applaunch", "48700", "-sm", "Native"],
+		},
+		{
+			"name": "build_all",
+			"cmd": ["bash", "-l", "-c", "make build_all"],
+		},
+		{
+			"name": "git add",
+			"cmd": ["bash", "-l", "-c", "git add ."],
+		},
+		{
+			"name": "git commit",
+			"cmd": ["bash", "-l", "-c", "git commit -m autoCommit_via_sublime"],
+		},
+		{
+			"name": "git push",
+			"cmd": ["bash", "-l", "-c", "git push"],
+		},
+	],
+}

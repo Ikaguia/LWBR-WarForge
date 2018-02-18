@@ -2,21 +2,30 @@ from compiler import *
 register_plugin(__name__)
 
 class typ:
-	blank,open_container,close_container,text,checkbox,numbox,button,combo_button,code = xrange(9)
+	blank,open_container,close_container,text,checkbox,numbox,button,combo_button,textbox,code = xrange(10)
 
 	def_y_sz = 30
 	y_sz = {
 		open_container: 0,
 		close_container: 1.33 * def_y_sz,
+		button: 2 * def_y_sz,
 		code: 0,
 		combo_button: 2.5 * def_y_sz,
+		textbox: 2 * def_y_sz,
+	}
+	def_x_sz = 0
+	x_sz = {
+		button: 85,
+		textbox: -125,
 	}
 def y_sz(tp):
 	if typ.y_sz.has_key(tp): return typ.y_sz[tp]
 	return typ.def_y_sz
-def get_x(in_container):
-	if in_container: return 10
-	return 300
+def get_x(in_container,tp=-1):
+	x = typ.def_x_sz
+	if typ.x_sz.has_key(tp): x = typ.x_sz[tp]
+	if in_container: return x + 10
+	return x + 300
 
 
 
@@ -37,7 +46,9 @@ def make_presentation(name,flags,args,opts):
 	]
 	in_container = False
 	for opti in xrange(len(opts)):
-		opt = opts[opti]
+		opt = list(opts[opti])
+
+		opt[0] = abs(opt[0])
 
 		load += [(assign,l.cur_overlay,0),]
 
@@ -57,7 +68,7 @@ def make_presentation(name,flags,args,opts):
 					(val_sub,l.cur_y,opt[2]),
 					(str_clear,s0),
 					(create_text_overlay, l.cur_overlay, s0, tf_scrollable),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]), l.cur_y),
 					(overlay_set_area_sz, l.cur_overlay, opt[1], opt[2]),
 					(set_container_overlay, l.cur_overlay),
 					(assign,l.out_y,l.cur_y),
@@ -76,7 +87,7 @@ def make_presentation(name,flags,args,opts):
 			elif opt[0] == typ.code:
 				#
 				load += opt[1]
-			load += [(val_sub,l.cur_y,y_sz(opt[0])),]
+			load += [(val_sub,l.cur_y, y_sz(opt[0])),]
 		else:
 			load += [
 				(try_begin),
@@ -87,31 +98,31 @@ def make_presentation(name,flags,args,opts):
 				load += [
 					(create_text_overlay, l.cur_overlay, "@"+opt[1]),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]), l.cur_y - (y_sz(opt[0])/2)),
 				]
 			elif opt[0] == typ.checkbox:
 				load += [
 					(create_text_overlay, l.cur_overlay, "@"+opt[1]),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container) + 30, l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]) + 30, l.cur_y - (y_sz(opt[0])/2)),
 					(create_check_box_overlay, l.cur_overlay, mesh.checkbox_off, mesh.checkbox_on),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y+5),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]),      l.cur_y - (y_sz(opt[0])/2)),
 					(overlay_set_val, l.cur_overlay, l.val),
 				]
 			elif opt[0] == typ.numbox:
 				load += [
 					(create_text_overlay, l.cur_overlay, "@"+opt[1]),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container) + 75, l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]) + 75, l.cur_y - (y_sz(opt[0])/2)),
 					(create_number_box_overlay, l.cur_overlay, opt[4], opt[5]),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]),      l.cur_y - (y_sz(opt[0])/2)),
 					(overlay_set_val, l.cur_overlay, l.val),
 				]
 			elif opt[0] == typ.button:
 				load += [
-					(create_button_overlay, l.cur_overlay, "@"+opt[1]),
+					(create_game_button_overlay, l.cur_overlay, "@"+opt[1]),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]), l.cur_y - (y_sz(opt[0])/2)),
 				]
 			elif opt[0] == typ.combo_button:
 				load += [(try_begin),]
@@ -119,16 +130,31 @@ def make_presentation(name,flags,args,opts):
 				load += [
 					(create_text_overlay, l.cur_overlay, "@"+opt[1]),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container), l.cur_y),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]),       l.cur_y - (y_sz(opt[0])/4)),
 
 					(create_combo_button_overlay, l.cur_overlay),
 					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
-					(overlay_set_pos, l.cur_overlay, get_x(in_container)+140, l.cur_y - (1.25*y_sz(typ.text))),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]) + 140, l.cur_y - (3*y_sz(opt[0])/4)),
 				]
 				for combo_opt in opt[4]: load += [(overlay_add_item, l.cur_overlay, "@"+combo_opt),]
 				load += [(try_end),]
+			elif opt[0] == typ.textbox:
+				load += [(try_begin),]
+				load += opt[2]
+				load += [
+					(create_text_overlay, l.cur_overlay, "@"+opt[1]),
+					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,typ.text),     l.cur_y - (y_sz(opt[0])/4)),
+
+					(create_simple_text_box_overlay, l.cur_overlay),
+					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
+					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]) + 125, l.cur_y - (3*y_sz(opt[0])/4)),
+					(overlay_set_sz, l.cur_overlay, 350, 1000),
+					(overlay_set_text, l.cur_overlay, "@{s0}"),
+				]
+				load += [(try_end),]
 			load += [
-					(val_sub,l.cur_y,y_sz(opt[0])),
+					(val_sub, l.cur_y, y_sz(opt[0])),
 				(try_end),
 			]
 
@@ -142,16 +168,27 @@ def make_presentation(name,flags,args,opts):
 		#
 	]
 	for opti in xrange(len(opts)):
-		opt = opts[opti]
+		opt = list(opts[opti])
+
+		reset = False
+		if opt[0] < 0:
+			reset = True
+			opt[0] *= -1
+
 		change += [
 			(else_try),
 				(troop_get_slot, l.check, trp.lwbr_prsnt_vars, opti),
 				(eq, l.obj, l.check)
 		]
-		if opt[0] in (typ.checkbox,typ.numbox,typ.button,typ.combo_button):
+		if opt[0] in (typ.checkbox,typ.numbox,typ.button,typ.combo_button,typ.textbox):
 			change += opt[3]
 		else:
 			change += [(display_message,"@This should never appear: %d"%opti),]
+		if reset:
+			change += [
+				(presentation_set_duration, 0),
+				(start_presentation, "prsnt_%s"%name),
+				]
 
 	change += [(try_end),]
 

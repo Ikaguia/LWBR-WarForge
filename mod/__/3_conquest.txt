@@ -1,0 +1,10 @@
+read_command_file 0_default.txt
+
+set_mission multiplayer_hq
+set_map multi_scene_1
+add_map multi_scene_2
+add_map multi_scene_4
+add_map multi_scene_11
+add_map multi_scene_12
+
+start
