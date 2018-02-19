@@ -856,22 +856,22 @@ def send_str_to_players(string,i1,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
 			] + lwbr.sv_version([
 				(try_for_players, l.player),
 					(call_script, script.cf_lwbr_filter_player, l.player, f),
-					# (player_get_slot, l.r, player, lwbr.slot_player.str_receiving1),
+					# (player_get_slot, l.r, player, lwbr.player_slots["str_receiving1"].id),
 					# (eq, l.r, -1),
 					(try_begin),
 						(call_script, script.cf_lwbr_filter_player, l.player, get_filter("-Server")),
-						(player_set_slot, l.player, lwbr.slot_player.str_receiving1, i1),
-						(player_set_slot, l.player, lwbr.slot_player.str_receiving2, i2),
-						(player_set_slot, l.player, lwbr.slot_player.str_receiving3, i3),
-						(player_set_slot, l.player, lwbr.slot_player.str_receiving4, i4),
+						(player_set_slot, l.player, lwbr.player_slots["str_receiving1"].id, i1),
+						(player_set_slot, l.player, lwbr.player_slots["str_receiving2"].id, i2),
+						(player_set_slot, l.player, lwbr.player_slots["str_receiving3"].id, i3),
+						(player_set_slot, l.player, lwbr.player_slots["str_receiving4"].id, i4),
 						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
-							lwbr.cl_event.set_var, lwbr.var.str_receiving1, i1, 0, f, silent) + [
+							lwbr.cl_event.set_var, lwbr.cl_vars["str_receiving1"].id, i1, 0, f, silent) + [
 						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
-							lwbr.cl_event.set_var, lwbr.var.str_receiving2, i2, 0, f, silent) + [
+							lwbr.cl_event.set_var, lwbr.cl_vars["str_receiving2"].id, i2, 0, f, silent) + [
 						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
-							lwbr.cl_event.set_var, lwbr.var.str_receiving3, i3, 0, f, silent) + [
+							lwbr.cl_event.set_var, lwbr.cl_vars["str_receiving3"].id, i3, 0, f, silent) + [
 						] + send_event_to_player(l.player, lwbr.multiplayer_event_client,
-							lwbr.cl_event.set_var, lwbr.var.str_receiving4, i4, 0, f, silent) + [
+							lwbr.cl_event.set_var, lwbr.cl_vars["str_receiving4"].id, i4, 0, f, silent) + [
 					(try_end),
 					(multiplayer_send_string_to_player, l.player, lwbr.multiplayer_event_client_str, string),
 				(try_end),
@@ -885,22 +885,22 @@ def send_str_to_player(player,string,i1,i2=2,i3=0,i4=0,f=0,silent=lwbr.verbose):
 			(multiplayer_is_server),
 			] + lwbr.sv_version([
 				(call_script, script.cf_lwbr_filter_player, player, f),
-				# (player_get_slot, l.r, player, lwbr.slot_player.str_receiving1),
+				# (player_get_slot, l.r, player, lwbr.player_slots["str_receiving1"].id),
 				# (eq, l.r, -1),
 				(try_begin),
 					(call_script, script.cf_lwbr_filter_player, player, get_filter("-Server")),
-					(player_set_slot, player, lwbr.slot_player.str_receiving1, i1),
-					(player_set_slot, player, lwbr.slot_player.str_receiving2, i2),
-					(player_set_slot, player, lwbr.slot_player.str_receiving3, i3),
-					(player_set_slot, player, lwbr.slot_player.str_receiving4, i4),
+					(player_set_slot, player, lwbr.player_slots["str_receiving1"].id, i1),
+					(player_set_slot, player, lwbr.player_slots["str_receiving2"].id, i2),
+					(player_set_slot, player, lwbr.player_slots["str_receiving3"].id, i3),
+					(player_set_slot, player, lwbr.player_slots["str_receiving4"].id, i4),
 					(send_event_to_player, player, lwbr.multiplayer_event_client,
-						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving1, i1, 0, f, silent),
+						lwbr.cl_event.lwbr_set_var, lwbr.cl_vars["str_receiving1"].id, i1, 0, f, silent),
 					(send_event_to_player, player, lwbr.multiplayer_event_client,
-						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving2, i2, 0, f, silent),
+						lwbr.cl_event.lwbr_set_var, lwbr.cl_vars["str_receiving2"].id, i2, 0, f, silent),
 					(send_event_to_player, player, lwbr.multiplayer_event_client,
-						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving3, i3, 0, f, silent),
+						lwbr.cl_event.lwbr_set_var, lwbr.cl_vars["str_receiving3"].id, i3, 0, f, silent),
 					(send_event_to_player, player, lwbr.multiplayer_event_client,
-						lwbr.cl_event.lwbr_set_var, lwbr.var.str_receiving4, i4, 0, f, silent),
+						lwbr.cl_event.lwbr_set_var, lwbr.cl_vars["str_receiving4"].id, i4, 0, f, silent),
 				(try_end),
 				(multiplayer_send_string_to_player, player, lwbr.multiplayer_event_client_str, string),
 			]) + [#end lwbr.sv_version
@@ -911,22 +911,22 @@ def send_str_to_server(string,i1,i2=0,i3=0,i4=0,silent=lwbr.verbose):
 		(try_begin),
 			(neg|multiplayer_is_dedicated_server),
 			] + lwbr.cl_version([
-				# (get_lwbr_var, l.sending, lwbr.var.str_sending1),
+				# (get_lwbr_var, l.sending, lwbr.cl_vars["str_sending1"].id),
 				# (eq, l.sending, -1),
 				(try_begin),
 					(neg|multiplayer_is_server),
-					] + set_lwbr_var(lwbr.var.str_sending1, i1) + [
-					] + set_lwbr_var(lwbr.var.str_sending2, i2) + [
-					] + set_lwbr_var(lwbr.var.str_sending3, i3) + [
-					] + set_lwbr_var(lwbr.var.str_sending4, i4) + [
+					] + set_lwbr_var(lwbr.cl_vars["str_sending1"].id, i1) + [
+					] + set_lwbr_var(lwbr.cl_vars["str_sending2"].id, i2) + [
+					] + set_lwbr_var(lwbr.cl_vars["str_sending3"].id, i3) + [
+					] + set_lwbr_var(lwbr.cl_vars["str_sending4"].id, i4) + [
 					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
-						lwbr.var.str_sending1, i1, 0, silent) + [
+						lwbr.cl_vars["str_sending1"].id, i1, 0, silent) + [
 					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
-						lwbr.var.str_sending2, i2, 0, silent) + [
+						lwbr.cl_vars["str_sending2"].id, i2, 0, silent) + [
 					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
-						lwbr.var.str_sending3, i3, 0, silent) + [
+						lwbr.cl_vars["str_sending3"].id, i3, 0, silent) + [
 					] + send_event_to_server(lwbr.multiplayer_event_server,lwbr.sv_event.return_var,
-						lwbr.var.str_sending4, i4, 0, silent) + [
+						lwbr.cl_vars["str_sending4"].id, i4, 0, silent) + [
 				(try_end),
 				(multiplayer_send_string_to_server, lwbr.multiplayer_event_server_str, string),
 			]) + [#end lwbr.cl_version

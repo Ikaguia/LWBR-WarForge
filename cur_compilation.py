@@ -1,0 +1,2 @@
+IS_CLIENT = False
+IS_SERVER = True

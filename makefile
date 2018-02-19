@@ -3,13 +3,13 @@ COMPILE = compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 DEST_LINUX = /home/cristiano/.local/share/Steam/steamapps/common/MountBlade Warband
 DDEST_LINUX = $(DEST_LINUX)
-DEST_WINDOWS = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
-DDEST_WINDOWS = ../wb_dedicated
+DEST_WINDOWS1 = c:/STEAM/steamapps/common/MountBlade Warband
+DDEST_WINDOWS1 = $(DEST_WINDOWS1)
+DEST_WINDOWS2 = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
+DDEST_WINDOWS2 = ../wb_dedicated
 
-# DEST = $(DEST_LINUX)
-# DDEST = $(DDEST_LINUX)
-DEST = $(DEST_WINDOWS)
-DDEST = $(DDEST_WINDOWS)
+DEST = $(DEST_WINDOWS1)
+DDEST = $(DDEST_WINDOWS1)
 
 DESTM = $(DEST)/modules
 DDESTM = $(DDEST)/modules
@@ -121,3 +121,17 @@ debug: _clear
 	@echo " "
 	@echo "FULL_FILES = $(FULL_FILES)"
 	@echo " "
+
+help:
+	@echo "cmp_cl: compiles client version"
+	@echo "cmp_sv: compiles server version"
+	@echo "cmp_full: compiles full version"
+	@echo "cmp_all: compiles all three versions"
+	@echo "build_cl: builds the zip file for the client version"
+	@echo "build_sv: builds the zip file for the server version"
+	@echo "build_full: builds the zip file for the full version"
+	@echo "build_all: builds the zip file for all three versions"
+	@echo "cl: builds the client version and moves it to the correct directory"
+	@echo "sv: builds the server version and moves it to the correct directory"
+	@echo "full: builds the full version and moves it to the correct directory"
+	@echo "run_sv: runs the dedicated server on battle mode"

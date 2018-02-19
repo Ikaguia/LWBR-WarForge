@@ -631,7 +631,7 @@ def foo___lwbr_give_items_to_troop():
 							(try_end),
 					]) + [
 						(else_try),
-							(troop_slot_eq, trp.lwbr_sv_vars, lwbr.sv_var.horses_en, 0),
+							(troop_slot_eq, trp.lwbr_sv_vars, lwbr.sv_vars["horses_en"].id, 0),
 							(eq, g.lwbr_horses_enabled ,0),
 							(item_get_type, l.type, free_item),
 							(eq, l.type, itp_type_horse),
@@ -657,17 +657,18 @@ def foo___lwbr_give_items_to_troop():
 			(str_store_troop_name, s0, l.troop),
 			(display_message, "@Error: invalid or unrecognized troop '{s0}' for script.lwbr_give_items_to_troop"),
 		(try_end),
-	] + lwbr.debug([
-			(try_begin),
-				(eq, l.troop, trp.swadian_infantry_multiplayer),
-				(str_store_troop_name, s0, l.troop),
-				(display_message, "@trp.{s0} has itms:"),
-				(try_for_troop_items, l.itm, l.troop),
-					(str_store_item_name, s1, l.itm),
-					(display_message, "@	itm.{s1}"),
-				(try_end),
-			(try_end),
-	])
+	]
+	# foo += lwbr.debug([
+	# 		(try_begin),
+	# 			(eq, l.troop, trp.swadian_infantry_multiplayer),
+	# 			(str_store_troop_name, s0, l.troop),
+	# 			(display_message, "@trp.{s0} has itms:"),
+	# 			(try_for_troop_items, l.itm, l.troop),
+	# 				(str_store_item_name, s1, l.itm),
+	# 				(display_message, "@	itm.{s1}"),
+	# 			(try_end),
+	# 		(try_end),
+	# ])
 
 	return ("lwbr_give_items_to_troop",foo)
 

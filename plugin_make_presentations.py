@@ -121,7 +121,7 @@ def make_presentation(name,flags,args,opts):
 			elif opt[0] == typ.button:
 				load += [
 					(create_game_button_overlay, l.cur_overlay, "@"+opt[1]),
-					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
+					(overlay_set_color, l.cur_overlay, 0x000000),
 					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]), l.cur_y - (y_sz(opt[0])/2)),
 				]
 			elif opt[0] == typ.combo_button:
@@ -133,7 +133,7 @@ def make_presentation(name,flags,args,opts):
 					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]),       l.cur_y - (y_sz(opt[0])/4)),
 
 					(create_combo_button_overlay, l.cur_overlay),
-					(overlay_set_color, l.cur_overlay, 0xFFFFFF),
+					(overlay_set_color, l.cur_overlay, 0x000000),
 					(overlay_set_pos, l.cur_overlay, get_x(in_container,opt[0]) + 140, l.cur_y - (3*y_sz(opt[0])/4)),
 				]
 				for combo_opt in opt[4]: load += [(overlay_add_item, l.cur_overlay, "@"+combo_opt),]

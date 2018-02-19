@@ -1,12 +1,13 @@
 from compiler import *
 
 mod_version	= 2000 #2.000
-debug_mode	= 1
-edit_scenes = 1
+debug_mode	= 0 #add debug messages ingame
+edit_scenes = 0 #replace custom battle with edit scenes menu
 
-native = -1
 
-wt_event_limit = 30
+native = -1 #mod version
+wt_event_limit = 30 #how many weather events can be run per second
+
 
 
 #used for item packs selection
@@ -66,200 +67,146 @@ class _action:#player action
 		self.cd = cd
 		self.hk = hk
 		self.adm = adm
-		_action.count = _action.count + 1
-class act:#actions
-	taunt = _action(cd=1,hk=key_comma)
-	cheer = _action(cd=1,hk=key_period)
-	# kdown = _action(cd=1,hk=key_delete,adm=True)
-	count = _action.count
+		_action.count += 1
+actions = {
+	"taunt": _action(cd=1,hk=key_comma),
+	"cheer": _action(cd=1,hk=key_period),
+	#"kdown": _action(cd=1,hk=key_delete,adm=True),
+	}
 
-class _event:
-	count = {}
-	def __init__(self,typ):
-		if not _event.count.has_key(typ):
-			print "Error: count not set for event type",typ
-			exit(1)
-		self.id = _event.count[typ]
-		_event.count[typ] = _event.count[typ] + 1
 class sv_event:#events that run on the server
 	start = 0
 	end = start + 4
 
-	_event.count["sv"] = start
 	set_sv_var,ask_sv_var,return_var,\
-	action = [_event("sv") for _ in xrange(start,end)]
+	action = xrange(start,end)
 class cl_event:#events that run on the client
 	start = 0
 	end = start + 15
 
-	_event.count["cl"] = start
 	set_var,ask_var,return_sv_var,\
 	set_faction_slot,set_item_slot,set_party_slot,set_pt_slot,set_quest_slot,set_sp_slot,\
 	set_scene_slot,set_team_slot,set_agent_slot,set_troop_slot,set_player_slot,\
-	clear_items = [_event("cl") for _ in xrange(start,end)]
+	clear_items = xrange(start,end)
 class str_event:#options on sending strings
 	start = 0
 	end = start + 1
 
-	_event.count["str"] = start
-	set_troop_name, = [_event("str") for _ in xrange(start,end)]
+	set_troop_name, = xrange(start,end)
 
 class _var:
-	count = {}
-	def __init__(self,typ,deff=None,deff_sv=None):
+	count = {
+		"cl": 0,
+		"sv": 0,
+	}
+	def __init__(self,typ,deff=None,deff_sv=None,sync=False,reset=True):
 		if not _var.count.has_key(typ):
 			print "Error: count not set for event type",typ
 			exit(1)
 		self.id = _var.count[typ]
 		self.deff = deff
 		self.deff_sv = deff_sv
-		_var.count[typ] = _var.count[typ] + 1
-class cl_var:#personal settings
-	_var.count["cl"] = 0
-	version = var("cl",deff=mod_version)
-	dmg_report = var("cl",deff=0)
-	keep_items = var("cl",deff=1)
-	nxt_scn_info = var("cl",deff=0)
-	msg_edit = var("cl",deff=1)
-	str_sending1 = var("cl",deff=-1)
-	str_sending2 = var("cl",deff=-1)
-	str_sending3 = var("cl",deff=-1)
-	str_sending4 = var("cl",deff=-1)
-	str_receiving1 = var("cl",deff=-1)
-	str_receiving2 = var("cl",deff=-1)
-	str_receiving3 = var("cl",deff=-1)
-	str_receiving4 = var("cl",deff=-1)
-	count = _var.count["cl"]
-class sv_var:#settings of the server
-	_var.count["sv"] = 0
-	items = var("sv",deff=packages["Native"],deff_sv=packages["Native"]|packages["WarForge"])
-	version = var("sv",deff=native,deff_sv=version)
-	firearms_en = var("sv",deff=0,deff_sv=0)
-	horses_en = var("sv",deff=1,deff_sv=1)
-	peasants_en = var("sv",deff=0,deff_sv=0)
-	persistant_stats = var("sv",deff=0,deff_sv=0)
-	count = _var.count["sv"]
+		self.sync = sync
+		self.reset = reset
+		_var.count[typ] += 1
+cl_vars = {#personal settings
+	"version":			_var("cl",deff=mod_version,reset=False),
+	"dmg_report":		_var("cl",deff=0,reset=False),
+	"keep_items":		_var("cl",deff=1,reset=False),
 
-	firearms_en,horses_en,peasants_en,persistant_stats,\
-	horse_jump,taunt,cheer,free_wpn,min_version,msg_cd,msg_cnt,msg_cur_tm,msg_cur_id,\
-	t1_dmg_r,t1_dmg_d,t2_dmg_r,t2_dmg_d,weather_config,time_config,fog_config,\
-	count = xrange(start,end+1)
-	default = {
-		firearms_en: 0,
-		horses_en: 1,
-		peasants_en: 0,
-		persistant_stats: 0,
-		horse_jump: 0,
-		taunt: 0,
-		cheer: 0,
-		free_wpn: 0,
-		min_version: native,
-		msg_cd: -1,
-		msg_cnt: 0,
-		msg_cur_tm: -1,
-		msg_cur_id: -1,
-		t1_dmg_d: 100,
-		t1_dmg_r: 100,
-		t2_dmg_d: 100,
-		t2_dmg_r: 100,
-		weather_config: 0,
-		time_config: 0,
-		fog_config: 0,
+	"nxt_scn_info":		_var("cl",deff=0), #next scene to receive info from server
+	"msg_edit":			_var("cl",deff=1), #id of msg being edited
+
+	"str_sending1":		_var("cl",deff=-1),
+	"str_sending2":		_var("cl",deff=-1),
+	"str_sending3":		_var("cl",deff=-1),
+	"str_sending4":		_var("cl",deff=-1),
+	"str_receiving1":	_var("cl",deff=-1),
+	"str_receiving2":	_var("cl",deff=-1),
+	"str_receiving3":	_var("cl",deff=-1),
+	"str_receiving4":	_var("cl",deff=-1),
 	}
-	default_sv = {
-		version: mod_version,
-		firearms_en: 0,
-		horses_en: 1,
-		peasants_en: 0,
-		persistant_stats: 0,
-		horse_jump: 1,
-		taunt: 1,
-		cheer: 1,
-		free_wpn: 0,
-		# min_version: mod_version,
-		min_version: native,
-		msg_cd: 120,#in seconds
-		msg_cnt: 1,#how many different messages
-		msg_cur_tm: 0,
-		msg_cur_id: 0,
-		t1_dmg_d: 100,
-		t1_dmg_r: 100,
-		t2_dmg_d: 100,
-		t2_dmg_r: 100,
-		weather_config: 0,#based on map
-		time_config: 0,#random
-		fog_config: 0,#based on map
+sv_vars = {#settings of the server
+	"items":			_var("sv",deff=packages["Native"],deff_sv=packages["Native"]|packages["WarForge"],sync=True),
+	"version": 			_var("sv",deff=native,deff_sv=mod_version,sync=True),
+	"firearms_en":		_var("sv",deff=0,deff_sv=0,sync=True),
+	"horses_en":		_var("sv",deff=1,deff_sv=1,sync=True),
+	"peasants_en":		_var("sv",deff=0,deff_sv=0,sync=True),
+	"persistant_stats":	_var("sv",deff=0,deff_sv=0,sync=True),
+	"horse_jump":		_var("sv",deff=0,deff_sv=1,sync=True),
+	"taunt":			_var("sv",deff=0,deff_sv=1,sync=True),
+	"cheer":			_var("sv",deff=0,deff_sv=1,sync=True),
+	"free_wpn":			_var("sv",deff=1,deff_sv=1,sync=True),
+	"min_version":		_var("sv",deff=native,deff_sv=native,sync=True),
+	"msg_cd":			_var("sv",deff=-1,deff_sv=120,sync=True), #cooldown in seconds
+	"msg_cnt":			_var("sv",deff=0,deff_sv=1,sync=True), #how many different messages
+	"msg_cur_tm":		_var("sv",deff=0,deff_sv=0), #counter
+	"msg_cur_id":		_var("sv",deff=0,deff_sv=0), #counter
+	"t1_dmg_d":			_var("sv",deff=100,deff_sv=100,sync=True), #team 1 damage dealt
+	"t1_dmg_r":			_var("sv",deff=100,deff_sv=100,sync=True), #team 1 damage received
+	"t2_dmg_d":			_var("sv",deff=100,deff_sv=100,sync=True), #team 2 damage dealt
+	"t2_dmg_r":			_var("sv",deff=100,deff_sv=100,sync=True), #team 2 damage received
+	"weather_config":	_var("sv",deff=0,deff_sv=0,sync=True), #0 = based on map
+	"time_config":		_var("sv",deff=0,deff_sv=0,sync=True), #0 = random
+	"fog_config":		_var("sv",deff=0,deff_sv=0,sync=True), #0 = based on map
 	}
 
-class slot_player:
-	start = 80
-	end = start + 10
-	version,nxt_scn_info,\
-	str_sending1,str_receiving1,\
-	str_sending2,str_receiving2,\
-	str_sending3,str_receiving3,\
-	str_sending4,str_receiving4,\
-	count = xrange(start,end+1)
-	default = {
-		version: native,
-		nxt_scn_info: -1,#unknown/native player
-		str_sending1: -1,#none
-		str_sending2: -1,#none
-		str_sending3: -1,#none
-		str_sending4: -1,#none
-		str_receiving1: -1,#none
-		str_receiving2: -1,#none
-		str_receiving3: -1,#none
-		str_receiving4: -1,#none
+class _slot:
+	count = {
+		"player": 80,
+		"troop": 0,
+		"scene": 0,
 	}
-class slot_troop:
-	start = 0
-	end = start + 9
-	sel_head,sel_body,sel_foot,sel_hand,sel_horse,sel_wpn1,sel_wpn2,sel_wpn3,sel_wpn4,\
-	count = xrange(start,end+1)
-	default = {
-		sel_head: -2,#-2 for unknown, -1 for none
-		sel_body: -2,#-2 for unknown, -1 for none
-		sel_foot: -2,#-2 for unknown, -1 for none
-		sel_hand: -2,#-2 for unknown, -1 for none
-		sel_horse:-2,#-2 for unknown, -1 for none
-		sel_wpn1: -2,#-2 for unknown, -1 for none
-		sel_wpn2: -2,#-2 for unknown, -1 for none
-		sel_wpn3: -2,#-2 for unknown, -1 for none
-		sel_wpn4: -2,#-2 for unknown, -1 for none
+	def __init__(self,typ,deff=None):
+		self.id = _slot.count[typ]
+		self.deff = deff
+		_slot.count[typ] += 1
+player_slots = {
+	"version":			_slot("player",native),
+	"nxt_scn_info":		_slot("player",-1), #unknown/native player
+	"str_sending1":		_slot("player",-1), #none
+	"str_sending2":		_slot("player",-1), #none
+	"str_sending3":		_slot("player",-1), #none
+	"str_sending4":		_slot("player",-1), #none
+	"str_receiving1":	_slot("player",-1), #none
+	"str_receiving2":	_slot("player",-1), #none
+	"str_receiving3":	_slot("player",-1), #none
+	"str_receiving4":	_slot("player",-1), #none
 	}
-class slot_scene:
-	start = 0
-	end = start + 21
-	available_dm,available_tdm,available_hq,available_cf,available_sg,available_bt,available_fd,available_duel,available_coop,\
-	rain_min,rain_max,\
-	rain_chance,snow_chance,\
-	fog_min,fog_max,fog_color1,fog_color2,\
-	cur_wt_typ,cur_wt_str,cur_wt_fgD,cur_wt_fgC,\
-	count = xrange(start,end+1)
-	default = {
-		available_dm : 0,
-		available_tdm : 0,
-		available_bt : 0,
-		available_fd : 0,
-		available_cf : 0,
-		available_hq : 0,
-		available_sg : 0,
-		available_duel : 0,
-		available_coop : 0,
-		#default is plains weather
-		rain_min : 15,
-		rain_max : 50,
-		rain_chance : 40,#00-40 = 40% chance
-		snow_chance : 60,#40-60 = 20% chance
-		fog_min : 100,
-		fog_max : 700,
-		fog_color1 : 0x8F8F8F,
-		fog_color2 : 0x8F8F8F,
-		cur_wt_typ : -1,
-		cur_wt_str : -1,
-		cur_wt_fgD : -1,
-		cur_wt_fgC : -1,
+troop_slots = {
+	"sel_head":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_body":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_foot":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_hand":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_horse":		_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_wpn1":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_wpn2":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_wpn3":			_slot("troop",-2), #-2 for unset, -1 for none
+	"sel_wpn4":			_slot("troop",-2), #-2 for unset, -1 for none
+	}
+scene_slots = {
+	"available_dm":		_slot("scene",0),
+	"available_tdm":	_slot("scene",0),
+	"available_hq":		_slot("scene",0),
+	"available_cf":		_slot("scene",0),
+	"available_sg":		_slot("scene",0),
+	"available_bt":		_slot("scene",0),
+	"available_fd":		_slot("scene",0),
+	"available_duel":	_slot("scene",0),
+	"available_coop":	_slot("scene",0),
+	#default is plains weather
+	"rain_min":			_slot("scene",15),
+	"rain_max":			_slot("scene",50),
+	"rain_chance":		_slot("scene",40), #00-40 = 40% chance
+	"snow_chance":		_slot("scene",60), #40-60 = 20% chance
+	"fog_min":			_slot("scene",100),
+	"fog_max":			_slot("scene",700),
+	"fog_color1":		_slot("scene",0x8F8F8F),
+	"fog_color2":		_slot("scene",0x8F8F8F),
+	"cur_wt_typ":		_slot("scene",-1), #unset
+	"cur_wt_str":		_slot("scene",-1), #unset
+	"cur_wt_fgD":		_slot("scene",-1), #unset
+	"cur_wt_fgC":		_slot("scene",-1), #unset
 	}
 
 scenes_opt = [
@@ -278,14 +225,14 @@ scenes_opt = [
 			scn.multi_scene_19,
 			scn.multi_scene_20,
 		],{
-			slot_scene.available_dm : 0,
-			slot_scene.available_tdm : 0,
-			slot_scene.available_bt : 0,
-			slot_scene.available_fd : 0,
-			slot_scene.available_cf : 0,
-			slot_scene.available_hq : 0,
-			slot_scene.available_duel : 0,
-			slot_scene.available_coop : 0,
+			scene_slots["available_dm"].id : 0,
+			scene_slots["available_tdm"].id : 0,
+			scene_slots["available_bt"].id : 0,
+			scene_slots["available_fd"].id : 0,
+			scene_slots["available_cf"].id : 0,
+			scene_slots["available_hq"].id : 0,
+			scene_slots["available_duel"].id : 0,
+			scene_slots["available_coop"].id : 0,
 		}),
 	(#random
 		[
@@ -294,11 +241,11 @@ scenes_opt = [
 			scn.random_multi_steppe_medium,
 			scn.random_multi_steppe_large,
 		],{
-			slot_scene.available_dm : 0,
-			slot_scene.available_tdm : 0,
-			slot_scene.available_bt : 0,
-			slot_scene.available_cf : 0,
-			slot_scene.available_duel : 0,
+			scene_slots["available_dm"].id : 0,
+			scene_slots["available_tdm"].id : 0,
+			scene_slots["available_bt"].id : 0,
+			scene_slots["available_cf"].id : 0,
+			scene_slots["available_duel"].id : 0,
 		}),
 	(#not in fight and destroy
 		[
@@ -306,10 +253,10 @@ scenes_opt = [
 			scn.multi_scene_17,
 			scn.multi_scene_18,
 		],
-		{slot_scene.available_fd : 0}),
+		{scene_slots["available_fd"].id : 0}),
 	(#not in coop
 		[scn.multi_scene_2,],
-		{slot_scene.available_coop : 0}
+		{scene_slots["available_coop"].id : 0}
 		),
 	(#random
 		[
@@ -318,11 +265,11 @@ scenes_opt = [
 			scn.random_multi_steppe_medium,
 			scn.random_multi_steppe_large,
 		],{
-			slot_scene.available_dm : 0,
-			slot_scene.available_tdm : 0,
-			slot_scene.available_bt : 0,
-			slot_scene.available_cf : 0,
-			slot_scene.available_duel : 0,
+			scene_slots["available_dm"].id : 0,
+			scene_slots["available_tdm"].id : 0,
+			scene_slots["available_bt"].id : 0,
+			scene_slots["available_cf"].id : 0,
+			scene_slots["available_duel"].id : 0,
 		}),
 	(#desert
 		[
@@ -339,14 +286,14 @@ scenes_opt = [
 			scn.multi_scene_15,#Mahdaar Castle, Castle 5
 			scn.multi_scene_16,#Jameyyed Castle, Castle 6
 		],{
-			slot_scene.rain_min		: 1,
-			slot_scene.rain_max		: 15,
-			slot_scene.rain_chance	: 3,# 3%
-			slot_scene.snow_chance	: 4,# 1%
-			slot_scene.fog_min		: 300,
-			slot_scene.fog_max		: 1000,
-			slot_scene.fog_color1	: 0xFF8400,
-			slot_scene.fog_color2	: 0xFF8400,
+			scene_slots["rain_min"].id		: 1,
+			scene_slots["rain_max"].id		: 15,
+			scene_slots["rain_chance"].id	: 3,# 3%
+			scene_slots["snow_chance"].id	: 4,# 1%
+			scene_slots["fog_min"].id		: 300,
+			scene_slots["fog_max"].id		: 1000,
+			scene_slots["fog_color1"].id	: 0xFF8400,
+			scene_slots["fog_color2"].id	: 0xFF8400,
 		}),
 	(#desert close
 		[
@@ -363,14 +310,14 @@ scenes_opt = [
 			scn.multi_scene_17,#The Arena
 			scn.multi_scene_20,#Desert Town
 		],{
-			slot_scene.rain_min		: 1,
-			slot_scene.rain_max		: 15,
-			slot_scene.rain_chance	: 3,# 3%
-			slot_scene.snow_chance	: 4,# 1%
-			slot_scene.fog_min		: 15,
-			slot_scene.fog_max		: 90,
-			slot_scene.fog_color1	: 0xFF8400,
-			slot_scene.fog_color2	: 0xFF8400,
+			scene_slots["rain_min"].id		: 1,
+			scene_slots["rain_max"].id		: 15,
+			scene_slots["rain_chance"].id	: 3,# 3%
+			scene_slots["snow_chance"].id	: 4,# 1%
+			scene_slots["fog_min"].id		: 15,
+			scene_slots["fog_max"].id		: 90,
+			scene_slots["fog_color1"].id	: 0xFF8400,
+			scene_slots["fog_color2"].id	: 0xFF8400,
 		}),
 	(#steppe
 		[
@@ -411,14 +358,14 @@ scenes_opt = [
 			scn.random_multi_steppe_medium,#Random Steppe (Medium)
 			scn.random_multi_steppe_large,#Random Steppe (Large)
 		],{
-			slot_scene.rain_min		: 1,
-			slot_scene.rain_max		: 40,
-			slot_scene.rain_chance	: 15,# 15%
-			slot_scene.snow_chance	: 30,# 30%
-			slot_scene.fog_min		: 150,
-			slot_scene.fog_max		: 500,
-			slot_scene.fog_color1	: 0xFF8400,
-			slot_scene.fog_color2	: 0xFF8400,
+			scene_slots["rain_min"].id		: 1,
+			scene_slots["rain_max"].id		: 40,
+			scene_slots["rain_chance"].id	: 15,# 15%
+			scene_slots["snow_chance"].id	: 30,# 30%
+			scene_slots["fog_min"].id		: 150,
+			scene_slots["fog_max"].id		: 500,
+			scene_slots["fog_color1"].id	: 0xFF8400,
+			scene_slots["fog_color2"].id	: 0xFF8400,
 		}),
 	(#taiga
 		[
@@ -447,14 +394,14 @@ scenes_opt = [
 			scn.multi_scene_14,#Battle on Ice
 			scn.multi_scene_21,#Cold Coast
 		],{
-			slot_scene.rain_min		: 15,
-			slot_scene.rain_max		: 50,
-			slot_scene.rain_chance	: 5,  #  5%
-			slot_scene.snow_chance	: 100,# 95%
-			slot_scene.fog_min		: 150,
-			slot_scene.fog_max		: 500,
-			slot_scene.fog_color1	: 0xFFFFFF,
-			slot_scene.fog_color2	: 0xFFFFFF,
+			scene_slots["rain_min"].id		: 15,
+			scene_slots["rain_max"].id		: 50,
+			scene_slots["rain_chance"].id	: 5,  #  5%
+			scene_slots["snow_chance"].id	: 100,# 95%
+			scene_slots["fog_min"].id		: 150,
+			scene_slots["fog_max"].id		: 500,
+			scene_slots["fog_color1"].id	: 0xFFFFFF,
+			scene_slots["fog_color2"].id	: 0xFFFFFF,
 		}),
 	(#mountains
 		[
@@ -475,14 +422,14 @@ scenes_opt = [
 			scn.multi_scene_4,#Ruined Fort
 			scn.multi_scene_10,#Turin Castle, Castle 3
 		],{
-			slot_scene.rain_min		: 20,
-			slot_scene.rain_max		: 60,
-			slot_scene.rain_chance	: 15,# 15%
-			slot_scene.snow_chance	: 55,# 40%
-			slot_scene.fog_min		: 10,
-			slot_scene.fog_max		: 120,
-			slot_scene.fog_color1	: 0x8F8F8F,
-			slot_scene.fog_color2	: 0x8F8F8F,
+			scene_slots["rain_min"].id		: 20,
+			scene_slots["rain_max"].id		: 60,
+			scene_slots["rain_chance"].id	: 15,# 15%
+			scene_slots["snow_chance"].id	: 55,# 40%
+			scene_slots["fog_min"].id		: 10,
+			scene_slots["fog_max"].id		: 120,
+			scene_slots["fog_color1"].id	: 0x8F8F8F,
+			scene_slots["fog_color2"].id	: 0x8F8F8F,
 		}),
 	(#forest
 		[
@@ -492,14 +439,14 @@ scenes_opt = [
 			scn.multi_scene_13,#Brunwud Castle, Castle 4
 			scn.multi_scene_18,#Forest Hideout
 		],{
-			slot_scene.rain_min		: 10,
-			slot_scene.rain_max		: 70,
-			slot_scene.rain_chance	: 35,# 35%
-			slot_scene.snow_chance	: 40,#  5%
-			slot_scene.fog_min		: 10,
-			slot_scene.fog_max		: 500,
-			slot_scene.fog_color1	: 0x8F8F8F,
-			slot_scene.fog_color2	: 0x8F8F8F,
+			scene_slots["rain_min"].id		: 10,
+			scene_slots["rain_max"].id		: 70,
+			scene_slots["rain_chance"].id	: 35,# 35%
+			scene_slots["snow_chance"].id	: 40,#  5%
+			scene_slots["fog_min"].id		: 10,
+			scene_slots["fog_max"].id		: 500,
+			scene_slots["fog_color1"].id	: 0x8F8F8F,
+			scene_slots["fog_color2"].id	: 0x8F8F8F,
 		}),
 	(#coast
 		[
@@ -509,14 +456,14 @@ scenes_opt = [
 			scn.multi_scene_11,#Nord Town
 			scn.multi_scene_12,#Port Assault
 		],{
-			slot_scene.rain_min		: 20,
-			slot_scene.rain_max		: 100,
-			slot_scene.rain_chance	: 55,# 55%
-			slot_scene.snow_chance	: 60,#  5%
-			slot_scene.fog_min		: 0,
-			slot_scene.fog_max		: 250,
-			slot_scene.fog_color1	: 0x9798AB,
-			slot_scene.fog_color2	: 0x9798AB,
+			scene_slots["rain_min"].id		: 20,
+			scene_slots["rain_max"].id		: 100,
+			scene_slots["rain_chance"].id	: 55,# 55%
+			scene_slots["snow_chance"].id	: 60,#  5%
+			scene_slots["fog_min"].id		: 0,
+			scene_slots["fog_max"].id		: 250,
+			scene_slots["fog_color1"].id	: 0x9798AB,
+			scene_slots["fog_color2"].id	: 0x9798AB,
 		}),
 ]
 
@@ -539,9 +486,9 @@ def debug_func(func_name="script_name", args=[]):
 
 def cl_version(block = []):
 	if IS_CLIENT: return block
-	else: return [(display_message, "@Error: running client side code on dedicated server"),]
+	else: return [(display_message, "@Error: this is the dedicated server version, trying to run clientside code"),]
 
 def sv_version(block = []):
 	if IS_SERVER: return block
-	else: return [(display_message, "@Error: running server side code on non-server client"),]
+	else: return [(display_message, "@Error: this is the clientside only version, trying to run server code"),]
 
