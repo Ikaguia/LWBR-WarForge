@@ -1378,6 +1378,7 @@ scripts = [
 			(store_script_param, ":val1", 2),
 
 			#LWBR WarForge 2.0 --- BEGIN
+			(call_script, script.lwbr_server_start),
 			] + lwbr.debug([
 				(assign, reg0, l.input),
 				(assign, reg1, l.val1),
@@ -1864,6 +1865,20 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
+			#LWBR WarForge 2.0 --- BEGIN
+			(else_try),#limit general -> change "items" sv var
+				(eq, l.input, 81),
+				(try_begin),
+					(is_between, l.val1, 1, lwbr.packages["full"]),
+					(set_lwbr_sv_var, "items", l.val1),
+					(call_script, script.lwbr_give_items_to_troops, l.val1),
+					(assign, reg0, l.val1),
+					(str_store_string, s0, "@Changed 'items' sv_var to #{reg0}"),
+				(else_try),
+					(assign, reg0, l.val1),
+					(str_store_string, s0, "@Invalid value #{reg0} for 'items' sv_var"),
+				(try_end),
+			#LWBR WarForge 2.0 --- END
 			(else_try),
 				#INVASION MODE END
 				(str_store_string, s0, "@{!}DEBUG : SYSTEM ERROR!"),
@@ -8131,19 +8146,21 @@ scripts = [
 			(try_begin),
 				(eq, l.event_type, lwbr.multiplayer_event_server),
 				] + lwbr.sv_version([
-				(store_script_param, l.type, 3),
-				(try_begin),
-					(neg|multiplayer_is_server),
-					(display_message, "@Error: Received lwbr.sv_event #{reg0} on client"),
-				(else_try),
-					(ge, l.type, lwbr.sv_event.end - 1),
+					(store_script_param, l.type, 3),
 					(assign, reg0, l.type),
-					(display_message, "@Error: Unrecognized type received for lwbr.sv_event #{reg0}"),
+					(display_message, "@lwbr.sv_event #{reg0}"),
+					(try_begin),
+						(neg|multiplayer_is_server),
+						(display_message, "@Error: Received lwbr.sv_event #{reg0} on client"),
+					(else_try),
+						(neg|is_between, l.type, lwbr.sv_event.start, lwbr.sv_event.end),
+						(assign, reg0, l.type),
+						(display_message, "@Error: Unrecognized type received for lwbr.sv_event #{reg0}"),
 					inject('lwbr_inject_server_only_events'),
-				(else_try),
-					(assign, reg0, l.type),
-					(display_message, "@Error: Untreated type received for lwbr.sv_event #{reg0}"),
-				(try_end),
+					(else_try),
+						(assign, reg0, l.type),
+						(display_message, "@Error: Untreated type received for lwbr.sv_event #{reg0}"),
+					(try_end),
 				]) + [#end lwbr.sv_version
 			(else_try),
 				(eq, l.event_type, lwbr.multiplayer_event_client),
@@ -8207,6 +8224,11 @@ scripts = [
 						(player_set_slot, ":player_no", ":slot_no", ":value"),
 					(else_try),
 						(neq, l.value, -1),
+						#LWBR WarForge 2.0 --- BEGIN
+						(get_lwbr_sv_var, l.val, "items"),
+						(neq, l.val, lwbr.packages["Arena"]),
+						(neq, l.val, lwbr.packages["Peasant"]),
+						#LWBR WarForge 2.0 --- END
 						(str_store_item_name, s0, l.value),
 						(display_message, "@invalid item '{s0}'"),
 					(try_end),
@@ -8290,6 +8312,12 @@ scripts = [
 						(try_end),
 						(eq, ":is_valid", 1),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(call_script, script.game_get_scene_name, l.value),
+						(store_add, l.string_id, l.value_2, multiplayer_game_type_names_begin),
+						(str_store_string, s1, l.string_id),
+						(log_action, "@Started map '{s0}' with mission '{s1}'", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_game_type", ":value_2"),
 						#INVASION MODE START
 						(call_script, "script_multiplayer_set_g_multiplayer_is_game_type_captain"),
@@ -8313,6 +8341,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 2, 201),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed max players to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(try_begin),
 							(eq, "$g_multiplayer_game_type", multiplayer_game_type_captain_coop),
 							(val_min, ":value", ccoop_max_num_players),
@@ -8329,6 +8361,11 @@ scripts = [
 						(is_between, ":value", 1, 3),
 						(is_between, ":value_2", 0, "$g_multiplayer_max_num_bots"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(assign, reg1, l.value_2),
+						(log_action, "@Changed max bots in team {reg0} to #{reg1}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(try_begin),
 							(eq, ":value", 1),
 							(assign, "$g_multiplayer_num_bots_team_1", ":value_2"),
@@ -8349,7 +8386,16 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
-						(server_set_anti_cheat, 0),
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled VAC", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled VAC", l.player_no, lwbr.verbose),
+						(try_end),
+						(server_set_anti_cheat, l.value),
+						#(server_set_anti_cheat, 0),
+						#LWBR WarForge 2.0 --- END
 					(try_end),
 				(else_try),
 					(eq, ":event_type", multiplayer_event_admin_set_friendly_fire),
@@ -8359,6 +8405,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled ranged friendly fire", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled ranged friendly fire", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(server_set_friendly_fire, ":value"),
 					(try_end),
 				(else_try),
@@ -8369,6 +8423,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled melee friendly fire", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled melee friendly fire", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(server_set_melee_friendly_fire, ":value"),
 					(try_end),
 				(else_try),
@@ -8379,6 +8441,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 101),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed friendly fire self damage to #{reg0}%", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_friendly_fire_damage_self_ratio, ":value"),
 					(try_end),
 				(else_try),
@@ -8389,6 +8455,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 101),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed friendly fire friend damage to #{reg0}%", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_friendly_fire_damage_friend_ratio, ":value"),
 					(try_end),
 				(else_try),
@@ -8399,6 +8469,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 4),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(str_store_string, s0, s.free + l.value),
+						(log_action, "@Set spectator mode to '{s0}'", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_ghost_mode, ":value"),
 					(try_end),
 				(else_try),
@@ -8409,6 +8483,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(str_store_string, s0, s.automatic + l.value),
+						(log_action, "@Set block_direction to '{s0}'", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_control_block_dir, ":value"),
 					(try_end),
 				(else_try),
@@ -8419,6 +8497,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 5),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(str_store_string, s0, s.combat_speed_0 + l.value),
+						(log_action, "@Set combat speed to '{s0}'", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_combat_speed, ":value"),
 					(try_end),
 				(else_try),
@@ -8428,6 +8510,16 @@ scripts = [
 					(player_is_admin, ":player_no"),
 					(is_between, ":value", 0, 6),
 					#condition checks are done
+					#LWBR WarForge 2.0 --- BEGIN
+					(try_begin),
+						(eq, l.value, 5),
+						(str_store_string, s0, s.unlimited),
+						(log_action, "@Set combat speed to '{s0}'", l.player_no, lwbr.verbose),
+					(else_try),
+						(assign, reg0, 5-l.value),
+						(log_action, "@Set combat speed to '{reg0}'", l.player_no, lwbr.verbose),
+					(try_end),
+					#LWBR WarForge 2.0 --- END
 					(assign, "$g_multiplayer_number_of_respawn_count", ":value"),
 					(get_max_players, ":num_players"),
 					(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8441,6 +8533,14 @@ scripts = [
 						#validity check
 						(player_is_admin, ":player_no"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Added the server to the master list", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Removed the server from the master list", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(server_set_add_to_game_servers_list, ":value"),
 					(try_end),
 				(else_try),
@@ -8451,6 +8551,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 3, 31),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed respawn period to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_respawn_period", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8466,6 +8570,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 5, 121),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed max game minutes to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_game_max_minutes", ":value"),
 					(try_end),
 				(else_try),
@@ -8476,6 +8584,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 60, 901),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed round max seconds to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_round_max_seconds", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8491,6 +8603,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled respawn as bot", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled respawn as bot", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_player_respawn_as_bot", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8506,6 +8626,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 3, 1001),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed game max points to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_game_max_points", ":value"),
 					(try_end),
 				(else_try),
@@ -8516,6 +8640,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 25, 401),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed # of points gained from flags to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_point_gained_from_flags", ":value"),
 					(try_end),
 				(else_try),
@@ -8526,6 +8654,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 11),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed # of points gained from capturing a flag to #{reg0}", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_point_gained_from_capturing_flag", ":value"),
 					(try_end),
 				(else_try),
@@ -8536,6 +8668,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 1001),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed initial gold multiplier to #{reg0}%", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_initial_gold_multiplier", ":value"),
 					(try_end),
 				(else_try),
@@ -8546,6 +8682,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 1001),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed battle earnings gold multiplier to #{reg0}%", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_battle_earnings_multiplier", ":value"),
 					(try_end),
 				(else_try),
@@ -8556,6 +8696,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 1001),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed round earnings gold multiplier to #{reg0}%", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_round_earnings_multiplier", ":value"),
 					(try_end),
 				(else_try),
@@ -8566,6 +8710,9 @@ scripts = [
 						(server_get_renaming_server_allowed, "$g_multiplayer_renaming_server_allowed"),
 						(eq, "$g_multiplayer_renaming_server_allowed", 1),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(log_action, "@Changed server name to '{s0}'", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_name, s0), #validity is checked inside this function
 					(try_end),
 				(else_try),
@@ -8574,6 +8721,9 @@ scripts = [
 						#validity check
 						(player_is_admin, ":player_no"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(log_action, "@Changed server password.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(server_set_password, s0), #validity is checked inside this function
 					(try_end),
 				(else_try),
@@ -8582,6 +8732,7 @@ scripts = [
 						#validity check
 						(player_is_admin, ":player_no"),
 						#condition checks are done
+						(log_action, "@Changed server welcome message", l.player_no, lwbr.verbose),
 						(server_set_welcome_message, s0), #validity is checked inside this function
 					(try_end),
 				(else_try),
@@ -8604,6 +8755,11 @@ scripts = [
 						##          (try_end),
 						##          (eq, ":is_valid", 1),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(str_store_faction_name, s0, l.value_2),
+						(log_action, "@Changed team {reg0} faction to '{s0}'.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(try_begin),
 							(eq, ":value", 1),
 							(is_between, ":value_2", npc_kingdoms_begin, npc_kingdoms_end),
@@ -8793,17 +8949,26 @@ scripts = [
 						(try_begin),
 							(eq, ":value", 1), #kicking a player
 							(str_store_player_username, s1, ":value_2"),
-							(server_add_message_to_log, "str_poll_kick_player_s1_by_s0"),
+							#LWBR WarForge 2.0 --- BEGIN
+							# (server_add_message_to_log, "str_poll_kick_player_s1_by_s0"),
+							(log_action, "@Started a poll to kick player '{s1}'.", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 						(else_try),
 							(eq, ":value", 2), #banning a player
 							(str_store_player_username, s1, ":value_2"),
-							(server_add_message_to_log, "str_poll_ban_player_s1_by_s0"),
+							#LWBR WarForge 2.0 --- BEGIN
+							# (server_add_message_to_log, "str_poll_ban_player_s1_by_s0"),
+							(log_action, "@Started a poll to ban player '{s1}'.", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 						(else_try),
 							(eq, ":value", 0), #vote for map
 							(store_sub, ":string_index", ":value_2", multiplayer_scenes_begin),
 							(val_add, ":string_index", multiplayer_scene_names_begin),
 							(str_store_string, s1, ":string_index"),
-							(server_add_message_to_log, "str_poll_change_map_to_s1_by_s0"),
+							#LWBR WarForge 2.0 --- BEGIN
+							# (server_add_message_to_log, "str_poll_change_map_to_s1_by_s0"),
+							(log_action, "@Started a poll to change map to '{s1}'.", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 						(else_try),
 							(eq, ":value", 3), #vote for map and factions
 							(store_sub, ":string_index", ":value_2", multiplayer_scenes_begin),
@@ -8811,12 +8976,18 @@ scripts = [
 							(str_store_string, s1, ":string_index"),
 							(str_store_faction_name, s2, ":value_3"),
 							(str_store_faction_name, s3, ":value_4"),
-							(server_add_message_to_log, "str_poll_change_map_to_s1_and_factions_to_s2_and_s3_by_s0"),
+							#LWBR WarForge 2.0 --- BEGIN
+							# (server_add_message_to_log, "str_poll_change_map_to_s1_and_factions_to_s2_and_s3_by_s0"),
+							(log_action, "@Started a poll to change map to '{s1}' and factions to '{s2}'' and '{s3}.", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 						(else_try),
 							(eq, ":value", 4), #vote for number of bots
 							(assign, reg0, ":value_2"),
 							(assign, reg1, ":value_3"),
-							(server_add_message_to_log, "str_poll_change_number_of_bots_to_reg0_and_reg1_by_s0"),
+							#LWBR WarForge 2.0 --- BEGIN
+							# (server_add_message_to_log, "str_poll_change_number_of_bots_to_reg0_and_reg1_by_s0"),
+							(log_action, "@Started a poll to change number of bots to {reg0} and {reg1}.", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 						(try_end),
 						(assign, "$g_multiplayer_poll_running", 1),
 						(assign, "$g_multiplayer_poll_ended", 0),
@@ -8874,6 +9045,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(player_is_active, ":value"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(str_store_player_username, s0, l.value),
+						(log_action, "@Kicked player '{s0}'.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(kick_player, ":value"),
 					(try_end),
 				(else_try),
@@ -8884,6 +9059,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(player_is_active, ":value"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(str_store_player_username, s0, l.value),
+						(log_action, "@Banned player '{s0}'.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(ban_player, ":value", 0, ":player_no"),
 					(try_end),
 				(else_try),
@@ -8894,6 +9073,10 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 50, 101),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed valid vote ratio to #{reg0}.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_valid_vote_ratio", ":value"),
 					(try_end),
 				(else_try),
@@ -8905,6 +9088,15 @@ scripts = [
 						(this_or_next|is_between, ":value", 2, 7),
 						(eq, ":value", 1000),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1000),
+							(log_action, "@Changed auto-balance limit to unlimited.", l.player_no, lwbr.verbose),
+						(else_try),
+							(assign, reg0, l.value),
+							(log_action, "@Changed auto-balance limit to #{reg0}.", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_auto_team_balance_limit", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8921,6 +9113,10 @@ scripts = [
 						(is_between, ":value", 0, 51),
 						(is_between, ":value", 0, "$g_multiplayer_max_num_bots"),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(assign, reg0, l.value),
+						(log_action, "@Changed number of bots voteable to #{reg0}.", l.player_no, lwbr.verbose),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_num_bots_voteable", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8936,6 +9132,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled voting for factions", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled voting for factions", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_factions_voteable", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8951,6 +9155,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled voting for maps", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled voting for maps", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_maps_voteable", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8966,6 +9178,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled polls to kick players", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled polls to kick players", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_kick_voteable", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8981,6 +9201,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled polls to ban players", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled polls to ban players", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_ban_voteable", ":value"),
 						(get_max_players, ":num_players"),
 						(try_for_range, ":cur_player", 1, ":num_players"),
@@ -8996,6 +9224,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled individual banners", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled individual banners", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_allow_player_banners", ":value"),
 					(try_end),
 				(else_try),
@@ -9006,6 +9242,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 1),
+							(log_action, "@Enabled force minimum armor", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled force minimum armor", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_force_default_armor", ":value"),
 					(try_end),
 				(else_try),
@@ -9061,6 +9305,14 @@ scripts = [
 						(player_is_admin, ":player_no"),
 						(is_between, ":value", 0, 2),
 						#condition checks are done
+						#LWBR WarForge 2.0 --- BEGIN
+						(try_begin),
+							(eq, l.value, 0),
+							(log_action, "@Enabled randged weapons", l.player_no, lwbr.verbose),
+						(else_try),
+							(log_action, "@Disabled randged weapons", l.player_no, lwbr.verbose),
+						(try_end),
+						#LWBR WarForge 2.0 --- END
 						(assign, "$g_multiplayer_disallow_ranged_weapons", ":value"),
 					(try_end),
 					#INVASION MODE START
@@ -9116,6 +9368,10 @@ scripts = [
 							(player_is_admin, ":player_no"),
 							(is_between, ":difficulty", 0, 3),
 							#condition checks are done
+							#LWBR WarForge 2.0 --- BEGIN
+							(str_store_string, s0, s.ccoop_easy + l.value),
+							(log_action, "@Set coop fifficulty to '{s0}'", l.player_no, lwbr.verbose),
+							#LWBR WarForge 2.0 --- END
 							(assign, "$g_multiplayer_ccoop_difficulty", ":difficulty"),
 							(assign, reg0, ":difficulty"),
 							#(display_message, "@storing difficulty as: {reg0}"),
@@ -9839,6 +10095,14 @@ scripts = [
 			(try_begin),
 				(ge, ":vote_ratio", "$g_multiplayer_valid_vote_ratio"),
 				(assign, ":result", 1),
+				#LWBR WarForge 2.0 --- BEGIN
+				(assign, reg0, l.vote_ratio),
+				(assign, reg1, g.g_multiplayer_valid_vote_ratio),
+				(assign, reg2, g.g_multiplayer_poll_yes_count),
+				(assign, reg3, g.g_multiplayer_poll_no_count),
+				(assign, reg4, l.abstain_votes),
+				(log_action, "@Poll was accepted with {reg0}% out of {reg1}% needed.^Yes: #{reg2}^No: #{reg3}^Abstain: #{reg4}", -1, lwbr.verbose),
+				#LWBR WarForge 2.0 --- END
 				(try_begin),
 					(eq, "$g_multiplayer_poll_to_show", 1), #kick player
 					(try_begin),
@@ -9864,6 +10128,14 @@ scripts = [
 					(try_end),
 				(try_end),
 			(else_try),
+				#LWBR WarForge 2.0 --- BEGIN
+				(assign, reg0, l.vote_ratio),
+				(assign, reg1, g.g_multiplayer_valid_vote_ratio),
+				(assign, reg2, g.g_multiplayer_poll_yes_count),
+				(assign, reg3, g.g_multiplayer_poll_no_count),
+				(assign, reg4, l.abstain_votes),
+				(log_action, "@Poll was rejected with {reg0}% out of {reg1}% needed.^Yes: #{reg2}^No: #{reg3}^Abstain: #{reg4}", -1, lwbr.verbose),
+				#LWBR WarForge 2.0 --- END
 				(assign, "$g_multiplayer_poll_running", 0), #end immediately if poll fails. but end after some time if poll succeeds (apply the results first)
 			(try_end),
 			(get_max_players, ":num_players"),

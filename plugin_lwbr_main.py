@@ -26,7 +26,7 @@ def foo__lwbr_menu():
 		(typ.blank,),
 		(typ.text,"Server is not running LWBR WarForge",is_nat),
 		(typ.text,"Server is running LWBR WarForge v{reg0}.{reg1}{reg2}{reg3}",is_wf + [
-				(get_lwbr_sv_var,l.version,lwbr.sv_vars["version"].id),
+				(get_lwbr_sv_var, l.version, "version"),
 				(store_mod, reg3, l.version, 10),
 				(val_div, l.version, 10),
 				(store_mod, reg2, l.version, 10),
@@ -68,17 +68,17 @@ def foo__lwbr_menu():
 		(typ.numbox,"Messages interval(seconds):") + foo_sv_var(lwbr.sv_vars["msg_cd"].id) + (0,1001),
 		(-typ.numbox,"Messages count:") + foo_sv_var(lwbr.sv_vars["msg_cnt"].id) + (0,lwbr.msg_cnt_max+1),
 		(-typ.numbox,"Editting Message:") + foo_cl_var(lwbr.cl_vars["msg_edit"].id,[
-				(get_lwbr_sv_var, l.max, lwbr.sv_vars["msg_cnt"].id),
+				(get_lwbr_sv_var, l.max, "msg_cnt"),
 				(ge, l.max, 2),
 				]) + (1,l.max+1),
 		(typ.textbox,"Message #{reg0}:",[
-				(get_lwbr_sv_var, l.cnt, lwbr.sv_vars["msg_cnt"].id),
+				(get_lwbr_sv_var, l.cnt, "msg_cnt"),
 				(ge, l.cnt, 1),
-				(get_lwbr_var, l.cnt, lwbr.cl_vars["msg_edit"].id),
+				(get_lwbr_var, l.cnt, "msg_edit"),
 				(assign, reg0, l.cnt),
 				(str_store_troop_name, s0, lwbr.msg_troops_begin+l.cnt-1),
 				],[
-				(get_lwbr_var, l.cnt, lwbr.cl_vars["msg_edit"].id),
+				(get_lwbr_var, l.cnt, "msg_edit"),
 				(store_add, l.trp, lwbr.msg_troops_begin-1, l.cnt),
 				(troop_set_name, l.trp, s0),
 				(send_str_to_server, "@{s0}", lwbr.str_event.set_troop_name, l.trp, 0, 0, lwbr.silent),
@@ -101,7 +101,7 @@ def foo__lwbr_menu():
 					(assign, l.val, lwbr.packages[pack]),
 					(store_sub, l.begin, l.obj, 2*packi),
 					(store_add, l.end, l.begin, 2*len(lwbr.packs)),
-					(display_message, "@packi {reg0} len(lwbr.packs) {reg1}"),
+					#(display_message, "@packi {reg0} len(lwbr.packs) {reg1}"),
 					(try_for_range, l.o, l.begin, l.end),
 						(neq, l.o, l.obj),
 						(overlay_set_val, l.o, 0),
@@ -203,21 +203,26 @@ scripts = [
 				] + lwbr.sv_version([
 					] + lwbr.debug([(display_message, "@running script lwbr_server_start"),]) + [
 
+					(eq, g.lwbr_server_initiallized, 0),
+
 					(call_script, script.lwbr_init_cl_vars),
 					(call_script, script.lwbr_init_sv_vars),
 					(call_script, script.lwbr_init_slots),
+					(call_script, script.lwbr_init_hotkeys),
 
 					(try_for_range, l.scn, 0, scn.end),
 						(call_script, script.lwbr_calc_weather, l.scn),
 					(try_end),
 
-					(get_lwbr_sv_var, l.itms, lwbr.sv_vars["items"].id),
+					(get_lwbr_sv_var, l.itms, "items"),
 					(call_script, script.lwbr_give_items_to_troops, l.itms),
 
 					(try_for_range, l.msg, 0, lwbr.msg_cnt_max),
 						(str_store_string, s0, l.msg+lwbr.msg_string_begin),
 						(troop_set_name, l.msg+lwbr.msg_troops_begin, s0),
 					(try_end),
+
+					(assign, g.lwbr_server_initiallized, 1),
 				]) + [#end lwbr.sv_version
 			(try_end),
 			]),
@@ -231,12 +236,13 @@ scripts = [
 					(call_script, script.lwbr_init_cl_vars),
 					(call_script, script.lwbr_init_sv_vars),
 					(call_script, script.lwbr_init_slots),
+					(call_script, script.lwbr_init_hotkeys),
 
 					(try_for_range, l.scn, 0, scn.end),
 						(call_script, script.lwbr_calc_weather, l.scn),
 					(try_end),
 
-					(get_lwbr_sv_var, l.itms, lwbr.sv_vars["items"].id),
+					(get_lwbr_sv_var, l.itms, "items"),
 					(call_script, script.lwbr_give_items_to_troops, l.itms),
 				]) + [#end lwbr.cl_version
 			(try_end),
@@ -251,6 +257,7 @@ scripts = [
 			(try_for_range, l.trp, 0, trp.end),
 				(neq, l.trp, trp.lwbr_sv_vars),
 				(neq, l.trp, trp.lwbr_vars),
+				(neq, l.trp, trp.lwbr_hotkeys),
 				] + [(troop_set_slot, l.trp, lwbr.troop_slots[slot].id, lwbr.troop_slots[slot].deff) for slot in lwbr.troop_slots] + [
 			(try_end),
 			#scenes
@@ -376,8 +383,17 @@ scripts = [
 				] + [(player_set_slot, l.pl, lwbr.player_slots[slot].id, lwbr.player_slots[slot].deff) for slot in lwbr.player_slots] + [
 			(try_end),
 			]),
+	#script.lwbr_init_hotkeys
+	("lwbr_init_hotkeys",[
+			(try_begin),
+				(eq, g.lwbr_hotkeys_initialized, 0),
+				] + [(set_lwbr_hotkey, lwbr.actions[action].id) for action in lwbr.actions] + [
+				(assign, g.lwbr_hotkeys_initialized, 1),
+			(try_end),
+			]),
 	#script.lwbr_ask_player_info
-	("lwbr_ask_player_info", lwbr.debug([ (display_message, "@asking info from player"), ]) + [
+	("lwbr_ask_player_info",[
+			] + lwbr.debug([ (display_message, "@asking info from player"), ]) + [
 			] + lwbr.sv_version([
 				(store_script_param, l.player, 1),
 				] + [ (send_event_to_player, l.player, lwbr.multiplayer_event_client, lwbr.cl_event.ask_var, var)\
@@ -385,7 +401,8 @@ scripts = [
 			]) + [#end lwbr.sv_version
 			]),
 	#script.lwbr_send_player_info
-	("lwbr_send_player_info", lwbr.debug([ (display_message, "@sending info to player"), ]) + [
+	("lwbr_send_player_info",[
+			] + lwbr.debug([ (display_message, "@sending info to player"), ]) + [
 			] + lwbr.sv_version([
 				(store_script_param, l.player, 1),
 				] + sum([ [
@@ -397,7 +414,6 @@ scripts = [
 				(call_script, script.lwbr_send_scene_weather_info, l.player, l.scn),
 			]) + [#end lwbr.sv_version
 			]),
-
 
 	## SEND EVENTS TO SV/PLAYER ##
 	#script.cf_lwbr_filter_player
@@ -446,7 +462,7 @@ scripts = [
 					(store_script_param, l.silent, 7),
 					(try_begin),
 						(eq, l.silent, 0),
-					] + lwbr.debug_func("lwbr_send_event_to_players", [l.event_type, l.par1, l.par2, l.par3, l.par4, l.filter]) + [
+						] + lwbr.debug_func("lwbr_send_event_to_players", [l.event_type, l.par1, l.par2, l.par3, l.par4, l.filter]) + [
 					(try_end),
 					(try_for_players, l.player),
 						(filter_player, l.player, l.filter),
@@ -503,7 +519,32 @@ scripts = [
 				]) + [#end lwbr.cl_version
 			(try_end),
 			]),
-
+	#script.lwbr_log_action
+	("lwbr_log_action",[
+			(store_script_param_1, l.player),
+			(store_script_param_2, l.silent),
+			(try_begin),
+				(player_is_active, l.player),
+				(str_store_player_username, s0, l.player),
+				(player_get_unique_id, reg0),
+				(try_begin),
+					(player_is_admin, l.player),
+					(str_store_string, s42, "@Admin {s0} #{reg0}: {s42}"),
+				(else_try),
+					(str_store_string, s42, "@Player {s0} #{reg0}: {s42}"),
+				(try_end),
+			(try_end),
+			(try_begin),
+				(multiplayer_is_dedicated_server),
+				(server_add_message_to_log, s42),
+			(try_end),
+			(try_begin),
+				(neq, l.silent, lwbr.silent),
+				(try_for_players, l.pl),
+					(multiplayer_send_string_to_player, l.pl, multiplayer_event_show_server_message, s42),
+				(try_end),
+			(try_end),
+			]),
 
 	## VARs and SV_VARs
 	#script.lwbr_init_cl_vars
@@ -705,9 +746,9 @@ scripts = [
 	("lwbr_set_weather",[
 			#(store_current_scene, l.scn),
 			(store_script_param_1, l.scn),
-			(get_lwbr_sv_var, l.weather_config,	lwbr.sv_vars["weather_config"].id),
-			(get_lwbr_sv_var, l.time_config,		lwbr.sv_vars["time_config"].id),
-			(get_lwbr_sv_var, l.fog_config,		lwbr.sv_vars["fog_config"].id),
+			(get_lwbr_sv_var, l.weather_config,	"weather_config"),
+			(get_lwbr_sv_var, l.time_config,	"time_config"),
+			(get_lwbr_sv_var, l.fog_config,		"fog_config"),
 			#rain/snow
 			(try_begin),
 				(eq, l.weather_config, 0),
@@ -747,7 +788,15 @@ scripts = [
 				(assign, l.tim, 24),
 			(try_end),
 			#fog
-			(scene_get_slot, l.fgC, l.scn, lwbr.scene_slots["cur_wt_fgC"].id),
+			(try_begin),
+				(this_or_next|ge, l.tim, 18),
+				(lt, l.tim, 6),
+				(store_random_in_range, l.rnd, 0, 2),
+				(eq, l.rnd, 0),
+				(assign, l.fgC, 0x0F0F0F),
+			(else_try),
+				(scene_get_slot, l.fgC, l.scn, lwbr.scene_slots["cur_wt_fgC"].id),
+			(try_end),
 			(try_begin),
 				(eq, l.fog_config, 0),
 				(scene_get_slot, l.fgD, l.scn, lwbr.scene_slots["cur_wt_fgD"].id),
@@ -822,7 +871,6 @@ scripts = [
 			]) + [#end lwbr.sv_version
 			]),
 
-
 	## ITEMS ##
 	#script.lwbr_set_item_for_troop
 	("lwbr_set_item_for_troop",[
@@ -882,7 +930,118 @@ scripts = [
 			(try_end),
 			]),
 
+	## ACTIONS ##
+	#script.lwbr_do_action
+	("lwbr_do_action",[
+			(store_script_param_1, l.action),
+			(store_script_param_2, l.player_no),
 
+			(assign, l.error, -1),
+
+			(try_begin),#check if it is a valid action
+				] + [ (neq, l.action, lwbr.actions[act].id) for act in lwbr.actions] + [
+				(assign, l.error, 1),
+			(else_try),#check if it is a valid player
+				(neg|player_is_active, l.player_no),
+				(assign, l.error, 2),
+			(else_try),#check if the player has the privileges to do it
+				(neg|player_is_admin, l.player_no),
+				(call_script, script.cf_lwbr_is_adm_action, l.action),
+				(assign, l.error, 3),
+			(else_try),#check the player cooldown for the action
+				(eq, 1, 0),##TODO
+				(assign, l.error, 4),
+			] + sum([[
+				(else_try),
+					(eq, l.action, lwbr.actions[act].id),
+					(call_script, lwbr.actions[act].script, l.player_no),
+					(assign, l.error, 0),
+			] for act in lwbr.actions ],[]) + [
+			(try_end),
+			(assign, reg42, l.error),
+			]),
+	#script.cf_lwbr_is_adm_action
+	("cf_lwbr_is_adm_action",[
+			(store_script_param_1, l.action),
+			] + [ (this_or_next|eq, l.action, lwbr.actions[act].id) for act in lwbr.actions if lwbr.actions[act].adm] + [
+			(eq, 1, 0),
+			]),
+	#script.lwbr_action_taunt
+	("lwbr_action_taunt",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+				(get_player_agent_no, l.agent, l.player_no),
+				(agent_is_active, l.agent),
+				(agent_is_alive, l.agent),
+				#play sound
+				(player_get_gender, l.gender, l.player_no),
+				(try_begin),
+					(eq, l.gender, 1),#female
+					(agent_play_sound, l.agent, snd.woman_yell),
+				(else_try),
+					(store_random_in_range, l.sound, snd.man_warcry, snd.encounter_nobleman),
+					(agent_play_sound, l.agent, l.sound),
+				(try_end),
+			(try_end),
+			]),
+	#script.lwbr_action_cheer
+	("lwbr_action_cheer",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+				(get_player_agent_no, l.agent, l.player_no),
+				(agent_is_active, l.agent),
+				(agent_is_alive, l.agent),
+				#play cheer animation
+				# (agent_get_animation, l.anim, l.agent, 0),#lower body animation
+				# (try_begin),
+				# 	(this_or_next|eq, l.anim, anim.stand),
+				# 	(this_or_next|eq, l.anim, anim.stand_man),
+				# 	(eq, 0, 1),
+				# 	(agent_set_animation, l.agent, anim.cheer_stand, 1),
+				# (else_try),
+				# 	(agent_set_animation, l.agent, anim.cheer, 1),
+				# (try_end),
+				(agent_set_animation, l.agent, anim.cheer, 1),
+				#play sound
+				(player_get_gender, l.gender, l.player_no),
+				(try_begin),
+					(eq, l.gender, 1),#female
+					(agent_play_sound, l.agent, snd.woman_yell),
+				(else_try),
+					(agent_play_sound, l.agent, snd.man_warcry),
+				(try_end),
+			(try_end),
+			]),
+	#script.lwbr_action_jumphorse
+	("lwbr_action_jumphorse",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+			(try_end),
+			]),
+	#script.lwbr_action_msg_to_adm
+	("lwbr_action_msg_to_adm",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+			(try_end),
+			]),
+	#script.lwbr_action_msg_from_adm
+	("lwbr_action_msg_from_adm",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+			(try_end),
+			]),
+	#script.lwbr_action_kdown
+	("lwbr_action_kdown",[
+			(store_script_param_1, l.player_no),
+			(try_begin),
+				(player_is_active, l.player_no),
+			(try_end),
+			]),
 
 	## OTHER ##
 	#script.lwbr_get_key_name
@@ -1298,59 +1457,6 @@ scripts = [
 				(agent_set_animation,l.agent_no,l.anim, 1),
 			(try_end),
 			]),
-	#script.lwbr_taunt
-	("lwbr_taunt",[
-			(store_script_param_1,l.agent_no),
-			(store_script_param_2,l.taunt),
-			(try_begin),
-				(agent_is_active, l.agent_no),
-				(agent_get_player_id, l.player_no, l.agent_no),
-				(player_is_active, l.player_no),
-				(agent_is_alive, l.agent_no),
-				(agent_get_animation,l.anim, l.agent_no, 0),
-				(try_begin),
-					(eq,l.anim, "anim_stand_man"),
-					(eq,l.taunt, 0),
-					(agent_set_animation,l.agent_no,"anim_cheer_stand", 1),
-				(else_try),
-					(eq,l.taunt, 0),
-					(agent_set_animation,l.agent_no,"anim_cheer", 1),
-				(try_end),
-				(try_begin),
-					(player_get_gender, l.gender, l.player_no),
-					(eq, l.gender, 1),#female
-					(try_begin),
-						# (eq,l.taunt, 0),
-						(str_store_string, s2, "@cheer"),
-						(assign, l.sound, "snd_woman_yell"),
-					# (else_try),
-					# 	(str_store_string, s2, "@taunt"),
-					# 	(store_random_in_range, l.sound, "snd_woman_die", "snd_hide"),
-					(try_end),
-				(else_try),
-					(try_begin),
-						(eq,l.taunt, 0),
-						(str_store_string, s2, "@cheer"),
-						(assign, l.sound, "snd_man_warcry"),
-					(else_try),
-						(str_store_string, s2, "@taunt"),
-						(store_random_in_range, l.sound, "snd_man_warcry", "snd_encounter_nobleman"),
-					(try_end),
-				(try_end),
-				(agent_play_sound, l.agent_no, l.sound),
-
-				(assign,reg1,l.sound),
-				(assign,reg2,l.anim),
-				(str_store_player_username, s1, l.player_no),
-				(str_store_string, s1, "@Player {s1} {s2}ed with sound = {reg1}."),
-				(server_add_message_to_log, s1),
-				(try_begin),
-					(eq, lwbr.debug_mode, 1),
-					(multiplayer_send_string_to_player, l.player_no, multiplayer_event_show_server_message,
-						"@{s2} sound is {reg1} and anim is {reg2}"),
-				(try_end),
-			(try_end),
-			]),
 	#script.lwbr_drop_shield ##TODO
 	# ("lwbr_drop_shield",[
 			# #(store_script_param_1,l.agent_no),
@@ -1689,9 +1795,10 @@ scripts = [
 troops = [
 	["lwbr_vars",   "{!}lwbr_vars",   "{!}lwbr_vars",   tf_hero|tf_inactive, 0, 0, 0, [], 0, 0, 0, 0, 0],
 	["lwbr_sv_vars","{!}lwbr_sv_vars","{!}lwbr_sv_vars",tf_hero|tf_inactive, 0, 0, 0, [], 0, 0, 0, 0, 0],
+	["lwbr_hotkeys","{!}lwbr_hotkeys","{!}lwbr_hotkeys",tf_hero|tf_inactive, 0, 0, 0, [], 0, 0, 0, 0, 0],
 ]
 
-strings = [ ("sv_msg_1", "This server is running LWBR WarForge v%.3f"%(lwbr.mod_version/1000)) ] + [ ("sv_msg_%d"%i,"Default msg %d"%i) for i in xrange(2, 101)]
+strings = [ ("sv_msg_1", "This server is running LWBR WarForge v%.3f"%(lwbr.mod_version/1000)) ] + [ ("sv_msg_%d"%i,"Default msg %d"%i) for i in xrange(2, lwbr.msg_cnt_max+1)]
 
 injection = {
 	'lwbr_inject_escape_presentation_load' : [
@@ -1751,14 +1858,14 @@ injection = {
 				(assign, l.done, 1),
 			(else_try),
 				(eq, l.event_type, lwbr.multiplayer_event_client_str),
-				(get_lwbr_var, l.par1, lwbr.cl_vars["str_receiving1"].id),(eq, l.par1, l.par1),
-				(get_lwbr_var, l.par2, lwbr.cl_vars["str_receiving2"].id),(eq, l.par2, l.par2),
-				(get_lwbr_var, l.par3, lwbr.cl_vars["str_receiving3"].id),(eq, l.par3, l.par3),
-				(get_lwbr_var, l.par4, lwbr.cl_vars["str_receiving4"].id),(eq, l.par4, l.par4),
-				(set_lwbr_var, lwbr.cl_vars["str_receiving1"].id, -1, lwbr.sync_to_sv),
-				(set_lwbr_var, lwbr.cl_vars["str_receiving2"].id, -1, lwbr.sync_to_sv),
-				(set_lwbr_var, lwbr.cl_vars["str_receiving3"].id, -1, lwbr.sync_to_sv),
-				(set_lwbr_var, lwbr.cl_vars["str_receiving4"].id, -1, lwbr.sync_to_sv),
+				(get_lwbr_var, l.par1, "str_receiving1"),(eq, l.par1, l.par1),
+				(get_lwbr_var, l.par2, "str_receiving2"),(eq, l.par2, l.par2),
+				(get_lwbr_var, l.par3, "str_receiving3"),(eq, l.par3, l.par3),
+				(get_lwbr_var, l.par4, "str_receiving4"),(eq, l.par4, l.par4),
+				(set_lwbr_var, "str_receiving1", -1, lwbr.sync_to_sv),
+				(set_lwbr_var, "str_receiving2", -1, lwbr.sync_to_sv),
+				(set_lwbr_var, "str_receiving3", -1, lwbr.sync_to_sv),
+				(set_lwbr_var, "str_receiving4", -1, lwbr.sync_to_sv),
 				] + lwbr.debug_func("multiplayer_event_client_str", [l.player_no, l.par1, l.par2, l.par3, l.par4]) + [
 				] + lwbr.debug([(display_message, "@string is {s0}")]) + [
 				(try_begin),
@@ -1766,11 +1873,6 @@ injection = {
 				    (troop_set_name, l.par2, s0),
 				(try_end),
 				(assign, l.done, 1),
-			(else_try),
-				(eq, l.event_type, multiplayer_event_set_item_selection),
-				(store_script_param, l.par1, 3),
-				(store_script_param, l.par2, 4),
-				] + lwbr.debug_func("multiplayer_event_set_item_selection", [l.player_no, l.par1, l.par2]) + [
 			(else_try),
 				] + lwbr.debug_func("game_receive_network_message", [l.player_no, l.event_type]) + [
 			(try_end),
@@ -1786,19 +1888,21 @@ injection = {
 				(try_begin),#invalid player
 					(neg|player_is_active, l.player_no),
 					(assign, reg0, l.player_no),
-					(display_message, "@Error: invalid player id #{reg0} at sv_event.set_sv_var #{reg0} -> {reg1}"),
+					(log_action, "@Error: invalid player id #{reg0} at sv_event.set_sv_var #{reg0} -> {reg1}", -1, lwbr.silent),
 				(else_try),#not admin
 					(neg|player_is_admin, l.player_no),
 					(str_store_player_username, s0, l.player_no),
 					(assign, reg0, l.slot),
 					(assign, reg1, l.val),
-					(display_message, "@Error: non-admin player {s0} at sv_event.set_sv_var #{reg0} -> {reg1}"),
+					(log_action, "@Error: non-admin player {s0} at sv_event.set_sv_var #{reg0} -> {reg1}", -1, lwbr.silent),
 				(else_try),#invalid var
 					(neg|is_between, l.slot, 0, lwbr._var.count["sv"]),
 					(assign, reg0, l.slot),
-					(display_message, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.set_sv_var"),
+					(log_action, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.set_sv_var", -1, lwbr.silent),
 				(else_try),#valid
+					(get_lwbr_sv_var, l.old_val, l.slot),
 					(set_lwbr_sv_var, l.slot, l.val, lwbr.sync_to_cl),
+					(assign, l.logged, 0),
 					(try_begin),#items
 						(eq, l.slot, lwbr.sv_vars["items"].id),
 						(call_script, script.lwbr_give_items_to_troops, l.val),
@@ -1811,14 +1915,23 @@ injection = {
 						(try_end),
 					(else_try),#msg_cont
 						(eq, l.slot, lwbr.sv_vars["msg_cnt"].id),
-						(get_lwbr_sv_var, l.old_val, lwbr.sv_vars["msg_cnt"].id),
-						(val_add, l.val, lwbr.msg_troops_begin),
-						(val_add, l.old_val, lwbr.msg_troops_begin),
-						(try_for_range, l.trp, l.old_val, l.val),
+						(store_add, l.end, l.val, lwbr.msg_troops_begin),
+						(store_add, l.begin, l.old_val, lwbr.msg_troops_begin),
+						(try_for_range, l.trp, l.begin, l.end),
 							(str_store_troop_name, s0, l.trp),
 							(send_str_to_players, "@{s0}", lwbr.multiplayer_event_client_str,
 								lwbr.str_event.set_troop_name, l.trp, 0, "-Server|WarForge|Admin", lwbr.silent),
 						(try_end),
+						(assign, reg0, l.val),
+						(log_action, "@Changing # of server messages to #{reg0}", l.player_no, lwbr.verbose),
+						(assign, l.logged, 1),
+					(try_end),
+					(try_begin),
+						(eq, l.logged, 0),
+						(assign, reg0, l.slot),
+						(assign, reg1, l.old_val),
+						(assign, reg2, l.val),
+						(log_action, "@Changing server var #{reg0} from {reg1} to {reg2}", l.player_no, lwbr.verbose),
 					(try_end),
 				(try_end),
 			(try_end),
@@ -1829,7 +1942,7 @@ injection = {
 			(try_begin),
 				(neg|is_between, l.slot, 0, lwbr._var.count["sv"]),
 				(assign, reg0, l.slot),
-				(display_message, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.ask_sv_var"),
+				(log_action, "@Error: invalid or unrecognized sv_var #{reg0} at sv_event.ask_sv_var", l.player_no, lwbr.silent),
 			(else_try),
 				(get_lwbr_sv_var, l.val, l.slot),
 				(send_event_to_player, l.player_no, lwbr.multiplayer_event_client,
@@ -1852,17 +1965,42 @@ injection = {
 				(player_set_slot, l.player_no, l.slot, l.val),
 			(else_try),
 				(assign, reg0, l.slot),
-				(display_message, "@Error: invalid or unrecognized returned var #{reg0} at sv_event.return_var"),
+				(log_action, "@Error: invalid or unrecognized returned var #{reg0} at sv_event.return_var", l.player_no, lwbr.silent),
 			(try_end),
 		(else_try),#action
 			(eq, l.type, lwbr.sv_event.action),
 			(store_script_param, l.action, 4),
 			(try_begin),
-			# 	(eq, l.action, lwbr.action.taunt.id),
-			# 	...
-			# (else_try),
-				(assign, reg0, l.action),
-				(display_message, "@Error: invalid or unrecognized action #{reg0} at sv_event.action"),
+				(call_script, script.lwbr_do_action, l.action, l.player_no),
+				(assign, l.error, reg42),
+				(try_begin),
+					(eq, l.error, 0),
+					(try_begin),
+						(call_script, script.cf_lwbr_is_adm_action, l.action),
+						(assign, reg0, l.action),
+						(log_action, "@Doing admin action #{reg0}", l.player_no, lwbr.verbose),
+						# (log_action, "@Doing admin action #{reg0}", l.player_no, lwbr.verbose),
+					(else_try),
+						(assign, reg0, l.action),
+						(log_action, "@Doing action #{reg0}", l.player_no, lwbr.verbose),
+					(try_end),
+				(else_try),
+					(eq, l.error, 1),
+					(assign, reg0, l.action),
+					(log_action, "@Error: invalid or unrecognized action #{reg0} at sv_event.action", l.player_no, lwbr.verbose),
+				(else_try),
+					(eq, l.error, 2),
+					(assign, reg0, l.action),
+					(log_action, "@Error: invalid player at sv_event.action", -1, lwbr.verbose),
+				(else_try),
+					(eq, l.error, 3),
+					(assign, reg0, l.action),
+					(log_action, "@Error: admin only action #{reg0}", l.player_no, lwbr.verbose),
+				(else_try),
+					(eq, l.error, 4),
+					(assign, reg0, l.action),
+					(log_action, "@Error: action #{reg0} still in cooldown", l.player_no, lwbr.verbose),
+				(try_end),
 			(try_end),
 		],
 	'lwbr_inject_client_only_events' : [
@@ -2002,9 +2140,9 @@ injection = {
 				(scene_set_slot, l.scene, l.slot, l.val),
 				(try_begin),
 					(is_between, l.slot, lwbr.scene_slots["available_dm"].id, lwbr.scene_slots["cur_wt_fgC"].id+1),
-					(get_lwbr_var, l.val, lwbr.cl_vars["nxt_scn_info"].id),
+					(get_lwbr_var, l.val, "nxt_scn_info"),
 					(val_max, l.val, l.scene+1),
-					(set_lwbr_var, lwbr.cl_vars["nxt_scn_info"].id, l.val),
+					(set_lwbr_var, "nxt_scn_info", l.val),
 				(try_end),
 			(else_try),
 				(assign, reg0, l.slot),
@@ -2077,15 +2215,7 @@ injection = {
 	'lwbr_inject_on_player_spawn' : [],
 	'lwbr_inject_player_join' : [
 		] + lwbr.sv_version([
-			(str_store_player_username, s0, l.player_no),
-			(assign, reg0, l.player_no),
-			(player_get_unique_id, reg1, l.player_no),
-			(try_begin),
-				(player_is_admin, l.player_no),
-				(display_message, "@player '{s0}' id #{reg0} uid #{reg1} joined as admin"),
-			(else_try),
-				(display_message, "@player '{s0}' id #{reg0} uid #{reg1} joined"),
-			(try_end),
+			(log_action, "@Joined the server", l.player_no, lwbr.verbose),
 
 			(call_script, script.lbwr_init_player, l.player_no),
 			(call_script, script.lwbr_ask_player_info, l.player_no),
@@ -2133,25 +2263,25 @@ injection = {
 					]) + [#end lwbr.sv_version
 				(try_end),
 				]),
-		(1, 0, 0, [],[
-				(get_lwbr_sv_var, l.cur_tm, lwbr.sv_vars["msg_cur_tm"].id),
-				(get_lwbr_sv_var, l.max_tm, lwbr.sv_vars["msg_cd"].id),
-				(get_lwbr_sv_var, l.cur_id, lwbr.sv_vars["msg_cur_id"].id),
-				(get_lwbr_sv_var, l.max_id, lwbr.sv_vars["msg_cnt"].id),
+		(1, 0, 0, [],[#show server messages
+				(get_lwbr_sv_var, l.cur_tm, "msg_cur_tm"),
+				(get_lwbr_sv_var, l.max_tm, "msg_cd"),
+				(get_lwbr_sv_var, l.cur_id, "msg_cur_id"),
+				(get_lwbr_sv_var, l.max_id, "msg_cnt"),
 				(gt, l.max_tm, 0),
 				(try_begin),
 					(ge, l.cur_tm, l.max_tm),
 					(assign, l.cur_tm, 0),
 					(str_store_troop_name, s0, lwbr.msg_troops_begin+l.cur_id),
 					(try_for_players, l.pl),
-						(multiplayer_send_message_to_player, l.pl, multiplayer_event_show_server_message, "@{s0}"),
+						(multiplayer_send_string_to_player, l.pl, multiplayer_event_show_server_message, "@{s0}"),
 					(try_end),
 					(val_add, l.cur_id, 1),
 					(val_mod, l.cur_id, l.max_id),
 				(try_end),
 				(val_add, l.cur_tm, 1),
-				(set_lwbr_sv_var, lwbr.sv_vars["msg_cur_tm"].id, l.cur_tm),
-				(set_lwbr_sv_var, lwbr.sv_vars["msg_cur_id"].id, l.cur_id),
+				(set_lwbr_sv_var, "msg_cur_tm", l.cur_tm),
+				(set_lwbr_sv_var, "msg_cur_id", l.cur_id),
 				]),
 		(ti_on_multiplayer_mission_end, 0, 0, [],[#recalc weather for cur scn
 				(try_begin),
@@ -2162,11 +2292,11 @@ injection = {
 					]) + [#end lwbr.sv_version
 				(try_end),
 				]),
-		(5, 0, 0, [], [
+		(5, 0, 0, [], [#min version
 				(try_begin),
 					(multiplayer_is_server),
 					] + lwbr.sv_version([
-						(get_lwbr_sv_var, l.min_version, lwbr.sv_vars["min_version"].id),
+						(get_lwbr_sv_var, l.min_version, "min_version"),
 						(gt, l.min_version, 0),
 						(try_for_players, l.pl),
 							(player_get_slot, l.version, l.pl,  lwbr.player_slots["version"].id),
@@ -2202,6 +2332,35 @@ injection = {
 					]) + [#end lwbr.sv_version
 				(try_end),
 				]),
+		] + lwbr.cl_version([#actions
+			(0, 0, lwbr.actions[act].cd, [
+				(multiplayer_get_my_player, l.me),
+				(neg|player_is_busy_with_menus, l.me),
+				(get_lwbr_hotkey, l.hk, lwbr.actions[act].id),
+				(key_clicked, l.hk),
+				(display_message, "@doing action %d"%lwbr.actions[act].id),
+				], [ (send_event_to_server, lwbr.multiplayer_event_server, lwbr.sv_event.action, lwbr.actions[act].id), ])\
+			for act in lwbr.actions if not lwbr.actions[act].adm
+		] + [#admin actions
+			(0, 0, lwbr.actions[act].cd, [
+				(multiplayer_get_my_player, l.me),
+				(neg|player_is_busy_with_menus, l.me),
+				(player_is_admin, l.me),
+				(get_lwbr_hotkey, l.hk, lwbr.actions[act].id),
+				(key_clicked, l.hk),
+				] + lwbr.debug([(display_message, "@doing admin action %d"%lwbr.actions[act].id),]) + [
+				], [ (send_event_to_server, lwbr.multiplayer_event_server, lwbr.sv_event.action, lwbr.actions[act].id), ])\
+			for act in lwbr.actions if lwbr.actions[act].adm
+		]) + [#end cl_version
+		] + lwbr.sv_version([#player exited message
+			(ti_on_player_exit, 0, 0, [],[#player exited message
+					(try_begin),
+						(multiplayer_is_server),
+						(store_trigger_param_1, l.player_no),
+						(log_action, "@Left the server", l.player_no, lwbr.verbose),
+					(try_end),
+					]),
+		]) + [#end sv_version
 		],
 	'lwbr_inject_mt_deathmatch' : [],
 	'lwbr_inject_mt_t_deathmatch' : [],
@@ -2213,7 +2372,7 @@ injection = {
 	'lwbr_inject_mt_coop' : [],
 	'lwbr_inject_mt_duel' : [],
 	'lwbr_inject_buy_equipment' : [
-		(get_lwbr_sv_var, l.packs, lwbr.sv_vars["items"].id),
+		(get_lwbr_sv_var, l.packs, "items"),
 		] + lwbr.debug_func("lwbr_inject_buy_equipment", [l.player_no, l.packs]) + [
 		# try_begin # lwbr_buy_peasant_items
 			(store_and, l.check, l.packs, lwbr.packages["Peasant"]),

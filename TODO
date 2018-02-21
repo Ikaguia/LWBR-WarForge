@@ -1,3 +1,4 @@
+warforge items
 peasant items - Done
 arena items - Done
 initial info not being sent!! why?? - Fixed, event_types need to be < 128
@@ -7,25 +8,35 @@ items not working - Fixed
 added parts of warband ui retexture - https://forums.taleworlds.com/index.php/topic,373299.0.html
 min version -- Done
 server messages -- Done
+action system -- Done
+actions
+	taunt -- Done
+	cheer -- Done
+log admin action and teamkills -- Done
 
 
+fix changing server messages
 
 
 dmg report
 keep items
 edit hotkeys
 
-log admin action and teamkills
+actions
+	knock down players(adm)
+	msg from admin to all(adm)
+	msg to all admins
+	jump from horse
+	drop shield
 
-admin text
+add cooldown check serverside for actions
+check if agent_play_sound is synced with clients
 admin cheats
 maplist config in game
 new maps
 enable/disable horses
 peasant troops
 persistant stats
-jump from horses
-taunt
 one free wpn
 modify dmg
 peasant and arena skill levels

@@ -4,7 +4,7 @@ COMPILE = compile.py tag %1 %2 %3 %4 %5 %6 %7 %8 %9
 DEST_LINUX = /home/cristiano/.local/share/Steam/steamapps/common/MountBlade Warband
 DDEST_LINUX = $(DEST_LINUX)
 DEST_WINDOWS1 = c:/STEAM/steamapps/common/MountBlade Warband
-DDEST_WINDOWS1 = $(DEST_WINDOWS1)
+DDEST_WINDOWS1 = ../../wb_dedicated
 DEST_WINDOWS2 = c:/Program Files (x86)/Steam/steamapps/common/MountBlade Warband
 DDEST_WINDOWS2 = ../wb_dedicated
 
@@ -94,8 +94,10 @@ cl:   _clear _move_cl
 sv:   _clear _move_sv
 full: _clear _move_full
 
-run_sv:
-	$(DDEST)/mb_warband_dedicated.exe -r 1_battle.txt -m Native
+run_sv-%:
+	(winpty "$(DDEST)/mb_warband_dedicated.exe" -r $*.txt -m Native &)
+run_sv_p: run_sv-10_peasant_wars
+run_sv: run_sv-1_battle
 
 _clear:
 	@#clear

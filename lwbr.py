@@ -56,22 +56,26 @@ sync_to_sv = 2
 verbose = 0
 silent = 1
 
-msg_troops_begin = trp.find_item_cheat
+msg_troops_begin = trp.trainer_1
 msg_string_begin = s.sv_msg_1
-msg_cnt_max = 100
+msg_cnt_max = 30
 
 class _action:#player action
 	count = 0
-	def __init__(self,cd=0,hk=-1,adm=False):
+	def __init__(self,script,cd=0,hk=-1,adm=False):
 		self.id = _action.count
 		self.cd = cd
 		self.hk = hk
 		self.adm = adm
+		self.script = script
 		_action.count += 1
 actions = {
-	"taunt": _action(cd=1,hk=key_comma),
-	"cheer": _action(cd=1,hk=key_period),
-	#"kdown": _action(cd=1,hk=key_delete,adm=True),
+	"taunt":		_action(script.lwbr_action_taunt,		cd=3,hk=key_comma),
+	"cheer":		_action(script.lwbr_action_cheer,		cd=6,hk=key_period),
+	"jumphorse":	_action(script.lwbr_action_jumphorse,	cd=5,hk=key_k),
+	"msg_to_adm":	_action(script.lwbr_action_msg_to_adm,	cd=5,hk=key_back_space),
+	"msg_from_adm":	_action(script.lwbr_action_msg_from_adm,cd=5,hk=key_u,adm=True),
+	"kdown":		_action(script.lwbr_action_kdown,		cd=5,hk=key_delete,adm=True),
 	}
 
 class sv_event:#events that run on the server
@@ -314,10 +318,10 @@ scenes_opt = [
 			scene_slots["rain_max"].id		: 15,
 			scene_slots["rain_chance"].id	: 3,# 3%
 			scene_slots["snow_chance"].id	: 4,# 1%
-			scene_slots["fog_min"].id		: 15,
+			scene_slots["fog_min"].id		: 45,
 			scene_slots["fog_max"].id		: 90,
 			scene_slots["fog_color1"].id	: 0xFF8400,
-			scene_slots["fog_color2"].id	: 0xFF8400,
+			scene_slots["fog_color2"].id	: 0xAA2C00,
 		}),
 	(#steppe
 		[
@@ -486,9 +490,9 @@ def debug_func(func_name="script_name", args=[]):
 
 def cl_version(block = []):
 	if IS_CLIENT: return block
-	else: return [(display_message, "@Error: this is the dedicated server version, trying to run clientside code"),]
+	else: return []
 
 def sv_version(block = []):
 	if IS_SERVER: return block
-	else: return [(display_message, "@Error: this is the clientside only version, trying to run server code"),]
+	else: return []
 

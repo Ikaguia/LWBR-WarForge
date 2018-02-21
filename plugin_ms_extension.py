@@ -795,13 +795,27 @@ extend_syntax(item_modifier_get_value_multiplier)  # (item_modifier_get_value_mu
 
 #Operations
 def set_lwbr_var(var,val,sync=0):
+	if type(var) == type("aaa"): var = lwbr.cl_vars[var].id
 	return [ (call_script, script.lwbr_set_var, var, val, sync), ]
 def set_lwbr_sv_var(var,val,sync=0):
+	if type(var) == type("aaa"): var = lwbr.sv_vars[var].id
 	return [ (call_script, script.lwbr_set_sv_var, var, val, sync), ]
 def get_lwbr_var(dest,var):
+	if type(var) == type("aaa"): var = lwbr.cl_vars[var].id
 	return [ (call_script, script.lwbr_get_var, var), (assign, dest, reg42), ]
 def get_lwbr_sv_var(dest,var):
+	if type(var) == type("aaa"): var = lwbr.sv_vars[var].id
 	return [ (call_script, script.lwbr_get_sv_var, var), (assign, dest, reg42), ]
+def set_lwbr_hotkey(hk,val=None):
+	if val is None:#reset to default
+		for action in lwbr.actions:
+			if lwbr.actions[action].id == hk:
+				return [ (troop_set_slot, trp.lwbr_hotkeys, hk, lwbr.actions[action].hk), ]
+		print "Error: hotkey",hk,"not found"
+		exit(1)
+	return [ (troop_set_slot, trp.lwbr_hotkeys, hk, val), ]
+def get_lwbr_hotkey(dest,hk):
+	return [ (troop_get_slot, dest, trp.lwbr_hotkeys, hk), ]
 def set_mp_item_for_troop(item,troop,val):
 	return [ (call_script, script.lwbr_set_item_for_troop, item, troop, val), ]
 def get_mp_item_for_troop(dest,item,troop):
@@ -932,11 +946,18 @@ def send_str_to_server(string,i1,i2=0,i3=0,i4=0,silent=lwbr.verbose):
 			]) + [#end lwbr.cl_version
 		(try_end),
 		]
+def log_action(string, player_no=-1, silent=lwbr.silent):
+	return [
+		(str_store_string, s42, string),
+		(call_script, script.lwbr_log_action, player_no, silent),
+	]
 
 extend_syntax(set_lwbr_var)			#(set_lwbr_var, var, val, <sync:no/sv->cl/cl->sv>)
 extend_syntax(set_lwbr_sv_var)		#(set_lwbr_sv_var, var, val, <sync:no/sv->cl/cl->sv>)
 extend_syntax(get_lwbr_var)			#(get_lwbr_var, dest, var)
 extend_syntax(get_lwbr_sv_var)		#(get_lwbr_sv_var, dest, var)
+extend_syntax(set_lwbr_hotkey)		#(set_lwbr_hotkey, hk, val)
+extend_syntax(get_lwbr_hotkey)		#(get_lwbr_hotkey, dest, hk)
 extend_syntax(set_mp_item_for_troop)#(set_mp_item_for_troop, item, troop, val)
 extend_syntax(get_mp_item_for_troop)#(get_mp_item_for_troop, dest, item, troop)
 extend_syntax(set_slot)				#(set_slot, obj, slot, val)
@@ -948,3 +969,4 @@ extend_syntax(send_event_to_server)	#(send_event_to_server, event_type, <arg1>, 
 extend_syntax(send_str_to_players)	#(send_str_to_players, string, arg1, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
 extend_syntax(send_str_to_player)	#(send_str_to_player, player, string, arg1, <arg2>, <arg3>, <arg4>, <filter>, <silent>)
 extend_syntax(send_str_to_server)	#(send_str_to_server, string, arg1, <arg2>, <arg3>, <arg4>, <silent>)
+extend_syntax(log_action)			#(log_action, string, player_no, silent)
