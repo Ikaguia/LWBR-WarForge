@@ -3052,10 +3052,13 @@ presentations = [
 						(try_end),
 						#INVASION MODE END
 
+						#LWBR WarForge 2.0 --- BEGIN
 						(store_current_scene, l.cur_scene),
-						(val_sub, l.cur_scene, "scn_multi_scene_1"),
-						(val_add, l.cur_scene, "str_multi_scene_1"),
-						(str_store_string, s0, l.cur_scene),
+						#(val_sub, l.cur_scene, "scn_multi_scene_1"),
+						#(val_add, l.cur_scene, "str_multi_scene_1"),
+						#(str_store_string, s0, l.cur_scene),
+						(call_script, script.game_get_scene_name, l.cur_scene),
+						#LWBR WarForge 2.0 --- END
 						(str_store_string, s3, "str_map_name_s0"),
 						(str_store_string, s2, "str_s2_s3"),
 

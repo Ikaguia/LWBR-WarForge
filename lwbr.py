@@ -12,28 +12,25 @@ wt_event_limit = 30 #how many weather events can be run per second
 
 #used for item packs selection
 packages = {'full': 0}
-packs = ('Native','WarForge','Arena','Peasant','Event','Event2')
-for pack in packs:
+packs = ('Native','WarForge','Event','Event2')
+solo_packs = ('Arena','Peasant')
+for pack in (packs + solo_packs):
 	packages[pack] = 1 << (len(packages)-1)
 	packages['full'] += packages[pack]
-for pack in packs:
+for pack in (packs + solo_packs):
 	packages['-'+pack] = packages['full'] ^ packages[pack]
+
 
 #used to select all players that match all restrictions that are set
 #i.e: "Admin|WarForge" will select all admins that are using this mod)
 player_types = {
 	"Any"		: 0,
 	"Admin"		: 1,
-	"NotAdmin"	: 2,
-	"NotServer"	: 4,
+	"-Admin"	: 2,
+	"-Server"	: 4,
 	"Native"	: 8,
 	"WarForge"	: 16,
 }
-player_types["All"]			= player_types["Any"]
-player_types["-Admin"]		= player_types["NotAdmin"]
-player_types["-Server"]		= player_types["NotServer"]
-player_types["-WarForge"]	= player_types["Native"]
-player_types["-Native"]		= player_types["WarForge"]
 def player_filter(filters):
 	filters = filters.split("|")
 	val = 0
@@ -50,15 +47,40 @@ multiplayer_event_client			= 126
 multiplayer_event_server_str		= 127
 multiplayer_event_client_str		= 49 #128 is invalid
 
+dont_sync = -1
 sync_to_cl = 1
 sync_to_sv = 2
 
 verbose = 0
 silent = 1
 
+console = -2
+
 msg_troops_begin = trp.trainer_1
 msg_string_begin = s.sv_msg_1
 msg_cnt_max = 30
+
+
+class game_mode:#special "game modes"
+	count = 0
+	def __init__(self,custom_message=None,items=None):
+		self.custom_message = custom_message
+		self.items = items
+		self.id = game_mode.count
+		game_mode.count += 1
+game_modes = {
+	"native" :		game_mode(),
+	"peasantWars" :	game_mode(
+		custom_message = "This server is running the 'Peasant Wars' game mode. In this mode, whenever you spawn you will receive random peasant gear. \
+		Every troop will have the same stats and skills.",
+		items = "Peasant",
+		),
+	"tournament":	game_mode(
+		custom_message = "This server is running the 'Tournament' game mode. In this mode, whenever you spawn you will get a kit of weapons depending on the type of weapon in your first\
+		 slot and wether you picked or not a horse.",
+		items = "Arena",
+		),
+}
 
 class _action:#player action
 	count = 0
@@ -71,7 +93,7 @@ class _action:#player action
 		_action.count += 1
 actions = {
 	"taunt":		_action(script.lwbr_action_taunt,		cd=3,hk=key_comma),
-	"cheer":		_action(script.lwbr_action_cheer,		cd=6,hk=key_period),
+	"cheer":		_action(script.lwbr_action_cheer,		cd=3,hk=key_period),
 	"jumphorse":	_action(script.lwbr_action_jumphorse,	cd=5,hk=key_k),
 	"msg_to_adm":	_action(script.lwbr_action_msg_to_adm,	cd=5,hk=key_back_space),
 	"msg_from_adm":	_action(script.lwbr_action_msg_from_adm,cd=5,hk=key_u,adm=True),
@@ -131,6 +153,7 @@ cl_vars = {#personal settings
 	"str_receiving4":	_var("cl",deff=-1),
 	}
 sv_vars = {#settings of the server
+	"game_mode":		_var("sv",deff=game_modes["native"].id,deff_sv=game_modes["native"].id,sync=True),
 	"items":			_var("sv",deff=packages["Native"],deff_sv=packages["Native"]|packages["WarForge"],sync=True),
 	"version": 			_var("sv",deff=native,deff_sv=mod_version,sync=True),
 	"firearms_en":		_var("sv",deff=0,deff_sv=0,sync=True),
@@ -471,10 +494,70 @@ scenes_opt = [
 		}),
 ]
 
+scenes_name = {
+	"multi_scene_1": "Ruins",
+	"multi_scene_2": "Village",
+	"multi_scene_3": "Hailes Castle",
+	"multi_scene_4": "Ruined Fort",
+	"multi_scene_5": "Scene 5",
+	"multi_scene_6": "Scene 6",
+	"multi_scene_7": "Field by the River",
+	"multi_scene_8": "Rudkhan Castle",
+	"multi_scene_9": "Snowy Village",
+	"multi_scene_10": "Turin Castle",
+	"multi_scene_11": "Nord Town",
+	"multi_scene_12": "Port Assault",
+	"multi_scene_13": "Brunwud Castle",
+	"multi_scene_14": "Battle on Ice",
+	"multi_scene_15": "Mahdaar Castle",
+	"multi_scene_16": "Jameyyed Castle",
+	"multi_scene_17": "The Arena",
+	"multi_scene_18": "Forest Hideout",
+	"multi_scene_19": "Canyon",
+	"multi_scene_20": "Desert Town",
+	"multi_scene_21": "Cold Coast",
+	"random_multi_plain_medium": "Random Plains (Medium)",
+	"random_multi_plain_large": "Random Plains (Large)",
+	"random_multi_steppe_medium": "Random Steppe (Medium)",
+	"random_multi_steppe_large": "Random Steppe (Large)",
+}
+if True:#set name for scenes
+	from module_parties import parties as _parties
+	towns_start,towns_end = 999999,0
+	castles_start,castles_end = 999999,0
+	villages_start,villages_end = 999999,0
+	for i in xrange(len(_parties)):
+		pid = _parties[i][0]
+		if pid.startswith("town_"):
+			towns_start = min(towns_start,i)
+			towns_end = max(towns_end,i)
+		if pid.startswith("castle_"):
+			castles_start = min(castles_start,i)
+			castles_end = max(castles_end,i)
+		if pid.startswith("village_"):
+			villages_start = min(villages_start,i)
+			villages_end = max(villages_end,i)
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_center"%(1 + town - towns_start)] = _parties[town][1] + "'s center"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_castle"%(1 + town - towns_start)] = _parties[town][1] + "'s castle"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_tavern"%(1 + town - towns_start)] = _parties[town][1] + "'s tavern"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_store" %(1 + town - towns_start)] = _parties[town][1] + "'s store"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_arena" %(1 + town - towns_start)] = _parties[town][1] + "'s arena"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_prison"%(1 + town - towns_start)] = _parties[town][1] + "'s prison"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_walls" %(1 + town - towns_start)] = _parties[town][1] + "'s walls"
+	for town in xrange(towns_start, towns_end): scenes_name["town_%d_alley" %(1 + town - towns_start)] = _parties[town][1] + "'s alley"
+	for castle in xrange(castles_start, castles_end):
+		scenes_name["castle_%d_exterior" %(1 + castle - castles_start)] = _parties[castle][1] + "'s exterior"
+		scenes_name["castle_%d_interior" %(1 + castle - castles_start)] = _parties[castle][1] + "'s interior"
+		scenes_name["castle_%d_prison"   %(1 + castle - castles_start)] = _parties[castle][1] + "'s prison"
+	for village in xrange(villages_start, villages_end): scenes_name["village_%d" %(1 + village - villages_start)] = _parties[village][1] + " village"
 
-def debug(block = []):
-	if debug_mode == 0: return []
-	return block
+
+def cond(check, block=[]):
+	if check: return block
+	return []
+
+def debug(block=[]):
+	return cond(debug_mode,block)
 
 def debug_func(func_name="script_name", args=[]):
 	if debug_mode == 0: return []
@@ -488,11 +571,9 @@ def debug_func(func_name="script_name", args=[]):
 			]
 	return block + [(display_message, s42),]
 
-def cl_version(block = []):
-	if IS_CLIENT: return block
-	else: return []
+def cl_version(block=[]):
+	return cond(IS_CLIENT,block)
 
-def sv_version(block = []):
-	if IS_SERVER: return block
-	else: return []
+def sv_version(block=[]):
+	return cond(IS_SERVER,block)
 

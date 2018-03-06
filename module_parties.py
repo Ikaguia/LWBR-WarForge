@@ -327,5 +327,5 @@ parties = [
 #LWBR WarForge 2.0 --- BEGIN
 if not IS_CLIENT:
 	for g in xrange(len(parties)):
-		parties[g] = (parties[g][0],"_",0,0,0,0,0,0,0,(0,0),[(trp.player,1,0)])
+		parties[g] = (parties[g][0],parties[g][1],0,0,0,0,0,0,0,(0,0),[(trp.player,1,0)])
 #LWBR WarForge 2.0 --- END

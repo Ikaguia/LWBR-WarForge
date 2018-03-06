@@ -1550,13 +1550,13 @@ all_items_end = itm.items_end
 all_quests_begin = 0
 all_quests_end = "qst_quests_end"
 
-towns_begin = "p_town_1"
-castles_begin = "p_castle_1"
-villages_begin = "p_village_1"
+towns_begin = p.town_1
+castles_begin = p.castle_1
+villages_begin = p.village_1
 
 towns_end = castles_begin
 castles_end = villages_begin
-villages_end   = "p_salt_mine"
+villages_end   = p.salt_mine
 
 walled_centers_begin = towns_begin
 walled_centers_end   = castles_end

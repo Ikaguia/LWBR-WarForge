@@ -12,7 +12,9 @@ action system -- Done
 actions
 	taunt -- Done
 	cheer -- Done
+	jump from horse -- Done
 log admin action and teamkills -- Done
+correct name for all maps -- Done
 
 
 fix changing server messages
@@ -26,11 +28,10 @@ actions
 	knock down players(adm)
 	msg from admin to all(adm)
 	msg to all admins
-	jump from horse
 	drop shield
 
+change peasant and arena to custom missions
 add cooldown check serverside for actions
-check if agent_play_sound is synced with clients
 admin cheats
 maplist config in game
 new maps

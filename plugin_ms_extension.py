@@ -947,8 +947,10 @@ def send_str_to_server(string,i1,i2=0,i3=0,i4=0,silent=lwbr.verbose):
 		(try_end),
 		]
 def log_action(string, player_no=-1, silent=lwbr.silent):
+	string2 = string.replace("%","%%")
 	return [
 		(str_store_string, s42, string),
+		(str_store_string, s43, string2),
 		(call_script, script.lwbr_log_action, player_no, silent),
 	]
 

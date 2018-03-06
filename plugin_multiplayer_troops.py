@@ -583,8 +583,6 @@ def foo___lwbr_give_items_to_troop():
 	foo = [
 		(store_script_param_1, l.value),
 		(store_script_param_2, l.troop),
-		# (troop_clear_inventory,l.troop),#doesnt clear equiped items
-		# (troop_raise_skill, l.troop, skl.inventory_management, 10),
 		(troop_get_inventory_capacity, l.slots, l.troop),
 		(try_for_range, l.slot, 0, l.slots),
 			(troop_set_inventory_slot, l.troop, l.slot, -1),
@@ -593,9 +591,19 @@ def foo___lwbr_give_items_to_troop():
 		(eq, l.troop_fac, l.troop_fac),
 		(try_for_range, l.itm, 0, itm.end),
 			(set_mp_item_for_troop, l.itm, l.troop, -1),
-			# (store_sub, l.item_troop_slot, l.troop, multiplayer_troops_begin),
-			# (val_add, l.item_troop_slot, slot_item_multiplayer_availability_linked_list_begin),
-			# (item_set_slot, l.itm, l.item_troop_slot, -1),
+		(try_end),
+		(get_lwbr_sv_var, l.gm, "game_mode"),
+		(try_begin),
+	]
+
+	for gm in lwbr.game_modes:
+		if lwbr.game_modes[gm].items:
+			foo += [
+					(eq, l.gm, lwbr.game_modes[gm].id),
+					(assign, l.value, lwbr.packages[lwbr.game_modes[gm].items]),
+				(else_try),
+			]
+	foo += [
 		(try_end),
 		(try_begin),
 	]
@@ -604,13 +612,13 @@ def foo___lwbr_give_items_to_troop():
 		for troop_id,troop_type,troop_packs in fact_troops:
 			if troop_id == trp.player:
 				if fact_id != fac.no_faction:
-					foo += [(eq,l.troop_fac,fact_id),]
+					foo += [(eq, l.troop_fac, fact_id),]
 			else:
-				foo += [(eq,l.troop,troop_id),]
+				foo += [(eq, l.troop, troop_id),]
 			for pack_name,pack_free_items,pack_paid_items in troop_packs:
 				foo += [
 					(try_begin),
-						(store_and,l.pack,l.value,lwbr.packages[pack_name]),
+						(store_and, l.pack, l.value, lwbr.packages[pack_name]),
 						(neq,l.pack,0),
 				] + lwbr.debug([
 						(try_begin),

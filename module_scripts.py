@@ -1390,7 +1390,7 @@ scripts = [
 				(eq, ":input", 2),
 				(store_script_param, ":val2", 3),
 			(end_try),
-			(try_begin),
+			(try_begin),#get bot count
 				(eq, ":input", 1),
 				(assign, reg0, ":val1"),
 				(try_begin),
@@ -1404,7 +1404,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#set bot count
 				(eq, ":input", 2),
 				(assign, reg0, ":val1"),
 				(assign, reg1, ":val2"),
@@ -1412,25 +1412,28 @@ scripts = [
 					(eq, ":val1", 1),
 					(ge, ":val2", 0),
 					(assign, "$g_multiplayer_num_bots_team_1", ":val2"),
+					(log_action, "@Set team 1 bot count to #{reg1}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_team_reg0_bot_count_is_reg1"),
 				(else_try),
 					(eq, ":val1", 2),
 					(ge, ":val2", 0),
 					(assign, "$g_multiplayer_num_bots_team_2", ":val2"),
+					(log_action, "@Set team 2 bot count to #{reg1}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_team_reg0_bot_count_is_reg1"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get round max seconds
 				(eq, ":input", 3),
 				(assign, reg0, "$g_multiplayer_round_max_seconds"),
 				(str_store_string, s0, "str_maximum_seconds_for_round_is_reg0"),
-			(else_try),
+			(else_try),#set round max seconds
 				(eq, ":input", 4),
 				(assign, reg0, ":val1"),
 				(try_begin),
 					(is_between, ":val1", multiplayer_round_max_seconds_min, multiplayer_round_max_seconds_max),
 					(assign, "$g_multiplayer_round_max_seconds", ":val1"),
+					(log_action, "@Set maximum seconds for round to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_maximum_seconds_for_round_is_reg0"),
 					(get_max_players, ":num_players"),
 					(try_for_range, ":cur_player", 1, ":num_players"),
@@ -1440,31 +1443,33 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get respawn period
 				(eq, ":input", 5),
 				(assign, reg0, "$g_multiplayer_respawn_period"),
 				(str_store_string, s0, "str_respawn_period_is_reg0_seconds"),
-			(else_try),
+			(else_try),#set respawn period
 				(eq, ":input", 6),
 				(assign, reg0, ":val1"),
 				(try_begin),
 					(is_between, ":val1", multiplayer_respawn_period_min, multiplayer_respawn_period_max),
 					(assign, "$g_multiplayer_respawn_period", ":val1"),
+					(log_action, "@Set respawn period to #{reg0} seconds", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_respawn_period_is_reg0_seconds"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get num bots voteable
 				(eq, ":input", 7),
 				(assign, reg0, "$g_multiplayer_num_bots_voteable"),
 				(str_store_string, s0, "str_bots_upper_limit_for_votes_is_reg0"),
-			(else_try),
+			(else_try),#set num bots voteable
 				(eq, ":input", 8),
 				(try_begin),
 					(is_between, ":val1", 0, 51),
 					(assign, "$g_multiplayer_num_bots_voteable", ":val1"),
 					(store_add, "$g_multiplayer_max_num_bots", ":val1", 1),
 					(assign, reg0, "$g_multiplayer_num_bots_voteable"),
+					(log_action, "@Set bot count limit for polls to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_bots_upper_limit_for_votes_is_reg0"),
 					(get_max_players, ":num_players"),
 					(try_for_range, ":cur_player", 1, ":num_players"),
@@ -1474,7 +1479,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get map is voteable
 				(eq, ":input", 9),
 				(try_begin),
 					(eq, "$g_multiplayer_maps_voteable", 1),
@@ -1482,15 +1487,17 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_map_is_not_voteable"),
 				(try_end),
-			(else_try),
+			(else_try),#set map is voteable
 				(eq, ":input", 10),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_maps_voteable", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled polls to change map", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_map_is_voteable"),
 					(else_try),
+						(log_action, "@Disabled polls to change map", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_map_is_not_voteable"),
 					(try_end),
 					(get_max_players, ":num_players"),
@@ -1501,7 +1508,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get factions are voteable
 				(eq, ":input", 11),
 				(try_begin),
 					(eq, "$g_multiplayer_factions_voteable", 1),
@@ -1509,15 +1516,17 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_factions_are_not_voteable"),
 				(try_end),
-			(else_try),
+			(else_try),#set factions are voteable
 				(eq, ":input", 12),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_factions_voteable", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled polls to change factions", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_factions_are_voteable"),
 					(else_try),
+						(log_action, "@Disabled polls to change factions", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_factions_are_not_voteable"),
 					(try_end),
 					(get_max_players, ":num_players"),
@@ -1528,7 +1537,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get players respawn as bot
 				(eq, ":input", 13),
 				(try_begin),
 					(eq, "$g_multiplayer_player_respawn_as_bot", 1),
@@ -1536,15 +1545,17 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_players_do_not_respawn_as_bot"),
 				(try_end),
-			(else_try),
+			(else_try),#set players respawn as bot
 				(eq, ":input", 14),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_player_respawn_as_bot", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled player respawn as bot", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_players_respawn_as_bot"),
 					(else_try),
+						(log_action, "@Disabled player respawn as bot", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_players_do_not_respawn_as_bot"),
 					(try_end),
 					(get_max_players, ":num_players"),
@@ -1555,7 +1566,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get kick is voteable
 				(eq, ":input", 15),
 				(try_begin),
 					(eq, "$g_multiplayer_kick_voteable", 1),
@@ -1563,15 +1574,17 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_kicking_a_player_is_not_voteable"),
 				(try_end),
-			(else_try),
+			(else_try),#set kick is voteable
 				(eq, ":input", 16),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_kick_voteable", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled polls to kick players", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_kicking_a_player_is_voteable"),
 					(else_try),
+						(log_action, "@Disabled polls to kick players", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_kicking_a_player_is_not_voteable"),
 					(try_end),
 					(get_max_players, ":num_players"),
@@ -1582,7 +1595,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get ban is voteable
 				(eq, ":input", 17),
 				(try_begin),
 					(eq, "$g_multiplayer_ban_voteable", 1),
@@ -1590,15 +1603,17 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_banning_a_player_is_not_voteable"),
 				(try_end),
-			(else_try),
+			(else_try),#set ban is voteable
 				(eq, ":input", 18),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_ban_voteable", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled polls to ban players", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_banning_a_player_is_voteable"),
 					(else_try),
+						(log_action, "@Disabled polls to ban players", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_banning_a_player_is_not_voteable"),
 					(try_end),
 					(get_max_players, ":num_players"),
@@ -1609,30 +1624,32 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get valid vote ratio
 				(eq, ":input", 19),
 				(assign, reg0, "$g_multiplayer_valid_vote_ratio"),
 				(str_store_string, s0, "str_percentage_of_yes_votes_required_for_a_poll_to_get_accepted_is_reg0"),
-			(else_try),
+			(else_try),#set valid vote ratio
 				(eq, ":input", 20),
 				(try_begin),
 					(is_between, ":val1", 50, 101),
 					(assign, "$g_multiplayer_valid_vote_ratio", ":val1"),
 					(assign, reg0, ":val1"),
+					(log_action, "@Set valid vote ratio to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_percentage_of_yes_votes_required_for_a_poll_to_get_accepted_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get auto-balance limit
 				(eq, ":input", 21),
 				(assign, reg0, "$g_multiplayer_auto_team_balance_limit"),
 				(str_store_string, s0, "str_auto_team_balance_threshold_is_reg0"),
-			(else_try),
+			(else_try),#set auto-balance limit
 				(eq, ":input", 22),
 				(try_begin),
 					(is_between, ":val1", 2, 7),
 					(assign, "$g_multiplayer_auto_team_balance_limit", ":val1"),
 					(assign, reg0, "$g_multiplayer_auto_team_balance_limit"),
+					(log_action, "@Set auto-balance limit to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_auto_team_balance_threshold_is_reg0"),
 					(get_max_players, ":num_players"),
 					(try_for_range, ":cur_player", 1, ":num_players"),
@@ -1652,49 +1669,52 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get starting gold
 				(eq, ":input", 23),
 				(assign, reg0, "$g_multiplayer_initial_gold_multiplier"),
 				(str_store_string, s0, "str_starting_gold_ratio_is_reg0"),
-			(else_try),
+			(else_try),#set starting gold
 				(eq, ":input", 24),
 				(try_begin),
 					(is_between, ":val1", 0, 1001),
 					(assign, "$g_multiplayer_initial_gold_multiplier", ":val1"),
 					(assign, reg0, "$g_multiplayer_initial_gold_multiplier"),
+					(log_action, "@Set starting gold to #{reg0}%", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_starting_gold_ratio_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get combat gold bonus
 				(eq, ":input", 25),
 				(assign, reg0, "$g_multiplayer_battle_earnings_multiplier"),
 				(str_store_string, s0, "str_combat_gold_bonus_ratio_is_reg0"),
-			(else_try),
+			(else_try),#set combat gold bonus
 				(eq, ":input", 26),
 				(try_begin),
 					(is_between, ":val1", 0, 1001),
 					(assign, "$g_multiplayer_battle_earnings_multiplier", ":val1"),
 					(assign, reg0, "$g_multiplayer_battle_earnings_multiplier"),
+					(log_action, "@Set combat gold bonus to #{reg0}%", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_combat_gold_bonus_ratio_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get round gold bonus
 				(eq, ":input", 27),
 				(assign, reg0, "$g_multiplayer_round_earnings_multiplier"),
 				(str_store_string, s0, "str_round_gold_bonus_ratio_is_reg0"),
-			(else_try),
+			(else_try),#set round gold bonus
 				(eq, ":input", 28),
 				(try_begin),
 					(is_between, ":val1", 0, 1001),
 					(assign, "$g_multiplayer_round_earnings_multiplier", ":val1"),
 					(assign, reg0, "$g_multiplayer_round_earnings_multiplier"),
+					(log_action, "@Set round gold bonus to #{reg0}%", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_round_gold_bonus_ratio_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get player banners allowed
 				(eq, ":input", 29),
 				(try_begin),
 					(eq, "$g_multiplayer_allow_player_banners", 1),
@@ -1702,21 +1722,23 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_player_banners_are_not_allowed"),
 				(try_end),
-			(else_try),
+			(else_try),#set players banners allowed
 				(eq, ":input", 30),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_allow_player_banners", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled player banners", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_player_banners_are_allowed"),
 					(else_try),
+						(log_action, "@Disabled player banners", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_player_banners_are_not_allowed"),
 					(try_end),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get force minimum armor
 				(eq, ":input", 31),
 				(try_begin),
 					(eq, "$g_multiplayer_force_default_armor", 1),
@@ -1724,77 +1746,83 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_default_armor_is_not_forced"),
 				(try_end),
-			(else_try),
+			(else_try),#set force minimum armor
 				(eq, ":input", 32),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_force_default_armor", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Enabled force minimum armor", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_default_armor_is_forced"),
 					(else_try),
+						(log_action, "@Disabled force minimum armor", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_default_armor_is_not_forced"),
 					(try_end),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get points gained from flags
 				(eq, ":input", 33),
 				(assign, reg0, "$g_multiplayer_point_gained_from_flags"),
 				(str_store_string, s0, "str_point_gained_from_flags_is_reg0"),
-			(else_try),
+			(else_try),#set points gained from flags
 				(eq, ":input", 34),
 				(try_begin),
 					(is_between, ":val1", 25, 401),
 					(assign, "$g_multiplayer_point_gained_from_flags", ":val1"),
 					(assign, reg0, "$g_multiplayer_point_gained_from_flags"),
+					(log_action, "@Set points gained from flags to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_point_gained_from_flags_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get points gained from capturing flags
 				(eq, ":input", 35),
 				(assign, reg0, "$g_multiplayer_point_gained_from_capturing_flag"),
 				(str_store_string, s0, "str_point_gained_from_capturing_flag_is_reg0"),
-			(else_try),
+			(else_try),#set points gained from capturing flags
 				(eq, ":input", 36),
 				(try_begin),
 					(is_between, ":val1", 0, 11),
 					(assign, "$g_multiplayer_point_gained_from_capturing_flag", ":val1"),
 					(assign, reg0, "$g_multiplayer_point_gained_from_capturing_flag"),
+					(log_action, "@Set points gained from capturing flags to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_point_gained_from_capturing_flag_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get map time limit
 				(eq, ":input", 37),
 				(assign, reg0, "$g_multiplayer_game_max_minutes"),
 				(str_store_string, s0, "str_map_time_limit_is_reg0"),
-			(else_try),
+			(else_try),#set map time limit
 				(eq, ":input", 38),
 				(try_begin),
 					(is_between, ":val1", 5, 121),
 					(assign, "$g_multiplayer_game_max_minutes", ":val1"),
 					(assign, reg0, "$g_multiplayer_game_max_minutes"),
+					(log_action, "@Set map time limit to #{reg0} minutes", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_map_time_limit_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get team points limit
 				(eq, ":input", 39),
 				(assign, reg0, "$g_multiplayer_game_max_points"),
 				(str_store_string, s0, "str_team_points_limit_is_reg0"),
-			(else_try),
+			(else_try),#set team points limit
 				(eq, ":input", 40),
 				(try_begin),
 					(is_between, ":val1", 3, 1001),
 					(assign, "$g_multiplayer_game_max_points", ":val1"),
 					(assign, reg0, "$g_multiplayer_game_max_points"),
+					(log_action, "@Set team points limit to #{reg0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_team_points_limit_is_reg0"),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get defender spawn count limit
 				(eq, ":input", 41),
 				(assign, reg0, "$g_multiplayer_number_of_respawn_count"),
 				(try_begin),
@@ -1804,7 +1832,7 @@ scripts = [
 					(str_store_string, s1, "str_reg0"),
 				(try_end),
 				(str_store_string, s0, "str_defender_spawn_count_limit_is_s1"),
-			(else_try),
+			(else_try),#set defender spawn count limit
 				(eq, ":input", 42),
 				(try_begin),
 					(is_between, ":val1", 0, 6),
@@ -1816,6 +1844,7 @@ scripts = [
 					(else_try),
 						(str_store_string, s1, "str_reg0"),
 					(try_end),
+					(log_action, "@Set defender spawn count to {s1}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 					(str_store_string, s0, "str_defender_spawn_count_limit_is_s1"),
 					(get_max_players, ":num_players"),
 					(try_for_range, ":cur_player", 1, ":num_players"),
@@ -1825,7 +1854,7 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get disallow ranged weapons
 				(eq, ":input", 43),
 				(try_begin),
 					(eq, "$g_multiplayer_disallow_ranged_weapons", 1),
@@ -1833,28 +1862,30 @@ scripts = [
 				(else_try),
 					(str_store_string, s0, "str_ranged_weapons_are_allowed"),
 				(try_end),
-			(else_try),
+			(else_try),#set disallow ranged weapons
 				(eq, ":input", 44),
 				(try_begin),
 					(is_between, ":val1", 0, 2),
 					(assign, "$g_multiplayer_disallow_ranged_weapons", ":val1"),
 					(try_begin),
 						(eq, ":val1", 1),
+						(log_action, "@Disabled ranged weapons", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_ranged_weapons_are_disallowed"),
 					(else_try),
+						(log_action, "@Enabled ranged weapons", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 						(str_store_string, s0, "str_ranged_weapons_are_allowed"),
 					(try_end),
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
-			(else_try),
+			(else_try),#get invasion difficulty
 				#INVASION MODE START
 				(eq, ":input", 83), # get_invasion_difficulty # returns the difficulty for Invasion mode
 				(assign, ":string_index", "$g_multiplayer_ccoop_difficulty"),
 				(val_add, ":string_index", "str_ccoop_easy"),
 				(str_store_string, s0, ":string_index"),
 				(str_store_string, s0, "str_ccoop_difficulty_s0"),
-			(else_try),
+			(else_try),#set invasion difficulty
 				(eq, ":input", 84), # set_invasion_difficulty # returns the squad size for captain mode
 				(try_begin),
 					(is_between, ":val1", 0, 3),
@@ -1862,6 +1893,7 @@ scripts = [
 					(store_add, ":string_index", "str_ccoop_easy", "$g_multiplayer_ccoop_difficulty"),
 					(str_store_string, s0, ":string_index"),
 					(str_store_string, s0, "str_ccoop_difficulty_s0"),
+					(log_action, "@Set invasion difficulty to {s0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 				(else_try),
 					(str_store_string, s0, "str_input_is_not_correct_for_the_command_type_help_for_more_information"),
 				(try_end),
@@ -1872,8 +1904,23 @@ scripts = [
 					(is_between, l.val1, 1, lwbr.packages["full"]),
 					(set_lwbr_sv_var, "items", l.val1),
 					(call_script, script.lwbr_give_items_to_troops, l.val1),
-					(assign, reg0, l.val1),
-					(str_store_string, s0, "@Changed 'items' sv_var to #{reg0}"),
+					(try_begin),
+						(eq, l.val1, lwbr.packages["Native"]),
+						(str_store_string, s0, "@Native only"),
+					(else_try),
+						(eq, l.val1, lwbr.packages["Native"] | lwbr.packages["WarForge"]),
+						(str_store_string, s0, "@Native + WarForge"),
+					(else_try),
+						(eq, l.val1, lwbr.packages["Peasant"]),
+						(str_store_string, s0, "@Peasant Wars"),
+					(else_try),
+						(eq, l.val1, lwbr.packages["Arena"]),
+						(str_store_string, s0, "@Tournament"),
+					(else_try),
+						(assign, reg0, l.val1),
+						(str_store_string, s0, "@#{reg0}"),
+					(try_end),
+					(log_action, "@Set 'items' to {s0}", lwbr.console, lwbr.verbose),#LWBR WarForge 2.0
 				(else_try),
 					(assign, reg0, l.val1),
 					(str_store_string, s0, "@Invalid value #{reg0} for 'items' sv_var"),
@@ -4045,6 +4092,7 @@ scripts = [
 	("game_get_scene_name",[
 			(store_script_param, ":scene_no", 1),
 			(try_begin),
+			inject('lwbr_inject_get_scene_name'),#LWBR WarForge 2.0
 				(is_between, ":scene_no", multiplayer_scenes_begin, multiplayer_scenes_end),
 				(store_sub, ":string_id", ":scene_no", multiplayer_scenes_begin),
 				(val_add, ":string_id", multiplayer_scene_names_begin),
@@ -8147,8 +8195,6 @@ scripts = [
 				(eq, l.event_type, lwbr.multiplayer_event_server),
 				] + lwbr.sv_version([
 					(store_script_param, l.type, 3),
-					(assign, reg0, l.type),
-					(display_message, "@lwbr.sv_event #{reg0}"),
 					(try_begin),
 						(neg|multiplayer_is_server),
 						(display_message, "@Error: Received lwbr.sv_event #{reg0} on client"),
